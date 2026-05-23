@@ -252,6 +252,20 @@ def write_html(report: AuditReport, path: Path) -> None:
       max-height: 260px;
       overflow: auto;
     }}
+    details {{
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg);
+      padding: 10px 12px;
+      margin-top: 10px;
+    }}
+    details:first-of-type {{
+      margin-top: 0;
+    }}
+    summary {{
+      cursor: pointer;
+      font-weight: 800;
+    }}
     @media (max-width: 980px) {{
       main {{ grid-template-columns: 1fr; }}
       aside, section {{ border-right: 0; border-bottom: 1px solid var(--line); }}
@@ -376,6 +390,7 @@ def write_html(report: AuditReport, path: Path) -> None:
         <div class="panel"><h3>Defensible Rewrite</h3><p class="wrap">${{esc(audit.weaker_supported_rewrite)}}</p></div>
         <div class="panel"><h3>Why</h3><p class="wrap">${{esc(audit.why)}}</p></div>
         <div class="panel"><h3>Numeric Findings</h3>${{list(audit.numeric_findings)}}</div>
+        <div class="panel"><h3>Agent Steps</h3>${{agentSteps(audit.agent_outputs || [])}}</div>
       `;
       document.getElementById('evidence').innerHTML = `
         ${{sourcesChecked(audit.contrast)}}
@@ -410,7 +425,7 @@ def write_html(report: AuditReport, path: Path) -> None:
       `;
     }}
     function sourcesChecked(contrast) {{
-      if (!contrast) return '<div class="panel"><h3>Evidence Contrast References</h3><p class="muted">No contrast references checked for this claim.</p></div>';
+      if (!contrast) return '<div class="panel"><h3>Evidence Contrast References</h3><p class="muted">No contrast references checked for this claim. Contrast is applied only to the selected top-risk claims controlled by --contrast-top.</p></div>';
       const references = contrast.reference_sources || [];
       const best = contrast.best_sources || [];
       return `
@@ -456,6 +471,23 @@ def write_html(report: AuditReport, path: Path) -> None:
           </div>
         `;
       }}).join('');
+    }}
+    function agentSteps(values) {{
+      if (!values.length) return '<p class="muted">No agent step trace recorded.</p>';
+      return values.map(step => `
+        <details>
+          <summary>${{esc(step.agent)}} — ${{esc(step.summary)}}</summary>
+          <p class="muted">Claim ID: ${{esc(step.claim_id)}}</p>
+          <h4>Supporting evidence</h4>
+          ${{items(step.supporting_evidence || [])}}
+          <h4>Contradictions / narrowing evidence</h4>
+          ${{items(step.counter_evidence || [])}}
+          <h4>Missing context</h4>
+          ${{list(step.missing_context || [])}}
+          <h4>Numeric findings</h4>
+          ${{list(step.numeric_findings || [])}}
+        </details>
+      `).join('');
     }}
     function list(values) {{
       if (!values.length) return '<p class="muted">None recorded.</p>';
@@ -503,6 +535,8 @@ def _audit_markdown(audit: ClaimAudit) -> list[str]:
         f"**Defensible rewrite:** {audit.weaker_supported_rewrite}",
         "",
     ]
+    if audit.agent_outputs:
+        lines.extend(_agent_outputs_markdown(audit))
     if audit.contrast:
         lines.extend(_contrast_markdown(audit))
     if audit.numeric_findings:
@@ -521,6 +555,35 @@ def _audit_markdown(audit: ClaimAudit) -> list[str]:
         lines.append("**Missing context:**")
         lines.extend(f"- {item}" for item in audit.missing_context)
         lines.append("")
+    return lines
+
+
+def _agent_outputs_markdown(audit: ClaimAudit) -> list[str]:
+    lines = ["### Agent Steps", ""]
+    for step in audit.agent_outputs:
+        lines.extend(
+            [
+                f"<details><summary>{step.agent}: {step.summary}</summary>",
+                "",
+            ]
+        )
+        if step.supporting_evidence:
+            lines.append("**Supporting evidence:**")
+            lines.extend(_evidence_markdown_item(item) for item in step.supporting_evidence)
+            lines.append("")
+        if step.counter_evidence:
+            lines.append("**Contradictions / narrowing evidence:**")
+            lines.extend(_evidence_markdown_item(item) for item in step.counter_evidence)
+            lines.append("")
+        if step.missing_context:
+            lines.append("**Missing context:**")
+            lines.extend(f"- {item}" for item in step.missing_context)
+            lines.append("")
+        if step.numeric_findings:
+            lines.append("**Numeric findings:**")
+            lines.extend(f"- {finding}" for finding in step.numeric_findings)
+            lines.append("")
+        lines.extend(["</details>", ""])
     return lines
 
 

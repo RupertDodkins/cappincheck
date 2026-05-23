@@ -124,6 +124,7 @@ class ClaimAudit(BaseModel):
     counter_evidence: list[EvidenceItem] = Field(default_factory=list)
     missing_context: list[str] = Field(default_factory=list)
     numeric_findings: list[str] = Field(default_factory=list)
+    agent_outputs: list[AgentAudit] = Field(default_factory=list)
     contrast: EvidenceContrast | None = None
 
 

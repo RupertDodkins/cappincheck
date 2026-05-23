@@ -14,6 +14,9 @@ def main() -> None:
     contrasted = [audit for audit in audits if audit.get("contrast")]
     if not contrasted:
         raise SystemExit("Expected at least one contrasted claim.")
+    missing_agent_steps = [audit["claim"]["id"] for audit in audits if not audit.get("agent_outputs")]
+    if missing_agent_steps:
+        raise SystemExit(f"Claims missing agent step traces: {missing_agent_steps}")
     verdicts = {audit["contrast"].get("recommended_verdict") for audit in contrasted}
     if "overstated" not in verdicts:
         raise SystemExit(f"Expected an overstated contrast verdict; saw {sorted(verdicts)}")

@@ -34,6 +34,8 @@ async def audit_claims(
     selected = claims[:limit]
     if mock:
         audits = [_mock_audit(document, claim) for claim in selected]
+        for audit in audits:
+            audit.agent_outputs = _mock_agent_outputs(audit)
         if contrast:
             return await apply_contrast(
                 document,
@@ -66,6 +68,7 @@ async def _audit_one(document: Document, claim: RiskyClaim, *, runtime: str) -> 
     )
     print(f"Aggregating {claim.id}")
     aggregated = await _aggregate(document, claim, list(agent_results), runtime=runtime)
+    aggregated.agent_outputs = list(agent_results)
     return _merge_numeric_calibration(document, aggregated)
 
 
@@ -241,6 +244,65 @@ def _mock_needs_receipts_audit(claim: RiskyClaim) -> ClaimAudit:
         ],
         numeric_findings=[],
     )
+
+
+def _mock_agent_outputs(audit: ClaimAudit) -> list[AgentAudit]:
+    support_summary = (
+        "Found direct benchmark support for the narrower table values."
+        if audit.supporting_evidence
+        else "No direct supporting evidence was available in the deterministic fixture."
+    )
+    contradiction_summary = (
+        "Found scope limitations, missing deployment evidence, or wording that narrows the claim."
+        if audit.counter_evidence or audit.missing_context
+        else "No contradictions were found for the scoped claim."
+    )
+    numeric_summary = (
+        "Computed the absolute and relative difference from the benchmark values."
+        if audit.numeric_findings
+        else "No numeric calibration was applicable."
+    )
+    return [
+        AgentAudit(
+            agent="verifier",
+            claim_id=audit.claim.id,
+            summary=support_summary,
+            supporting_evidence=audit.supporting_evidence,
+            counter_evidence=[],
+            missing_context=[],
+            numeric_findings=[],
+        ),
+        AgentAudit(
+            agent="contradiction-finder",
+            claim_id=audit.claim.id,
+            summary=contradiction_summary,
+            supporting_evidence=[],
+            counter_evidence=audit.counter_evidence,
+            missing_context=audit.missing_context,
+            numeric_findings=[],
+        ),
+        AgentAudit(
+            agent="numeric-calibrator",
+            claim_id=audit.claim.id,
+            summary=numeric_summary,
+            supporting_evidence=[],
+            counter_evidence=[],
+            missing_context=[],
+            numeric_findings=audit.numeric_findings,
+        ),
+        AgentAudit(
+            agent="claim-aggregator",
+            claim_id=audit.claim.id,
+            summary=(
+                f"Combined specialist outputs into final verdict `{audit.verdict.value}` "
+                f"with `{audit.confidence}` confidence."
+            ),
+            supporting_evidence=audit.supporting_evidence,
+            counter_evidence=audit.counter_evidence,
+            missing_context=audit.missing_context,
+            numeric_findings=audit.numeric_findings,
+        ),
+    ]
 
 
 def _merge_numeric_calibration(document: Document, audit: ClaimAudit) -> ClaimAudit:

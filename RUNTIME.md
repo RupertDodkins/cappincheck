@@ -4,6 +4,8 @@ CappinCheck currently runs locally. The CLI loads the role definitions in `skill
 
 The supported default runtime is local. An experimental `--runtime managed` path uses the Google GenAI Interactions API to run the same specialist skill prompts through managed interactions. Google marks this API as experimental, so the local runtime remains the demo-safe default.
 
+Current demo guidance: do not rely on `--runtime managed` live on stage. A one-claim smoke test on May 23, 2026 entered the Interactions API call and did not complete within the 45-second guard in this environment, so the adapter should be described as implemented but not demo-safe.
+
 ## Current Runtime
 
 - `cappincheck audit ... --mock` uses deterministic fixture output for demos and tests.

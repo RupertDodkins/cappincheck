@@ -20,6 +20,44 @@ Source: `examples/demo_document.md`
 
 **Defensible rewrite:** CappinCheck improves from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain and 3.8% relative improvement under the benchmark conditions.
 
+### Agent Steps
+
+<details><summary>verifier: Found direct benchmark support for the narrower table values.</summary>
+
+**Supporting evidence:**
+- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+
+</details>
+
+<details><summary>contradiction-finder: Found scope limitations, missing deployment evidence, or wording that narrows the claim.</summary>
+
+**Missing context:**
+- No real-world deployment task is reported in the demo document.
+
+</details>
+
+<details><summary>numeric-calibrator: Computed the absolute and relative difference from the benchmark values.</summary>
+
+**Numeric findings:**
+- Absolute gain: 87.3 - 84.1 = 3.2 points.
+- Relative gain: (3.2 / 84.1) * 100 = 3.8%.
+
+</details>
+
+<details><summary>claim-aggregator: Combined specialist outputs into final verdict `overstated` with `high` confidence.</summary>
+
+**Supporting evidence:**
+- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+
+**Missing context:**
+- No real-world deployment task is reported in the demo document.
+
+**Numeric findings:**
+- Absolute gain: 87.3 - 84.1 = 3.2 points.
+- Relative gain: (3.2 / 84.1) * 100 = 3.8%.
+
+</details>
+
 ### Evidence Contrast
 
 **Claim says:** Our method improves performance by 30% over prior work on real-world tasks.
@@ -64,6 +102,30 @@ Source: `examples/demo_document.md`
 
 **Defensible rewrite:** CappinCheck generalizes across the curated domains represented in Benchmark X; real-world deployment performance was not evaluated.
 
+### Agent Steps
+
+<details><summary>verifier: No direct supporting evidence was available in the deterministic fixture.</summary>
+
+</details>
+
+<details><summary>contradiction-finder: Found scope limitations, missing deployment evidence, or wording that narrows the claim.</summary>
+
+**Missing context:**
+- Additional external grounding would be needed for a production verdict.
+
+</details>
+
+<details><summary>numeric-calibrator: No numeric calibration was applicable.</summary>
+
+</details>
+
+<details><summary>claim-aggregator: Combined specialist outputs into final verdict `missing_context` with `medium` confidence.</summary>
+
+**Missing context:**
+- Additional external grounding would be needed for a production verdict.
+
+</details>
+
 ### Evidence Contrast
 
 **Claim says:** The system robustly generalizes across domains.
@@ -100,6 +162,30 @@ Source: `examples/demo_document.md`
 **Why:** The claim may be plausible, but the demo document does not provide enough scope or external evidence.
 
 **Defensible rewrite:** The document provides preliminary evidence for a narrower version of this claim.
+
+### Agent Steps
+
+<details><summary>verifier: No direct supporting evidence was available in the deterministic fixture.</summary>
+
+</details>
+
+<details><summary>contradiction-finder: Found scope limitations, missing deployment evidence, or wording that narrows the claim.</summary>
+
+**Missing context:**
+- Additional external grounding would be needed for a production verdict.
+
+</details>
+
+<details><summary>numeric-calibrator: No numeric calibration was applicable.</summary>
+
+</details>
+
+<details><summary>claim-aggregator: Combined specialist outputs into final verdict `missing_context` with `medium` confidence.</summary>
+
+**Missing context:**
+- Additional external grounding would be needed for a production verdict.
+
+</details>
 
 **Missing context:**
 - Additional external grounding would be needed for a production verdict.
