@@ -445,12 +445,12 @@
       document.getElementById('claim-detail').innerHTML = `
         <div class="panel">
           <span class="badge ${cls(audit.vibe)}">${esc(audit.vibe)}</span>
-          <strong>${esc(audit.verdict)}</strong>
+          <strong>Formal verdict: ${esc(audit.verdict)}</strong>
           ${hint(vibeTip(audit.vibe))}
           <div class="score"><div style="width: ${audit.cap_score}%"></div></div>
           <p class="muted">
-            Cap Score: ${audit.cap_score} / 100 ${hint('Higher means the original wording stretches further beyond what the evidence supports.')}
-            · Confidence: ${esc(audit.confidence)} ${hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}
+            Confidence: ${esc(audit.confidence)} ${hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}
+            · Cap Score: ${audit.cap_score} / 100 ${hint('Higher means the original wording stretches further beyond what the evidence supports.')}
             · Evidence items: ${evidenceCount} ${hint('Evidence items are supporting or counter-evidence records attached to this claim.')}
           </p>
           <div class="strength-grid">
@@ -465,8 +465,8 @@
         <div class="panel"><h3>Numeric Findings</h3>${list(audit.numeric_findings)}</div>
       `;
       document.getElementById('evidence').innerHTML = `
-        <div class="panel"><h3>Supporting</h3>${items(audit.supporting_evidence)}</div>
-        <div class="panel"><h3>Counter</h3>${items(audit.counter_evidence)}</div>
+        <div class="panel"><h3>Supporting Evidence Found</h3>${items(audit.supporting_evidence)}</div>
+        <div class="panel"><h3>Contradictions / Narrowing Evidence</h3>${items(audit.counter_evidence)}</div>
         <div class="panel"><h3>Missing Context</h3>${list(audit.missing_context)}</div>
       `;
       document.getElementById('raw').textContent = JSON.stringify(audit, null, 2);

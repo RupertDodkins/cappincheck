@@ -2,13 +2,17 @@
 
 Source: `examples/demo_document.md`
 
-| Claim | Vibe | Formal Verdict | Cap Score | Confidence |
-| --- | --- | --- | ---: | --- |
-| Our method improves performance by 30% over prior work on real-world tasks. | cap | overstated | 88 | high |
-| The system robustly generalizes across domains. | sus | missing_context | 64 | medium |
-| This is the first agentic workflow for scientific claim auditing. | sus | missing_context | 64 | medium |
+| Claim | Formal Verdict | Confidence | Vibe | Cap Score |
+| --- | --- | --- | --- | ---: |
+| Our method improves performance by 30% over prior work on real-world tasks. | overstated | high | cap | 88 |
+| The system robustly generalizes across domains. | missing_context | medium | sus | 64 |
+| This is the first agentic workflow for scientific claim auditing. | missing_context | medium | sus | 64 |
 
-## c1: cap / overstated
+## c1: overstated
+
+**Confidence:** high
+
+**Vibe:** cap
 
 **Original:** Our method improves performance by 30% over prior work on real-world tasks.
 
@@ -22,14 +26,18 @@ Source: `examples/demo_document.md`
 - Absolute gain: 87.3 - 84.1 = 3.2 points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 
-**Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table)
+**Supporting evidence found:**
+- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 **Missing context:**
 - No real-world deployment task is reported in the demo document.
 
 
-## c2: sus / missing_context
+## c2: missing_context
+
+**Confidence:** medium
+
+**Vibe:** sus
 
 **Original:** The system robustly generalizes across domains.
 
@@ -43,7 +51,11 @@ Source: `examples/demo_document.md`
 - Additional external grounding would be needed for a production verdict.
 
 
-## c3: sus / missing_context
+## c3: missing_context
+
+**Confidence:** medium
+
+**Vibe:** sus
 
 **Original:** This is the first agentic workflow for scientific claim auditing.
 

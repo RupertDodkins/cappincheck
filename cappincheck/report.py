@@ -17,12 +17,12 @@ def write_markdown(report: AuditReport, path: Path) -> None:
         "",
         f"Source: `{report.document.source}`",
         "",
-        "| Claim | Vibe | Formal Verdict | Cap Score | Confidence |",
-        "| --- | --- | --- | ---: | --- |",
+        "| Claim | Formal Verdict | Confidence | Vibe | Cap Score |",
+        "| --- | --- | --- | --- | ---: |",
     ]
     for audit in report.audits:
         lines.append(
-            f"| {audit.claim.claim} | {audit.vibe} | {audit.verdict.value} | {audit.cap_score} | {audit.confidence} |"
+            f"| {audit.claim.claim} | {audit.verdict.value} | {audit.confidence} | {audit.vibe} | {audit.cap_score} |"
         )
 
     for audit in report.audits:
@@ -369,12 +369,12 @@ def write_html(report: AuditReport, path: Path) -> None:
       document.getElementById('claim-detail').innerHTML = `
         <div class="panel">
           <span class="badge ${{cls(audit.vibe)}}">${{esc(audit.vibe)}}</span>
-          <strong>${{esc(audit.verdict)}}</strong>
+          <strong>Formal verdict: ${{esc(audit.verdict)}}</strong>
           ${{hint(vibeTip(audit.vibe))}}
           <div class="score"><div style="width: ${{audit.cap_score}}%"></div></div>
           <p class="muted">
-            Cap Score: ${{audit.cap_score}} / 100 ${{hint('Higher means the original wording stretches further beyond what the evidence supports.')}}
-            · Confidence: ${{esc(audit.confidence)}} ${{hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}}
+            Confidence: ${{esc(audit.confidence)}} ${{hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}}
+            · Cap Score: ${{audit.cap_score}} / 100 ${{hint('Higher means the original wording stretches further beyond what the evidence supports.')}}
             · Evidence items: ${{evidenceCount}} ${{hint('Evidence items are supporting or counter-evidence records attached to this claim.')}}
           </p>
           <div class="strength-grid">
@@ -389,8 +389,8 @@ def write_html(report: AuditReport, path: Path) -> None:
         <div class="panel"><h3>Numeric Findings</h3>${{list(audit.numeric_findings)}}</div>
       `;
       document.getElementById('evidence').innerHTML = `
-        <div class="panel"><h3>Supporting</h3>${{items(audit.supporting_evidence)}}</div>
-        <div class="panel"><h3>Counter</h3>${{items(audit.counter_evidence)}}</div>
+        <div class="panel"><h3>Supporting Evidence Found</h3>${{items(audit.supporting_evidence)}}</div>
+        <div class="panel"><h3>Contradictions / Narrowing Evidence</h3>${{items(audit.counter_evidence)}}</div>
         <div class="panel"><h3>Missing Context</h3>${{list(audit.missing_context)}}</div>
       `;
       document.getElementById('raw').textContent = JSON.stringify(audit, null, 2);
@@ -445,7 +445,11 @@ def write_html(report: AuditReport, path: Path) -> None:
 def _audit_markdown(audit: ClaimAudit) -> list[str]:
     lines = [
         "",
-        f"## {audit.claim.id}: {audit.vibe} / {audit.verdict.value}",
+        f"## {audit.claim.id}: {audit.verdict.value}",
+        "",
+        f"**Confidence:** {audit.confidence}",
+        "",
+        f"**Vibe:** {audit.vibe}",
         "",
         f"**Original:** {audit.claim.claim}",
         "",
@@ -461,15 +465,23 @@ def _audit_markdown(audit: ClaimAudit) -> list[str]:
         lines.extend(f"- {finding}" for finding in audit.numeric_findings)
         lines.append("")
     if audit.supporting_evidence:
-        lines.append("**Supporting evidence:**")
-        lines.extend(f"- {item.snippet} ({item.source_title})" for item in audit.supporting_evidence)
+        lines.append("**Supporting evidence found:**")
+        lines.extend(_evidence_markdown_item(item) for item in audit.supporting_evidence)
         lines.append("")
     if audit.counter_evidence:
-        lines.append("**Counter-evidence:**")
-        lines.extend(f"- {item.snippet} ({item.source_title})" for item in audit.counter_evidence)
+        lines.append("**Contradictions / narrowing evidence:**")
+        lines.extend(_evidence_markdown_item(item) for item in audit.counter_evidence)
         lines.append("")
     if audit.missing_context:
         lines.append("**Missing context:**")
         lines.extend(f"- {item}" for item in audit.missing_context)
         lines.append("")
     return lines
+
+
+def _evidence_markdown_item(item) -> str:
+    source = item.source_title
+    if item.url:
+        source = f"[{item.source_title}]({item.url})"
+    suffix = f" Relevance: {item.relevance}" if item.relevance else ""
+    return f"- {item.snippet} ({source}).{suffix}"
