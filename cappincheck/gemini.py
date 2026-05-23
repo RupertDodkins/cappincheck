@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 from typing import TypeVar
 
 from google import genai
@@ -14,6 +15,7 @@ T = TypeVar("T", bound=BaseModel)
 
 class GeminiClient:
     def __init__(self, model: str | None = None) -> None:
+        _load_dotenv()
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
             raise RuntimeError("GEMINI_API_KEY is required unless --mock is used.")
@@ -41,3 +43,17 @@ class GeminiClient:
             return response.parsed
         text = response.text or "{}"
         return schema.model_validate(json.loads(text))
+
+
+def _load_dotenv() -> None:
+    env_path = Path.cwd() / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        key, value = stripped.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        os.environ.setdefault(key, value)
