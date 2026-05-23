@@ -54,7 +54,7 @@ def audit(
     typer.echo("Extracting risky claims...")
     extract_started_at = perf_counter()
     try:
-        claims = extract_claims(document, mock=mock, limit=max(limit, 8))
+        claims = extract_claims(document, mock=mock, limit=limit)
     except Exception as exc:
         _fail_with_context("claim extraction", exc)
     extract_duration_ms = _elapsed_ms(extract_started_at)
