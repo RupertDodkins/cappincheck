@@ -4,7 +4,7 @@ This plan supersedes the broad outstanding-work list for the next hackathon phas
 
 ## Current Baseline
 
-CappinCheck is a CLI-first open-source tool that audits dense technical/scientific documents for claims that may outrun the evidence. It extracts risky claims, runs specialist verifier/skeptic/numeric-calibrator passes, and emits Markdown, JSON, and static HTML reports.
+CappinCheck is a CLI-first open-source tool that audits AI model reports, dense technical/scientific documents, and technical blog posts for claims that may outrun the evidence. It extracts risky claims, runs specialist verifier/skeptic/numeric-calibrator passes, and emits Markdown, JSON, and static HTML reports.
 
 Already present or in progress:
 
@@ -30,7 +30,7 @@ Build **Evidence Contrast Mode** before any broader Claim Drift mode.
 Rationale:
 
 - It strengthens the existing `audit` workflow instead of adding a second product surface.
-- It makes Gemini Search grounding and URL Context central to the demo.
+- It makes URL Context central to the demo, with Google Search grounding reserved for a later source-discovery extension.
 - It is lower risk than cross-surface claim drift while still providing the same core moment: "the claim says X; the best source actually supports narrower Y."
 - It is easier to pair with one real public demo document.
 
@@ -46,13 +46,13 @@ Decision:
 
 - Keep the project name `CappinCheck`.
 - Lead reports with formal labels: `Formal Verdict`, `Confidence`, `Evidence`, `Delta`, and `Defensible Rewrite`.
-- Demote vibe labels to small secondary badges.
-- In the live demo, say "the slang is just a thin UX mnemonic; the artifact is the evidence ledger."
+- Remove `cap`, `sus`, and `no cap` labels from the main demo view.
+- Keep playful terminology out of the primary Markdown/HTML report unless it is hidden in raw JSON or future non-demo UI.
 
 Acceptance criteria:
 
-- HTML selected-claim view shows formal verdict and confidence before vibe/cap wording.
-- Markdown report sections start with formal verdict and explanation, not the vibe label.
+- HTML selected-claim view shows one reader-facing source of truth: formal verdict, confidence, reason, evidence, and rewrite.
+- Markdown report sections start with formal verdict and explanation.
 - README demo language emphasizes claim audit, evidence contrast, and defensible rewrites.
 
 ### 2. Real Public Demo Target
@@ -78,12 +78,14 @@ Evidence Contrast Mode is the explicit "claim vs existing docs" feature. It shou
 
 ### User Experience
 
-Add optional flags to the existing audit command:
+Add optional flags to the existing audit command. V1 should use explicit reference URLs:
 
 ```bash
 cappincheck audit examples/evidence_contrast_demo.md \
   --mock \
   --contrast \
+  --reference https://example.com/reference-1 \
+  --reference https://example.com/reference-2 \
   --contrast-top 3 \
   --out examples/contrast_demo.md \
   --json examples/contrast_demo.json \
@@ -95,8 +97,9 @@ Live path:
 ```bash
 cappincheck audit <public-url-or-file> \
   --contrast \
+  --reference https://example.com/model-card \
+  --reference https://example.com/paper-or-benchmark \
   --contrast-top 2 \
-  --contrast-sources-per-claim 3 \
   --out examples/contrast_live.md \
   --json examples/contrast_live.json \
   --html examples/contrast_live.html
@@ -104,14 +107,24 @@ cappincheck audit <public-url-or-file> \
 
 Do not add a `--live` flag. Non-mock mode is already live.
 
+V2 can add automatic source discovery:
+
+```bash
+cappincheck audit <public-url-or-file> --contrast --discover-references
+```
+
+Do not build `--discover-references` until explicit `--reference` mode is complete and demo-stable.
+
 ### What It Does
 
 For the top risky claims, Evidence Contrast Mode:
 
-1. Discovers authoritative public sources with Google Search grounding.
+1. Uses user-provided `--reference` URLs as the source-of-truth candidates.
 2. Reads selected source URLs with URL Context.
 3. Compares the exact claim wording against those sources.
 4. Adds an evidence contrast card under each selected claim.
+
+Reference discovery with Google Search grounding is a later extension, not v1.
 
 The contrast card answers:
 
@@ -122,8 +135,8 @@ The contrast card answers:
 
 Final report layout should have two layers:
 
-1. `Evidence Contrast`: the demo-facing side-by-side card that explains the claim/source delta in one glance.
-2. `Evidence Stack`: the raw support, contradiction/narrowing evidence, and missing context underneath for auditability.
+1. `Evidence Contrast`: the demo-facing side-by-side card that explains the claim/reference delta in one glance.
+2. `Sources Checked`: expandable reference URLs, snippets, and mismatch notes underneath for auditability.
 
 Example card shape:
 
@@ -152,19 +165,15 @@ Add schemas similar to:
 {
   "claim_id": "string",
   "claim_text": "string",
-  "source_discovery": {
-    "search_queries": ["string"],
-    "candidate_sources": [
-      {
-        "url": "string",
-        "title": "string",
-        "source_type": "official_doc|paper|standard|dataset|benchmark|government|academic|vendor_doc|blog|unknown",
-        "why_relevant": "string",
-        "authority_score": 0,
-        "selected": true
-      }
-    ]
-  },
+  "reference_sources": [
+    {
+      "url": "string",
+      "title": "string",
+      "source_type": "official_doc|paper|standard|dataset|benchmark|government|academic|vendor_doc|blog|unknown",
+      "why_relevant": "string",
+      "authority_score": 0
+    }
+  ],
   "contrast": {
     "best_sources": [
       {
@@ -179,7 +188,6 @@ Add schemas similar to:
     "delta_explanation": "string",
     "suggested_rewrite": "string",
     "recommended_verdict": "supported|overstated|missing_context|contradicted|not_checkable",
-    "vibe": "no cap|sus|cap|needs receipts",
     "confidence": "low|medium|high"
   }
 }
@@ -189,28 +197,20 @@ Keep the schema shallow. Do not model full source graphs in this phase.
 
 ### Prompt Contract
 
-Source discovery prompt:
-
-```text
-Find up to N authoritative public sources that can verify this technical/scientific claim.
-Prefer official docs, original papers, standards, dataset docs, benchmark reports, government/academic sources, and vendor docs.
-Avoid low-authority summaries unless no better source exists.
-Return JSON only.
-```
-
 Contrast prompt:
 
 ```text
-Compare the exact claim wording against the selected source URLs.
+Compare the exact claim wording against the provided reference URLs.
 Focus on scope, quantity, causality, benchmark conditions, dates/versioning, uncertainty language, and missing qualifiers.
 The task is not to prove universal truth. The task is to decide whether the selected sources support this claim as written.
 Return JSON only.
 ```
 
-### Verdict Merge Rules
+### Verdict Rules
 
-- Preserve both existing audit verdict and contrast verdict in JSON.
-- If contrast is `not_checkable`, do not worsen the existing verdict unless the existing audit was also weak.
+- The reader-facing report should show one final formal verdict per claim.
+- Internally, raw JSON may preserve pre-contrast audit metadata for debugging, but the UI should not show `audit verdict -> contrast verdict` as the main story.
+- If contrast is `not_checkable`, do not worsen the final verdict unless the existing audit was also weak.
 - If delta is `narrower_than_claim`, map contrast verdict to `overstated` or `missing_context`.
 - If delta is `contradicted`, map contrast verdict to `contradicted`.
 - Do not hide uncertainty.
@@ -220,19 +220,16 @@ Return JSON only.
 In Markdown and HTML, each contrasted claim should show an `Evidence Contrast` section before the raw evidence lists:
 
 - Claim
-- Best source says
+- Best reference says
 - Delta type and explanation
-- Existing verdict -> contrast verdict
+- Final formal verdict
 - Defensible rewrite
-- Small vibe label
 
-The raw `Evidence Stack` should remain underneath and show:
+The raw `Sources Checked` section should remain underneath and show:
 
-- Search queries
-- Source URLs/titles
-- Supporting evidence found
-- Contradictions / narrowing evidence
-- Missing context
+- Reference URLs/titles
+- Relevant snippets
+- What each reference supports, narrows, contradicts, or leaves unchecked
 
 The report must remain static. No hosted app.
 
@@ -255,8 +252,8 @@ Done when all commands exit `0`.
 
 Tasks:
 
-- Update report ordering so formal verdict/confidence appear before vibe labels.
-- Keep vibe labels but make them secondary.
+- Update report ordering so formal verdict/confidence/reason are the primary reader-facing source of truth.
+- Remove vibe labels from the main demo view.
 - Update README copy if it currently leads with slang.
 
 Verification:
@@ -273,7 +270,7 @@ Manual check: selected claim view reads as a serious audit report.
 Tasks:
 
 - Add contrast-related schema classes.
-- Add `--contrast`, `--contrast-top`, and `--contrast-sources-per-claim`.
+- Add `--contrast`, `--contrast-top`, and repeatable `--reference`.
 - Add deterministic mock contrast output.
 - Add `examples/evidence_contrast_demo.md` if useful.
 
@@ -289,15 +286,14 @@ Done when JSON includes contrast results and HTML renders contrast cards.
 
 Tasks:
 
-- Add source discovery pass using Gemini Search grounding.
-- Capture search queries and candidate source URLs when possible.
-- Add contrast verification pass using Google Search + URL Context.
-- Degrade gracefully when no good URLs are found.
+- Add contrast verification pass using URL Context over provided `--reference` URLs.
+- Degrade gracefully when no reference URL is supplied or a reference cannot be read.
+- Keep Search-based `--discover-references` as a documented v2 deferral unless the explicit-reference path is finished early.
 
 Verification:
 
 ```bash
-CAPPINCHECK_TIMEOUT_SECONDS=90 cappincheck audit examples/demo_document.md --contrast --contrast-top 1 --out examples/contrast_live.md --json examples/contrast_live.json --html examples/contrast_live.html
+CAPPINCHECK_TIMEOUT_SECONDS=90 cappincheck audit examples/demo_document.md --contrast --reference https://example.com/reference --contrast-top 1 --out examples/contrast_live.md --json examples/contrast_live.json --html examples/contrast_live.html
 ```
 
 Done when the command exits `0` and the report includes at least one live contrast card.
@@ -338,7 +334,8 @@ Demo can be completed in 90 seconds.
 
 Do not spend this phase on:
 
-- `--discover` search-discovered hype maps.
+- `--discover-references` source discovery.
+- Search-discovered hype maps.
 - Full Claim Drift mode across multiple downstream pages.
 - Citation bibliography parsing.
 - File Search.
@@ -356,6 +353,6 @@ Use this claim:
 
 Core demo sentence:
 
-> Search grounding finds candidate evidence, URL Context reads the sources, Code Execution or local calibration checks numbers, and structured outputs turn it into a reusable claim ledger.
+> URL Context reads the references, Code Execution or local calibration checks numbers, and structured outputs turn it into a reusable claim ledger.
 
 Keep the serious artifact first. The playful language is garnish.

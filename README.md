@@ -2,7 +2,7 @@
 
 Grounded adversarial claim audit for dense expert documents.
 
-CappinCheck reads a paper, model report, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce a structured evidence ledger.
+CappinCheck reads an AI model report, paper, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce a structured evidence ledger.
 
 It is not a paper summarizer. The output is a claim ledger: original wording, formal verdict, supporting evidence found, contradictions or narrowing evidence, missing context, numeric findings, and the strongest defensible rewrite.
 
@@ -67,7 +67,6 @@ Each audited claim includes:
 - Original claim
 - Claim type
 - Formal verdict: `supported`, `overstated`, `missing_context`, `contradicted`, or `not_checkable`
-- Vibe verdict: `no cap`, `mostly no cap`, `sus`, `cap`, or `needs receipts`
 - Cap score from `0` to `100`
 - Supporting evidence found
 - Contradictions / narrowing evidence
@@ -76,7 +75,7 @@ Each audited claim includes:
 
 ## Planned: Evidence Contrast Mode
 
-The current report shows evidence lists: verifier support, contradiction/narrowing evidence, and missing context. The next planned mode is sharper: for selected claims, CappinCheck will discover authoritative public sources with Google Search grounding, read those sources with URL Context, and render a side-by-side contrast card:
+The current report shows evidence lists: verifier support, contradiction/narrowing evidence, and missing context. The next planned mode is sharper: for selected claims, CappinCheck will compare the claim against user-provided reference URLs with URL Context and render a side-by-side contrast card:
 
 ```text
 Claim says: ...
@@ -89,8 +88,10 @@ This is documented in `DEMO_EXTENSION_PLAN.md`. Evidence Contrast Mode is the in
 
 Planned report layout:
 
-- `Evidence Contrast`: the demo-facing side-by-side card: claim wording, best source wording, delta, verdict movement, and defensible rewrite.
-- `Evidence Stack`: the raw support, contradiction/narrowing evidence, and missing-context trails underneath for inspection.
+- `Evidence Contrast`: the demo-facing side-by-side card: claim wording, reference wording, delta, final verdict, and defensible rewrite.
+- `Sources Checked`: expandable reference URLs, snippets, and mismatch notes underneath for inspection.
+
+Reference discovery with Google Search grounding is a v2 extension. The first version should prioritize explicit `--reference` URLs for demo reliability.
 
 ## Limitations
 

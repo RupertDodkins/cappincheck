@@ -35,7 +35,7 @@ open examples/demo_report.html
 - Done: static dashboard filters, source links, and claim-strength UI added.
 - Done: README/RUNTIME docs updated to describe local default and managed beta caveat.
 - Done: report now surfaces supporting evidence and contradictions/narrowing evidence explicitly.
-- Planned next: Evidence Contrast Mode, which turns evidence lists into side-by-side claim-vs-source cards. The intended layout is `Evidence Contrast` first for demo legibility, then the raw `Evidence Stack` underneath for inspection. See `DEMO_EXTENSION_PLAN.md`.
+- Planned next: Evidence Contrast Mode, which turns evidence lists into side-by-side claim-vs-reference cards. V1 should use explicit `--reference` URLs, show one final formal verdict, and render `Evidence Contrast` first with `Sources Checked` underneath. See `DEMO_EXTENSION_PLAN.md`.
 - Remaining optional: choose a stronger real public source and pre-generate a stable report when network/API latency permits.
   - Managed Agents are documented as a future adapter boundary in `RUNTIME.md`; they are not the current runtime.
 
@@ -208,7 +208,7 @@ Objective: make the static report demo-ready without adding backend complexity.
 
 Tasks:
 
-- Add basic filtering by verdict/vibe.
+- Add basic filtering by formal verdict.
 - Improve the claim strength visualization.
 - Ensure long claims wrap cleanly.
 - Ensure source URLs are clickable.
@@ -218,7 +218,7 @@ Verification criteria:
 
 - Open `examples/demo_report.html` locally.
 - Click through each claim.
-- Filter by at least one verdict/vibe.
+- Filter by at least one formal verdict.
 - Resize to a narrow viewport and confirm no major overlap.
 - No network request is required to view the report.
 
