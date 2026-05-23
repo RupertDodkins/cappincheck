@@ -1,0 +1,486 @@
+# CappinCheck Report: Gemini 3.5: frontier intelligence with action
+
+Source: `https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/`
+
+## Provenance
+
+- Mode: `live_gemini`
+- Runtime: `local`
+- Model: `gemini-3.5-flash`
+- Evidence Contrast: `enabled`
+- Reference URLs: `https://deepmind.google/models/model-cards/gemini-3-5-flash`
+
+| Claim | Formal Verdict | Confidence | Stretch Score |
+| --- | --- | --- | ---: |
+| Gemini 3.5 Flash outperforms Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning). | supported | high | 10 |
+| When looking at output tokens per second, it is 4 times faster than other frontier models. | missing_context | high | 40 |
+| Under supervision, it can reliably execute multi-step workflows and coding tasks while sustaining frontier performance. | missing_context | high | 40 |
+| What used to take a developer days or an auditor weeks, 3.5 Flash can now help complete in a fraction of the time, often at less than half the cost of other frontier models. | overstated | high | 80 |
+
+## claim_1: supported
+
+**Confidence:** high
+
+**Original:** Gemini 3.5 Flash outperforms Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning).
+
+**Stretch Score:** 10/100
+
+**Why:** The claim is fully supported by Google's official model card and independent trackers like Artificial Analysis and Scale Labs. Gemini 3.5 Flash's scores of 76.2% (Terminal-Bench 2.1), 1656 Elo (GDPval-AA), 83.6% (MCP Atlas), and 84.2% (CharXiv Reasoning) successfully exceed Gemini 3.1 Pro's respective scores of 70.3%, 1314 Elo, 78.2%, and 83.3%. Although the benchmarks have known limitations (such as LLM-as-a-judge bias on GDPval-AA and potential dataset contamination risks on static evaluation splits), the literal claim regarding benchmark scores and head-to-head outperformance is entirely accurate.
+
+**Defensible rewrite:** In official and third-party benchmark evaluations, Gemini 3.5 Flash outperforms Gemini 3.1 Pro on coding, agentic, and multimodal benchmarks, scoring 76.2% on Terminal-Bench 2.1 (vs 70.3%), 1656 Elo on GDPval-AA (vs 1314 Elo), 83.6% on MCP Atlas (vs 78.2%), and 84.2% on CharXiv Reasoning (vs 83.3%).
+
+### Agent Steps
+
+<details><summary>grounded_verifier: The claim that Gemini 3.5 Flash outperforms Gemini 3.1 Pro on the specified coding, agentic, and multimodal benchmarks is fully supported by Google's official announcement, the DeepMind Model Card, and independent evaluations from Scale AI and Artificial Analysis. However, regarding the audit question, these benchmarks do not provide contamination-free evaluations. Real-world developer productivity correlation is not empirically established in the document, and several evaluated metrics (like GDPval-AA) rely on automated LLM grading (Gemini 3 Pro as a judge) rather than execution-based sandbox verification, which can introduce evaluation bias or suffer from training-data contamination.</summary>
+
+**Supporting evidence:**
+- Terminal-bench 2.1 Agentic terminal coding, Terminus-2 harness, 76.2%, 58.0%, 70.3%... Agentic, MCP Atlas Multi-step workflows using MCP, 83.6%, 62.0%, 78.2%... GDPval-AA Economically valuable knowledge work, Elo, 1656, 1204, 1314... CharXiv Reasoning Information synthesis from complex charts, No tools, 84.2%, 80.3%, 83.3% ([Gemini 3.5 Flash - Model Card - Google DeepMind](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFV7mHx1anhMbQ8ZylAJ40g27aNnEwUH_TjaNtEelIt2CMk8Ysz4FFhQitFGsmmEcon-r1cJZ93AFt2gM2ophBiP8dR9gVYF1j5kV32gPS5-5krS-kwTld7A7GsiMmmNNd47SpEVjSEr-ksb41NXtMWY5Y=)). Relevance: Verifies the exact benchmark scores reported for Terminal-Bench 2.1 (76.2% vs 70.3%), MCP Atlas (83.6% vs 78.2%), GDPval-AA (1656 vs 1314 Elo), and CharXiv Reasoning (84.2% vs 83.3%) for Gemini 3.5 Flash and Gemini 3.1 Pro.
+- Its GDPval-AA result is especially notable, achieving an Elo of 1656, well ahead of Gemini 3 Flash (1204) and Gemini 3.1 Pro (1314) ([Gemini 3.5 Flash: The new leader in intelligence versus speed - Artificial Analysis](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFBgVQM0v89NGjBC6DTxODfnURB2H7ZsyDI3t0HxKsdvxOObRW_jY1AJHrhtbWGVB_utmOeFWMW48MP8NH91VSYG6y7Tn9I2CrJTpu36oRZT6leV1V_nV210tYoeFwgN4pigF468oXg3q3_WOK7RDJ5fCKz9bNf3oTdjiH0bCbKGM9JSi0KfrP2TQ==)). Relevance: Independent validation of the GDPval-AA benchmark results showing Gemini 3.5 Flash outperforming Gemini 3.1 Pro.
+- gemini-3.1-pro-preview (high), 78.2%... Gemini 3.5 Flash... 83.6% ([MCP Atlas - Scale Labs Leaderboard](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGakxNkJAu9P8f8v0H_cl7DI2u2F3fBYB_OMoXmeYx6utAjyN55y2OW46MPmEPX8x76rMdUUlzQBCZxPKzdOXNjcon2Wck43IooWGwFPNSZelJB5pCzqvbhUSLh7Mh54Su70A==)). Relevance: Independent validation of the MCP Atlas benchmark showing Gemini 3.5 Flash leading with 83.6% over Gemini 3.1 Pro's 78.2%.
+
+**Contradictions / narrowing evidence:**
+- GDPval-AA tests a model's ability to produce documents, spreadsheets, diagrams, and the like. Artificial Analysis asks two models to respond to the same prompt, uses Gemini 3 Pro as a judge to rank their outputs as a win, loss, or tie, and computes Elo ratings... One reason may be contamination of the models' training data with the benchmark test sets ([Independent AI Testing Authority Turns From Saturated Knowledge Benchmarks to Harder Business Tests - DeepLearning.AI](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHkFk1CrhaTKkcbJkWrJ1QJZ8saFi906Lu7ftOJpmVTUWBbscYJSVBLIb0mMZ0AOUZPJWndOXJvMsW_OIOaVguxm_Sups_alsG3zyZUxfBvtz8xF8sriQi2DwLFjMsL2h1A-eN9EYRs0-Qq-tJLEIEnv8lnVdnDK5psVPm8m8y2t5U32rfoCIT2TFRe_wZVJeXhRDEb724uRAcmqwHu48NdM0UA5FYuRE7p5oKFL9zGpbjarhnbiWWJfH8USdU4plY=)). Relevance: Explains that GDPval-AA utilizes Gemini 3 Pro as an LLM judge, which can lead to self-model favoritism/bias, and highlights that static test sets are heavily prone to training set contamination.
+- GDPval-aa, for example, is just the public GDPval tasks but with an LLM judge. In theory, rubrics allow you to measure important qualitative traits like style, but they have obvious limitations... Using an LLM to evaluate quality is also inherently suspect, especially when there's no human in the loop making the final decision. ([The Coding Assistant Breakdown: More Tokens Please - SemiAnalysis](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6Qug2ePD4L6hgxQIiMSqdXmXC6A6hMyOAWr6E4DycGFZIn1AichTPwNGwn_yKfcZenOgUPDMBXVWOvVddiVWf4f5kM4NWO254FI5dxCGRBOw4x6kRU0QyNWW9BMyUC8MCMwEnw2htaKy1GjQwAWgsmZlJUL0aIvU0D0MfyxF7)). Relevance: Points out the critical limitations of relying on LLM-judged benchmarks like GDPval-AA to evaluate true capability compared to real-world standards.
+
+**Missing context:**
+- The GDPval-AA benchmark uses an LLM judge (Gemini 3 Pro) to score outputs, meaning the evaluation is not fully execution-verified or contamination-free.
+- Standard static benchmarks like Terminal-Bench and CharXiv do not have integrated mechanisms to prevent training data contamination, unlike rolling/dynamic benchmarks (e.g., LiveCodeBench).
+- There are no verified human-in-the-loop developer productivity studies included in the release materials to support how these exact numbers translate to actual software engineering speedups.
+
+**Numeric findings:**
+- Terminal-Bench 2.1: 76.2% for Gemini 3.5 Flash vs 70.3% for Gemini 3.1 Pro
+- GDPval-AA: 1656 Elo for Gemini 3.5 Flash vs 1314 Elo for Gemini 3.1 Pro
+- MCP Atlas: 83.6% for Gemini 3.5 Flash vs 78.2% for Gemini 3.1 Pro
+- CharXiv Reasoning: 84.2% for Gemini 3.5 Flash vs 83.3% for Gemini 3.1 Pro
+
+</details>
+
+<details><summary>Contradiction Finder Skill: While Gemini 3.5 Flash achieves impressive scores on Terminal-Bench, GDPval-AA, MCP Atlas, and CharXiv Reasoning, the underlying benchmarks possess significant caveats regarding evaluation noise, training data contamination, and their correlation with actual developer productivity. Independent audits show that static bench performance overstates real-world gains, which are highly context-dependent, limited by the 'one-shot' nature of the tests, and prone to adversarial exploits.</summary>
+
+**Supporting evidence:**
+- It’s our strongest agentic and coding model yet, outperforming Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning). ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: Provides the primary claim and corresponding benchmark scores for Gemini 3.5 Flash.
+- Source returned by Gemini grounding metadata. ([sshh.io](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVPvHV0UC8vOnDcSS3sNkW5L85mcAA9WZQm-ijv_5lMhjrBBj1UfpxJGea8JdT55-mt9mj7Qu9FSIXcvxyFwbC0bQqohwCnKvmP2p8T69iCBX-QLlKGm52qCC-zLxiMDFT0F2eXDPPWA==)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([deeplearning.ai](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSgjbjs6fABcJARcZill57hiTSxpIrG5XntN4CnZ8lDWeEEfeV1AuMVo7eOZa5yOU5HjblQ7wPYmRp6QtBd7QPDOsFmwYZ-ICBTTashyhJ_UWyhN4elQfDeeKS-gqS2iw3xyfLuRfbE5Q1qo5y3Detd5hnVoACFvBeRrwDi_Ms1oug1Ld3DqhdAipzbj-VvkkwQJOUhpP08aZXhyPAs4TRVhKMLAIrTbLa8O8SQ3fRMEDXjjrZJPe01T82Ld8l7IU=)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([tldr.tech](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGrrWH20Vu6LywoymZj3-FL9JXvh7uBfNrg0vEonOLMRV3wgjRGkyYDtgDOQsoDs_S5vMM3tu9Kh4Rnnw_0i4iD2GFI0pc53LEYjAeNabnmvgSwbRyf4A==)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([openai.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF0M5k2bC-KLm16HufvzhXdxOEhMsnZPj2t-a0Wu6EiVIOMA4qvp_z8USQikCzB-3aWVjN9w24ktQKRHgC16ksoLDi1flUavSM1AMVUeVO-lLvCbUbK4w==)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFvSxs4Iw-rpdGHS2iHYRaSdiTzPyUnopmdDuHMDkd5rjn4qn6ARauoNktI4ZaJ8_5LZLmb7j93GNfdqU-R2qKaAyIS2AIb84gOvNUKAzFOUTgrGLCutG54DA==)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([scale.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGrJvwdeK3DDAsKXOzVSWsNNA7Dr7PR4geCfoylL6LvqITgY-wim8I5KekMZC35HflJ-XVL2YivAMYvJoL1nwc7M_1k8AtXfIPc7r_8iVEJOrU4tidIkVOH0oj5VaaAiXBKBQ==)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([neurips.cc](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGAkBbh6MyjxSE2xuJsW0yEZzcgsteGixeorhNOpXVA2z2plnLRFWhSlzVQ3s4FZrmU1zUiu-apUd4MvtSiEzXtpk4wqvQWajlcqBH1RpnEq_4v1Q_auOtrnn3IcLNsUIK4c8ALPJLXCF7QjftipcMUoXmMkyHMtiA06TzxN9SCdKZR9cpzDn8Z-7IyWc154jlQMt08ra9C2n04TIUVUJBYUVkb87B4qQsJojxLls3MBVu76ck8zu3pH-4=)). Relevance: Grounding source used during specialist audit.
+
+**Contradictions / narrowing evidence:**
+- Contamination: It's very difficult to truly guarantee a model never saw questions or answers from benchmarks during training. ... Unscored Failures: Benchmarks often check for the presence of a correct answer, not the absence of a side effect. A coding agent that deletes your database ... ([Understanding AI Benchmarks - by Shrivu Shankar](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVPvHV0UC8vOnDcSS3sNkW5L85mcAA9WZQm-ijv_5lMhjrBBj1UfpxJGea8JdT55-mt9mj7Qu9FSIXcvxyFwbC0bQqohwCnKvmP2p8T69iCBX-QLlKGm52qCC-zLxiMDFT0F2eXDPPWA==)). Relevance: Highlights critical flaws in agentic benchmarks like Terminal-Bench, noting the lack of side-effect checks (e.g., database deletion) and the pervasive issue of data contamination during model training.
+- Our evaluation reveals significant accuracy drops (25–29% on average) following gaslighting negation prompts, indicating that even top-tier reasoning models struggle to preserve correct answers under manipulative user feedback. ([Reasoning Models Are More Easily Gaslighted Than You Think - arXiv](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFvSxs4Iw-rpdGHS2iHYRaSdiTzPyUnopmdDuHMDkd5rjn4qn6ARauoNktI4ZaJ8_5LZLmb7j93GNfdqU-R2qKaAyIS2AIb84gOvNUKAzFOUTgrGLCutG54DA==)). Relevance: Demonstrates that multimodal reasoning models evaluated on benchmarks like CharXiv lack robustness, experiencing major accuracy drops under basic adversarial user negation prompts.
+
+**Missing context:**
+- One-shot limitation of GDPval: The creators of GDPval explicitly state that it evaluates models in a static, one-shot manner, which fails to capture the iterative, collaborative, and feedback-driven nature of real-world knowledge work [3.2.1].
+- Contamination and Split-Security: MCP-Atlas relies on a public 500-task split and a private 500-task split to preserve leaderboard integrity. If models are evaluated or fine-tuned on the public split, scores can be artificially inflated.
+- Evaluation Noise and Judge Bias: Many GDPval evaluations (including GDPval-AA) use LLM-as-a-judge frameworks (often Gemini or GPT-4o), which are susceptible to bias toward verbosity, style, and formatting over substantive correctness.
+- Mismatch with Team Productivity: 2025 DORA data indicates that most '10x AI productivity' claims do not translate to real engineering teams. Actual developer productivity is dominated by cultural factors, tooling integration, and scaffolding rather than raw LLM performance on isolated coding benchmarks.
+- Grading Errors on CharXiv: The Princeton NLP team admitted that automated grading issues and evaluator noise limit the precision of the CharXiv benchmark, with humans scoring only 80.5% on reasoning tasks.
+
+**Numeric findings:**
+- 76.2% on Terminal-Bench 2.1
+- 1656 Elo on GDPval-AA
+- 83.6% on MCP Atlas
+- 84.2% on CharXiv Reasoning
+- 25-29% average drop in reasoning accuracy on CharXiv and other benchmarks under adversarial gaslighting negation prompts [3.4.3]
+- Only 500 tasks are kept in the private split of MCP-Atlas, while 500 are public
+
+</details>
+
+<details><summary>numeric_calibrator: The claim asserts that Gemini 3.5 Flash outperforms Gemini 3.1 Pro on several benchmarks, but the source document fails to provide the baseline performance metrics for Gemini 3.1 Pro. Consequently, it is mathematically impossible to calculate the absolute or relative margins of improvement, compute percentage point differences, or verify the exact level of outperformance.</summary>
+
+**Supporting evidence:**
+- It’s our strongest agentic and coding model yet, outperforming Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning). ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: Confirms the claimed scores for Gemini 3.5 Flash across the four specified benchmarks.
+
+**Missing context:**
+- Gemini 3.1 Pro baseline score on Terminal-Bench 2.1
+- Gemini 3.1 Pro baseline score on GDPval-AA (Elo rating)
+- Gemini 3.1 Pro baseline score on MCP Atlas
+- Gemini 3.1 Pro baseline score on CharXiv Reasoning
+
+**Numeric findings:**
+- No comparative arithmetic could be executed because the document lacks all baseline numbers for the comparison model (Gemini 3.1 Pro).
+- Gemini 3.5 Flash Terminal-Bench 2.1 score: 76.2%. Gemini 3.1 Pro baseline: Unknown.
+- Gemini 3.5 Flash GDPval-AA score: 1656 Elo. Gemini 3.1 Pro baseline: Unknown.
+- Gemini 3.5 Flash MCP Atlas score: 83.6%. Gemini 3.1 Pro baseline: Unknown.
+- Gemini 3.5 Flash CharXiv Reasoning score: 84.2%. Gemini 3.1 Pro baseline: Unknown.
+
+</details>
+
+### Evidence Contrast
+
+**Claim says:** Gemini 3.5 Flash outperforms Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning).
+
+**Best reference says:** Lists the baseline results for Gemini 3.1 Pro alongside the new Gemini 3.5 Flash scores, validating the outperformance claim.
+
+**Key qualification:** Scores: Terminal-Bench 2.1 (76.2% vs. 70.3%), GDPval-AA (1656 Elo vs. 1314 Elo), MCP Atlas (83.6% vs. 78.2%), and CharXiv Reasoning (84.2% vs. 83.3%).
+
+**Delta:** same — The reference claim is accurate to the technical benchmark metrics reported in Google's model card and verified by independent platforms. No discrepancy exists between the stated percentages/Elo and the official documentation.
+
+**Final verdict:** supported
+
+**Defensible rewrite:** Gemini 3.5 Flash outperforms Gemini 3.1 Pro on coding, agentic, and multimodal benchmarks, scoring 76.2% on Terminal-Bench 2.1 (compared to 70.3%), 1656 Elo on GDPval-AA (compared to 1314 Elo), 83.6% on MCP Atlas (compared to 78.2%), and 84.2% on CharXiv Reasoning (compared to 83.3%).
+
+### Sources Checked
+
+- Gemini 3.5: frontier intelligence with action (blog, authority 90/100): https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/. The original blog post containing the claim.
+
+**Reference snippets / mismatches:**
+- Lists the baseline results for Gemini 3.1 Pro alongside the new Gemini 3.5 Flash scores, validating the outperformance claim. (Gemini 3.5 Flash - Model Card - Google DeepMind, supports, https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSeGb_RMdhZ7qHMhZw6QKML2iUfsJFJ71USMnI2J91QuLjTHLaO_97x5Zp8AD9LkXZzU8aZDqhg-rP0f88Ht9zYlYLJ_1K4lsF6bDyBG2ernKc1CvftavSz0x_j-nA0kWHXPGpUqWk8p0Tghu9gB9ZJag=). Scores: Terminal-Bench 2.1 (76.2% vs. 70.3%), GDPval-AA (1656 Elo vs. 1314 Elo), MCP Atlas (83.6% vs. 78.2%), and CharXiv Reasoning (84.2% vs. 83.3%).
+
+**Numeric findings:**
+- Terminal-Bench 2.1: 76.2% for Gemini 3.5 Flash vs 70.3% for Gemini 3.1 Pro
+- GDPval-AA: 1656 Elo for Gemini 3.5 Flash vs 1314 Elo for Gemini 3.1 Pro
+- MCP Atlas: 83.6% for Gemini 3.5 Flash vs 78.2% for Gemini 3.1 Pro
+- CharXiv Reasoning: 84.2% for Gemini 3.5 Flash vs 83.3% for Gemini 3.1 Pro
+
+**Supporting evidence found:**
+- Terminal-bench 2.1 Agentic terminal coding, Terminus-2 harness, 76.2%, 58.0%, 70.3%... Agentic, MCP Atlas Multi-step workflows using MCP, 83.6%, 62.0%, 78.2%... GDPval-AA Economically valuable knowledge work, Elo, 1656, 1204, 1314... CharXiv Reasoning Information synthesis from complex charts, No tools, 84.2%, 80.3%, 83.3% ([Gemini 3.5 Flash - Model Card - Google DeepMind](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSeGb_RMdhZ7qHMhZw6QKML2iUfsJFJ71USMnI2J91QuLjTHLaO_97x5Zp8AD9LkXZzU8aZDqhg-rP0f88Ht9zYlYLJ_1K4lsF6bDyBG2ernKc1CvftavSz0x_j-nA0kWHXPGpUqWk8p0Tghu9gB9ZJag=)). Relevance: Verifies the exact benchmark scores reported for Terminal-Bench 2.1, MCP Atlas, GDPval-AA, and CharXiv Reasoning, showing Gemini 3.5 Flash outperforming Gemini 3.1 Pro.
+- Its GDPval-AA result is especially notable, achieving an Elo of 1656, well ahead of Gemini 3 Flash (1204) and Gemini 3.1 Pro (1314) ([Gemini 3.5 Flash: The new leader in intelligence versus speed - Artificial Analysis](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFBgVQM0v89NGjBC6DTxODfnURB2H7ZsyDI3t0HxKsdvxOObRW_jY1AJHrhtbWGVB_utmOeFWMW48MP8NH91VSYG6y7Tn9I2CrJTpu36oRZT6leV1V_nV210tYoeFwgN4pigF468oXg3q3_WOK7RDJ5fCKz9bNf3oTdjiH0bCbKGM9JSi0KfrP2TQ==)). Relevance: Provides independent validation of the GDPval-AA benchmark results.
+- gemini-3.1-pro-preview (high), 78.2%... Gemini 3.5 Flash... 83.6% ([MCP Atlas - Scale Labs Leaderboard](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGakxNkJAu9P8f8v0H_cl7DI2u2F3fBYB_OMoXmeYx6utAjyN55y2OW46MPmEPX8x76rMdUUlzQBCZxPKzdOXNjcon2Wck43IooWGwFPNSZelJB5pCzqvbhUSLh7Mh54Su70A==)). Relevance: Independent verification of the MCP Atlas benchmark showing Gemini 3.5 Flash leading over Gemini 3.1 Pro.
+
+**Contradictions / narrowing evidence:**
+- GDPval-AA tests a model's ability to produce documents, spreadsheets, diagrams, and the like. Artificial Analysis asks two models to respond to the same prompt, uses Gemini 3 Pro as a judge to rank their outputs as a win, loss, or tie, and computes Elo ratings... One reason may be contamination of the models' training data with the benchmark test sets ([Independent AI Testing Authority Turns From Saturated Knowledge Benchmarks to Harder Business Tests - DeepLearning.AI](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHkFk1CrhaTKkcbJkWrJ1QJZ8saFi906Lu7ftOJpmVTUWBbscYJSVBLIb0mMZ0AOUZPJWndOXJvMsW_OIOaVguxm_Sups_alsG3zyZUxfBvtz8xF8sriQi2DwLFjMsL2h1A-eN9EYRs0-Qq-tJLEIEnv8lnVdnDK5psVPm8m8y2t5U32rfoCIT2TFRe_wZVJeXhRDEb724uRAcmqwHu48NdM0UA5FYuRE7p5oKFL9zGpbjarhnbiWWJfH8USdU4plY=)). Relevance: Highlights that GDPval-AA utilizes Gemini 3 Pro as an LLM judge, which can lead to self-model favoritism/bias, and that static test sets are heavily prone to training set contamination.
+- GDPval-aa, for example, is just the public GDPval tasks but with an LLM judge. In theory, rubrics allow you to measure important qualitative traits like style, but they have obvious limitations... Using an LLM to evaluate quality is also inherently suspect, especially when there's no human in the loop making the final decision. ([The Coding Assistant Breakdown: More Tokens Please - SemiAnalysis](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6Qug2ePD4L6hgxQIiMSqdXmXC6A6hMyOAWr6E4DycGFZIn1AichTPwNGwn_yKfcZenOgUPDMBXVWOvVddiVWf4f5kM4NWO254FI5dxCGRBOw4x6kRU0QyNWW9BMyUC8MCMwEnw2htaKy1GjQwAWgsmZlJUL0aIvU0D0MfyxF7)). Relevance: Points out the critical limitations of relying on LLM-judged benchmarks like GDPval-AA to evaluate true capability compared to real-world standards.
+
+**Missing context:**
+- The GDPval-AA benchmark uses an LLM judge (Gemini 3 Pro) to score outputs, meaning the evaluation is not fully execution-verified or contamination-free.
+- Standard static benchmarks like Terminal-Bench and CharXiv do not have integrated mechanisms to prevent training data contamination, unlike rolling/dynamic benchmarks (e.g., LiveCodeBench).
+- There are no verified human-in-the-loop developer productivity studies included in the release materials to support how these exact numbers translate to actual software engineering speedups.
+
+
+## claim_2: missing_context
+
+**Confidence:** high
+
+**Original:** When looking at output tokens per second, it is 4 times faster than other frontier models.
+
+**Stretch Score:** 40/100
+
+**Why:** While Gemini 3.5 Flash's raw output speed of 278-289 tokens per second is indeed roughly 4 times faster than flagship competitor models like GPT-5.5 (65-71 tokens/sec) and Claude Opus 4.7 (50-67 tokens/sec), the original claim lacks essential context. The official announcement does not name these benchmark targets, nor does it disclose the hardware configs, prompt lengths, or concurrency conditions. Furthermore, the 4x speedup is a selective comparison that does not apply universally to all comparable peers (such as gpt-oss-120b at 246 tokens/sec) and does not translate to 4x overall execution speed in end-to-end agentic workflows due to non-generation overheads.
+
+**Defensible rewrite:** Under standardized benchmarks, Gemini 3.5 Flash's output token generation speed is approximately 4 times faster than certain flagship competitor models, such as GPT-5.5 and Claude Opus 4.7.
+
+### Agent Steps
+
+<details><summary>grounded_verifier: The official Google blog post introducing Gemini 3.5 Flash states that it is '4 times faster than other frontier models' when measuring output tokens per second, referencing the Artificial Analysis index. However, the post itself fails to define the hardware, prompt lengths, concurrency conditions, or specific competitor models compared. Third-party evaluations from Artificial Analysis and WaveSpeed fill in these details: Gemini 3.5 Flash delivers approximately 278 to 289 output tokens per second. This is roughly 4x faster than flagship competitor models like GPT-5.5 (~71 tokens/sec) and Claude Opus 4.7 (~67 tokens/sec). Artificial Analysis tests this speed under a default workload of 10,000 input tokens over public APIs (such as Google AI Studio). Architecturally, this speedup was enabled by co-designing the model specifically with Google's eighth-generation (Gen-8) TPU hardware.</summary>
+
+**Supporting evidence:**
+- Gemini 3.5 Flash outputs at 289 tokens/second — roughly 4x faster than both Claude Opus 4.7 (67 tok/s) and GPT-5.5 (71 tok/s). ([Gemini 3.5 Flash vs Claude Opus 4.7 vs GPT-5.5: Which Frontier Model Wins in 2026?](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHWanJrumoOo1vAXKC5cOicSP7V2TwLYCU2bJrCYN7wAATISZ48-i0nHc-stmi3XWIennQQkrdVAKzcdTu7aCthX3_Vv3_I_rkG5YNWpjd9pql1g8BkYEPRxtW61uOPtrgE0E7CBMbnXPdHB77Es1tu8FHOPXPsMi841JomDkArZvXKHEtPyw==)). Relevance: Provides the specific competitor models compared (Claude Opus 4.7 and GPT-5.5) along with their exact measured throughputs supporting the 4x speedup claim.
+- The Solution: Google DeepMind co-designed Gemini 3.5 Flash's architecture directly with its eighth-generation TPU hardware, compressing deeper reasoning capability into a model that runs at Flash-tier latency. Custom TPU co-design: The model's training pipeline was built specifically around Google's Gen-8 TPUs, allowing DeepMind to train deeper reasoning layers without the inference latency penalty that normally comes with model depth. ([Google's 4× Faster Bargain AI - Business Analytics Review](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE07hd1A8801OlZiOZB89Xf7-9DWsJ4tTruouebt0cK6hJXZ6BYWthAEMTLBG-c3GQQ8baavPNLi-HkEpvDYuGnfySKYAsWW_4QEqR8MytYi_DBHkL9RDKdYJN1VTERl9RX0nMqVfGs0usjUZbzTW6i5H7LucFRfEUdag==)). Relevance: Provides the specific hardware context (Google Gen-8 TPUs) used to train and run the model without latency penalties.
+- Update: Default performance benchmarking workload has updated to 10k input tokens to better reflect production use cases. ([Gemini 3.5 Flash: API Provider Performance Benchmarking & Price Analysis](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEgEI6oGxU73E8GcswykPLWvmjTxdnGZwVbIKe3XtGU4u8khzIiqC2n5DlzJleXServR1CuwE962fKj8UcySLu7h6RZQmaG5eymhrJNOW5MYxwy4nY_nyhDqFpyL-ZvQToRH6zDOIn0idH7dcbxJReRBrmdTnA=)). Relevance: Provides the prompt/workload length condition (10,000 input tokens) under which the Artificial Analysis API provider throughput metrics are calculated.
+
+**Missing context:**
+- Google's official announcement does not specify the names of the compared competitor models, hardware configurations, prompt lengths, or concurrency conditions.
+- The 4x speedup applies strictly to output text generation speed (tokens per second) and does not map to a 4x overall speedup in multi-step agentic workflows where external tool calling, network, and file I/O overheads dominate execution time.
+
+**Numeric findings:**
+- Gemini 3.5 Flash output throughput: ~278 to 289 tokens per second
+- GPT-5.5 output throughput: ~71 tokens per second
+- Claude Opus 4.7 output throughput: ~67 tokens per second
+- Artificial Analysis default benchmark prompt length: 10,000 input tokens
+
+</details>
+
+<details><summary>Contradiction Finder Skill: While independent data from Artificial Analysis confirms Gemini 3.5 Flash (high) produces ~278-289 tokens per second (roughly 4x faster than Claude Opus 4.7 at 50 t/s and GPT-5.5 xhigh at 65-71 t/s), the official Google blog post fails to disclose any of these competitor names, hardware configurations, prompt lengths, or concurrency conditions. Furthermore, audits show that because Gemini 3.5 is highly verbose and token-hungry on multi-turn tasks, the 4x raw output speed does not translate to 4x faster agentic execution, and can result in costs 5.5x higher than its predecessor.</summary>
+
+**Supporting evidence:**
+- Artificial Analysis output speed — Gemini 3.5 Flash at 289 tokens per second, 4x faster. Gemini 3.5 Flash: 289 tokens/sec; Gemini 3.1 Pro: 135 tokens/sec; GPT-5.5 (xhigh): 71 tokens/sec; Claude Opus 4.7 (max) ([How to Use Gemini 3.5 Flash: Complete Guide to Google's Fastest AI Model (2026)](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH_3GROuJBEsDV7PEr5kbRePKD55XwqQApBGsXB7v6k_r7Hj-v-Qtcggacm5-w8Y2TPihWFif8sVIJygAc-bvO8adpbqgDmcJPlkrjZjT9MKQLjiQKNqIup5RgRVVu62fAM8yzbHkLtxVSK08xXjCD_)). Relevance: Provides the specific competitor models (GPT-5.5 and Claude Opus 4.7) and the numerical baseline that justifies the 4x speedup claim under standardized testing.
+
+**Contradictions / narrowing evidence:**
+- Faster token generation reduces the part of an agent's time spent generating text, and for agentic coding that text portion is often large (long plans, lots of code output, multi-turn reasoning). So agents get faster, but not 4x. ([Google Launched Antigravity 2.0 with Gemini 3.5 Flash. Will Agents Be 4x Faster? | Belitsoft](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHaSBQStB3s6178DpP2ynaBlaT4tB9rgLvtbbhqGoGiAMNGOCbxkHYupOs3iJlmJFzQpVdZIJXvlHbq9kZaGRKs813KWYh4XeJ5gYrwbdFz9SsRzml17rSP3uZGH8TrUsEo6FbaOaKNpl-RqoE=)). Relevance: Points out that raw output token generation speed does not result in a 4x improvement in end-to-end agentic workflow speeds due to other non-generation bottlenecks.
+- Gemini 3.5 Flash costs $1,552 to run the Artificial Analysis Intelligence Index, 5.5x more than Gemini 3 Flash and 75% more than Gemini 3.1 Pro. This is driven by increases in both token usage and token prices. ([Gemini 3.5 Flash: The new leader in intelligence versus speed - Artificial Analysis](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFo3mskWk0l7LrOLixsmyTU_FFKpZSt1NVadjdAGB9b_85ggwS8uTaZn6VGvTNNN1tJiNzcLG5nsJk1EN75rjYG1rOSEaN1tmDcx5ZfKBOVndcBKsZS2z3SzLh4ro60a8LwmOaUMQgnSUttoBK6r_AZezcyemmaiJ92P2Qr_yeSHNvVgLfyc5MLWQ==)). Relevance: Demonstrates that the model's speed is offset by high token consumption, making it significantly more expensive to execute than the Pro models it is compared against.
+
+**Missing context:**
+- The official document does not name the specific competitor models compared under the '4x' speed assertion.
+- The blog post completely omits hardware specifications (such as TPU configurations), prompt lengths, or concurrency loads used during testing.
+- There is no mention of the model's high verbosity (averaging 73M tokens generated on evaluations versus a leaderboard average of 36M), which directly impacts end-to-end response times and operational costs in agent loops.
+
+**Numeric findings:**
+- Gemini 3.5 Flash operates at approximately 278 to 289 output tokens per second.
+- Competitor models GPT-5.5 (xhigh) and Claude Opus 4.7 (max) operate at approximately 65-71 t/s and 50 t/s, respectively.
+- Gemini 3.5 Flash is 5.5x more expensive to evaluate on the Intelligence Index than Gemini 3 Flash, and 75% more expensive than Gemini 3.1 Pro.
+
+</details>
+
+<details><summary>Numeric Calibrator: The document claims that Gemini 3.5 Flash is 4 times faster than other frontier models in terms of output tokens per second, referencing the Artificial Analysis index. However, the blog post itself lacks technical specifications, names of compared competitor models, their precise speeds, or the benchmarking conditions (such as hardware, prompt length, and concurrency settings) under which this 4x improvement was measured. External data from Artificial Analysis shows that Gemini 3.5 Flash generates around 278-280 tokens per second. Comparing Gemini 3.5 Flash to models like GPT-5.5 (65 tok/s) and Claude Opus 4.7 (50 tok/s) yields speedups of 4.3x to 5.6x, validating the '4x faster' claim against these targets. However, compared to other peer or frontier models like gpt-oss-120b (246 tok/s) or Gemini 3.1 Pro (123 tok/s), the speedup is only 1.1x to 2.3x, illustrating that the 4x figure represents a selective benchmark comparison rather than a universal baseline speedup.</summary>
+
+**Supporting evidence:**
+- Speed: 278 output tokens per second (rank #2 of 147 in its AA price class). The closest frontier peer is gpt-oss-120b (high) at 246. Other frontier-class models are well behind: Gemini 3.1 Pro Preview at 123, GPT-5.5 (xhigh) at 65, Claude Opus 4.7 (max) at 50. ([Gemini 3.5 Flash: a detailed benchmark and capability review - Appwrite](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsyLDdJzdwV63vU27PQ7CUci15Q0KrE3A-Sq0UYrYWGe5H9TRQlNwtnO5Wlb19yoOpgDIAVRvVz9OUYtSLwlLGzZ43lrbrp18ViMhy74ryAWtb63sTg0evBf3ElM0j1oxNIR9zyE2yple7WOsEPQ==)). Relevance: Provides independent measurement of Gemini 3.5 Flash speed (278 tokens/second) and shows it is 4.28x faster than GPT-5.5 and 5.56x faster than Claude Opus 4.7.
+
+**Contradictions / narrowing evidence:**
+- The closest frontier peer is gpt-oss-120b (high) at 246. Other frontier-class models are well behind: Gemini 3.1 Pro Preview at 123... ([Gemini 3.5 Flash: a detailed benchmark and capability review - Appwrite](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsyLDdJzdwV63vU27PQ7CUci15Q0KrE3A-Sq0UYrYWGe5H9TRQlNwtnO5Wlb19yoOpgDIAVRvVz9OUYtSLwlLGzZ43lrbrp18ViMhy74ryAWtb63sTg0evBf3ElM0j1oxNIR9zyE2yple7WOsEPQ==)). Relevance: Demonstrates that the '4 times faster' claim does not hold true against all comparable or peer models, such as gpt-oss-120b (only 1.13x faster) or Gemini 3.1 Pro (2.26x faster).
+
+**Missing context:**
+- Specific identities of the compared 'other frontier models' in the original blog post.
+- Precise performance figures (tokens/second) for Gemini 3.5 Flash and the benchmark targets.
+- Testing parameters such as hardware configurations, prompt lengths, and concurrency levels used for the speedup calculation.
+
+**Numeric findings:**
+- Gemini 3.5 Flash measured output speed = 278 tokens per second (according to Artificial Analysis data).
+- GPT-5.5 (xhigh) output speed = 65 tokens per second. Speedup calculation: 278 / 65 = 4.28x faster.
+- Claude Opus 4.7 (max) output speed = 50 tokens per second. Speedup calculation: 278 / 50 = 5.56x faster.
+- Gemini 3.1 Pro Preview output speed = 123 tokens per second. Speedup calculation: 278 / 123 = 2.26x faster.
+- gpt-oss-120b (high) output speed = 246 tokens per second. Speedup calculation: 278 / 246 = 1.13x faster.
+
+</details>
+
+### Evidence Contrast
+
+**Claim says:** When looking at output tokens per second, it is 4 times faster than other frontier models.
+
+**Best reference says:** The Gemini 3.5 Flash model card does not contain any statistics, measurements, or comparisons regarding output tokens per second, speed, or latency.
+
+**Key qualification:** The model card focuses on architectural parameters, input/output limits, safety evaluations, and task-based benchmarks (such as coding and agentic benchmarks), but omits physical speed and generation throughput metrics.
+
+**Delta:** not_checkable — The claim regarding the model being 4 times faster in terms of output tokens per second than other frontier models is entirely absent from the provided model card reference URL. The model card contains no speed or latency comparisons, rendering the claim not checkable against this specific source.
+
+**Final verdict:** not_checkable
+
+**Defensible rewrite:** According to Google's announcement blog, Gemini 3.5 Flash features an output token generation speed that is 4 times faster than other frontier models, though this throughput metric is not documented in its official model card.
+
+### Sources Checked
+
+- Gemini 3.5 Flash - Model Card - Google DeepMind (official_doc, authority 95/100): https://deepmind.google/models/model-cards/gemini-3-5-flash. This is the official model card for Gemini 3.5 Flash, the model referenced by the speed claim.
+
+**Reference snippets / mismatches:**
+- The Gemini 3.5 Flash model card does not contain any statistics, measurements, or comparisons regarding output tokens per second, speed, or latency. (Gemini 3.5 Flash - Model Card - Google DeepMind, unclear, https://deepmind.google/models/model-cards/gemini-3-5-flash). The model card focuses on architectural parameters, input/output limits, safety evaluations, and task-based benchmarks (such as coding and agentic benchmarks), but omits physical speed and generation throughput metrics.
+
+**Numeric findings:**
+- Gemini 3.5 Flash measured output speed: ~278 to 289 tokens per second
+- GPT-5.5 (xhigh) output speed: ~65 to 71 tokens per second (Speedup calculation: ~4.1x - 4.3x)
+- Claude Opus 4.7 (max) output speed: ~50 to 67 tokens per second (Speedup calculation: ~4.3x - 5.6x)
+- gpt-oss-120b (high) output speed: 246 tokens per second (Speedup calculation: 1.13x)
+- Gemini 3.1 Pro Preview output speed: 123 tokens per second (Speedup calculation: 2.26x)
+- Artificial Analysis default benchmark prompt length: 10,000 input tokens
+
+**Supporting evidence found:**
+- Gemini 3.5 Flash outputs at 289 tokens/second — roughly 4x faster than both Claude Opus 4.7 (67 tok/s) and GPT-5.5 (71 tok/s). ([Gemini 3.5 Flash vs Claude Opus 4.7 vs GPT-5.5: Which Frontier Model Wins in 2026?](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHWanJrumoOo1vAXKC5cOicSP7V2TwLYCU2bJrCYN7wAATISZ48-i0nHc-stmi3XWIennQQkrdVAKzcdTu7aCthX3_Vv3_I_rkG5YNWpjd9pql1g8BkYEPRxtW61uOPtrgE0E7CBMbnXPdHB77Es1tu8FHOPXPsMi841JomDkArZvXKHEtPyw==)). Relevance: Confirms the 4x speedup against prominent competitor models like GPT-5.5 and Claude Opus 4.7.
+- Speed: 278 output tokens per second (rank #2 of 147 in its AA price class). The closest frontier peer is gpt-oss-120b (high) at 246. Other frontier-class models are well behind: Gemini 3.1 Pro Preview at 123, GPT-5.5 (xhigh) at 65, Claude Opus 4.7 (max) at 50. ([Gemini 3.5 Flash: a detailed benchmark and capability review - Appwrite](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsyLDdJzdwV63vU27PQ7CUci15Q0KrE3A-Sq0UYrYWGe5H9TRQlNwtnO5Wlb19yoOpgDIAVRvVz9OUYtSLwlLGzZ43lrbrp18ViMhy74ryAWtb63sTg0evBf3ElM0j1oxNIR9zyE2yple7WOsEPQ==)). Relevance: Provides independent benchmark metrics verifying Gemini 3.5 Flash generates 278 tokens/second, making it 4.28x faster than GPT-5.5 and 5.56x faster than Claude Opus 4.7.
+
+**Contradictions / narrowing evidence:**
+- The closest frontier peer is gpt-oss-120b (high) at 246. Other frontier-class models are well behind: Gemini 3.1 Pro Preview at 123... ([Gemini 3.5 Flash: a detailed benchmark and capability review - Appwrite](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsyLDdJzdwV63vU27PQ7CUci15Q0KrE3A-Sq0UYrYWGe5H9TRQlNwtnO5Wlb19yoOpgDIAVRvVz9OUYtSLwlLGzZ43lrbrp18ViMhy74ryAWtb63sTg0evBf3ElM0j1oxNIR9zyE2yple7WOsEPQ==)). Relevance: Demonstrates that the 4x speedup claim is selective and does not hold true against all frontier or peer models like gpt-oss-120b (only 1.13x faster) or Gemini 3.1 Pro (only 2.26x faster).
+- Faster token generation reduces the part of an agent's time spent generating text, and for agentic coding that text portion is often large (long plans, lots of code output, multi-turn reasoning). So agents get faster, but not 4x. ([Google Launched Antigravity 2.0 with Gemini 3.5 Flash. Will Agents Be 4x Faster? | Belitsoft](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHaSBQStB3s6178DpP2ynaBlaT4tB9rgLvtbbhqGoGiAMNGOCbxkHYupOs3iJlmJFzQpVdZIJXvlHbq9kZaGRKs813KWYh4XeJ5gYrwbdFz9SsRzml17rSP3uZGH8TrUsEo6FbaOaKNpl-RqoE=)). Relevance: Highlights that raw output token speedup does not translate to 4x faster execution in real-world, multi-step agentic workflows.
+
+**Missing context:**
+- The official Google blog post does not specify the names of the compared competitor models, hardware configurations, prompt lengths, or concurrency conditions.
+- The 4x speedup is a selective comparison that does not apply to all peer models (such as gpt-oss-120b, which is only 1.13x slower).
+- The 4x speedup applies strictly to output text generation speed (tokens per second) and does not map to a 4x overall speedup in multi-step agentic workflows where external tool calling, network, and file I/O overheads dominate execution time.
+
+
+## claim_3: missing_context
+
+**Confidence:** high
+
+**Original:** Under supervision, it can reliably execute multi-step workflows and coding tasks while sustaining frontier performance.
+
+**Stretch Score:** 40/100
+
+**Why:** The claim uses the subjective and unquantified term 'reliably' to describe executing multi-step workflows under supervision, but lacks specified metrics on the actual human intervention rates or long-horizon success. Furthermore, external benchmarks show performance regressions in complex reasoning (e.g., ARC-AGI-2, Humanity's Last Exam) compared to prior models, which suggests limitations in the model's reliability for complex long-running workflows without significant human oversight.
+
+**Defensible rewrite:** Under human supervision, Gemini 3.5 Flash demonstrates strong performance on key coding and agentic benchmarks, though its reliability on complex, long-horizon workflows remains unquantified and dependent on active human oversight.
+
+### Agent Steps
+
+<details><summary>grounded_verifier: The claim states that Gemini 3.5 Flash can reliably execute multi-step workflows and coding tasks under supervision while sustaining frontier performance. While the provided document and the Google DeepMind Model Card present several benchmarks assessing its agentic capabilities—such as MCP Atlas (83.6%) and Terminal-Bench 2.1 (76.2%)—they do not disclose the exact success rate for workflows of 10 or more sequential steps, nor do they specify the exact percentage of tasks requiring human intervention to prevent failure.</summary>
+
+**Supporting evidence:**
+- It’s our strongest agentic and coding model yet, outperforming Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning). ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: Provides benchmark results showing Gemini 3.5 Flash's performance on agentic task and multi-step tool use benchmarks.
+
+**Missing context:**
+- The official documentation does not provide the exact success rate of Gemini 3.5 Flash specifically on multi-step workflows consisting of 10 or more sequential steps.
+- The specific percentage of tasks requiring human intervention to prevent failure is not quantified; the document only mentions qualitatively that it operates 'under supervision' and with 'reduced manual intervention'.
+
+**Numeric findings:**
+- Terminal-Bench 2.1: 76.2%
+- GDPval-AA: 1656 Elo
+- MCP Atlas: 83.6%
+- CharXiv Reasoning: 84.2%
+
+</details>
+
+<details><summary>contradiction_finder: Google's official announcement and the Gemini 3.5 Flash model card do not publish any exact success rates for multi-step workflows of 10 or more sequential steps, nor do they specify the percentage of tasks requiring human intervention. While the model achieves high scores on general agentic benchmarks (e.g., 83.6% on MCP Atlas), its 'reliability' is heavily qualified by the phrase 'under supervision.' Independent tests and technical reviews highlight that Gemini 3.5 Flash still exhibits regression on complex reasoning and long-context benchmarks compared to older models like Gemini 3.1 Pro, which could increase the need for human intervention in long-horizon tasks.</summary>
+
+**Supporting evidence:**
+- Under supervision, it can reliably execute multi-step workflows and coding tasks while sustaining frontier performance. ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: This is the primary claim asserting the model's reliability in executing multi-step workflows, subject to human supervision.
+- Source returned by Gemini grounding metadata. ([deepmind.google](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZOjLw1RBuqDpoebSn57044dY3eCsCFTCpTrY5ZC4G3n2UP69nV5UyxEViXMp6eNKUTyIhI_3eSW8r3uzltIZ-XCiWRYOecELQNNc4Ns3lSThOrKeJTicKxcPX3nWD6MzRlDoITCIGdUIWs_hug1lEpfY=)). Relevance: Grounding source used during specialist audit.
+- Source returned by Gemini grounding metadata. ([nxcode.io](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHJhzVumUxJtxILHEm605QePY3bkVRPPPMj8ejZrN0W8fD4dH637bk34ccFWaLIWv1hg2rHaUBZPPvglkgG-DNmExTrOKWaSAclc5g8JqHnR_20G03HP64JwBhaTeHdfz7ow3RoV_x6EaxYV5MUiHXb3cfDoXd0kjT82Rc0sz12e-s_GK4x2Z00Dw1pYxhTMzj4welRhY4=)). Relevance: Grounding source used during specialist audit.
+
+**Contradictions / narrowing evidence:**
+- To be sure, some of the new technologies demonstrated on site still felt like powerful demos rather than fully finished products. Additional validation and optimization appear necessary before they can land stably in real-world industry settings. (Google I/O 2026 Declares Era of 'Working AI,' Puts Gemini 3.5 Flash Front and Center). Relevance: Indicates that the demonstrated agentic capabilities are not yet fully stable for real-world enterprise deployment, challenging the assertion of turnkey reliability [2.4.8].
+- The cracks are in pure reasoning and long context: Gemini 3.1 Pro still wins Humanity's Last Exam (44.4% vs 40.2%), ARC-AGI-2 (77.1% vs 72.1%), and the 128k slice of MRCR v2 by 7.6 points. If you're doing needle-in-haystack on long documents, this is not your model yet. (Gemini 3.5 Flash: The Flash That Beat Last Year's Pro (Complete 2026 Guide) | NxCode). Relevance: Shows that Gemini 3.5 Flash has regression in long-context and pure reasoning compared to older models, which is critical for long-running, multi-step agentic workflows.
+
+**Missing context:**
+- Google does not publish an exact success rate for multi-step workflows of 10 or more sequential steps. Benchmarks like MCP Atlas (83.6%) and SWE-Bench Pro (55.1%) are referenced, but they do not isolate performance on long-horizon sequential chains [1.3.1].
+- The percentage of tasks requiring human intervention to prevent failure is unspecified. The document relies on the qualifier 'Under supervision' without clarifying the frequency, depth, or parameters of the human oversight required.
+
+</details>
+
+<details><summary>numeric_calibrator: The claim assertion that Gemini 3.5 can reliably execute multi-step workflows under supervision is purely qualitative. The provided document lacks any quantitative benchmarks, percentages, or statistics regarding the success rate of workflows with 10 or more sequential steps, or the frequency of human intervention needed to prevent failure.</summary>
+
+**Missing context:**
+- The exact success rate of Gemini 3.5 Flash on multi-step workflows of 10 or more sequential steps.
+- The percentage of multi-step workflows that require human intervention to prevent failure.
+
+**Numeric findings:**
+- No arithmetic could be performed because the document lacks quantitative data, denominators, or percentage breakdowns for the success rate or human intervention rate of multi-step workflows.
+
+</details>
+
+### Evidence Contrast
+
+**Claim says:** Under supervision, it can reliably execute multi-step workflows and coding tasks while sustaining frontier performance.
+
+**Best reference says:** Mentions that it is the strongest agentic/coding model yet, outperforming Gemini 3.1 Pro on some benchmarks (Terminal-Bench 2.1: 76.2%, MCP Atlas: 83.6%), but relies on the qualitative modifier 'under supervision' without defining the failure rate or degree of human intervention.
+
+**Key qualification:** Requires supervision; does not disclose quantitative reliability or step limits.
+
+**Delta:** missing_context — The claim implies consistent and general 'reliability' for executing multi-step workflows but leaves the exact parameters of 'supervision' and reliability over long-horizon sequential workflows unquantified. Moreover, independent audits demonstrate that Gemini 3.5 Flash regresses on reasoning and long-context benchmarks compared to older models (such as ARC-AGI-2 and Humanity's Last Exam), which introduces essential context about its limits on complex, multi-step tasks.
+
+**Final verdict:** missing_context
+
+**Defensible rewrite:** Under human supervision, Gemini 3.5 Flash demonstrates strong performance on key coding and agentic benchmarks, though its performance on complex, long-horizon multi-step workflows remains unquantified and subject to human oversight.
+
+### Sources Checked
+
+- Gemini 3.5: frontier intelligence with action (official_doc, authority 95/100): https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/. This is the source document containing the claim and agentic benchmark performance.
+
+**Reference snippets / mismatches:**
+- Mentions that it is the strongest agentic/coding model yet, outperforming Gemini 3.1 Pro on some benchmarks (Terminal-Bench 2.1: 76.2%, MCP Atlas: 83.6%), but relies on the qualitative modifier 'under supervision' without defining the failure rate or degree of human intervention. (Gemini 3.5: frontier intelligence with action, narrows, https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/). Requires supervision; does not disclose quantitative reliability or step limits.
+
+**Numeric findings:**
+- Terminal-Bench 2.1: 76.2%
+- GDPval-AA: 1656 Elo
+- MCP Atlas: 83.6%
+- CharXiv Reasoning: 84.2%
+
+**Supporting evidence found:**
+- It’s our strongest agentic and coding model yet, outperforming Gemini 3.1 Pro on challenging coding and agentic benchmarks like Terminal-Bench 2.1 (76.2%), GDPval-AA (1656 Elo) and MCP Atlas (83.6%), and leading in multimodal understanding (84.2% on CharXiv Reasoning). ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: Provides the model's primary agentic benchmark scores supporting improved baseline performance.
+
+**Contradictions / narrowing evidence:**
+- The cracks are in pure reasoning and long context: Gemini 3.1 Pro still wins Humanity's Last Exam (44.4% vs 40.2%), ARC-AGI-2 (77.1% vs 72.1%), and the 128k slice of MRCR v2 by 7.6 points. (Gemini 3.5 Flash: The Flash That Beat Last Year's Pro (Complete 2026 Guide) | NxCode). Relevance: Shows regression in long-context and pure reasoning compared to older models, which directly impacts the reliability of long-horizon, multi-step workflows.
+- To be sure, some of the new technologies demonstrated on site still felt like powerful demos rather than fully finished products. Additional validation and optimization appear necessary before they can land stably in real-world industry settings. (Google I/O 2026 Declares Era of 'Working AI,' Puts Gemini 3.5 Flash Front and Center). Relevance: Highlights that real-world stability and reliability for agentic workflows are not yet fully established for industry deployment.
+
+**Missing context:**
+- The official report does not define the success rate or average length of the multi-step workflows it can execute reliably.
+- The depth, frequency, and exact nature of the supervision required to ensure reliable execution remain unquantified.
+
+
+## claim_4: overstated
+
+**Confidence:** high
+
+**Original:** What used to take a developer days or an auditor weeks, 3.5 Flash can now help complete in a fraction of the time, often at less than half the cost of other frontier models.
+
+**Stretch Score:** 80/100
+
+**Why:** The claim generalizes automated, programmatic benchmark improvements and qualitative partner pilot programs into broad, quantified human productivity gains ('days to a fraction of the time', 'weeks to a fraction') without any controlled user studies or randomized trials tracking human developer or auditor hours. Additionally, while the raw API pricing of Gemini 3.5 Flash is highly competitive, the 'less than half the cost' claim is contingent on model configuration; when configured with 'high' thinking enabled, its cost can exceed other frontier models run on medium configurations.
+
+**Defensible rewrite:** While actual human-in-the-loop productivity gains depend on individual workflows, Gemini 3.5 Flash's speed and pricing can help developers and auditors execute long-horizon agentic tasks significantly faster, and at standard API rates, it can be substantially more cost-effective than several comparable frontier models.
+
+### Agent Steps
+
+<details><summary>Grounded Verifier: The assertion that Gemini 3.5 Flash helps complete tasks in a fraction of the time at less than half the cost of other frontier models is an illustrative marketing claim. Google does not publish or reference any controlled human user studies or structured cost-benefit analyses validating these exact developer/auditor temporal reductions. Instead, the claim is supported by automated agentic and coding benchmarks (e.g., Terminal-Bench 2.1, GDPval-AA, MCP Atlas) and qualitative enterprise partner pilot descriptions (e.g., Macquarie Bank customer onboarding, Xero tax document prep). Independent API pricing audits verify that Gemini 3.5 Flash is significantly cheaper than competing frontier or Pro-tier models, though its actual operational savings are highly dependent on the use of context caching and are offset by price increases relative to previous Flash-tier models.</summary>
+
+**Supporting evidence:**
+- This balance of speed and performance makes 3.5 Flash ideal for tackling long-horizon agentic tasks. What used to take a developer days or an auditor weeks, 3.5 Flash can now help complete in a fraction of the time, often at less than half the cost of other frontier models. It rapidly plans, builds and iterates to solve real-world problems, whether it's developing new applications, maintaining codebases or helping to prepare financial documents. ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: This is the source document containing the claim. It provides proxy evidence using automated benchmarks (such as Terminal-Bench 2.1, GDPval-AA, and MCP Atlas) and lists qualitative partner pilots (Macquarie Bank, Xero, Shopify, Salesforce, Databricks, and Ramp) to support the model's capabilities in coding and auditing tasks.
+- Pricing: $1.50 input / $9.00 output per 1M tokens. $0.15 cached input... Pricing is roughly 3x Gemini 3 Flash (which was $0.50 / $3), but still 40% cheaper on input and 40% cheaper on output than Gemini 3.1 Pro at $2.50 / $15. The 90% cache discount makes long agent contexts the dominant cost lever... ([Gemini 3.5 Flash: Benchmarks, Pricing, and Complete Specs - LLM Stats](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPsm2TCBLVJjYLl2U9AQkiSkpZqr24fff96IyAooZMbUcb3mHiD1j_rqznj5dwqXckTq90RNlMy82qgXjU58HUDvsaGcT7zLFtL__ybl1kQiDrMVwzwyxTHF0PzYPhCEbzV1o36n5uK2z4fpo04vTLMQ==)). Relevance: Provides the exact API pricing metrics demonstrating how Gemini 3.5 Flash is structurally cheaper than Pro-tier alternatives, supporting the 'less than half the cost' claim, especially when utilizing context caching for multi-turn agentic loops.
+
+**Contradictions / narrowing evidence:**
+- It is completely unacceptable to market an update based on theoretical, laboratory-controlled metrics when the real-world user experience is a massive step backward... if I have to wait for 6 days for some complete basis task, I'd rather switch to something else. ([Very dissapointed with new token cycle - Google Antigravity](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEPbsocYkpcEwlmqR8gycw8SFpwCzsyt5PAL-ByITxLjYj85-Shwh43eY8w-wmbTRJ2cmbPRmNc0tvZNJcsQBgBDugm64yiyltkhdWq6hiVZtl4O_LO5Yw5oSQfsgipnyX7R27YX7_FjcZ1Tx6lbIamLXwFNA5c3l2USltuctf2auVQFg==)). Relevance: Highlights developer frustration and real-world friction with the token cycle and wait times on Google's Antigravity platform, challenging the claim of frictionless day/week compression in standard deployment contexts.
+
+**Missing context:**
+- The source documentation does not supply any controlled human-in-the-loop user studies or structured cost-benefit datasets tracking human developer/auditor hours spent versus AI hours spent.
+- The claim of 'less than half the cost of other frontier models' is based on raw API token pricing comparisons rather than holistic project operation costs (which involve human review, error mitigation, and agentic loop iterations).
+
+**Numeric findings:**
+- Terminal-Bench 2.1: 76.2% score achieved by Gemini 3.5 Flash.
+- GDPval-AA: 1656 Elo score on real-world knowledge work.
+- MCP Atlas: 83.6% score on tool use and agent coordination.
+- Output token speed: 4 times faster output tokens per second compared to other frontier models.
+- Standard API Pricing: $1.50 per million input tokens and $9.00 per million output tokens.
+- Context caching rate: $0.15 per million tokens (90% discount compared to standard input).
+
+</details>
+
+<details><summary>Skeptical Contradiction Finder: The causal claim that Gemini 3.5 Flash compresses days of developer effort or weeks of auditor work into a 'fraction of the time' at 'less than half the cost' lacks support from controlled user studies, randomized trials, or formal human-in-the-loop cost-benefit analysis data. Google's evaluation methodology relies strictly on automated, static code and agentic benchmarks (e.g., Terminal-Bench 2.1, SWE-Bench Pro, GDPval-AA), as well as unquantified qualitative enterprise pilot anecdotes (such as Macquarie Bank, Shopify, and Xero). Furthermore, although marketed as a low-cost alternative to massive flagship models, Gemini 3.5 Flash represents a 3x price hike over its immediate predecessor, Gemini 3 Flash. Developer communities also report that high benchmark scores do not reliably translate to error-free execution in long-horizon real-world settings, where tool-use failures and cascading errors persist.</summary>
+
+**Contradictions / narrowing evidence:**
+- Pricing. API pricing per million tokens: Input: $1.50; Output: $9.00... How it compares: vs Gemini 3 Flash ($0.50 / $3.00): 3x more on both input and output. Within the Flash tier: the most expensive Flash-tier model Google has released. ([Gemini 3.5 Flash: a detailed benchmark and capability review - Appwrite](https://blog.appwrite.io/gemini-3-5-flash-benchmarks/)). Relevance: Provides counter-evidence to the broad cost-reduction claim. While it may be cheaper than flagship frontier models, Gemini 3.5 Flash represents a substantial 3x price increase over the previous Flash model, making it the most expensive model in its tier and eroding cost efficiencies for existing Flash-tier workflows.
+
+**Missing context:**
+- Absence of Human-Subject Evaluation: Google's technical evaluation card for Gemini 3.5 Flash relies entirely on automated, single-pass programmatic benchmarks (Terminal-Bench, SWE-Bench Pro, GDPval-AA) and pass@1 metrics. It contains no controlled user studies or cognitive load analyses verifying actual hour/day/week savings for human developers or auditors.
+- Unquantified Pilot Programs: The listed business deployments (Macquarie Bank, Xero, Ramp, Shopify) are described as qualitative pilots, integrations, or early trials. None have published audited or rigorous productivity metrics confirming that overall human work time was cut to a specified fraction of historical baselines.
+- Real-world Performance vs. Benchmark Discrepancy: Developer communities on Reddit and Hacker News report that despite high synthetic benchmark scores ('benchmaxing'), Gemini 3.5 Flash still struggles significantly with multi-turn tool calling, complex instructions, and error-cascade problems in long-horizon workflows, casting doubt on its readiness to completely displace days or weeks of manual human auditing/coding labor.
+
+**Numeric findings:**
+- Gemini 3.5 Flash API pricing is $1.50 per million input tokens and $9.00 per million output tokens.
+- This price represents a 3x (or 200%) increase over Gemini 3 Flash, which cost $0.50 per million input and $3.00 per million output tokens.
+- The model's self-reported Terminal-Bench 2.1 coding score is 76.2% and its SWE-Bench Pro (Public) single-attempt score is 55.1%.
+
+</details>
+
+<details><summary>Numeric Calibrator: The claim asserts that Gemini 3.5 Flash completes developer and auditor tasks in a fraction of the time and often at less than half the cost of other frontier models. However, the source document contains no controlled user studies, cost-benefit analysis data, or specific pricing matrices to verify these precise metrics. External benchmarks indicate that while Gemini 3.5 Flash standard API pricing is $1.50/M input and $9.00/M output tokens, the relative cost varies dramatically depending on the reasoning depth ('thinking_level') used, meaning the 'less than half the cost' claim is context-dependent and unsupported by the document alone.</summary>
+
+**Supporting evidence:**
+- What used to take a developer days or an auditor weeks, 3.5 Flash can now help complete in a fraction of the time, often at less than half the cost of other frontier models. ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: This is the source document containing the original qualitative claim about developer/auditor time and cost savings.
+- Pichai put the performance gap in blunt terms: '3.5 Flash is better than 3.1 Pro... and it's at the almost, I would say, 90% of the performance of frontier models, 4x faster... and about 1/3 to one half the cost.' ([Google says Gemini 3.5 Flash can slash enterprise AI costs by more than $1 billion a year](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGrUdFQlWyrl_-T66JnoLLtLzFdnik2vwYi9-dMWeb7RkTVrKCl9_3I8FLYq5Xt7KKkVW-NLHdZrH7KxC8AZejnz6pMvOCRqStMI9-ur3l5HahWNxo5GzxnbMUdM2q4sBxylfoOGmO6O7V9IT26RkBuL8Hj4gXYbrBGbReOjG0EKSnqOoDwjzx7xfttkHFThjmdpF-5AL6wrbqGvxdKRuPEb_LhCtqLIUHWJwNNVFt28A==)). Relevance: Confirms Google's internal marketing estimate of running Gemini 3.5 Flash at approximately 1/3 to 1/2 the cost of comparable frontier models.
+
+**Contradictions / narrowing evidence:**
+- Model, Cost to run AA benchmark suite. Claude Opus 4.7 (Adaptive, Max), $5,117.14. GPT-5.5 (xhigh), $3,357.00. Gemini 3.5 Flash (high), $1,551.60. Claude Opus 4.7 (Non-reasoning, High), $1,217.23. GPT-5.5 (medium), $1,199.14. ([Gemini 3.5 Flash: The Flash That Beat Last Year's Pro (Complete 2026 Guide) | NxCode](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmmuv4-LXQ4axV1Gl_wcMcrFAtnpwf1y0GGqOMwp_QcgaccNYbw9ARwZEli8ml9aQkp8RqHnvqBDntJxLQRPUHuE_xQMnhyPDtKp-jg64ct0DSRkyWIhuN4hd9Md3zouoJjWlTg3HrsbW4fmR3sSScSdL2ACLkq_OpUCrP7rsSvTcAOLT1Jvcb2VXfa1FnRqRIRHEoiQ==)). Relevance: Indicates that when running Gemini 3.5 Flash with 'high' thinking enabled, the cost ($1,551.60) is actually higher than GPT-5.5 (medium, $1,199.14) or Claude Opus 4.7 (Non-reasoning, High, $1,217.23), challenging the blanket 'less than half the cost' claim.
+
+**Missing context:**
+- Baseline completion times (in hours or days) for developer and auditor workflows before integrating Gemini 3.5 Flash.
+- The exact completion times and quantitative speedup factors achieved in controlled user studies.
+- Specific token pricing rates or total operational costs of the 'other frontier models' used for the cost-benefit analysis baseline.
+- A clear specification of the pricing tiers compared (e.g., standard API rates vs. batch pricing, and the configured 'thinking_level' of Gemini 3.5 Flash).
+
+**Numeric findings:**
+- The phrase 'less than half the cost' implies a relative cost savings of > 50% (Relative Cost = Gemini 3.5 Flash Cost / Other Frontier Model Cost < 0.50).
+- According to external benchmark suite runs, Gemini 3.5 Flash (high thinking) at $1,551.60 is 46.22% of the cost of GPT-5.5 xhigh ($3,357.00), satisfying the 'less than half' claim: (1551.60 / 3357.00) * 100 = 46.22%, representing a 53.78% relative cost improvement.
+- However, compared to GPT-5.5 medium ($1,199.14), Gemini 3.5 Flash (high thinking) at $1,551.60 is 29.39% more expensive: ((1551.60 - 1199.14) / 1199.14) * 100 = 29.39% cost increase, demonstrating that the 'less than half the cost' claim does not hold across all frontier model configurations.
+- No numerical ratios, absolute time deltas, or time denominators are provided in the source text to verify the 'days to a fraction of the time' (or weeks to a fraction) claim.
+
+</details>
+
+### Evidence Contrast
+
+**Claim says:** What used to take a developer days or an auditor weeks, 3.5 Flash can now help complete in a fraction of the time, often at less than half the cost of other frontier models.
+
+**Best reference says:** The model card lists 'multi-week enterprise processes' as an intended use case and shows benchmark improvements on agentic, coding, and expert tasks, but does not contain controlled human productivity studies or a comprehensive cost-comparison matrix validating the 'fraction of the time' or 'less than half the cost' metrics.
+
+**Key qualification:** Provides experimental evaluation metrics rather than broad real-world human-in-the-loop time/cost savings.
+
+**Delta:** broader_than_claim — The claim generalizes automated, programmatic benchmark improvements and qualitative partner pilot programs into broad, quantified human productivity gains ('days to a fraction of the time', 'weeks to a fraction') without any controlled user studies or randomized trials tracking human developer or auditor hours. Additionally, while the raw API pricing of Gemini 3.5 Flash is highly competitive, the 'less than half the cost' claim is contingent on model configuration; when configured with 'high' thinking enabled, its cost can exceed other frontier models run on medium configurations.
+
+**Final verdict:** overstated
+
+**Defensible rewrite:** While actual human-in-the-loop productivity gains depend on individual workflows, Gemini 3.5 Flash's speed and pricing can help developers and auditors execute long-horizon agentic tasks significantly faster, and at standard API rates, it can be substantially more cost-effective than several comparable frontier models.
+
+### Sources Checked
+
+- Gemini 3.5 Flash Model Card (official_doc, authority 100/100): https://deepmind.google/models/model-cards/gemini-3-5-flash. Provides official specifications, intended use cases, evaluations, and limitations for the Gemini 3.5 Flash model.
+
+**Reference snippets / mismatches:**
+- The model card lists 'multi-week enterprise processes' as an intended use case and shows benchmark improvements on agentic, coding, and expert tasks, but does not contain controlled human productivity studies or a comprehensive cost-comparison matrix validating the 'fraction of the time' or 'less than half the cost' metrics. (Gemini 3.5 Flash Model Card, narrows, https://deepmind.google/models/model-cards/gemini-3-5-flash). Provides experimental evaluation metrics rather than broad real-world human-in-the-loop time/cost savings.
+
+**Numeric findings:**
+- Standard API Pricing: $1.50 per million input tokens, $9.00 per million output tokens [LLM Stats].
+- The model represents a 3x price increase over Gemini 3 Flash ($0.50 input / $3.00 output) [LLM Stats, Appwrite].
+- Running Gemini 3.5 Flash (high thinking) at $1,551.60 is 46.22% of the cost of GPT-5.5 xhigh ($3,357.00), representing a 53.78% relative cost improvement [NxCode].
+- Compared to GPT-5.5 medium ($1,199.14), Gemini 3.5 Flash (high thinking) is 29.39% more expensive [NxCode].
+
+**Supporting evidence found:**
+- This balance of speed and performance makes 3.5 Flash ideal for tackling long-horizon agentic tasks. What used to take a developer days or an auditor weeks, 3.5 Flash can now help complete in a fraction of the time, often at less than half the cost of other frontier models. ([Gemini 3.5: frontier intelligence with action](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/)). Relevance: Original source document containing the qualitative productivity claims and enterprise pilot examples.
+- Pichai put the performance gap in blunt terms: '3.5 Flash is better than 3.1 Pro... and it's at the almost, I would say, 90% of the performance of frontier models, 4x faster... and about 1/3 to one half the cost.' ([Google says Gemini 3.5 Flash can slash enterprise AI costs by more than $1 billion a year](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGrUdFQlWyrl_-T66JnoLLtLzFdnik2vwYi9-dMWeb7RkTVrKCl9_3I8FLYq5Xt7KKkVW-NLHdZrH7KxC8AZejnz6pMvOCRqStMI9-ur3l5HahWNxo5GzxnbMUdM2q4sBxylfoOGmO6O7V9IT26RkBuL8Hj4gXYbrBGbReOjG0EKSnqOoDwjzx7xfttkHFThjmdpF-5AL6wrbqGvxdKRuPEb_LhCtqLIUHWJwNNVFt28A==)). Relevance: Shows Google's internal pricing comparison baseline, matching the 'less than half the cost' target relative to massive flagship models.
+
+**Contradictions / narrowing evidence:**
+- Model, Cost to run AA benchmark suite. Claude Opus 4.7 (Adaptive, Max), $5,117.14. GPT-5.5 (xhigh), $3,357.00. Gemini 3.5 Flash (high), $1,551.60. Claude Opus 4.7 (Non-reasoning, High), $1,217.23. GPT-5.5 (medium), $1,199.14. ([Gemini 3.5 Flash: The Flash That Beat Last Year's Pro (Complete 2026 Guide) | NxCode](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmmuv4-LXQ4axV1Gl_wcMcrFAtnpwf1y0GGqOMwp_QcgaccNYbw9ARwZEli8ml9aQkp8RqHnvqBDntJxLQRPUHuE_xQMnhyPDtKp-jg64ct0DSRkyWIhuN4hd9Md3zouoJjWlTg3HrsbW4fmR3sSScSdL2ACLkq_OpUCrP7rsSvTcAOLT1Jvcb2VXfa1FnRqRIRHEoiQ==)). Relevance: Demonstrates that depending on the configuration (e.g., enabling high thinking_level), Gemini 3.5 Flash can actually be more expensive than other frontier models (like GPT-5.5 medium), meaning the 'less than half the cost' claim does not always hold true.
+- Pricing. API pricing per million tokens: Input: $1.50; Output: $9.00... How it compares: vs Gemini 3 Flash ($0.50 / $3.00): 3x more on both input and output. ([Gemini 3.5 Flash: a detailed benchmark and capability review - Appwrite](https://blog.appwrite.io/gemini-3-5-flash-benchmarks/)). Relevance: Shows that Gemini 3.5 Flash is actually 3x more expensive than its direct predecessor Gemini 3 Flash, which may increase costs for existing workloads transitioning within the Flash tier.
+
+**Missing context:**
+- No controlled user studies or randomized trials tracking human developer/auditor labor hours are provided to back the causal claim of compressing days/weeks of work.
+- The 'less than half the cost' claim is based on raw API token pricing rather than holistic operational costs (which must account for human-in-the-loop review, agentic error recovery, and iterative multi-turn runs).
+- Operational savings depend heavily on utilizing specific pricing features like context caching.
+

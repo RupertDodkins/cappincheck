@@ -122,6 +122,12 @@
   <script>
     const examples = [
       {
+        label: 'Real Public Report',
+        badge: 'context',
+        href: 'gemini_35_flash_report.html',
+        summary: 'Live Gemini run on Google’s Gemini 3.5 announcement, contrasted against the official DeepMind model card. Best headline artifact for showing real public input.'
+      },
+      {
         label: 'Evidence Contrast Fallback',
         badge: 'overstated',
         href: 'contrast_demo.html',
@@ -166,6 +172,7 @@
       summary.innerHTML = `
         <strong>${item.label}</strong>
         <p>${item.summary}</p>
+        <p>Real command: <code>cappincheck audit https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/ --contrast --reference https://deepmind.google/models/model-cards/gemini-3-5-flash --contrast-top 2 --limit 4 --out examples/gemini_35_flash_report.md --json examples/gemini_35_flash_report.json --html examples/gemini_35_flash_report.html</code></p>
         <p>Fallback command: <code>cappincheck audit examples/demo_document.md --mock --contrast --contrast-top 2 --out examples/contrast_demo.md --json examples/contrast_demo.json --html examples/contrast_demo.html</code></p>
       `;
       frame.src = item.href;

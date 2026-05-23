@@ -1,17 +1,34 @@
-# Real Public Example Placeholder
+# Real Public Example
 
-This placeholder is for a future live/public demo source. Do not paste copyrighted paper or model-report text here unless the license clearly permits redistribution.
+This example audits a real public AI model announcement and contrasts selected claims against an official technical reference.
 
-Recommended format:
+Source title: Gemini 3.5: frontier intelligence with action
 
-- Source title: `<public paper, model report, benchmark post, or technical blog>`
-- Source URL: `<public URL>`
-- Why it is useful: `<one sentence about the checkable claim type>`
-- Suggested command:
+Source URL: https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/
+
+Reference URL: https://deepmind.google/models/model-cards/gemini-3-5-flash
+
+Why it is useful: it contains benchmark, speed, cost, and enterprise-pilot claims that are public, on-theme for the hackathon, and suitable for checking against official model-card evidence.
+
+Generated artifacts:
+
+- `examples/gemini_35_flash_report.md`
+- `examples/gemini_35_flash_report.json`
+- `examples/gemini_35_flash_report.html`
+
+Command:
 
 ```bash
 source .venv/bin/activate
-cappincheck audit <local excerpt or URL-derived notes> --out examples/live_report.md --json examples/live_report.json --html examples/live_report.html --limit 3
+CAPPINCHECK_TIMEOUT_SECONDS=90 cappincheck audit \
+  https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/ \
+  --contrast \
+  --reference https://deepmind.google/models/model-cards/gemini-3-5-flash \
+  --contrast-top 2 \
+  --limit 4 \
+  --out examples/gemini_35_flash_report.md \
+  --json examples/gemini_35_flash_report.json \
+  --html examples/gemini_35_flash_report.html
 ```
 
-Keep `examples/demo_document.md` as the deterministic mock fixture for no-key demos.
+Demo note: use this as the real public input example. Keep `examples/contrast_demo.html` as the deterministic no-network fallback.

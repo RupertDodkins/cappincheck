@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html as html_lib
 import re
 from pathlib import Path
 
@@ -16,9 +17,12 @@ def load_document(source: str) -> Document:
         content_type = response.headers.get("content-type", "")
         if "pdf" in content_type or source.lower().endswith(".pdf"):
             text = _read_pdf_bytes(response.content)
+            title = _infer_title(text, source)
         else:
+            title = _html_title(response.text) or source
             text = _strip_html(response.text)
-        return Document(title=_infer_title(text, source), source=source, text=text)
+            title = title if title != source else _infer_title(text, source)
+        return Document(title=title, source=source, text=text)
 
     path = Path(source)
     if path.suffix.lower() == ".pdf":
@@ -43,6 +47,14 @@ def _strip_html(html: str) -> str:
     html = re.sub(r"(?is)<script.*?</script>|<style.*?</style>", " ", html)
     text = re.sub(r"(?s)<[^>]+>", " ", html)
     return re.sub(r"\s+", " ", text).strip()
+
+
+def _html_title(html: str) -> str | None:
+    match = re.search(r"(?is)<title[^>]*>(.*?)</title>", html)
+    if not match:
+        return None
+    title = _strip_html(match.group(1))
+    return html_lib.unescape(title).strip() or None
 
 
 def _infer_title(text: str, fallback: str) -> str:
