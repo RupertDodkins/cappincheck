@@ -305,7 +305,7 @@ def write_html(report: AuditReport, path: Path) -> None:
       </div>
       <div class="filters single">
         <label>Verdict
-          <span class="hint" tabindex="0" data-tip="Formal verdict used in JSON/Markdown: supported, overstated, missing context, contradicted, or not checkable.">?</span>
+          <span class="hint" tabindex="0" data-tip="Formal verdict definitions: supported = evidence supports the claim as written; overstated = directionally supported but too broad/strong/certain; missing_context = may be true but key scope/baseline/method/source context is absent; contradicted = evidence conflicts with the claim; not_checkable = insufficient evidence to verify or falsify.">?</span>
           <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
         </label>
       </div>
@@ -351,6 +351,15 @@ def write_html(report: AuditReport, path: Path) -> None:
       return '';
     }};
     const hint = (text) => `<span class="hint" tabindex="0" data-tip="${{esc(text)}}">?</span>`;
+    function verdictTip(verdict) {{
+      return ({{
+        supported: 'Available evidence supports the claim as written or with only minor caveats.',
+        overstated: 'Evidence points in the same direction, but the wording is stronger, broader, or more certain than supported.',
+        missing_context: 'The claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.',
+        contradicted: 'Available evidence conflicts with the claim as written.',
+        not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
+      }})[verdict] || 'Formal CappinCheck verdict for this claim.';
+    }}
     const filteredAudits = () => report.audits
       .map((audit, index) => ({{ ...audit, __index: index }}))
       .filter(audit => filters.verdict === 'all' || audit.verdict === filters.verdict);
@@ -389,6 +398,9 @@ def write_html(report: AuditReport, path: Path) -> None:
       const evidenceCount = audit.supporting_evidence.length + audit.counter_evidence.length;
       const evidenceScore = Math.min(100, evidenceCount * 25);
       const confidence = confidenceScore[audit.confidence] ?? 0;
+      const computedChecks = audit.numeric_findings?.length
+        ? `<div class="panel"><h3>Computed Checks</h3>${{list(audit.numeric_findings)}}</div>`
+        : '';
       document.getElementById('claim-detail').innerHTML = `
         <div class="panel">
           <h3>Report Provenance</h3>
@@ -397,7 +409,7 @@ def write_html(report: AuditReport, path: Path) -> None:
           <p class="wrap"><strong>Reference URLs:</strong> ${{(report.reference_urls || []).length ? (report.reference_urls || []).map(esc).join(', ') : 'none'}}</p>
         </div>
         <div class="panel">
-          <strong>Formal verdict: ${{esc(audit.verdict)}}</strong>
+          <strong>Formal verdict: ${{esc(audit.verdict)}}</strong> ${{hint(verdictTip(audit.verdict))}}
           <div class="score"><div style="width: ${{audit.stretch_score}}%"></div></div>
           <p class="muted">
             Confidence: ${{esc(audit.confidence)}} ${{hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}}
@@ -414,7 +426,7 @@ def write_html(report: AuditReport, path: Path) -> None:
         ${{contrastCard(audit.contrast)}}
         <div class="panel"><h3>Defensible Rewrite</h3><p class="wrap">${{esc(audit.weaker_supported_rewrite)}}</p></div>
         <div class="panel"><h3>Why</h3><p class="wrap">${{esc(audit.why)}}</p></div>
-        <div class="panel"><h3>Numeric Findings</h3>${{list(audit.numeric_findings)}}</div>
+        ${{computedChecks}}
         <div class="panel"><h3>Agent Steps</h3>${{agentSteps(audit.agent_outputs || [])}}</div>
       `;
       document.getElementById('evidence').innerHTML = `
@@ -509,7 +521,7 @@ def write_html(report: AuditReport, path: Path) -> None:
           ${{items(step.counter_evidence || [])}}
           <h4>Missing context</h4>
           ${{list(step.missing_context || [])}}
-          <h4>Numeric findings</h4>
+          <h4>Computed checks</h4>
           ${{list(step.numeric_findings || [])}}
         </details>
       `).join('');
@@ -565,7 +577,7 @@ def _audit_markdown(audit: ClaimAudit) -> list[str]:
     if audit.contrast:
         lines.extend(_contrast_markdown(audit))
     if audit.numeric_findings:
-        lines.append("**Numeric findings:**")
+        lines.append("**Computed checks:**")
         lines.extend(f"- {finding}" for finding in audit.numeric_findings)
         lines.append("")
     if audit.supporting_evidence:
@@ -605,7 +617,7 @@ def _agent_outputs_markdown(audit: ClaimAudit) -> list[str]:
             lines.extend(f"- {item}" for item in step.missing_context)
             lines.append("")
         if step.numeric_findings:
-            lines.append("**Numeric findings:**")
+            lines.append("**Computed checks:**")
             lines.extend(f"- {finding}" for finding in step.numeric_findings)
             lines.append("")
         lines.extend(["</details>", ""])

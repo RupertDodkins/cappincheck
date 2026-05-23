@@ -46,7 +46,7 @@ Source: `examples/demo_document.md`
 
 <details><summary>numeric-calibrator: Computed the absolute and relative difference from the benchmark values.</summary>
 
-**Numeric findings:**
+**Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 
@@ -60,13 +60,13 @@ Source: `examples/demo_document.md`
 **Missing context:**
 - No real-world deployment task is reported in the demo document.
 
-**Numeric findings:**
+**Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 
 </details>
 
-**Numeric findings:**
+**Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 

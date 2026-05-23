@@ -43,7 +43,7 @@ Source: `examples/careful_document.md`
 
 <details><summary>numeric-calibrator: Computed the absolute and relative difference from the benchmark values.</summary>
 
-**Numeric findings:**
+**Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 percentage points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 - The document uses percentage-point wording, so the numeric claim is properly scoped.
@@ -55,14 +55,14 @@ Source: `examples/careful_document.md`
 **Supporting evidence:**
 - Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
-**Numeric findings:**
+**Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 percentage points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 - The document uses percentage-point wording, so the numeric claim is properly scoped.
 
 </details>
 
-**Numeric findings:**
+**Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 percentage points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 - The document uses percentage-point wording, so the numeric claim is properly scoped.

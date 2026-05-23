@@ -4,7 +4,7 @@ Grounded adversarial claim audit for dense expert documents.
 
 CappinCheck reads an AI model report, paper, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce a structured evidence ledger.
 
-It is not a paper summarizer. The output is a claim ledger: original wording, formal verdict, evidence contrast against references, collapsible agent steps, supporting evidence found, contradictions or narrowing evidence, missing context, numeric findings, and the strongest defensible rewrite.
+It is not a paper summarizer. The output is a claim ledger: original wording, formal verdict, evidence contrast against references, collapsible agent steps, supporting evidence found, contradictions or narrowing evidence, missing context, computed checks when relevant, and the strongest defensible rewrite.
 
 ## Why Low-Latency Gemini
 
@@ -82,6 +82,12 @@ Each audited claim includes:
 - Original claim
 - Claim type
 - Formal verdict: `supported`, `overstated`, `missing_context`, `contradicted`, or `not_checkable`
+- Verdict definitions:
+  - `supported`: available evidence supports the claim as written or with only minor caveats.
+  - `overstated`: evidence points in the same direction, but the wording is stronger, broader, or more certain than supported.
+  - `missing_context`: the claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.
+  - `contradicted`: available evidence conflicts with the claim as written.
+  - `not_checkable`: available sources do not provide enough evidence to verify or falsify the claim.
 - Stretch score from `0` to `100`
 - Evidence Contrast against explicit reference URLs when `--contrast` is enabled
 - Sources Checked with reference URLs, snippets, and mismatch notes
@@ -89,6 +95,7 @@ Each audited claim includes:
 - Supporting evidence found
 - Contradictions / narrowing evidence
 - Missing context
+- Computed checks when the claim has quantities, percentages, units, or table math to verify
 - Strongest defensible rewrite
 
 ## Evidence Contrast Mode
