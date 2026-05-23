@@ -93,6 +93,48 @@
     .badge.sus { background: var(--sus); }
     .badge.no-cap, .badge.mostly-no-cap { background: var(--nocap); }
     .badge.needs-receipts { background: var(--receipts); }
+    .hint {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: help;
+      position: relative;
+      background: var(--panel);
+      vertical-align: middle;
+    }
+    .hint:focus {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+    .hint::after {
+      content: attr(data-tip);
+      display: none;
+      position: absolute;
+      z-index: 10;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(280px, 72vw);
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+      box-shadow: 0 8px 24px rgba(31,35,40,.18);
+    }
+    .hint:hover::after,
+    .hint:focus::after {
+      display: block;
+    }
     .muted { color: var(--muted); }
     .wrap {
       overflow-wrap: anywhere;
@@ -159,6 +201,13 @@
       border-bottom: 0;
     }
     h2, h3 { margin: 0 0 10px; letter-spacing: 0; }
+    .title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
     pre {
       white-space: pre-wrap;
       background: #0d1117;
@@ -185,12 +234,17 @@
   </header>
   <main>
     <aside>
-      <h2>Claim Ledger</h2>
+      <div class="title-row">
+        <h2>Claim Ledger</h2>
+        <span class="hint" tabindex="0" data-tip="Each row is a risky factual claim extracted from the document. Click one to inspect the audit.">?</span>
+      </div>
       <div class="filters">
         <label>Vibe
+          <span class="hint" tabindex="0" data-tip="Memorable verdict: no cap means supported; sus means missing context; cap means overstated or contradicted; needs receipts means not checkable.">?</span>
           <select id="vibe-filter" onchange="filters.vibe=this.value; syncSelection(); render();"></select>
         </label>
         <label>Verdict
+          <span class="hint" tabindex="0" data-tip="Formal verdict used in JSON/Markdown: supported, overstated, missing context, contradicted, or not checkable.">?</span>
           <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
         </label>
       </div>
@@ -198,11 +252,17 @@
       <div id="claim-list"></div>
     </aside>
     <section>
-      <h2>Selected Claim</h2>
+      <div class="title-row">
+        <h2>Selected Claim</h2>
+        <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+      </div>
       <div id="claim-detail"></div>
     </section>
     <section>
-      <h2>Evidence Stack</h2>
+      <div class="title-row">
+        <h2>Evidence Stack</h2>
+        <span class="hint" tabindex="0" data-tip="Evidence is split into support, counter-evidence, and missing context so the verdict can be inspected.">?</span>
+      </div>
       <div id="evidence"></div>
       <h3>Raw JSON</h3>
       <pre id="raw"></pre>
@@ -340,6 +400,7 @@
       } catch (_) {}
       return '';
     };
+    const hint = (text) => `<span class="hint" tabindex="0" data-tip="${esc(text)}">?</span>`;
     const filteredAudits = () => report.audits
       .map((audit, index) => ({ ...audit, __index: index }))
       .filter(audit => filters.vibe === 'all' || audit.vibe === filters.vibe)
@@ -385,12 +446,17 @@
         <div class="panel">
           <span class="badge ${cls(audit.vibe)}">${esc(audit.vibe)}</span>
           <strong>${esc(audit.verdict)}</strong>
+          ${hint(vibeTip(audit.vibe))}
           <div class="score"><div style="width: ${audit.cap_score}%"></div></div>
-          <p class="muted">Cap Score: ${audit.cap_score} / 100 · Confidence: ${esc(audit.confidence)} · Evidence items: ${evidenceCount}</p>
+          <p class="muted">
+            Cap Score: ${audit.cap_score} / 100 ${hint('Higher means the original wording stretches further beyond what the evidence supports.')}
+            · Confidence: ${esc(audit.confidence)} ${hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}
+            · Evidence items: ${evidenceCount} ${hint('Evidence items are supporting or counter-evidence records attached to this claim.')}
+          </p>
           <div class="strength-grid">
-            ${strengthCard('Cap pressure', audit.cap_score, audit.vibe, `${audit.cap_score}/100`)}
-            ${strengthCard('Confidence', confidence, audit.vibe, esc(audit.confidence))}
-            ${strengthCard('Evidence depth', evidenceScore, audit.vibe, `${evidenceCount} item${evidenceCount === 1 ? '' : 's'}`)}
+            ${strengthCard('Cap pressure', audit.cap_score, audit.vibe, `${audit.cap_score}/100`, 'How much the wording outruns the evidence.')}
+            ${strengthCard('Confidence', confidence, audit.vibe, esc(audit.confidence), 'How confident CappinCheck is in this verdict from available evidence.')}
+            ${strengthCard('Evidence depth', evidenceScore, audit.vibe, `${evidenceCount} item${evidenceCount === 1 ? '' : 's'}`, 'How much direct evidence is attached to this claim audit.')}
           </div>
         </div>
         <div class="panel"><h3>Original</h3><p class="wrap">${esc(audit.claim.claim)}</p></div>
@@ -405,13 +471,22 @@
       `;
       document.getElementById('raw').textContent = JSON.stringify(audit, null, 2);
     }
-    function strengthCard(label, value, vibe, display) {
+    function strengthCard(label, value, vibe, display, tip) {
       return `
         <div class="strength-card">
-          <div class="strength-label"><span>${label}</span><span>${display}</span></div>
+          <div class="strength-label"><span>${label} ${hint(tip)}</span><span>${display}</span></div>
           <div class="meter ${cls(vibe)}"><div style="width: ${value}%"></div></div>
         </div>
       `;
+    }
+    function vibeTip(vibe) {
+      return {
+        'no cap': 'The claim appears supported as written.',
+        'mostly no cap': 'The claim is basically supported, with small caveats.',
+        'sus': 'The claim may be plausible, but important context or scope limits are missing.',
+        'cap': 'The claim is materially overstated, contradicted, or numerically stretched.',
+        'needs receipts': 'The claim cannot be checked from available evidence.'
+      }[vibe] || 'Audit verdict label.';
     }
     function list(values) {
       if (!values.length) return '<p class="muted">None recorded.</p>';
