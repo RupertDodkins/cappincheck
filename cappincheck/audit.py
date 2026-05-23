@@ -90,7 +90,7 @@ def _mock_audit(claim: RiskyClaim) -> ClaimAudit:
             EvidenceItem(
                 source_title="Demo document benchmark table",
                 url=None,
-                snippet="Baseline: 84.1%. ClaimLens: 87.3%.",
+                snippet="Baseline: 84.1%. CappinCheck: 87.3%.",
                 relevance="The table supports a 3.2-point absolute gain, not a 30% relative improvement.",
             )
         ]
@@ -135,4 +135,3 @@ def _mock_audit(claim: RiskyClaim) -> ClaimAudit:
         missing_context=["Additional external grounding would be needed for a production verdict."],
         numeric_findings=[],
     )
-

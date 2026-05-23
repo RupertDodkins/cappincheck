@@ -1,4 +1,4 @@
-# ClaimLens Report: Demo Paper: ClaimLens for Agentic Claim Audits
+# CappinCheck Report: Demo Paper: CappinCheck for Agentic Claim Audits
 
 Source: `examples/demo_document.md`
 
@@ -23,7 +23,7 @@ Source: `examples/demo_document.md`
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 
 **Supporting evidence:**
-- Baseline: 84.1%. ClaimLens: 87.3%. (Demo document benchmark table)
+- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table)
 
 **Missing context:**
 - No real-world deployment task is reported in the demo document.

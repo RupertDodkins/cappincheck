@@ -13,7 +13,7 @@ def write_json(report: AuditReport, path: Path) -> None:
 
 def write_markdown(report: AuditReport, path: Path) -> None:
     lines = [
-        f"# ClaimLens Report: {report.document.title}",
+        f"# CappinCheck Report: {report.document.title}",
         "",
         f"Source: `{report.document.source}`",
         "",
@@ -38,7 +38,7 @@ def write_html(report: AuditReport, path: Path) -> None:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ClaimLens Report</title>
+  <title>CappinCheck Report</title>
   <style>
     :root {{
       --ink: #1f2328;
@@ -133,7 +133,7 @@ def write_html(report: AuditReport, path: Path) -> None:
 <body>
   <header>
     <div>
-      <h1>ClaimLens</h1>
+      <h1>CappinCheck</h1>
       <div class="muted">{html.escape(report.document.title)}</div>
     </div>
     <div class="muted">{len(report.audits)} audited claims</div>
@@ -230,4 +230,3 @@ def _audit_markdown(audit: ClaimAudit) -> list[str]:
         lines.extend(f"- {item}" for item in audit.missing_context)
         lines.append("")
     return lines
-

@@ -16,7 +16,7 @@ def extract_claims(document: Document, *, mock: bool, limit: int = 8) -> list[Ri
 
     client = GeminiClient()
     prompt = f"""
-You are ClaimLens, an adversarial claim extractor for dense expert documents.
+You are CappinCheck, an adversarial claim extractor for dense expert documents.
 
 Extract the {limit} riskiest factual claims from the document below. Do not summarize.
 Prefer claims with numeric improvements, novelty language, broad generalization,
@@ -61,4 +61,3 @@ def _mock_claims() -> list[RiskyClaim]:
             audit_question="Does prior work include similar scientific fact-checking or claim-audit systems?",
         ),
     ]
-

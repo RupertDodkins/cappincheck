@@ -1,8 +1,8 @@
-# ClaimLens
+# CappinCheck
 
 Grounded adversarial claim audit for dense expert documents.
 
-ClaimLens reads a paper, model report, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to decide whether each claim is no cap, sus, cap, or needs receipts.
+CappinCheck reads a paper, model report, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to decide whether each claim is no cap, sus, cap, or needs receipts.
 
 It is not a paper summarizer. The output is a claim ledger: original wording, formal verdict, evidence, counter-evidence, cap score, and the strongest defensible rewrite.
 
@@ -22,7 +22,7 @@ The initial implementation includes a local async runner that loads those same s
 ## Quickstart
 
 ```bash
-cd /Users/rupert/engineering/claimlens
+cd /Users/rupert/engineering/cappincheck
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
@@ -31,7 +31,7 @@ pip install -e .
 Run the no-key demo:
 
 ```bash
-claimlens audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
+cappincheck audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
 open examples/demo_report.html
 ```
 
@@ -39,7 +39,7 @@ Run with Gemini:
 
 ```bash
 export GEMINI_API_KEY=...
-claimlens audit examples/demo_document.md --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
+cappincheck audit examples/demo_document.md --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
 ```
 
 ## Output
@@ -57,5 +57,4 @@ Each audited claim includes:
 
 ## Safety and Scope
 
-ClaimLens does not prove that a paper is true or false. It identifies claims whose wording may outrun the available evidence. It should be used as a triage and review aid, not as an authority.
-
+CappinCheck does not prove that a paper is true or false. It identifies claims whose wording may outrun the available evidence. It should be used as a triage and review aid, not as an authority.

@@ -1,18 +1,18 @@
-# ClaimLens Outstanding Work
+# CappinCheck Outstanding Work
 
-This document is the implementation handoff for finishing ClaimLens after the initial scaffold.
+This document is the implementation handoff for finishing CappinCheck after the initial scaffold.
 
 Goal: execute the remaining work sequentially, self-verify each step, and keep the project demoable at every checkpoint. Do not remove the deterministic `--mock` path; it is the fallback for live demo failure.
 
 ## Current State
 
-- Repo: `/Users/rupert/engineering/claimlens`
-- Initial commit: `993fdc2 Create ClaimLens hackathon scaffold`
+- Repo: `/Users/rupert/engineering/cappincheck`
+- Initial commit: `993fdc2 Create initial hackathon scaffold`
 - Working command:
 
 ```bash
 source .venv/bin/activate
-claimlens audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
+cappincheck audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
 open examples/demo_report.html
 ```
 
@@ -49,7 +49,7 @@ Suggested commands:
 ```bash
 source .venv/bin/activate
 export GEMINI_API_KEY=...
-claimlens audit examples/demo_document.md --out examples/live_report.md --json examples/live_report.json --html examples/live_report.html --limit 3
+cappincheck audit examples/demo_document.md --out examples/live_report.md --json examples/live_report.json --html examples/live_report.html --limit 3
 ```
 
 Verification criteria:
@@ -89,8 +89,8 @@ Suggested verification:
 
 ```bash
 source .venv/bin/activate
-python -m compileall claimlens
-claimlens audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
+python -m compileall cappincheck
+cappincheck audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
 ```
 
 ## Step 3: Improve Grounded Citation Capture
@@ -154,8 +154,8 @@ Tasks:
 
 Verification criteria:
 
-- `claimlens audit ... --runtime local` works.
-- If implemented, `claimlens audit ... --runtime managed` works on the demo document.
+- `cappincheck audit ... --runtime local` works.
+- If implemented, `cappincheck audit ... --runtime managed` works on the demo document.
 - If not implemented, `RUNTIME.md` is specific enough that another agent can add the adapter without rediscovering the architecture.
 - README does not overclaim Managed Agents execution if only local runtime is available.
 
@@ -214,7 +214,7 @@ Tasks:
 - Confirm `.gitignore` excludes `.env`, `.venv`, caches, and build outputs.
 - Add screenshots only if they are public-safe and helpful.
 - Add a short demo script section to README.
-- Add a "Limitations" section that says ClaimLens is triage, not scientific proof.
+- Add a "Limitations" section that says CappinCheck is triage, not scientific proof.
 
 Suggested commands:
 
@@ -245,7 +245,7 @@ Tasks:
 Demo command:
 
 ```bash
-claimlens audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
+cappincheck audit examples/demo_document.md --mock --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
 open examples/demo_report.html
 ```
 
@@ -257,4 +257,3 @@ Verification criteria:
 - The demo sentence is ready:
 
 > Before Gemini 3.5 Flash and Managed Agents, running multiple grounded subagents in parallel sandboxes, each browsing the web, executing code, and grading a single claim, would have cost dollars and minutes per audit. Today it costs cents and seconds, which is what makes a live claim ledger possible.
-

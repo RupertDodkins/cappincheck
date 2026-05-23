@@ -34,7 +34,7 @@ def _read_pdf_path(path: Path) -> str:
 
 
 def _read_pdf_bytes(content: bytes) -> str:
-    tmp = Path("/tmp/claimlens-input.pdf")
+    tmp = Path("/tmp/cappincheck-input.pdf")
     tmp.write_bytes(content)
     return _read_pdf_path(tmp)
 
@@ -51,4 +51,3 @@ def _infer_title(text: str, fallback: str) -> str:
         if len(stripped) >= 8:
             return stripped[:120]
     return fallback
-
