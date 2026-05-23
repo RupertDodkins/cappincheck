@@ -1,0 +1,444 @@
+{
+  "document": {
+    "title": "Introducing Claude Sonnet 4.5 \\ Anthropic",
+    "source": "https://www.anthropic.com/news/claude-sonnet-4-5",
+    "text": "Skip to main content Skip to footer Research Economic Futures Commitments Learn News Try Claude Announcements Introducing Claude Sonnet 4.5 Sep 29, 2025 Claude Sonnet 4.5 is the best coding model in the world. It&#x27;s the strongest model for building complex agents. It’s the best model at using computers. And it shows substantial gains in reasoning and math. Code is everywhere. It runs every application, spreadsheet, and software tool you use. Being able to use those tools and reason through hard problems is how modern work gets done. Claude Sonnet 4.5 makes this possible. We&#x27;re releasing it along with a set of major upgrades to our products. In Claude Code , we&#x27;ve added checkpoints—one of our most requested features—that save your progress and allow you to roll back instantly to a previous state. We&#x27;ve refreshed the terminal interface and shipped a native VS Code extension . We&#x27;ve added a new context editing feature and memory tool to the Claude API that lets agents run even longer and handle even greater complexity. In the Claude apps , we&#x27;ve brought code execution and file creation (spreadsheets, slides, and documents) directly into the conversation. And we&#x27;ve made the Claude for Chrome extension available to Max users who joined the waitlist last month. We&#x27;re also giving developers the building blocks we use ourselves to make Claude Code. We&#x27;re calling this the Claude Agent SDK . The infrastructure that powers our frontier products—and allows them to reach their full potential—is now yours to build with. This is the most aligned frontier model we’ve ever released, showing large improvements across several areas of alignment compared to previous Claude models. Claude Sonnet 4.5 is available everywhere today. If you’re a developer, simply use claude-sonnet-4-5 via the Claude API . Pricing remains the same as Claude Sonnet 4, at $3/$15 per million tokens. Frontier intelligence Claude Sonnet 4.5 is state-of-the-art on the SWE-bench Verified evaluation, which measures real-world software coding abilities. Practically speaking, we’ve observed it maintaining focus for more than 30 hours on complex, multi-step tasks. Claude Sonnet 4.5 represents a significant leap forward on computer use. On OSWorld, a benchmark that tests AI models on real-world computer tasks, Sonnet 4.5 now leads at 61.4%. Just four months ago, Sonnet 4 held the lead at 42.2%. Our Claude for Chrome extension puts these upgraded capabilities to use. In the demo below, we show Claude working directly in a browser, navigating sites, filling spreadsheets, and completing tasks. The model also shows improved capabilities on a broad range of evaluations including reasoning and math: Claude Sonnet 4.5 is our most powerful model to date. See footnotes for methodology. Experts in finance, law, medicine, and STEM found Sonnet 4.5 shows dramatically better domain-specific knowledge and reasoning compared to older models, including Opus 4.1. Finance Law Medicine STEM The model’s capabilities are also reflected in the experiences of early customers: We&#x27;re seeing state-of-the-art coding performance from Claude Sonnet 4.5 , with significant improvements on longer horizon tasks. It reinforces why many developers using Cursor choose Claude for solving their most complex problems. Michael Truell CEO Claude Sonnet 4.5 amplifies GitHub Copilot&#x27;s core strengths . Our initial evals show significant improvements in multi-step reasoning and code comprehension—enabling Copilot&#x27;s agentic experiences to handle complex, codebase-spanning tasks better. Mario Rodriguez Chief Product Officer Claude Sonnet 4.5 is excellent at software development tasks , learning our codebase patterns to deliver precise implementations. It handles everything from debugging to architecture with deep contextual understanding, transforming our development velocity. Eric Wendelin Tech Lead, GenAI for Developer Productivity Claude Sonnet 4.5 reduced average vulnerability intake time for our Hai security agents by 44% while improving accuracy by 25% , helping us reduce risk for businesses with confidence. Nidhi Aggarwal Chief Product Officer Claude Sonnet 4.5 is state of the art on the most complex litigation tasks. For example, analyzing full briefing cycles and conducting research to synthesize excellent first drafts of an opinion for judges, or interrogating entire litigation records to create detailed summary judgment analysis. Pablo Arredondo Vice President, CoCounsel Claude Sonnet 4.5&#x27;s edit capabilities are exceptional — we went from 9% error rate on Sonnet 4 to 0% on our internal code editing benchmark . Higher tool success at lower cost is a major leap for agentic coding. Claude Sonnet 4.5 balances creativity and control perfectly. Michele Catasta President Claude Sonnet 4.5 delivers impressive gains on our most complex, long-context tasks—from engineering in our codebase to in-product features and research. It&#x27;s noticeably more intelligent and a big leap forward , helping us push what 240M+ users can design with Canva. Danny Wu Head of AI Products Claude Sonnet 4.5 has noticeably improved Figma Make in early testing , making it easier to prompt and iterate. Teams can explore and validate their ideas with more functional prototypes and smoother interactions, while still getting the design quality Figma is known for. David Kossnick Head of AI Products Sonnet 4.5 represents a new generation of coding models . It&#x27;s surprisingly efficient at maximizing actions per context window through parallel tool execution, for example running multiple bash commands at once. Jeff Wang CEO For Devin, Claude Sonnet 4.5 increased planning performance by 18% and end-to-end eval scores by 12%— the biggest jump we&#x27;ve seen since the release of Claude Sonnet 3.6 . It excels at testing its own code, enabling Devin to run longer, handle harder tasks, and deliver production-ready code. Scott Wu Co-Founder and CEO Claude Sonnet 4.5 shows strong promise for red teaming , generating creative attack scenarios that accelerate how we study attacker tradecraft. These insights strengthen our defenses across endpoints, identity, cloud, data, SaaS, and AI workloads. Sven Krasser Sr. Vice President for Data Science and Chief Scientist Claude Sonnet 4.5 resets our expectations— it handles 30+ hours of autonomous coding , freeing our engineers to tackle months of complex architectural work in dramatically less time while maintaining coherence across massive codebases. Sean Ward CEO and Co-Founder For complex financial analysis—risk, structured products, portfolio screening—Claude Sonnet 4.5 with thinking delivers investment-grade insights that require less human review . When depth matters more than speed, it&#x27;s a meaningful step forward for institutional finance. Stian Kirkeberg Head of AI and Machine Learning 01 / 13 Our most aligned model yet As well as being our most capable model, Claude Sonnet 4.5 is our most aligned frontier model yet. Claude’s improved capabilities and our extensive safety training have allowed us to substantially improve the model’s behavior, reducing concerning behaviors like sycophancy, deception, power-seeking, and the tendency to encourage delusional thinking. For the model’s agentic and computer use capabilities, we’ve also made considerable progress on defending against prompt injection attacks, one of the most serious risks for users of these capabilities. You can read a detailed set of safety and alignment evaluations, which for the first time includes tests using techniques from mechanistic interpretability, in the Claude Sonnet 4.5 system card . Overall misaligned behavior scores from an automated behavioral auditor (lower is better). Misaligned behaviors include (but are not limited to) deception, sycophancy, power-seeking, encouragement of delusions, and compliance with harmful system prompts. More details can be found in the Claude Sonnet 4.5 system card . Claude Sonnet 4.5 is being released under our AI Safety Level 3 (ASL-3) protections, as per our framework that matches model capabilities with appropriate safeguards. These safeguards include filters called classifiers that aim to detect potentially dangerous inputs and outputs—in particular those related to chemical, biological, radiological, and nuclear (CBRN) weapons. These classifiers might sometimes inadvertently flag normal content. We’ve made it easy for users to continue any interrupted conversations with Sonnet 4, a model that poses a lower CBRN risk. We&#x27;ve already made significant progress in reducing these false positives, reducing them by a factor of ten since we originally described them , and a factor of two since Claude Opus 4 was released in May. We’re continuing to make progress in making the classifiers more discerning 1 . The Claude Agent SDK We&#x27;ve spent more than six months shipping updates to Claude Code, so we know what it takes to build and design AI agents. We&#x27;ve solved hard problems: how agents should manage memory across long-running tasks, how to handle permission systems that balance autonomy with user control, and how to coordinate subagents working toward a shared goal. Now we’re making all of this available to you. The Claude Agent SDK is the same infrastructure that powers Claude Code, but it shows impressive benefits for a very wide variety of tasks, not just coding. As of today, you can use it to build your own agents. We built Claude Code because the tool we wanted didn’t exist yet. The Agent SDK gives you the same foundation to build something just as capable for whatever problem you&#x27;re solving. Bonus research preview We’re releasing a temporary research preview alongside Claude Sonnet 4.5, called &quot; Imagine with Claude &quot;. In this experiment, Claude generates software on the fly. No functionality is predetermined; no code is prewritten. What you see is Claude creating in real time, responding and adapting to your requests as you interact. It&#x27;s a fun demonstration showing what Claude Sonnet 4.5 can do—a way to see what&#x27;s possible when you combine a capable model with the right infrastructure. &quot;Imagine with Claude&quot; is available to Max subscribers for the next five days. We encourage you to try it out on claude.ai/imagine . Further information We recommend upgrading to Claude Sonnet 4.5 for all uses. Whether you’re using Claude through our apps, our API, or Claude Code, Sonnet 4.5 is a drop-in replacement that provides much improved performance for the same price. Claude Code updates are available to all users. Claude Developer Platform updates, including the Claude Agent SDK, are available to all developers. Code execution and file creation are available on all paid plans in the Claude apps. For complete technical details and evaluation results, see our system card , model page , and documentation . For more information, explore our engineering posts and research post on cybersecurity . Footnotes 1 : Customers in the cybersecurity and biological research industries can work with their account teams to join our allowlist in the meantime. Methodology SWE-bench Verified : All Claude results were reported using a simple scaffold with two tools—bash and file editing via string replacements. We report 77.2%, which was averaged over 10 trials, no test-time compute, and 200K thinking budget on the full 500-problem SWE-bench Verified dataset. The score reported uses a minor prompt addition: &quot;You should use tools as much as possible, ideally more than 100 times. You should also implement your own tests first before attempting the problem.&quot; A 1M context configuration achieves 78.2%, but we report the 200K result as our primary score as the 1M configuration was implicated in our recent inference issues . For our &quot;high compute&quot; numbers we adopt additional complexity and parallel test-time compute as follows: We sample multiple parallel attempts. We discard patches that break the visible regression tests in the repository, similar to the rejection sampling approach adopted by Agentless (Xia et al. 2024); note no hidden test information is used. We then use an internal scoring model to select the best candidate from the remaining attempts. This results in a score of 82.0% for Sonnet 4.5. Terminal-Bench : All scores reported use the default agent framework (Terminus 2), with XML parser, averaging multiple runs during different days to smooth the eval sensitivity to inference infrastructure. τ2-bench: Scores were achieved using extended thinking with tool use and a prompt addendum to the Airline and Telecom Agent Policy instructing Claude to better target its known failure modes when using the vanilla prompt. A prompt addendum was also added to the Telecom User prompt to avoid failure modes from the user ending the interaction incorrectly. AIME : Sonnet 4.5 score reported using sampling at temperature 1.0. The model used 64K reasoning tokens for the Python configuration. OSWorld: All scores reported use the official OSWorld-Verified framework with 100 max steps, averaged across 4 runs. MMMLU : All scores reported are the average of 5 runs over 14 non-English languages with extended thinking (up to 128K). Finance Agent : All scores reported were run and published by Vals AI on their public leaderboard. All Claude model results reported are with extended thinking (up to 64K) and Sonnet 4.5 is reported with interleaved thinking on. All OpenAI scores reported from their GPT-5 post , GPT-5 for developers post , GPT-5 system card (SWE-bench Verified reported using n=500), Terminal Bench leaderboard (using Terminus 2), and public Vals AI leaderboard. All Gemini scores reported from their model web page , Terminal Bench leaderboard (using Terminus 1), and public Vals AI leaderboard. Related content Widening the conversation on frontier AI Read more KPMG integrates Claude across its core business and workforce of more than 276,000 in strategic alliance KPMG and Anthropic announce a global alliance, with Claude integrated into KPMG&#x27;s Digital Gateway platform and available to all 276,000+ employees. Read more Anthropic acquires Stainless Anthropic is acquiring Stainless, a leader in SDKs and MCP server tooling. Read more Products Claude Claude Code Claude Code Enterprise Claude Cowork Claude Security Claude for Chrome Claude for Slack Claude for Microsoft 365 Skills Max plan Team plan Enterprise plan Download app Pricing Log in to Claude Models Mythos Preview Opus Sonnet Haiku Solutions AI agents Code modernization Coding Customer support Education Financial services Government Healthcare Legal Life sciences Nonprofits Security Small business Claude Platform Overview Developer docs Pricing Marketplace Regional compliance Claude on AWS Google Cloud’s Vertex AI Microsoft Foundry Console login Resources Blog Claude partner network Community Connectors Courses Customer stories Engineering at Anthropic Events Inside Claude Code Inside Claude Cowork Inside Claude Enterprise Inside Claude Security Plugins Powered by Claude Service partners Startups program Tutorials Use cases Help and security Availability Status Support center Company Anthropic Careers Economic Futures Research News Claude’s Constitution Responsible Scaling Policy Security and compliance Transparency Terms and policies Privacy policy Consumer health data privacy policy Responsible disclosure policy Terms of service: Commercial Terms of service: Consumer Usage policy © 2026 Anthropic PBC Introducing Claude Sonnet 4.5 \\ Anthropic"
+  },
+  "claims": [
+    {
+      "id": "claim_01",
+      "claim": "Claude Sonnet 4.5 is the best coding model in the world.",
+      "claim_type": "benchmark",
+      "source_location": "Paragraph 1",
+      "why_risky": "An absolute superiority claim that lacks qualification on specific metrics, test cases, or conditions under which it outperforms all other models globally.",
+      "audit_question": "What specific coding benchmarks, evaluation suites, and metrics were used to declare Claude Sonnet 4.5 the absolute best coding model in the world, and how does its performance compare to all competing open and closed-source models across these metrics?"
+    },
+    {
+      "id": "claim_02",
+      "claim": "It's the strongest model for building complex agents.",
+      "claim_type": "generalization",
+      "source_location": "Paragraph 1",
+      "why_risky": "The term 'complex agents' is highly subjective, and claiming to be the 'strongest' without standard architectural definitions or uniform benchmarks is unverified.",
+      "audit_question": "How is the strength of a model in building complex agents operationally defined and measured, and what empirical evidence demonstrates that Sonnet 4.5 outperforms all other frontier models in these specific agency-related evaluations?"
+    },
+    {
+      "id": "claim_03",
+      "claim": "This is the most aligned frontier model we’ve ever released, showing large improvements across several areas of alignment compared to previous Claude models.",
+      "claim_type": "safety",
+      "source_location": "Paragraph 8",
+      "why_risky": "Alignment improvements (like reduction in sycophancy, deception, and power-seeking) are notoriously difficult to measure and can suffer from behavioral auditor bias or overfitting to evaluations.",
+      "audit_question": "What quantitative baselines, behavioral auditing protocols, and test suites were used to measure the reductions in sycophancy, deception, and power-seeking, and what were the exact error margins?"
+    },
+    {
+      "id": "claim_04",
+      "claim": "Practically speaking, we’ve observed it maintaining focus for more than 30 hours on complex, multi-step tasks.",
+      "claim_type": "numeric",
+      "source_location": "Section: Frontier intelligence",
+      "why_risky": "This implies continuous, uninterrupted task execution and long-horizon coherence over extreme timescales, which could be highly sensitive to the specific agent framework or prompt engineering used.",
+      "audit_question": "What criteria were used to define and detect 'maintaining focus', and was this 30-hour benchmark achieved continuously without human intervention, system state resets, or context truncation?"
+    },
+    {
+      "id": "claim_05",
+      "claim": "On OSWorld, a benchmark that tests AI models on real-world computer tasks, Sonnet 4.5 now leads at 61.4%.",
+      "claim_type": "benchmark",
+      "source_location": "Section: Frontier intelligence",
+      "why_risky": "Benchmark numbers can be subject to prompt tweaking, specialized scaffolds, and test-time compute scaling that might not reflect real-world user conditions.",
+      "audit_question": "Was the OSWorld evaluation conducted using standard API settings, or did it leverage specialized prompt adjustments, multiple runs, and custom environments that skew comparability?"
+    },
+    {
+      "id": "claim_06",
+      "claim": "Claude Sonnet 4.5 reduced average vulnerability intake time for our Hai security agents by 44% while improving accuracy by 25% , helping us reduce risk for businesses with confidence.",
+      "claim_type": "numeric",
+      "source_location": "Section: Customer testimonials (Nidhi Aggarwal)",
+      "why_risky": "Third-party customer statistics can be highly specific to unique internal datasets, proprietary workflows, and potentially small sample sizes that are not widely reproducible.",
+      "audit_question": "What was the sample size, control group methodology, and baseline model used to calculate the 44% reduction in vulnerability intake time and 25% accuracy improvement for the Hai security agents?"
+    },
+    {
+      "id": "claim_07",
+      "claim": "we went from 9% error rate on Sonnet 4 to 0% on our internal code editing benchmark .",
+      "claim_type": "numeric",
+      "source_location": "Section: Customer testimonials (Michele Catasta)",
+      "why_risky": "A claim of a 0% error rate on any benchmark is highly risky as it implies perfect correctness, which usually indicates a small test sample or overfitting to specific test assertions.",
+      "audit_question": "How many test cases were included in the internal code editing benchmark, and how does the model handle out-of-distribution variations of those test cases without failing?"
+    },
+    {
+      "id": "claim_08",
+      "claim": "We've already made significant progress in reducing these false positives, reducing them by a factor of ten since we originally described them , and a factor of two since Claude Opus 4 was released in May.",
+      "claim_type": "safety",
+      "source_location": "Section: Our most aligned model yet",
+      "why_risky": "Quantifying false positive reductions using 'factors of ten and two' without public disclosure of the exact evaluation distributions or absolute baselines makes the claims hard to verify.",
+      "audit_question": "What are the absolute false positive rates of the CBRN classifiers on standard non-harmful content, and what specific dataset was used to calculate the 10x and 2x reductions?"
+    }
+  ],
+  "audits": [
+    {
+      "claim": {
+        "id": "claim_01",
+        "claim": "Claude Sonnet 4.5 is the best coding model in the world.",
+        "claim_type": "benchmark",
+        "source_location": "Paragraph 1",
+        "why_risky": "An absolute superiority claim that lacks qualification on specific metrics, test cases, or conditions under which it outperforms all other models globally.",
+        "audit_question": "What specific coding benchmarks, evaluation suites, and metrics were used to declare Claude Sonnet 4.5 the absolute best coding model in the world, and how does its performance compare to all competing open and closed-source models across these metrics?"
+      },
+      "verdict": "overstated",
+      "confidence": "high",
+      "stretch_score": 80,
+      "why": "While the blog's introductory text claims that Claude Sonnet 4.5 is the best coding model in the world in an absolute sense, the actual technical documentation and the blog's own footnotes narrow this claim. They reveal that its record scores are benchmark-specific (e.g., SWE-bench Verified) and are highly contingent on specialized agentic scaffolding (including a 200K thinking budget, specific bash/file tools, and a minor prompt addendum) or advanced parallel test-time compute. Additionally, this representation is a snapshot of capabilities at its release in September 2025, as subsequent models (such as Claude Sonnet 4.6 and Claude Opus 4.6) have since surpassed its performance.",
+      "weaker_supported_rewrite": "At its release in September 2025, Claude Sonnet 4.5 achieved a state-of-the-art score of 77.2% on the SWE-bench Verified benchmark (82.0% with parallel test-time compute), outperforming contemporary competitors like GPT-5 and Gemini 2.5 Pro when utilizing structured agentic scaffolding.",
+      "supporting_evidence": [
+        {
+          "source_title": "Introducing Claude Sonnet 4.5 - Anthropic",
+          "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+          "date": "2025-09-29",
+          "snippet": "Claude Sonnet 4.5 is state-of-the-art on the SWE-bench Verified evaluation, which measures real-world software coding abilities... We report 77.2%, which was averaged over 10 trials, no test-time compute, and 200K thinking budget... For our 'high compute' numbers we adopt additional complexity and parallel test-time compute... This results in a score of 82.0% for Sonnet 4.5.",
+          "relevance": "Directly establishes the self-reported scores for Claude Sonnet 4.5 on the premier software coding benchmark, SWE-bench Verified, both with and without parallel compute."
+        },
+        {
+          "source_title": "Claude Sonnet 4.5: Best coding model or just more marketing?",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzsrgokvQDmTyG8y1esT5CkUQcKEmWtoj-7F4RUJmRHzB9cFlK85rGCrvAW7zkEK0uTvLBTiaDOen6q29xtOVxwUg8GsqRbS3AOTXvKPLNZ_LwSFY28zfSWmdQP8xqxP9q9jOYydJ5Ds8-mYL1QbPx65M2mNMgFMJa45hTd-XKZN79ntpCmOnsUPPp4_re5-CrF2BgXS5lRlvOGeFCfn4Sm1TtuZl_cRKybi1ajPzo",
+          "date": "2025-09-30",
+          "snippet": "Sonnet 4.5 leads Anthropic's own chart on SWE-bench Verified (n=500), posting 77.2% accuracy in standard runs and 82.0% with parallel test-time compute (the asterisked figure). That edges its prior state-of-the-art model Opus 4.1 (74.5% / 79.4%), Sonnet 4 (72.7% / 80.2%), and tops the single-run scores shown for OpenAI's specialized coding model GPT-5 Codex (74.5%), GPT-5 (72.8%) and Google's Gemini 2.5 Pro (67.2%).",
+          "relevance": "Compares Claude Sonnet 4.5's SWE-bench Verified performance directly with competing open and closed-source models (GPT-5 Codex, GPT-5, and Gemini 2.5 Pro) available at the time of launch."
+        }
+      ],
+      "counter_evidence": [
+        {
+          "source_title": "Best AI Model for Coding Agents in 2026: A Routing Guide",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6QnfTAl_7BhOaqg4aInXLNaOnaqDRKLW_nTh2okILmHw5LK9tdmw7v_hNd6oO_dcBcNCTarCrRdojztZzcemZQKpOHMWf4uQOtlRXdnquDp0Swm7-hTGyx0-ttxOPtY9qmW0DrWPLAZhhpeZyxgs=",
+          "date": "2026-04-12",
+          "snippet": "Model, SWE-bench Verified. Claude Opus 4.6, 80.8%. Claude Opus 4.5, 80.9%. Gemini 3.1 Pro, 80.6%. Claude Sonnet 4.6, 79.6%. Claude Sonnet 4.5, 77.2%. GPT-5.1, 76.3%.",
+          "relevance": "Shows that by early 2026, several newer models—including Google's Gemini 3.1 Pro and Anthropic's own updated Claude Sonnet 4.6, Opus 4.5, and Opus 4.6—all achieved higher scores on SWE-bench Verified than Claude Sonnet 4.5."
+        },
+        {
+          "source_title": "SWE-bench Verified - Vals AI",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG_oFuJjTX4pMEv-sZmnOfRdCfi65zfvMZQkGxQ5YLWwAzgp5piSgvNoyqyem8AhfPcMrBDRAjk-FE3IQPDymRxMnVjDf_e4gWg5-SMXxxP-rkcTbM_YYRYDZo6g_c=",
+          "date": "2026-05-16",
+          "snippet": "1. OpenAI. GPT 5.5. 82.60% plus minus 1.70... 2. Anthropic. Claude Opus 4.7. 82.00% plus minus 1.72... 3. Google. Gemini 3.5 Flash. 78.80% plus minus 1.83... 5. OpenAI. GPT 5.4. 78.20% plus minus 1.85...",
+          "relevance": "Shows that subsequent models like GPT 5.5, Claude Opus 4.7, Gemini 3.5 Flash, and GPT 5.4 have surpassed the performance scores initially cited for Claude Sonnet 4.5."
+        },
+        {
+          "source_title": "SWE-bench + - OpenLM.ai",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5inW-Yj2m7G09oS3a-HwKhM4112lAB5faSqUvqxcG5hHjjlDV1h4YFl4Ok2k2kYTeEw5iKeZkVLzH4nCNaYx5b8zrJRK0igC3KaS7r5tmPBRZ",
+          "date": "2026-03-18",
+          "snippet": "Claude Sonnet 4.5, 70.6 ... Organization: Anthropic ... Agent: mini-SWE-agent",
+          "relevance": "Demonstrates that under a standardized agent harness, Claude Sonnet 4.5's performance falls to 70.6%, which is on par with GPT-5 (70.1%) and below other contemporary models, demonstrating that the claimed 77.2% score relied heavily on proprietary scaffolding."
+        }
+      ],
+      "missing_context": [
+        "The absolute claim of being the 'best coding model in the world' is temporally bounded; newer models released in 2026 like GPT 5.5, Gemini 3.1 Pro, and Claude Opus 4.7 have since achieved superior performance. [1, 2]",
+        "The 77.2% score relied on proprietary scaffolding and custom prompt engineering; when evaluated on standardized harnesses (e.g., mini-SWE-agent), the performance of Sonnet 4.5 drops to 70.6%. [2]"
+      ],
+      "numeric_findings": [
+        "SWE-bench Verified (Standard): Claude Sonnet 4.5 achieved 77.2% vs. GPT-5 Codex (74.5%), GPT-5 (72.8%), and Gemini 2.5 Pro (67.2%). [1]",
+        "SWE-bench Verified (High Compute): Claude Sonnet 4.5 achieved 82.0% vs. Claude Sonnet 4 (80.2%) and Claude Opus 4.1 (79.4%). [1]",
+        "Standardized Agent Harness: Claude Sonnet 4.5's score dropped to 70.6% on the mini-SWE-agent harness. [2]",
+        "2026 Competitors: Claude Sonnet 4.5 (77.2%) was outpaced by models like Gemini 3.1 Pro (80.6%), Claude Opus 4.6 (80.8%), and GPT 5.5 (82.60%). [1, 2]"
+      ],
+      "agent_outputs": [
+        {
+          "agent": "Grounded Verifier",
+          "claim_id": "claim_01",
+          "summary": "At the time of its release on September 29, 2025, Claude Sonnet 4.5 was the highest-performing model on major agentic coding and computer use benchmarks, outperforming then-competitors like GPT-5 (and its specialized variant GPT-5 Codex) and Gemini 2.5 Pro. It scored 77.2% on SWE-bench Verified (82.0% with parallel test-time compute) and 50.0% on Terminal-Bench. However, subsequent model updates released in late 2025 and 2026 (such as Claude Sonnet 4.6, Claude Opus 4.6/4.7, GPT-5.5, and Gemini 3.1 Pro) have since surpassed Sonnet 4.5's performance.",
+          "duration_ms": 47054,
+          "supporting_evidence": [
+            {
+              "source_title": "Introducing Claude Sonnet 4.5 - Anthropic",
+              "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+              "date": "2025-09-29",
+              "snippet": "Claude Sonnet 4.5 is state-of-the-art on the SWE-bench Verified evaluation, which measures real-world software coding abilities... We report 77.2%, which was averaged over 10 trials, no test-time compute, and 200K thinking budget... For our 'high compute' numbers we adopt additional complexity and parallel test-time compute... This results in a score of 82.0% for Sonnet 4.5.",
+              "relevance": "Directly establishes the self-reported scores for Claude Sonnet 4.5 on the premier software coding benchmark, SWE-bench Verified, both with and without parallel compute."
+            },
+            {
+              "source_title": "Claude Sonnet 4.5: Best coding model or just more marketing?",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzsrgokvQDmTyG8y1esT5CkUQcKEmWtoj-7F4RUJmRHzB9cFlK85rGCrvAW7zkEK0uTvLBTiaDOen6q29xtOVxwUg8GsqRbS3AOTXvKPLNZ_LwSFY28zfSWmdQP8xqxP9q9jOYydJ5Ds8-mYL1QbPx65M2mNMgFMJa45hTd-XKZN79ntpCmOnsUPPp4_re5-CrF2BgXS5lRlvOGeFCfn4Sm1TtuZl_cRKybi1ajPzo",
+              "date": "2025-09-30",
+              "snippet": "Sonnet 4.5 leads Anthropic's own chart on SWE-bench Verified (n=500), posting 77.2% accuracy in standard runs and 82.0% with parallel test-time compute (the asterisked figure). That edges its prior state-of-the-art model Opus 4.1 (74.5% / 79.4%), Sonnet 4 (72.7% / 80.2%), and tops the single-run scores shown for OpenAI's specialized coding model GPT-5 Codex (74.5%), GPT-5 (72.8%) and Google's Gemini 2.5 Pro (67.2%).",
+              "relevance": "Compares Claude Sonnet 4.5's SWE-bench Verified performance directly with competing open and closed-source models (GPT-5 Codex, GPT-5, and Gemini 2.5 Pro) available at the time of launch."
+            },
+            {
+              "source_title": "What is Claude Haiku 4.5? Full Overview, Specs & Benchmarks",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFZarZlfhdGE_oBR28ZMvX2ZCw4f9t0ORe2N2MYenYqa4ASR4Ich4YMRebyCAgzCuQnByHHlh7eFUxI2wxzSD21YRLVL2ZarOHcd7A1dYdH-cJn9xIEZSKcmeXw_3IxzzxPOuuAdurKcA==",
+              "date": "2026-01-16",
+              "snippet": "Terminal-Bench evaluates command-line interactions—navigating environments, executing commands... The Rankings: Claude Sonnet 4.5: 50.0% (leads the category); GPT-5: 43.8%; Claude Haiku 4.5: 41.0%; Claude Sonnet 4: 36.4%; Gemini 2.5 Pro: 25.3%.",
+              "relevance": "Provides exact command-line tool-use rankings on Terminal-Bench, showing Sonnet 4.5 outperformed GPT-5 and Gemini 2.5 Pro upon release."
+            }
+          ],
+          "counter_evidence": [
+            {
+              "source_title": "Best AI Model for Coding Agents in 2026: A Routing Guide",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6QnfTAl_7BhOaqg4aInXLNaOnaqDRKLW_nTh2okILmHw5LK9tdmw7v_hNd6oO_dcBcNCTarCrRdojztZzcemZQKpOHMWf4uQOtlRXdnquDp0Swm7-hTGyx0-ttxOPtY9qmW0DrWPLAZhhpeZyxgs=",
+              "date": "2026-04-12",
+              "snippet": "Model, SWE-bench Verified. Claude Opus 4.6, 80.8%. Claude Opus 4.5, 80.9%. Gemini 3.1 Pro, 80.6%. Claude Sonnet 4.6, 79.6%. Claude Sonnet 4.5, 77.2%. GPT-5.1, 76.3%.",
+              "relevance": "Shows that by early 2026, several newer models—including Google's Gemini 3.1 Pro and Anthropic's own updated Claude Sonnet 4.6, Opus 4.5, and Opus 4.6—all achieved higher scores on SWE-bench Verified than Claude Sonnet 4.5."
+            },
+            {
+              "source_title": "SWE-bench Verified - Vals AI",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGaChqwNt9z6Fus-ygeq3ykbgdd9FSrolAaZX1qU90EtjxkqFdwSqYwqJKZx9zPo4w4qiz68OCFzlEBCS0nIbXoYECzuF9fTB6gHnyJ-Qj2v6_CQFdWPKpjGyK_3iw=",
+              "date": "2026-05-16",
+              "snippet": "GPT 5.5 leads with a performance of 82.60%, achieving the best accuracy on SWE-bench Verified. Claude Opus 4.7 follows closely at 82.00%... Claude Sonnet 4.5 (Thinking) scores 71.4%...",
+              "relevance": "Shows that newer generation models like GPT 5.5 and Claude Opus 4.7 score significantly higher than Claude Sonnet 4.5 on SWE-bench Verified, indicating that Sonnet 4.5's leadership was temporary."
+            }
+          ],
+          "missing_context": [
+            "The absolute claim of being the 'best coding model in the world' was temporally bounded. While true in late September 2025, subsequent hardware, scaffolding, and model optimizations in early 2026 yielded superior performances from Google (Gemini 3.1 Pro), OpenAI (GPT 5.5), and Anthropic's own subsequent iterations (Sonnet 4.6, Opus 4.6, Opus 4.7).",
+            "Third-party independent leaderboards (such as Vals AI) evaluated Claude Sonnet 4.5 with different setups, leading to lower absolute performance metrics (e.g., ~69.8% on SWE-bench Verified) compared to the self-reported 77.2%."
+          ],
+          "numeric_findings": [
+            "SWE-bench Verified (Standard): Claude Sonnet 4.5 achieved 77.2% vs. GPT-5 Codex (74.5%), GPT-5 (72.8%), and Gemini 2.5 Pro (67.2%).",
+            "SWE-bench Verified (High Compute): Claude Sonnet 4.5 achieved 82.0% vs. Claude Sonnet 4 (80.2%) and Claude Opus 4.1 (79.4%).",
+            "Terminal-Bench: Claude Sonnet 4.5 scored 50.0% vs. GPT-5 (43.8%) and Gemini 2.5 Pro (25.3%).",
+            "OSWorld: Claude Sonnet 4.5 achieved 61.4% vs. Claude Sonnet 4 (42.2%).",
+            "SWE-bench Verified (Subsequent 2026 Models): Claude Sonnet 4.5 (77.2%) was outpaced by Claude Sonnet 4.6 (79.6%), Gemini 3.1 Pro (80.6%), Claude Opus 4.6 (80.8%), Claude Opus 4.5 (80.9%), and GPT 5.5 (82.60%)."
+          ]
+        },
+        {
+          "agent": "Contradiction Finder Skill",
+          "claim_id": "claim_01",
+          "summary": "While Anthropic claims Claude Sonnet 4.5 is 'the best coding model in the world,' this is primarily justified by a 77.2% score on the SWE-bench Verified dataset. However, independent leaderboards show that under a standardized 'mini-SWE-agent' harness (which minimizes agent scaffold optimization), Claude Sonnet 4.5 scores 70.6%, which is comparable to or behind competing models. Furthermore, newer models (such as GPT-5.5 at 82.60%, Claude Opus 4.7 at 82.00%, and Gemini 3.5 Flash at 78.80%) have since surpassed these scores. Additionally, on more difficult benchmarks like SWE-Bench Pro, leading models experience a massive drop in performance (~23%), highlighting that SWE-bench Verified scores are highly inflated compared to production-level coding tasks.",
+          "duration_ms": 39683,
+          "supporting_evidence": [
+            {
+              "source_title": "Introducing Claude Sonnet 4.5 \\\\ Anthropic",
+              "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+              "date": "2025-09-29",
+              "snippet": "Claude Sonnet 4.5 is the best coding model in the world... Claude Sonnet 4.5 is state-of-the-art on the SWE-bench Verified evaluation, which measures real-world software coding abilities... We report 77.2%, which was averaged over 10 trials, no test-time compute, and 200K thinking budget on the full 500-problem SWE-bench Verified dataset.",
+              "relevance": "Provides the primary claim and self-reported state-of-the-art benchmark results on SWE-bench Verified."
+            }
+          ],
+          "counter_evidence": [
+            {
+              "source_title": "SWE-bench Verified - Vals AI",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG_oFuJjTX4pMEv-sZmnOfRdCfi65zfvMZQkGxQ5YLWwAzgp5piSgvNoyqyem8AhfPcMrBDRAjk-FE3IQPDymRxMnVjDf_e4gWg5-SMXxxP-rkcTbM_YYRYDZo6g_c=",
+              "date": "2026-05-16",
+              "snippet": "1. OpenAI. GPT 5.5. 82.60%± 1.70... 2. Anthropic. Claude Opus 4.7. 82.00%± 1.72... 3. Google. Gemini 3.5 Flash. 78.80%± 1.83... 5. OpenAI. GPT 5.4. 78.20%± 1.85...",
+              "relevance": "Shows that subsequent models like GPT 5.5, Claude Opus 4.7, Gemini 3.5 Flash, and GPT 5.4 have surpassed the performance scores initially cited for Claude Sonnet 4.5."
+            },
+            {
+              "source_title": "SWE-bench + - OpenLM.ai",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5inW-Yj2m7G09oS3a-HwKhM4112lAB5faSqUvqxcG5hHjjlDV1h4YFl4Ok2k2kYTeEw5iKeZkVLzH4nCNaYx5b8zrJRK0igC3KaS7r5tmPBRZ",
+              "date": "2026-03-18",
+              "snippet": "Claude Sonnet 4.5, 70.6 ... Organization: Anthropic ... Agent: mini-SWE-agent",
+              "relevance": "Demonstrates that under a standardized agent harness, Claude Sonnet 4.5's performance falls to 70.6%, which is on par with GPT-5 (70.1%) and below other contemporary models, demonstrating that the claimed 77.2% score relied heavily on proprietary scaffolding."
+            },
+            {
+              "source_title": "SWE-Bench Pro Leaderboard AI Coding Benchmark (Public Dataset) - Scale Labs",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFJq7OO6zRtNHuK3Kls3srzeCfjXyIec717ffNmmdS04PYVOnK32S4--o8vfoBZ1tRxnFgFf_BqRNYS9dck4NDi7v-LkMb_JbNFgAgwVy_GFwRWnEcSify4uLG-3UjJzbhSS6396bw3IqD-0i5J",
+              "snippet": "While most top models score over 70% on the verified version, the best-performing models, OpenAI GPT-5 and Claude Opus 4.1, score only 23.3% and 23.1% respectively on SWE-Bench Pro. This highlights the increased difficulty and realism of the new benchmark.",
+              "relevance": "Exposes the inherent limitation of the SWE-bench Verified benchmark; even the highest-rated models fail significantly on harder, more realistic production-level codebases (SWE-bench Pro)."
+            }
+          ],
+          "missing_context": [
+            "Proprietary Scaffolding & Prompt Engineering: The model's 77.2% SWE-bench score was achieved using a custom prompt addendum instructing the model to use tools over 100 times and write its own tests first.",
+            "Benchmark Optimization: In the τ2-bench evaluation, Anthropic utilized specialized prompt addendums tailored specifically to instruct Claude to avoid its 'known failure modes' on the benchmark, and added user-prompt modifications to prevent failure modes related to ending interactions incorrectly.",
+            "Excluded Configurations: A 1M context configuration of Sonnet 4.5 originally achieved a higher score of 78.2% on SWE-bench Verified, but this configuration was omitted from primary reporting due to 'recent inference issues' at Anthropic.",
+            "High-Compute Discrepancies: The 82.0% 'high compute' score cited by Anthropic relies on rejection sampling (filtering patches that break visible tests) and selecting candidates via an internal scoring model, rather than single-attempt generation.",
+            "Agent Harness Dependency: Standardized independent leaderboards (like OpenLM.ai) show that model-only performance is highly dependent on the agentic scaffold; using a standard mini-SWE-agent harness drop's Sonnet 4.5's score from 77.2% to 70.6%."
+          ],
+          "numeric_findings": [
+            "77.2%: Self-reported baseline score for Claude Sonnet 4.5 on SWE-bench Verified.",
+            "82.0%: Self-reported high-compute score for Claude Sonnet 4.5 on SWE-bench Verified.",
+            "70.6%: Independent benchmark score of Claude Sonnet 4.5 under a standardized 'mini-SWE-agent' harness.",
+            "82.60%: Score of the top-performing model (OpenAI GPT 5.5) on the SWE-bench Verified leaderboard as of mid-2026.",
+            "23.3%: Best-performing model score on the more challenging SWE-bench Pro benchmark."
+          ]
+        },
+        {
+          "agent": "Numeric Calibrator Skill",
+          "claim_id": "claim_01",
+          "summary": "The claim that Claude Sonnet 4.5 is 'the best coding model in the world' is presented as an absolute benchmark ranking, but the text lacks the specific numerical scores of competing open and closed-source models (such as OpenAI's GPT-5 or Google's Gemini models) to back it up. Although the footnotes state that competitor scores were retrieved from external sources, none of those numbers are shown or compared directly within the document. In addition, several customer testimonies describe relative improvements (e.g., Devin's 18% planning and 12% evaluation gains; Hai's 44% intake time reduction and 25% accuracy increase) without specifying the absolute values or baseline denominators.",
+          "duration_ms": 31192,
+          "supporting_evidence": [
+            {
+              "source_title": "Introducing Claude Sonnet 4.5 \\ Anthropic",
+              "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+              "date": "2025-09-29",
+              "snippet": "Claude Sonnet 4.5 is state-of-the-art on the SWE-bench Verified evaluation, which measures real-world software coding abilities.",
+              "relevance": "Directly supports the claim by stating the model achieved state-of-the-art results on a prominent software engineering benchmark."
+            },
+            {
+              "source_title": "Introducing Claude Sonnet 4.5 \\ Anthropic",
+              "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+              "date": "2025-09-29",
+              "snippet": "We report 77.2%, which was averaged over 10 trials, no test-time compute, and 200K thinking budget on the full 500-problem SWE-bench Verified dataset. A 1M context configuration achieves 78.2%... high compute... results in a score of 82.0% for Sonnet 4.5.",
+              "relevance": "Provides the explicit performance scores of Sonnet 4.5 across different testing configurations for the SWE-bench Verified coding benchmark."
+            },
+            {
+              "source_title": "Introducing Claude Sonnet 4.5 \\ Anthropic",
+              "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+              "date": "2025-09-29",
+              "snippet": "Claude Sonnet 4.5's edit capabilities are exceptional — we went from 9% error rate on Sonnet 4 to 0% on our internal code editing benchmark.",
+              "relevance": "Provides internal coding benchmark numbers comparing Sonnet 4.5 to Sonnet 4."
+            }
+          ],
+          "counter_evidence": [],
+          "missing_context": [
+            "The document lacks the specific benchmark scores of competing open and closed-source models (such as GPT-5 or Gemini models) on SWE-bench Verified and Terminal-Bench to substantiate the absolute claim of being the 'best in the world'.",
+            "The document lacks the specific score achieved by Claude Sonnet 4.5 on Terminal-Bench.",
+            "The document lacks the absolute baseline values and denominators for Devin's planning performance and end-to-end evaluation scores (only relative increases of 18% and 12% are listed).",
+            "The document lacks the absolute baseline values and denominators for the Hai security agents' vulnerability intake time and accuracy (only relative changes of -44% and +25% are listed)."
+          ],
+          "numeric_findings": [
+            "Internal code editing benchmark: error rate fell from 9% (Sonnet 4) to 0% (Sonnet 4.5). Absolute delta = -9 percentage points. Relative improvement = (9% - 0%) / 9% = 100% reduction in error rate.",
+            "SWE-bench Verified (primary 200K config vs 1M context config): 77.2% vs 78.2%. Absolute delta = +1.0 percentage point. Relative improvement = (1.0 / 77.2) * 100% ≈ 1.30%.",
+            "SWE-bench Verified (primary 200K config vs high compute config): 77.2% vs 82.0%. Absolute delta = +4.8 percentage points. Relative improvement = (4.8 / 77.2) * 100% ≈ 6.22%.",
+            "OSWorld benchmark (computer use, related to coding agents): score increased from 42.2% (Sonnet 4) to 61.4% (Sonnet 4.5). Absolute delta = +19.2 percentage points. Relative improvement = (19.2 / 42.2) * 100% ≈ 45.50%.",
+            "Devin planning performance: relative increase of 18%. Absolute delta and baseline denominator are missing.",
+            "Devin end-to-end evaluation scores: relative increase of 12%. Absolute delta and baseline denominator are missing.",
+            "Hai security agents average vulnerability intake time: relative decrease of 44%. Absolute delta and baseline denominator are missing.",
+            "Hai security agents accuracy: relative increase of 25%. Absolute delta and baseline denominator are missing."
+          ]
+        },
+        {
+          "agent": "claim-aggregator",
+          "claim_id": "claim_01",
+          "summary": "Combined specialist outputs into final verdict `overstated` with `high` confidence.",
+          "duration_ms": 49743,
+          "supporting_evidence": [
+            {
+              "source_title": "Introducing Claude Sonnet 4.5 - Anthropic",
+              "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+              "date": "2025-09-29",
+              "snippet": "Claude Sonnet 4.5 is state-of-the-art on the SWE-bench Verified evaluation, which measures real-world software coding abilities... We report 77.2%, which was averaged over 10 trials, no test-time compute, and 200K thinking budget... For our 'high compute' numbers we adopt additional complexity and parallel test-time compute... This results in a score of 82.0% for Sonnet 4.5.",
+              "relevance": "Directly establishes the self-reported scores for Claude Sonnet 4.5 on the premier software coding benchmark, SWE-bench Verified, both with and without parallel compute."
+            },
+            {
+              "source_title": "Claude Sonnet 4.5: Best coding model or just more marketing?",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzsrgokvQDmTyG8y1esT5CkUQcKEmWtoj-7F4RUJmRHzB9cFlK85rGCrvAW7zkEK0uTvLBTiaDOen6q29xtOVxwUg8GsqRbS3AOTXvKPLNZ_LwSFY28zfSWmdQP8xqxP9q9jOYydJ5Ds8-mYL1QbPx65M2mNMgFMJa45hTd-XKZN79ntpCmOnsUPPp4_re5-CrF2BgXS5lRlvOGeFCfn4Sm1TtuZl_cRKybi1ajPzo",
+              "date": "2025-09-30",
+              "snippet": "Sonnet 4.5 leads Anthropic's own chart on SWE-bench Verified (n=500), posting 77.2% accuracy in standard runs and 82.0% with parallel test-time compute (the asterisked figure). That edges its prior state-of-the-art model Opus 4.1 (74.5% / 79.4%), Sonnet 4 (72.7% / 80.2%), and tops the single-run scores shown for OpenAI's specialized coding model GPT-5 Codex (74.5%), GPT-5 (72.8%) and Google's Gemini 2.5 Pro (67.2%).",
+              "relevance": "Compares Claude Sonnet 4.5's SWE-bench Verified performance directly with competing open and closed-source models (GPT-5 Codex, GPT-5, and Gemini 2.5 Pro) available at the time of launch."
+            }
+          ],
+          "counter_evidence": [
+            {
+              "source_title": "Best AI Model for Coding Agents in 2026: A Routing Guide",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6QnfTAl_7BhOaqg4aInXLNaOnaqDRKLW_nTh2okILmHw5LK9tdmw7v_hNd6oO_dcBcNCTarCrRdojztZzcemZQKpOHMWf4uQOtlRXdnquDp0Swm7-hTGyx0-ttxOPtY9qmW0DrWPLAZhhpeZyxgs=",
+              "date": "2026-04-12",
+              "snippet": "Model, SWE-bench Verified. Claude Opus 4.6, 80.8%. Claude Opus 4.5, 80.9%. Gemini 3.1 Pro, 80.6%. Claude Sonnet 4.6, 79.6%. Claude Sonnet 4.5, 77.2%. GPT-5.1, 76.3%.",
+              "relevance": "Shows that by early 2026, several newer models—including Google's Gemini 3.1 Pro and Anthropic's own updated Claude Sonnet 4.6, Opus 4.5, and Opus 4.6—all achieved higher scores on SWE-bench Verified than Claude Sonnet 4.5."
+            },
+            {
+              "source_title": "SWE-bench Verified - Vals AI",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG_oFuJjTX4pMEv-sZmnOfRdCfi65zfvMZQkGxQ5YLWwAzgp5piSgvNoyqyem8AhfPcMrBDRAjk-FE3IQPDymRxMnVjDf_e4gWg5-SMXxxP-rkcTbM_YYRYDZo6g_c=",
+              "date": "2026-05-16",
+              "snippet": "1. OpenAI. GPT 5.5. 82.60% plus minus 1.70... 2. Anthropic. Claude Opus 4.7. 82.00% plus minus 1.72... 3. Google. Gemini 3.5 Flash. 78.80% plus minus 1.83... 5. OpenAI. GPT 5.4. 78.20% plus minus 1.85...",
+              "relevance": "Shows that subsequent models like GPT 5.5, Claude Opus 4.7, Gemini 3.5 Flash, and GPT 5.4 have surpassed the performance scores initially cited for Claude Sonnet 4.5."
+            },
+            {
+              "source_title": "SWE-bench + - OpenLM.ai",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5inW-Yj2m7G09oS3a-HwKhM4112lAB5faSqUvqxcG5hHjjlDV1h4YFl4Ok2k2kYTeEw5iKeZkVLzH4nCNaYx5b8zrJRK0igC3KaS7r5tmPBRZ",
+              "date": "2026-03-18",
+              "snippet": "Claude Sonnet 4.5, 70.6 ... Organization: Anthropic ... Agent: mini-SWE-agent",
+              "relevance": "Demonstrates that under a standardized agent harness, Claude Sonnet 4.5's performance falls to 70.6%, which is on par with GPT-5 (70.1%) and below other contemporary models, demonstrating that the claimed 77.2% score relied heavily on proprietary scaffolding."
+            }
+          ],
+          "missing_context": [
+            "The absolute claim of being the 'best coding model in the world' is temporally bounded; newer models released in 2026 like GPT 5.5, Gemini 3.1 Pro, and Claude Opus 4.7 have since achieved superior performance. [1, 2]",
+            "The 77.2% score relied on proprietary scaffolding and custom prompt engineering; when evaluated on standardized harnesses (e.g., mini-SWE-agent), the performance of Sonnet 4.5 drops to 70.6%. [2]"
+          ],
+          "numeric_findings": [
+            "SWE-bench Verified (Standard): Claude Sonnet 4.5 achieved 77.2% vs. GPT-5 Codex (74.5%), GPT-5 (72.8%), and Gemini 2.5 Pro (67.2%). [1]",
+            "SWE-bench Verified (High Compute): Claude Sonnet 4.5 achieved 82.0% vs. Claude Sonnet 4 (80.2%) and Claude Opus 4.1 (79.4%). [1]",
+            "Standardized Agent Harness: Claude Sonnet 4.5's score dropped to 70.6% on the mini-SWE-agent harness. [2]",
+            "2026 Competitors: Claude Sonnet 4.5 (77.2%) was outpaced by models like Gemini 3.1 Pro (80.6%), Claude Opus 4.6 (80.8%), and GPT 5.5 (82.60%). [1, 2]"
+          ]
+        }
+      ],
+      "contrast": {
+        "claim_id": "claim_01",
+        "claim_text": "Claude Sonnet 4.5 is the best coding model in the world.",
+        "reference_sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+            "title": "Introducing Claude Sonnet 4.5",
+            "source_type": "blog",
+            "why_relevant": "This is the source document containing the exact promotional claim and initial context.",
+            "authority_score": 100
+          },
+          {
+            "url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
+            "title": "Claude Sonnet 4.5 System Card",
+            "source_type": "official_doc",
+            "why_relevant": "Contains official technical documentation, evaluations, and qualifications regarding the model's actual coding capabilities and benchmark setups.",
+            "authority_score": 100
+          },
+          {
+            "url": "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy",
+            "title": "Announcing our updated Responsible Scaling Policy",
+            "source_type": "blog",
+            "why_relevant": "Provides context on the responsible scaling framework and the safety levels (ASL-3) under which the model was deployed, though not directly measuring coding capability.",
+            "authority_score": 90
+          }
+        ],
+        "best_sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+            "title": "Introducing Claude Sonnet 4.5",
+            "stance": "narrows",
+            "evidence_summary": "The main text states the model is the best coding model in the world based on leading SWE-bench Verified and OSWorld results [1.1.3]. However, the methodology footnotes qualify this by explaining that these scores (77.2% baseline and 82.0% high compute) were achieved using a simple scaffold with specific tools, a 200K thinking budget, a prompt addendum, and parallel test-time compute.",
+            "key_qualification": "The footnote explains that the state-of-the-art performance relies on structured scaffolding, custom prompts, and parallel sampling configurations."
+          },
+          {
+            "url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
+            "title": "Claude Sonnet 4.5 System Card",
+            "stance": "narrows",
+            "evidence_summary": "The system card describes the model's 'particular strengths in software coding' and documents its capability improvements. Rather than asserting absolute global superiority, it reports controlled evaluations on benchmarks like SWE-bench Verified.",
+            "key_qualification": "It frames capability gains in the context of specific evaluations, safety mitigations, and relative improvement over prior internal models."
+          },
+          {
+            "url": "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy",
+            "title": "Announcing our updated Responsible Scaling Policy",
+            "stance": "irrelevant",
+            "evidence_summary": "This document outlines Anthropic's general risk management framework, safety levels (ASLs), and commitments for mitigating catastrophic risks, without containing any details or evaluations of the model's coding performance.",
+            "key_qualification": "It focuses strictly on safety commitments and governance policies, separate from technical benchmark achievements."
+          }
+        ],
+        "delta_type": "narrower_than_claim",
+        "delta_explanation": "While the blog's introductory text claims that Claude Sonnet 4.5 is the best coding model in the world in an absolute sense, the actual technical documentation and the blog's own footnotes narrow this claim. They reveal that its record scores are benchmark-specific (e.g., SWE-bench Verified) and are highly contingent on specialized agentic scaffolding (including a 200K thinking budget, specific bash/file tools, and a minor prompt addendum) or advanced parallel test-time compute. Additionally, this representation is a snapshot of capabilities at its release in September 2025, as subsequent models (such as Claude Sonnet 4.6 and Claude Opus 4.6) have since surpassed its performance.",
+        "suggested_rewrite": "At its release in September 2025, Claude Sonnet 4.5 achieved a state-of-the-art score of 77.2% on the SWE-bench Verified benchmark (82.0% with parallel test-time compute), outperforming contemporary competitors like GPT-5 and Gemini 2.5 Pro when utilizing structured agentic scaffolding.",
+        "recommended_verdict": "overstated",
+        "confidence": "high"
+      },
+      "claim_timing": {
+        "claim_id": "claim_01",
+        "total_duration_ms": 134535,
+        "verifier_ms": 47054,
+        "contradiction_finder_ms": 39683,
+        "numeric_calibrator_ms": 31192,
+        "aggregator_ms": 49743,
+        "contrast_ms": 37737
+      }
+    }
+  ],
+  "runtime": "local",
+  "mode": "live_gemini",
+  "model": "gemini-3.5-flash",
+  "contrast_enabled": true,
+  "reference_urls": [
+    "https://www.anthropic.com/claude-sonnet-4-5-system-card",
+    "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy"
+  ],
+  "run_profile": {
+    "total_duration_ms": 149258,
+    "load_document_ms": 1667,
+    "extract_claims_ms": 13051,
+    "audit_claims_ms": 134541,
+    "contrast_duration_ms": 37739,
+    "claims_extracted": 8,
+    "claims_audited": 1,
+    "agent_passes": 3,
+    "contrast_claims": 1,
+    "unique_source_count": 7,
+    "claim_profiles": [
+      {
+        "claim_id": "claim_01",
+        "total_duration_ms": 134535,
+        "verifier_ms": 47054,
+        "contradiction_finder_ms": 39683,
+        "numeric_calibrator_ms": 31192,
+        "aggregator_ms": 49743,
+        "contrast_ms": 37737
+      }
+    ]
+  }
+}

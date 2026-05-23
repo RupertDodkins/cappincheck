@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CappinCheck Report</title>
+  <style>
+    :root {
+      --ink: #1f2328;
+      --muted: #667085;
+      --line: #d0d7de;
+      --bg: #f6f8fa;
+      --panel: #ffffff;
+      --overstated: #b42318;
+      --missing: #b54708;
+      --supported: #067647;
+      --receipts: #344054;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+    }
+    h1 { margin: 0; font-size: 24px; letter-spacing: 0; }
+    main {
+      min-height: calc(100vh - 74px);
+    }
+    .claim-strip {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .headline-strip {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(246,248,250,0.96));
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+    }
+    .stat-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .stat-note {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+    .report-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      min-height: calc(100vh - 250px);
+    }
+    section { padding: 18px; border-right: 1px solid var(--line); }
+    section:last-child { border-right: 0; }
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(180px, 260px);
+      gap: 10px;
+      margin: 0 0 12px;
+    }
+    label {
+      display: grid;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: var(--panel);
+      color: var(--ink);
+    }
+    .claim-row {
+      width: 100%;
+      text-align: left;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+    .claim-row.active { border-color: var(--ink); box-shadow: 0 0 0 2px rgba(31,35,40,.08); }
+    #claim-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+    .claim-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 999px;
+      margin-right: 6px;
+      color: white;
+      background: var(--receipts);
+    }
+    .hint {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: help;
+      position: relative;
+      background: var(--panel);
+      vertical-align: middle;
+    }
+    .hint:focus {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+    .hint::after {
+      content: attr(data-tip);
+      display: none;
+      position: absolute;
+      z-index: 10;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(280px, 72vw);
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+      box-shadow: 0 8px 24px rgba(31,35,40,.18);
+    }
+    .hint:hover::after,
+    .hint:focus::after {
+      display: block;
+    }
+    .muted { color: var(--muted); }
+    .wrap {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+      overflow-wrap: anywhere;
+    }
+    .score {
+      height: 10px;
+      background: #eaecf0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .score > div { height: 100%; background: var(--overstated); }
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .strength-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: var(--bg);
+    }
+    .strength-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .meter {
+      height: 8px;
+      background: var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .meter > div { height: 100%; background: var(--receipts); }
+    .meter.overstated > div, .meter.contradicted > div { background: var(--overstated); }
+    .meter.missing-context > div { background: var(--missing); }
+    .meter.supported > div { background: var(--supported); }
+    a {
+      color: var(--receipts);
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+    .source-item {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .source-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    h2, h3 { margin: 0 0 10px; letter-spacing: 0; }
+    .title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    pre {
+      white-space: pre-wrap;
+      background: #0d1117;
+      color: #f0f6fc;
+      padding: 12px;
+      border-radius: 8px;
+      max-height: 260px;
+      overflow: auto;
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg);
+      padding: 10px 12px;
+      margin-top: 10px;
+    }
+    details:first-of-type {
+      margin-top: 0;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+    @media (max-width: 980px) {
+      .report-grid { grid-template-columns: 1fr; }
+      section { border-right: 0; border-bottom: 1px solid var(--line); }
+      .strength-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>CappinCheck</h1>
+      <div class="muted">xAI Grok 3 Launch Claim Proxy</div>
+    </div>
+    <div class="muted">1 audited claims · 98.52s pipeline · live_gemini · local</div>
+  </header>
+  <main>
+    <div class="headline-strip">
+      <div class="title-row">
+        <h2>Run Summary</h2>
+        <span class="hint" tabindex="0" data-tip="This top strip summarizes the audit punchline: how many claims were audited, how severe they were, and what runtime/profile telemetry was recorded for the run.">?</span>
+      </div>
+      <div class="summary-grid" id="scorecard-grid"></div>
+      <div class="telemetry-grid" id="telemetry-grid"></div>
+    </div>
+    <div class="claim-strip">
+      <div class="title-row">
+        <h2>Claim Ledger</h2>
+        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
+      </div>
+      <div class="filters single">
+        <label>Verdict
+          <span class="hint" tabindex="0" data-tip="Formal verdict definitions: supported = evidence supports the claim as written; overstated = directionally supported but too broad/strong/certain; missing_context = may be true but key scope/baseline/method/source context is absent; contradicted = evidence conflicts with the claim; not_checkable = insufficient evidence to verify or falsify.">?</span>
+          <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
+        </label>
+      </div>
+      <p class="muted" id="filter-summary"></p>
+      <div id="claim-list"></div>
+    </div>
+    <div class="report-grid">
+      <section>
+        <div class="title-row">
+          <h2>Selected Claim</h2>
+          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+        </div>
+        <div id="claim-detail"></div>
+      </section>
+      <section>
+        <div class="title-row">
+          <h2>Source Provenance</h2>
+          <span class="hint" tabindex="0" data-tip="Separates explicit references you provided from claim-level contrast references and Gemini-discovered supporting or caveat/counter sources.">?</span>
+        </div>
+        <div id="evidence"></div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const report = {
+  "document": {
+    "title": "xAI Grok 3 Launch Claim Proxy",
+    "source": "examples/xai_grok3_launch_input.md",
+    "text": "# xAI Grok 3 Launch Claim Proxy\n\nOfficial source URL: https://x.ai/news/grok-3\n\nNote: the official xAI launch page is Cloudflare-blocked for the local CLI fetcher in this environment. This proxy preserves the public launch-page claims to audit while keeping the official URL in the document and contrast references.\n\n## Claims to audit\n\nGrok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.\n\nGrok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.\n\nGrok 3 reasoning models show strong benchmark results on AIME, GPQA, LiveCodeBench, MMMU, and long-context retrieval tasks.\n\nDeepSearch is a lightning-fast AI agent designed to seek the truth across the entire corpus of human knowledge.\n\nGrok 3 has a 1 million token context window, described as 8 times larger than xAI's previous models.\n"
+  },
+  "claims": [
+    {
+      "id": "grok3_colossus_training",
+      "claim": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster",
+      "claim_type": "novelty",
+      "source_location": "Paragraph 1 under 'Claims to audit'",
+      "why_risky": "Claims of training on a specific custom supercluster as a mark of sophistication require verification of hardware operational stability, scale, and actual utilization during training.",
+      "audit_question": "Can xAI provide verifiable system logs and hardware architecture details proving that Grok 3 was end-to-end trained on the Colossus supercluster?"
+    },
+    {
+      "id": "grok3_10x_compute",
+      "claim": "trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.",
+      "claim_type": "numeric",
+      "source_location": "Paragraph 1 under 'Claims to audit'",
+      "why_risky": "The '10x compute' claim is highly dependent on how 'previous state-of-the-art models' is defined and how training FLOPS are calculated.",
+      "audit_question": "What specific FLOPS estimation or hardware runtime metrics define the 10x compute comparison, and which baseline models constitute the 'previous state-of-the-art'?"
+    },
+    {
+      "id": "grok3_leading_performance",
+      "claim": "Grok 3 has leading performance across both academic benchmarks and real-world user preferences",
+      "claim_type": "benchmark",
+      "source_location": "Paragraph 2 under 'Claims to audit'",
+      "why_risky": "Stating 'leading performance' across both domains is a broad generalization that can be easily contradicted by specific benchmarks or sub-tasks where competitors excel.",
+      "audit_question": "Which comprehensive list of academic benchmarks and real-world preference metrics was evaluated to substantiate the 'leading performance' claim against all active competitor models?"
+    },
+    {
+      "id": "grok3_chatbot_arena_elo",
+      "claim": "including a reported 1402 Elo score in Chatbot Arena.",
+      "claim_type": "benchmark",
+      "source_location": "Paragraph 2 under 'Claims to audit'",
+      "why_risky": "Elo scores on LMSYS Chatbot Arena fluctuate over time, can suffer from vote manipulation or prompt distribution changes, and need exact versioning to be reproducible.",
+      "audit_question": "Is the 1402 Elo score officially published on the LMSYS leaderboard for Grok 3, and what is the associated confidence interval and sample size?"
+    },
+    {
+      "id": "grok3_reasoning_benchmarks",
+      "claim": "Grok 3 reasoning models show strong benchmark results on AIME, GPQA, LiveCodeBench, MMMU",
+      "claim_type": "benchmark",
+      "source_location": "Paragraph 3 under 'Claims to audit'",
+      "why_risky": "Benchmarks like AIME and GPQA are highly prone to data contamination, and 'strong' is a subjective descriptor without exact percentage scores and peer comparisons.",
+      "audit_question": "What are the exact percentage scores achieved by Grok 3 on AIME, GPQA, LiveCodeBench, and MMMU, and what decontamination protocols were implemented to prevent training set leakage?"
+    },
+    {
+      "id": "grok3_long_context_retrieval",
+      "claim": "strong benchmark results on ... long-context retrieval tasks.",
+      "claim_type": "benchmark",
+      "source_location": "Paragraph 3 under 'Claims to audit'",
+      "why_risky": "Retrieval performance over long contexts is notoriously unstable, and claiming 'strong' results requires proof of perfect recall across varying depths of the context window.",
+      "audit_question": "What specific long-context benchmarks were tested, and what was the exact recall percentage (e.g., in a Needle-in-a-Haystack test) across the entirety of the context window?"
+    },
+    {
+      "id": "grok3_deepsearch_truth",
+      "claim": "DeepSearch is a lightning-fast AI agent designed to seek the truth across the entire corpus of human knowledge.",
+      "claim_type": "generalization",
+      "source_location": "Paragraph 4 under 'Claims to audit'",
+      "why_risky": "Claiming an agent can seek the truth across the 'entire corpus of human knowledge' is an unmeasurable generalization, given that most of human knowledge is offline, paywalled, or non-digitized.",
+      "audit_question": "How is 'seeking the truth' programmatically defined, and what physical or digital limits restrict DeepSearch's access to the 'entire corpus of human knowledge'?"
+    },
+    {
+      "id": "grok3_1m_context_window",
+      "claim": "Grok 3 has a 1 million token context window, described as 8 times larger than xAI's previous models.",
+      "claim_type": "numeric",
+      "source_location": "Paragraph 5 under 'Claims to audit'",
+      "why_risky": "Increasing context window size by 8x to 1 million tokens introduces massive computational and retrieval efficiency challenges; often, performance degrades drastically at the limits.",
+      "audit_question": "Does Grok 3 maintain high retrieval accuracy and coherent reasoning at the limit of its 1 million token context, and what was the context length of the previous model used as the baseline for the 8x multiplier?"
+    }
+  ],
+  "audits": [
+    {
+      "claim": {
+        "id": "grok3_colossus_training",
+        "claim": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster",
+        "claim_type": "novelty",
+        "source_location": "Paragraph 1 under 'Claims to audit'",
+        "why_risky": "Claims of training on a specific custom supercluster as a mark of sophistication require verification of hardware operational stability, scale, and actual utilization during training.",
+        "audit_question": "Can xAI provide verifiable system logs and hardware architecture details proving that Grok 3 was end-to-end trained on the Colossus supercluster?"
+      },
+      "verdict": "missing_context",
+      "confidence": "high",
+      "stretch_score": 60,
+      "why": "While the claim is fully supported by xAI's official announcement, independent academic audit from the Stanford Foundation Model Transparency Index (FMTI 2025) highlights missing context. Specifically, xAI has not disclosed whether the entire Colossus supercluster was used for the training run, nor have they shared detailed hardware allocation, duration, or FLOPs, resulting in a score of 0 on compute transparency indicators.",
+      "weaker_supported_rewrite": "Grok 3 is officially described as xAI's most advanced model yet, trained on the Colossus supercluster (though specific compute and hardware utilization details for the final training run remain undisclosed).",
+      "supporting_evidence": [
+        {
+          "source_title": "Grok 3 Beta \u2014 The Age of Reasoning Agents - xAI",
+          "url": "https://x.ai/news/grok-3",
+          "date": "2025-02-19",
+          "snippet": "Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements in reasoning, mathematics, coding, world knowledge, and instruction-following tasks.",
+          "relevance": "Direct launch announcement from xAI establishing the training infrastructure and model status."
+        },
+        {
+          "source_title": "How xAI turned a factory shell into an AI 'Colossus' for Grok 3 - R&D World",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7QRtIuF1kQpT0DgkakgYNVHb4SlPmjfnA5JcIUrfAz2qDdnmT-vAh2sLFI7hnd-oWCxhB3pkmV3Or6xr3syb3lXXhOz6JyxBTfSs9nn1RFjEE7aSS7SiW1xHDrvqfEG8D71zohbN54v5Me54p0GSaUemEGDGO31z3L2ebZIuvQHBLoQvMWSSqXCIyVYRiSaaIpR4lXLBcpHnbO-tuNQTBL8I=",
+          "date": "2025-02-18",
+          "snippet": "In a repurposed Electrolux factory in Memphis, xAI trained Grok 3 on a supercomputer dubbed \u201cColossus,\u201d which the company says includes 200,000 Nvidia H100 GPUs.",
+          "relevance": "Third-party industry reporting corroborating the training of Grok 3 on the Colossus supercomputer."
+        },
+        {
+          "source_title": "Musk's xAI Unveils Grok-3: More Power, But Is It Breaking New Ground? - Decrypt",
+          "url": "https://decrypt.co/221584/musks-xai-unveils-grok-3-more-power-but-is-it-breaking-new-ground",
+          "date": "2025-02-17",
+          "snippet": "The star of the initial part of the show wasn't the AI itself, but rather 'Colossus,' a behemoth cluster of 200,000 GPUs that powers Grok-3's training.",
+          "relevance": "Confirming public consensus that the model training was powered by the Colossus cluster."
+        }
+      ],
+      "counter_evidence": [],
+      "missing_context": [
+        "xAI has not publicly released verifiable system logs, raw training telemetry, or official end-to-end hardware architecture blueprints that would allow independent verification.",
+        "The Stanford Center for Research on Foundation Models (CRFM) Transparency Report notes that xAI does not disclose specific hardware utilization or precise training compute reported in floating-point operations (FLOPs)."
+      ],
+      "numeric_findings": [
+        "Colossus supercluster scale is cited as utilizing 100,000 to 200,000 NVIDIA H100 and H200 GPUs.",
+        "The compute used is stated to be 10x that of previous state-of-the-art models.",
+        "0 out of 1 score on specific hardware and train-test overlap disclosures in Stanford CRFM transparency evaluations."
+      ],
+      "agent_outputs": [
+        {
+          "agent": "Grounded Verifier",
+          "claim_id": "grok3_colossus_training",
+          "summary": "The claim that Grok 3 was trained on the Colossus supercluster is officially supported by xAI's launch announcements and statements from executive leadership. However, regarding the specific audit question, xAI has not publicly released verifiable system logs, raw training telemetry, or official end-to-end hardware architecture blueprints that would allow independent verification of the claim. Available technical details of the Colossus hardware architecture are limited to high-level press releases, executive social media posts, and industry reporting on the facility (such as its scale of 100,000 to 200,000 NVIDIA H100/H200 GPUs, custom liquid cooling, and use of Supermicro and NVIDIA Spectrum-X technologies).",
+          "duration_ms": 27193,
+          "supporting_evidence": [
+            {
+              "source_title": "Grok 3 Beta \u2014 The Age of Reasoning Agents - xAI",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGFqqWKoluzmHqRbOIlcPJmjmK1JSF2JSstc9-ug6ctfveSxmRvnuUURKBJi8x8xxsg1hfMj9L-FE3KUaQh4T90Rr-3zGK54OOP1R_kAUs=",
+              "date": "2025-02-19",
+              "snippet": "Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements in reasoning, mathematics, coding, world knowledge, and instruction-following tasks.",
+              "relevance": "Direct official claim from xAI confirming Grok 3 was trained on their Colossus supercluster using 10x the compute of prior SOTA models."
+            },
+            {
+              "source_title": "How xAI turned a factory shell into an AI 'Colossus' for Grok 3 - R&D World",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7QRtIuF1kQpT0DgkakgYNVHb4SlPmjfnA5JcIUrfAz2qDdnmT-vAh2sLFI7hnd-oWCxhB3pkmV3Or6xr3syb3lXXhOz6JyxBTfSs9nn1RFjEE7aSS7SiW1xHDrvqfEG8D71zohbN54v5Me54p0GSaUemEGDGO31z3L2ebZIuvQHBLoQvMWSSqXCIyVYRiSaaIpR4lXLBcpHnbO-tuNQTBL8I=",
+              "date": "2025-02-18",
+              "snippet": "In a repurposed Electrolux factory in Memphis, xAI trained Grok 3 on a supercomputer dubbed \u201cColossus,\u201d which the company says includes 200,000 Nvidia H100 GPUs. Elon Musk and senior xAI employees described Grok 3 as \u201cthe smartest AI on Earth\u201d in a recent livestream, citing each GPU's capacity of up to 4 PFLOPS (four quadrillion floating-point operations per second) and high-speed interconnects across the cluster.",
+              "relevance": "Provides third-party reporting confirming the public details of the training cluster, location, and the scale of GPUs used, referencing company streams and executive descriptions."
+            },
+            {
+              "source_title": "How Grok Works Under the Hood: Inside xAI's Infrastructure and Training Logic - Medium",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEe6me0Ko7HQg8GMyYbCgrh7QgPkV6kr6PaPPIK7q1et7_Ix7R3D1kYmPUROOIt0zeny4w17fkQuIOF1aHOIT51qUATYKL7L579Hy3a0_84_Xgz-NvzdDvHUWWIJxCE0mkdSPa8F870gmZQRpTULH-yfvIxMKy2igsKdK4VRXAfgKMXBA9RvOE1mvOt0VLYjRDD4Ff7kGwVzgYkAJpe9cyed8CoM7GOV2CmEjGX5ZEvQ7o=",
+              "date": "2025-11-27",
+              "snippet": "Reporting from DatacenterDynamics and ServeTheHome paints the picture: a cluster designed for up to 100,000 NVIDIA H100 GPUs, connected via a single RDMA fabric... Supermicro's racks are designed from the ground up for liquid cooling... custom orchestrator that automatically ejects problematic nodes from a training job, optimizes checkpointing and data loading...",
+              "relevance": "Analyzes underlying hardware integration, liquid cooling systems, and node orchestration details of the Colossus supercluster, while noting the reliance on third-party reporting rather than official published logs."
+            }
+          ],
+          "counter_evidence": [],
+          "missing_context": [
+            "Verifiable system training logs or raw telemetry demonstrating continuous end-to-end execution on the Colossus supercluster.",
+            "Official technical whitepapers or documented hardware/network topologies published directly by xAI to substantiate the physical configuration during Grok 3's pre-training."
+          ],
+          "numeric_findings": [
+            "10x compute of previous state-of-the-art models",
+            "100,000 NVIDIA H100 GPUs initially, later expanded to 200,000 H100 and H200 GPUs",
+            "Estimated 250 megawatts drawing capacity buffered by Tesla MegaPacks",
+            "Processing speed of up to 4 PFLOPS per GPU"
+          ]
+        },
+        {
+          "agent": "Contradiction Finder",
+          "claim_id": "grok3_colossus_training",
+          "summary": "There is no independent verification, third-party audit, or publicly available system logs proving that Grok 3 was trained end-to-end on the Colossus supercluster. While xAI claims that Grok 3 was trained on Colossus using 200,000 NVIDIA H100 GPUs, these assertions rely entirely on corporate press releases and statements by Elon Musk. Furthermore, researchers at Stanford's Center for Research on Foundation Models (CRFM) have noted that xAI does not disclose specific training hardware utilization, training logs, or train-test overlap details, leaving the training claims unverifiable.",
+          "duration_ms": 24191,
+          "supporting_evidence": [
+            {
+              "source_title": "Grok 3 Beta \u2014 The Age of Reasoning Agents - xAI",
+              "url": "https://x.ai/news/grok-3",
+              "date": "2025-02-19",
+              "snippet": "Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements in reasoning...",
+              "relevance": "Official announcement establishing the primary claim that Grok 3 was trained on the Colossus supercluster."
+            },
+            {
+              "source_title": "rdworldonline.com",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFESfNxLhKdLvwddbWAOFsRxJ2CT4DqHapQ-CyR592jp0oaJIGfPm8cwslu1ZQ9UocSozLJN8GwJ334GLtUsJJiwM353pinpOmGoSjLVvwjHD0_J45TrLrFwFCv13MmIDH7b2HsIVmRxkFgTZRg6dWR8IHV7xQOV2NyIiq748u-JvEYIkdgGI0LZpr6rD7dIpaV72kGh-4siWCZucLj4LwD_2Y=",
+              "snippet": "Source returned by Gemini grounding metadata.",
+              "relevance": "Grounding source used during specialist audit."
+            },
+            {
+              "source_title": "builtin.com",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGTGtUWVOdeL2htQ0DYpeUXlQjzPaa6PXTrz1sHHqReldD4toCJ7e50Pzcz_OXTDEM3DXmF9XabB74lIUH-P4Owt6yg-FUW3ryOJIoKTxQFMSDwCgUTqXi2X2QPVar9n-1ieJCfBec6",
+              "snippet": "Source returned by Gemini grounding metadata.",
+              "relevance": "Grounding source used during specialist audit."
+            },
+            {
+              "source_title": "stanford.edu",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFX3CE4qWsdN3d11GQOG9GmxlRsHp7z9MdNgWfBOgziysgFC-jiD18NIdKVGOAzo0PZscDwBIyFE4Czj269vjoCPRDTBtFjIoQg4WnFgngsT0CA8_HcK07JgEpGCO6N_stKJTFXY88P5fdXxQumwYb7lmzu0d7yL3Xo4g2RjVbu9FBnKdI9jmB8nXC_CdSjkw==",
+              "snippet": "Source returned by Gemini grounding metadata.",
+              "relevance": "Grounding source used during specialist audit."
+            }
+          ],
+          "counter_evidence": [
+            {
+              "source_title": "xAI Transparency Report - Stanford CRFM",
+              "date": "2025-05-27",
+              "snippet": "No specific information about whether all the GPUs on the Colossus cluster are used for Grok 3 training. ... We will not award this point if (i) the training hardware generally used by the developer is disclosed, but the specific hardware [for Grok 3 is not]... Train-test overlap (Score: 0). ... Disclosure: Not disclosed.",
+              "relevance": "Highlights a direct conflict with any claim of verifiable training details, indicating that xAI does not disclose specific training hardware usage or test-overlap details for Grok 3."
+            }
+          ],
+          "missing_context": [
+            "xAI has not released any public technical reports, blueprints, network topologies, or cryptographically verifiable system logs showing end-to-end training runs for Grok 3 on Colossus.",
+            "The claim of a 200,000 GPU cluster relies on promotional media, and subsequent reports indicate that parts of the Colossus cluster's compute capacity (such as Colossus 1) are rented to other players, raising questions about actual hardware allocation during Grok 3's development.",
+            "The details regarding Grok 3's training framework rely on generic overviews of xAI's JAX and Rust stack rather than a specific, auditable technical paper."
+          ],
+          "numeric_findings": [
+            "200000 GPUs claimed to be in the Colossus supercluster",
+            "10 times compute compared to Grok 2 as stated by xAI",
+            "0 out of 1 score on specific hardware and train-test overlap disclosures in transparency evaluations"
+          ]
+        },
+        {
+          "agent": "Numeric Calibrator",
+          "claim_id": "grok3_colossus_training",
+          "summary": "While xAI claims Grok 3 was trained on its Colossus supercluster, the company has not released verifiable system logs, FLOPs measurements, or exact hardware architecture details proving end-to-end training. This is corroborated by the Stanford CRFM xAI Transparency Report, which notes that xAI has not provided specific information on compute usage or dedicated GPU allocations during Grok 3's training.",
+          "duration_ms": 27944,
+          "supporting_evidence": [
+            {
+              "source_title": "Colossus: The World's Largest AI Supercomputer - xAI",
+              "url": "https://x.ai/colossus",
+              "date": "2026-02-01",
+              "snippet": "Built in 122 days \u2014 outpacing every estimate \u2014 Colossus was the most powerful AI training system yet. Then we doubled it in 92 days to 200k GPUs... 200,000 H100 GPUs in a single interconnected cluster.",
+              "relevance": "Provides official infrastructure scale supporting the feasibility of training massive models like Grok 3 on the Colossus supercluster."
+            },
+            {
+              "source_title": "Musk's xAI Unveils Grok-3: More Power, But Is It Breaking New Ground? - Decrypt",
+              "url": "https://decrypt.co/221584/musks-xai-unveils-grok-3-more-power-but-is-it-breaking-new-ground",
+              "date": "2025-02-17",
+              "snippet": "The star of the initial part of the show wasn't the AI itself, but rather 'Colossus,' a behemoth cluster of 200,000 GPUs that powers Grok-3's training.",
+              "relevance": "Details that Grok 3's training was powered by the Colossus cluster."
+            }
+          ],
+          "counter_evidence": [
+            {
+              "source_title": "xAI Transparency Report - Stanford CRFM",
+              "url": "https://crfm.stanford.edu/",
+              "snippet": "The relevant passage on training compute states: 'Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3... ' ... No specific information provided about compute usage. Compute should be reported in appropriate units, which most often will be floating point operations (FLOPs)... No specific information about whether all the GPUs on the Colossus cluster are used for Grok 3 training.",
+              "relevance": "Confirms that xAI lacks transparency regarding verifiable system logs, exact hardware usage, and precise compute (FLOPs) measurements for Grok 3's training."
+            }
+          ],
+          "missing_context": [
+            "Verified system logs and end-to-end training telemetry from the Colossus supercluster.",
+            "Precise training compute reported in FLOPS (floating-point operations) with measurement methodology.",
+            "The exact number of GPUs and active nodes dedicated exclusively to Grok 3's training stages."
+          ],
+          "numeric_findings": [
+            "Estimation of GPU hours: 100,000 GPUs * 80 days * 24 hours/day = 192,000,000 H100 GPU hours (~1.92 * 10^8 hours). Some independent estimates place pre-training at roughly 200 million H100 GPU hours, which closely matches this calculation.",
+            "Compute multiplier: xAI claims 10x the compute of previous state-of-the-art models (10x compute), but without an official baseline in FLOPs (e.g., Grok 2 training FLOPs vs Grok 3 training FLOPs), the absolute and relative deltas remain unverifiable."
+          ]
+        },
+        {
+          "agent": "claim-aggregator",
+          "claim_id": "grok3_colossus_training",
+          "summary": "Combined specialist outputs into final verdict `supported` with `high` confidence.",
+          "duration_ms": 24511,
+          "supporting_evidence": [
+            {
+              "source_title": "Grok 3 Beta \u2014 The Age of Reasoning Agents - xAI",
+              "url": "https://x.ai/news/grok-3",
+              "date": "2025-02-19",
+              "snippet": "Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements in reasoning, mathematics, coding, world knowledge, and instruction-following tasks.",
+              "relevance": "Direct launch announcement from xAI establishing the training infrastructure and model status."
+            },
+            {
+              "source_title": "How xAI turned a factory shell into an AI 'Colossus' for Grok 3 - R&D World",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7QRtIuF1kQpT0DgkakgYNVHb4SlPmjfnA5JcIUrfAz2qDdnmT-vAh2sLFI7hnd-oWCxhB3pkmV3Or6xr3syb3lXXhOz6JyxBTfSs9nn1RFjEE7aSS7SiW1xHDrvqfEG8D71zohbN54v5Me54p0GSaUemEGDGO31z3L2ebZIuvQHBLoQvMWSSqXCIyVYRiSaaIpR4lXLBcpHnbO-tuNQTBL8I=",
+              "date": "2025-02-18",
+              "snippet": "In a repurposed Electrolux factory in Memphis, xAI trained Grok 3 on a supercomputer dubbed \u201cColossus,\u201d which the company says includes 200,000 Nvidia H100 GPUs.",
+              "relevance": "Third-party industry reporting corroborating the training of Grok 3 on the Colossus supercomputer."
+            },
+            {
+              "source_title": "Musk's xAI Unveils Grok-3: More Power, But Is It Breaking New Ground? - Decrypt",
+              "url": "https://decrypt.co/221584/musks-xai-unveils-grok-3-more-power-but-is-it-breaking-new-ground",
+              "date": "2025-02-17",
+              "snippet": "The star of the initial part of the show wasn't the AI itself, but rather 'Colossus,' a behemoth cluster of 200,000 GPUs that powers Grok-3's training.",
+              "relevance": "Confirming public consensus that the model training was powered by the Colossus cluster."
+            }
+          ],
+          "counter_evidence": [],
+          "missing_context": [
+            "xAI has not publicly released verifiable system logs, raw training telemetry, or official end-to-end hardware architecture blueprints that would allow independent verification.",
+            "The Stanford Center for Research on Foundation Models (CRFM) Transparency Report notes that xAI does not disclose specific hardware utilization or precise training compute reported in floating-point operations (FLOPs)."
+          ],
+          "numeric_findings": [
+            "Colossus supercluster scale is cited as utilizing 100,000 to 200,000 NVIDIA H100 and H200 GPUs.",
+            "The compute used is stated to be 10x that of previous state-of-the-art models.",
+            "0 out of 1 score on specific hardware and train-test overlap disclosures in Stanford CRFM transparency evaluations."
+          ]
+        }
+      ],
+      "contrast": {
+        "claim_id": "grok3_colossus_training",
+        "claim_text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster",
+        "reference_sources": [
+          {
+            "url": "https://x.ai/news/grok-3",
+            "title": "Grok 3 Beta \u2014 The Age of Reasoning Agents - xAI",
+            "source_type": "vendor_doc",
+            "why_relevant": "Official blog post from xAI introducing Grok 3 as its most advanced model and stating that it was trained on the Colossus supercluster.",
+            "authority_score": 100
+          },
+          {
+            "url": "https://crfm.stanford.edu/fmti/December-2025/company-reports/xAI_FinalReport_FMTI2025.html",
+            "title": "xAI Transparency Report - Stanford CRFM",
+            "source_type": "academic",
+            "why_relevant": "Provides independent evaluation of xAI's disclosures on Grok 3, showing that while xAI claims the model was trained on the Colossus supercluster, it lacks transparent details regarding whether the entire cluster was utilized or the specific compute used.",
+            "authority_score": 90
+          }
+        ],
+        "best_sources": [
+          {
+            "url": "https://x.ai/news/grok-3",
+            "title": "Grok 3 Beta \u2014 The Age of Reasoning Agents - xAI",
+            "stance": "supports",
+            "evidence_summary": "The official announcement states: 'We are pleased to introduce Grok 3, our most advanced model yet... Trained on our Colossus supercluster...'",
+            "key_qualification": "This is an official vendor marketing release."
+          },
+          {
+            "url": "https://crfm.stanford.edu/fmti/December-2025/company-reports/xAI_FinalReport_FMTI2025.html",
+            "title": "xAI Transparency Report - Stanford CRFM",
+            "stance": "narrows",
+            "evidence_summary": "The Stanford CRFM FMTI 2025 report notes that while xAI's press release claims Grok 3 was trained on the Colossus supercluster, xAI fails to disclose specific training hardware and compute details, such as whether all Colossus GPUs were utilized, the run duration, or total FLOPs.",
+            "key_qualification": "An independent evaluation of foundation model transparency."
+          }
+        ],
+        "delta_type": "missing_context",
+        "delta_explanation": "While the claim is fully supported by xAI's official announcement, independent academic audit from the Stanford Foundation Model Transparency Index (FMTI 2025) highlights missing context. Specifically, xAI has not disclosed whether the entire Colossus supercluster was used for the training run, nor have they shared detailed hardware allocation, duration, or FLOPs, resulting in a score of 0 on compute transparency indicators.",
+        "suggested_rewrite": "Grok 3 is officially described as xAI's most advanced model yet, trained on the Colossus supercluster (though specific compute and hardware utilization details for the final training run remain undisclosed).",
+        "recommended_verdict": "missing_context",
+        "confidence": "high"
+      },
+      "claim_timing": {
+        "claim_id": "grok3_colossus_training",
+        "total_duration_ms": 78364,
+        "verifier_ms": 27193,
+        "contradiction_finder_ms": 24191,
+        "numeric_calibrator_ms": 27944,
+        "aggregator_ms": 24511,
+        "contrast_ms": 25870
+      }
+    }
+  ],
+  "runtime": "local",
+  "mode": "live_gemini",
+  "model": "gemini-3.5-flash",
+  "contrast_enabled": true,
+  "reference_urls": [
+    "https://x.ai/news/grok-3",
+    "https://lmarena.ai/?leaderboard=",
+    "https://livecodebench.github.io/",
+    "https://crfm.stanford.edu/fmti/December-2025/company-reports/xAI_FinalReport_FMTI2025.html"
+  ],
+  "run_profile": {
+    "total_duration_ms": 98515,
+    "load_document_ms": 1,
+    "extract_claims_ms": 20148,
+    "audit_claims_ms": 78367,
+    "contrast_duration_ms": 25871,
+    "claims_extracted": 8,
+    "claims_audited": 1,
+    "agent_passes": 3,
+    "contrast_claims": 1,
+    "unique_source_count": 4,
+    "claim_profiles": [
+      {
+        "claim_id": "grok3_colossus_training",
+        "total_duration_ms": 78364,
+        "verifier_ms": 27193,
+        "contradiction_finder_ms": 24191,
+        "numeric_calibrator_ms": 27944,
+        "aggregator_ms": 24511,
+        "contrast_ms": 25870
+      }
+    ]
+  }
+};
+    let selected = 0;
+    const filters = { verdict: 'all' };
+    const cls = (value) => String(value).replaceAll('_', '-').replaceAll(' ', '-');
+    const confidenceScore = { low: 34, medium: 67, high: 100 };
+    const verdictOrder = ['supported', 'overstated', 'missing_context', 'contradicted', 'not_checkable'];
+    const verdictLabels = {
+      supported: 'Supported',
+      overstated: 'Overstated',
+      missing_context: 'Missing Context',
+      contradicted: 'Contradicted',
+      not_checkable: 'Not Checkable'
+    };
+    const esc = (value) => String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[char]));
+    const safeHref = (value) => {
+      if (!value) return '';
+      try {
+        const url = new URL(String(value), document.baseURI);
+        if (['http:', 'https:', 'mailto:'].includes(url.protocol)) return url.href;
+      } catch (_) {}
+      return '';
+    };
+    const hint = (text) => `<span class="hint" tabindex="0" data-tip="${esc(text)}">?</span>`;
+    const fmtMs = (value) => {
+      const durationMs = Number(value ?? 0);
+      if (!Number.isFinite(durationMs) || durationMs <= 0) return '0ms';
+      if (durationMs >= 1000) return `${(durationMs / 1000).toFixed(2)}s`;
+      return `${durationMs}ms`;
+    };
+    function verdictTip(verdict) {
+      return ({
+        supported: 'Available evidence supports the claim as written or with only minor caveats.',
+        overstated: 'Evidence points in the same direction, but the wording is stronger, broader, or more certain than supported.',
+        missing_context: 'The claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.',
+        contradicted: 'Available evidence conflicts with the claim as written.',
+        not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
+      })[verdict] || 'Formal CappinCheck verdict for this claim.';
+    }
+    function verdictCounts(audits) {
+      const counts = {
+        supported: 0,
+        overstated: 0,
+        missing_context: 0,
+        contradicted: 0,
+        not_checkable: 0,
+      };
+      for (const audit of audits) {
+        if (counts[audit.verdict] != null) counts[audit.verdict] += 1;
+      }
+      return counts;
+    }
+    function averageStretch(audits) {
+      if (!audits.length) return 0;
+      const total = audits.reduce((sum, audit) => sum + Number(audit.stretch_score || 0), 0);
+      return Math.round(total / audits.length);
+    }
+    function statCard(label, value, note = '') {
+      return `
+        <div class="stat-card">
+          <div class="stat-label">${esc(label)}</div>
+          <div class="stat-value">${esc(value)}</div>
+          ${note ? `<div class="stat-note">${esc(note)}</div>` : ''}
+        </div>
+      `;
+    }
+    function renderHeadline() {
+      const counts = verdictCounts(report.audits || []);
+      const avgStretch = averageStretch(report.audits || []);
+      const run = report.run_profile || {};
+      document.getElementById('scorecard-grid').innerHTML = [
+        statCard('Claims Audited', String((report.audits || []).length), `${run.claims_extracted ?? (report.claims || []).length} extracted`),
+        ...verdictOrder.map(key => statCard(verdictLabels[key], String(counts[key]), key === 'supported' ? 'best-case verdict' : '')),
+        statCard('Avg Stretch', `${avgStretch}/100`, 'higher means riskier wording'),
+      ].join('');
+      document.getElementById('telemetry-grid').innerHTML = [
+        statCard('Model', report.model || 'none', report.contrast_enabled ? 'contrast enabled' : 'contrast disabled'),
+        statCard('Runtime Path', `${report.mode} · ${report.runtime}`),
+        statCard('Pipeline Wall', fmtMs(run.total_duration_ms || 0), `audit ${fmtMs(run.audit_claims_ms || 0)} · contrast ${fmtMs(run.contrast_duration_ms || 0)}`),
+        statCard('Specialist Passes', String(run.agent_passes || 0), `${run.claims_audited || (report.audits || []).length} claims`),
+        statCard('Unique Sources', String(run.unique_source_count || 0), 'support + caveat + contrast urls'),
+        statCard('Provided References', String((report.reference_urls || []).length), 'explicit --reference inputs'),
+      ].join('');
+    }
+    const filteredAudits = () => report.audits
+      .map((audit, index) => ({ ...audit, __index: index }))
+      .filter(audit => filters.verdict === 'all' || audit.verdict === filters.verdict);
+    function setupFilters() {
+      fillSelect('verdict-filter', 'All verdicts', [...new Set(report.audits.map(audit => audit.verdict))]);
+    }
+    function fillSelect(id, allLabel, values) {
+      document.getElementById(id).innerHTML = [
+        `<option value="all">${allLabel}</option>`,
+        ...values.map(value => `<option value="${esc(value)}">${esc(value)}</option>`)
+      ].join('');
+    }
+    function syncSelection() {
+      const audits = filteredAudits();
+      if (!audits.some(audit => audit.__index === selected)) selected = audits[0]?.__index ?? 0;
+    }
+    function render() {
+      const audits = filteredAudits();
+      document.getElementById('filter-summary').textContent = `${audits.length} of ${report.audits.length} claims shown`;
+      document.getElementById('claim-list').innerHTML = audits.map((audit, i) => `
+        <button class="claim-row ${audit.__index === selected ? 'active' : ''}" onclick="selected=${audit.__index}; render();">
+          <div class="claim-meta">
+            <span class="muted">${esc(audit.verdict)} · ${esc(audit.claim.claim_type)} · score ${audit.stretch_score}/100</span>
+          </div>
+          <div class="wrap">${esc(audit.claim.claim)}</div>
+          <div class="meter ${cls(audit.verdict)}" title="Stretch score ${audit.stretch_score} / 100"><div style="width: ${audit.stretch_score}%"></div></div>
+          <p class="muted wrap">${esc(audit.claim.why_risky || '')}</p>
+        </button>
+      `).join('');
+      if (!audits.length) {
+        document.getElementById('claim-detail').innerHTML = '<div class="panel"><p class="muted">No claims match the selected filters.</p></div>';
+        document.getElementById('evidence').innerHTML = '';
+        return;
+      }
+      const audit = audits.find(item => item.__index === selected) ?? audits[0];
+      const evidenceCount = audit.supporting_evidence.length + audit.counter_evidence.length;
+      const evidenceScore = Math.min(100, evidenceCount * 25);
+      const confidence = confidenceScore[audit.confidence] ?? 0;
+      const computedChecks = audit.numeric_findings?.length
+        ? `<div class="panel"><h3>Computed Checks</h3>${list(audit.numeric_findings)}</div>`
+        : '';
+      const runProfile = report.run_profile
+        ? `
+            <p class="wrap"><strong>Pipeline wall:</strong> ${fmtMs(report.run_profile.total_duration_ms)} · <strong>Load:</strong> ${fmtMs(report.run_profile.load_document_ms)} · <strong>Extract:</strong> ${fmtMs(report.run_profile.extract_claims_ms)} · <strong>Audit:</strong> ${fmtMs(report.run_profile.audit_claims_ms)} · <strong>Contrast:</strong> ${fmtMs(report.run_profile.contrast_duration_ms)}</p>
+            <p class="wrap"><strong>Claims extracted / audited:</strong> ${report.run_profile.claims_extracted} / ${report.run_profile.claims_audited} · <strong>Specialist passes:</strong> ${report.run_profile.agent_passes} · <strong>Unique sources:</strong> ${report.run_profile.unique_source_count}</p>
+          `
+        : '';
+      document.getElementById('claim-detail').innerHTML = `
+        <div class="panel">
+          <h3>Report Provenance</h3>
+          <p class="wrap"><strong>Mode:</strong> ${esc(report.mode)} · <strong>Runtime:</strong> ${esc(report.runtime)} · <strong>Model:</strong> ${esc(report.model || 'none')}</p>
+          <p class="wrap"><strong>Evidence Contrast:</strong> ${report.contrast_enabled ? 'enabled' : 'disabled'}</p>
+          <p class="wrap"><strong>Provided reference URLs:</strong> ${(report.reference_urls || []).length ? (report.reference_urls || []).map(esc).join(', ') : 'none'}</p>
+          ${runProfile}
+        </div>
+        <div class="panel">
+          <strong>Formal verdict: ${esc(audit.verdict)}</strong> ${hint(verdictTip(audit.verdict))}
+          <div class="score"><div style="width: ${audit.stretch_score}%"></div></div>
+          <p class="muted">
+            Confidence: ${esc(audit.confidence)} ${hint('Confidence reflects how strongly the available evidence supports this verdict, not whether the original claim is true.')}
+            · Stretch Score: ${audit.stretch_score} / 100 ${hint('Higher means the original wording stretches further beyond what the evidence supports.')}
+            · Evidence items: ${evidenceCount} ${hint('Evidence items are supporting or counter-evidence records attached to this claim.')}
+          </p>
+          <div class="strength-grid">
+            ${strengthCard('Stretch pressure', audit.stretch_score, audit.verdict, `${audit.stretch_score}/100`, 'How much the wording outruns the evidence.')}
+            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident CappinCheck is in this verdict from available evidence.')}
+            ${strengthCard('Evidence depth', evidenceScore, audit.verdict, `${evidenceCount} item${evidenceCount === 1 ? '' : 's'}`, 'How much direct evidence is attached to this claim audit.')}
+          </div>
+        </div>
+        <div class="panel"><h3>Original</h3><p class="wrap">${esc(audit.claim.claim)}</p></div>
+        ${contrastCard(audit.contrast)}
+        <div class="panel"><h3>Defensible Rewrite</h3><p class="wrap">${esc(audit.weaker_supported_rewrite)}</p></div>
+        <div class="panel"><h3>Why</h3><p class="wrap">${esc(audit.why)}</p></div>
+        ${claimTimingPanel(audit.claim_timing)}
+        ${computedChecks}
+        <div class="panel"><h3>Agent Steps</h3>${agentSteps(audit.agent_outputs || [])}</div>
+      `;
+      document.getElementById('evidence').innerHTML = `
+        ${providedReferencesPanel(report.reference_urls || [])}
+        ${sourcesChecked(audit.contrast)}
+        <div class="panel"><h3>Gemini-Discovered Supporting Sources</h3><p class="muted">Sources found by the verifier while looking for the strongest support for this claim.</p>${items(audit.supporting_evidence)}</div>
+        <div class="panel"><h3>Gemini-Discovered Caveat / Counter Sources</h3><p class="muted">Sources found by the contradiction-finder while looking for caveats, missing context, benchmark limits, or contrary evidence.</p>${items(audit.counter_evidence)}</div>
+        <div class="panel"><h3>Missing Context</h3>${list(audit.missing_context)}</div>
+      `;
+    }
+    function strengthCard(label, value, verdict, display, tip) {
+      return `
+        <div class="strength-card">
+          <div class="strength-label"><span>${label} ${hint(tip)}</span><span>${display}</span></div>
+          <div class="meter ${cls(verdict)}"><div style="width: ${value}%"></div></div>
+        </div>
+      `;
+    }
+    function contrastCard(contrast) {
+      if (!contrast) return '';
+      const best = contrast.best_sources?.[0];
+      const sourceSummary = best ? best.evidence_summary : 'No usable reference source was available.';
+      const qualification = best?.key_qualification ? `<p><strong>Key qualification:</strong> ${esc(best.key_qualification)}</p>` : '';
+      return `
+        <div class="panel">
+          <h3>Evidence Contrast</h3>
+          <p><strong>Claim says:</strong> <span class="wrap">${esc(contrast.claim_text)}</span></p>
+          <p><strong>Best reference says:</strong> <span class="wrap">${esc(sourceSummary)}</span></p>
+          ${qualification}
+          <p><strong>Delta:</strong> ${esc(contrast.delta_type)} — ${esc(contrast.delta_explanation)}</p>
+          <p><strong>Final verdict:</strong> ${esc(contrast.recommended_verdict)} · Confidence: ${esc(contrast.confidence)}</p>
+          <p><strong>Defensible rewrite:</strong> <span class="wrap">${esc(contrast.suggested_rewrite)}</span></p>
+        </div>
+      `;
+    }
+    function claimTimingPanel(timing) {
+      if (!timing) return '';
+      return `
+        <div class="panel">
+          <h3>Claim Timing</h3>
+          <p class="muted">Measured wall-clock time for this claim during the run.</p>
+          <p><strong>Total:</strong> ${fmtMs(timing.total_duration_ms)} · <strong>Contrast:</strong> ${fmtMs(timing.contrast_ms)}</p>
+          <ul>
+            <li class="wrap"><strong>Verifier:</strong> ${fmtMs(timing.verifier_ms)}</li>
+            <li class="wrap"><strong>Contradiction finder:</strong> ${fmtMs(timing.contradiction_finder_ms)}</li>
+            <li class="wrap"><strong>Numeric calibrator:</strong> ${fmtMs(timing.numeric_calibrator_ms)}</li>
+            <li class="wrap"><strong>Aggregator:</strong> ${fmtMs(timing.aggregator_ms)}</li>
+          </ul>
+        </div>
+      `;
+    }
+    function providedReferencesPanel(values) {
+      if (!values.length) {
+        return `
+          <div class="panel">
+            <h3>Provided Reference URLs</h3>
+            <p class="muted">No explicit reference URLs were provided for this run.</p>
+          </div>
+        `;
+      }
+      return `
+        <div class="panel">
+          <h3>Provided Reference URLs</h3>
+          <p class="muted">Explicit sources supplied on the CLI with <code>--reference</code>. These anchor Evidence Contrast and define the source-of-truth packet for this run.</p>
+          ${plainUrlItems(values)}
+        </div>
+      `;
+    }
+    function sourcesChecked(contrast) {
+      if (!contrast) return '<div class="panel"><h3>Claim-Level Contrast References</h3><p class="muted">No contrast references checked for this claim. Contrast is applied only to the selected top-risk claims controlled by --contrast-top.</p></div>';
+      const references = contrast.reference_sources || [];
+      const best = contrast.best_sources || [];
+      return `
+        <div class="panel">
+          <h3>Claim-Level Contrast References</h3>
+          <p class="muted">References used by the Evidence Contrast pass for this selected claim. These are anchored by provided reference URLs, but Gemini may resolve nearby canonical pages or source titles while reading them.</p>
+          ${referenceItems(references)}
+        </div>
+        <div class="panel">
+          <h3>Reference Snippets / Mismatches</h3>
+          <p class="muted">Claim-level snippets showing how the referenced source supports, narrows, or conflicts with the original wording.</p>
+          ${contrastSourceItems(best)}
+        </div>
+      `;
+    }
+    function plainUrlItems(values) {
+      return values.map(value => {
+        const href = safeHref(value);
+        const source = href
+          ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(value)}</a>`
+          : `<span class="muted">${esc(value)}</span>`;
+        return `<div class="source-item"><p class="wrap">${source}</p></div>`;
+      }).join('');
+    }
+    function referenceItems(values) {
+      if (!values.length) return '<p class="muted">None recorded.</p>';
+      return values.map(item => {
+        const href = safeHref(item.url);
+        const source = href
+          ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(item.url)}</a>`
+          : `<span class="muted">${esc(item.url || 'No URL recorded')}</span>`;
+        return `
+          <div class="source-item">
+            <p><strong>${esc(item.title)}</strong> <span class="muted">(${esc(item.source_type)} · authority ${item.authority_score}/100)</span></p>
+            <p class="wrap">${source}</p>
+            <p class="muted wrap">${esc(item.why_relevant || '')}</p>
+          </div>
+        `;
+      }).join('');
+    }
+    function contrastSourceItems(values) {
+      if (!values.length) return '<p class="muted">None recorded.</p>';
+      return values.map(item => {
+        const href = safeHref(item.url);
+        const source = href
+          ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(item.url)}</a>`
+          : `<span class="muted">${esc(item.url || 'No URL recorded')}</span>`;
+        return `
+          <div class="source-item">
+            <p><strong>${esc(item.title)}</strong> <span class="muted">(${esc(item.stance)})</span></p>
+            <p class="wrap">${esc(item.evidence_summary)}</p>
+            <p class="wrap">${source}</p>
+            <p class="muted wrap">${esc(item.key_qualification || '')}</p>
+          </div>
+        `;
+      }).join('');
+    }
+    function agentSteps(values) {
+      if (!values.length) return '<p class="muted">No agent step trace recorded.</p>';
+      return values.map(step => `
+        <details>
+          <summary>${esc(step.agent)} — ${esc(step.summary)}</summary>
+          <p class="muted">Claim ID: ${esc(step.claim_id)}</p>
+          <p class="muted">Duration: ${step.duration_ms == null ? 'not recorded' : fmtMs(step.duration_ms)}</p>
+          <h4>Supporting evidence</h4>
+          ${items(step.supporting_evidence || [])}
+          <h4>Contradictions / narrowing evidence</h4>
+          ${items(step.counter_evidence || [])}
+          <h4>Missing context</h4>
+          ${list(step.missing_context || [])}
+          <h4>Computed checks</h4>
+          ${list(step.numeric_findings || [])}
+        </details>
+      `).join('');
+    }
+    function list(values) {
+      if (!values.length) return '<p class="muted">None recorded.</p>';
+      return `<ul>${values.map(value => `<li class="wrap">${esc(value)}</li>`).join('')}</ul>`;
+    }
+    function items(values) {
+      if (!values.length) return '<p class="muted">None recorded.</p>';
+      return values.map(item => {
+        const href = safeHref(item.url);
+        const source = href
+          ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(item.url)}</a>`
+          : `<span class="muted">${esc(item.url || 'No URL recorded')}</span>`;
+        return `
+          <div class="source-item">
+            <p><strong>${esc(item.source_title)}</strong></p>
+            <p class="wrap">${esc(item.snippet)}</p>
+            <p class="wrap">${source}</p>
+            <p class="muted wrap">${esc(item.relevance || '')}</p>
+          </div>
+        `;
+      }).join('');
+    }
+    setupFilters();
+    renderHeadline();
+    render();
+  </script>
+</body>
+</html>
