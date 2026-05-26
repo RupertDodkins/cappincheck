@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Honest Launches Methodology</title>
+  <style>
+    :root {
+      --ink: #1f1a17;
+      --muted: #655b54;
+      --line: rgba(79, 61, 47, 0.18);
+      --bg: #f7f1ea;
+      --panel: rgba(255, 251, 246, 0.94);
+      --accent: #9f4a21;
+      --shadow: 0 18px 50px rgba(51, 37, 29, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(159, 74, 33, 0.14), transparent 24%),
+        linear-gradient(180deg, #fbf7f2 0%, var(--bg) 58%, #f0e7de 100%);
+      font-family: "Avenir Next", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    }
+    a {
+      color: inherit;
+      text-underline-offset: 2px;
+    }
+    .page {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+    .hero,
+    .section,
+    .callout {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(31, 26, 23, 0.06);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    h1, h2, h3 {
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      letter-spacing: -0.02em;
+    }
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4.1rem);
+      line-height: 0.96;
+      max-width: 12ch;
+    }
+    .hero p,
+    .section p,
+    .section li {
+      line-height: 1.65;
+      color: var(--ink);
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .pill.primary {
+      background: #1f1a17;
+      color: #fffdf9;
+      border-color: #1f1a17;
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    .section {
+      padding: 24px;
+    }
+    .section h2 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+    .section h3 {
+      margin: 22px 0 8px;
+      font-size: 1.2rem;
+    }
+    .section ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+    .callout {
+      padding: 18px 20px;
+      background: linear-gradient(180deg, rgba(255, 247, 237, 0.92), rgba(255, 255, 255, 0.92));
+    }
+    .callout strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .metric {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.74);
+    }
+    .metric-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .metric-value {
+      margin-top: 6px;
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Methodology</div>
+      <h1>How these launch pages are audited.</h1>
+      <p>
+        Honest Launches does not try to prove universal truth. It audits how well launch language is supported by a dated evidence packet and rewrites claims that overrun the available evidence.
+      </p>
+      <div class="hero-links">
+        <a class="pill primary" href="index.html">Back to archive</a>
+        <a class="pill" href="../README.md">Open README</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="section">
+        <h2>What the archive is</h2>
+        <p>
+          Each published page is an audited modified version of an original launch document. The goal is to preserve the structure and rhetorical flow of the source while tightening claims that are unsupported, stretched, or missing critical context.
+        </p>
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="metric-label">Primary surface</div>
+            <div class="metric-value">Audited Launch Page</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Secondary surface</div>
+            <div class="metric-value">Audit Ledger</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Publish flow</div>
+            <div class="metric-value">Manual</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Evidence packet</h2>
+        <p>The intended source-of-truth hierarchy is:</p>
+        <ul>
+          <li>Launch post, model card, system card, eval appendix, and pricing or availability docs when relevant.</li>
+          <li>Benchmark-native references and public datasets when a launch makes benchmark or ranking claims.</li>
+          <li>Secondary structured sources like leaderboards or aggregators as challenge sources, not sole authority.</li>
+        </ul>
+        <div class="callout">
+          <strong>Current archive standard</strong>
+          Published tooltip citations are anchored to explicit reference URLs whenever possible. This keeps the receipts legible and avoids relying on vague web retrieval alone.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Verdicts</h2>
+        <p>Each audited claim receives one mutually exclusive verdict.</p>
+        <h3>Supported</h3>
+        <p>The available evidence supports the claim as written or with only minor caveats.</p>
+        <h3>Overstated</h3>
+        <p>The evidence points in the same direction, but the wording is stronger, broader, or more certain than supported.</p>
+        <h3>Missing context</h3>
+        <p>The claim may be directionally true, but key scope, baseline, methodology, denominator, or source context is absent.</p>
+        <h3>Contradicted</h3>
+        <p>The available evidence conflicts with the claim as written.</p>
+        <h3>Not checkable</h3>
+        <p>The available evidence does not provide enough support to verify or falsify the claim.</p>
+      </section>
+
+      <section class="section">
+        <h2>How a page is built</h2>
+        <ul>
+          <li>The document is ingested and converted into a source snapshot that preserves the main content structure.</li>
+          <li>Risky factual claims are extracted from the source.</li>
+          <li>Specialist audit passes look for support, caveats, contradictory evidence, and numeric inconsistencies.</li>
+          <li>Audited claims are mapped back onto the preserved page structure and rewritten inline.</li>
+          <li>Hover or tap on the underlined replacement opens the original wording, verdict, and explicit-reference citations.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>What the archive is not</h2>
+        <ul>
+          <li>It is not a universal benchmark of which lab or model is best overall.</li>
+          <li>It is not a pure fact-checking authority that proves all claims true or false.</li>
+          <li>It is not yet a legal or compliance certification layer.</li>
+          <li>It is not an open live-generation product for arbitrary URLs in the current version.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Current limits</h2>
+        <ul>
+          <li>Best results come from article-like launch pages and public PDFs.</li>
+          <li>Some pages are rendered from local proxies or PDFs when the original page is fetch-blocked.</li>
+          <li>The current launch-page renderer is high-fidelity, but not a full browser-grade clone of arbitrary sites.</li>
+          <li>Publication decisions are still manual. The archive is generated, inspected, and then published intentionally.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Evaluation and gate</h2>
+        <p>
+          The archive is also judged against an internal evaluation rubric. Each featured page should pass a publication gate, expose an evidence packet, and contribute to a reviewed gold set used to score verdict and rewrite quality over time.
+        </p>
+        <ul>
+          <li>Publication gate: original-source link, modified-version notice, evidence packet, anchored rewrites, cited rewrites, preserved source blocks.</li>
+          <li>Gold set: reviewed claim-level checks for verdict agreement and rewrite adequacy.</li>
+          <li>Archive quality score: aggregate view of legibility, trust, judgment quality, fidelity, and archive coherence.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

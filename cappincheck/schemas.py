@@ -50,10 +50,26 @@ DeltaType = Literal[
 ]
 
 
+class SnapshotBlock(BaseModel):
+    block_id: str
+    kind: str
+    text: str
+    section_heading: str | None = None
+    source_order: int = 0
+
+
+class SourceSnapshot(BaseModel):
+    title: str = "Untitled document"
+    source_url: str
+    source_kind: str = "text"
+    blocks: list[SnapshotBlock] = Field(default_factory=list)
+
+
 class Document(BaseModel):
     title: str = "Untitled document"
     source: str
     text: str
+    snapshot: SourceSnapshot | None = None
 
 
 class RiskyClaim(BaseModel):
@@ -122,6 +138,33 @@ class ClaimTimingProfile(BaseModel):
     contrast_ms: int = 0
 
 
+class ClaimAnchor(BaseModel):
+    claim_id: str
+    block_id: str
+    matched_text: str
+    start_char: int = 0
+    end_char: int = 0
+    match_type: str = "none"
+    match_confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+
+
+class TooltipCitation(BaseModel):
+    title: str
+    url: str | None = None
+    snippet: str = ""
+    why_relevant: str = ""
+
+
+class RewriteDecoration(BaseModel):
+    claim_id: str
+    verdict: Verdict
+    original_text: str
+    rewritten_text: str
+    reason: str
+    citations: list[TooltipCitation] = Field(default_factory=list)
+    anchor: ClaimAnchor
+
+
 class ClaimAudit(BaseModel):
     claim: RiskyClaim
     verdict: Verdict
@@ -136,6 +179,8 @@ class ClaimAudit(BaseModel):
     agent_outputs: list[AgentAudit] = Field(default_factory=list)
     contrast: EvidenceContrast | None = None
     claim_timing: ClaimTimingProfile | None = None
+    anchor: ClaimAnchor | None = None
+    tooltip_citations: list[TooltipCitation] = Field(default_factory=list)
 
 
 class RunTimingProfile(BaseModel):
@@ -152,6 +197,33 @@ class RunTimingProfile(BaseModel):
     claim_profiles: list[ClaimTimingProfile] = Field(default_factory=list)
 
 
+class LaunchPageView(BaseModel):
+    source_title: str
+    source_url: str
+    blocks: list[SnapshotBlock] = Field(default_factory=list)
+    decorations: list[RewriteDecoration] = Field(default_factory=list)
+    rewritten_claim_count: int = 0
+    explicit_reference_count: int = 0
+    primary_view: str = "audited_launch_page"
+
+
+class PublicationInfo(BaseModel):
+    slug: str
+    lab: str = ""
+    launch_name: str = ""
+    original_url: str | None = None
+    original_label: str | None = None
+    source_note: str | None = None
+    status: str = "reviewed"
+    published_at: str | None = None
+    evidence_packet_url: str | None = None
+    gate_status: str | None = None
+    disclaimer: str = (
+        "Audited modified version of the original source. This page is provided for analysis "
+        "and commentary and is not the original publisher's page."
+    )
+
+
 class AuditReport(BaseModel):
     document: Document
     claims: list[RiskyClaim]
@@ -162,3 +234,5 @@ class AuditReport(BaseModel):
     contrast_enabled: bool = False
     reference_urls: list[str] = Field(default_factory=list)
     run_profile: RunTimingProfile | None = None
+    launch_page: LaunchPageView | None = None
+    publication: PublicationInfo | None = None

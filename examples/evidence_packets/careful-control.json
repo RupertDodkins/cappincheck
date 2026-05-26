@@ -1,0 +1,48 @@
+{
+  "slug": "careful-control",
+  "lab": "Control",
+  "title": "Careful Scientific Claim",
+  "publishedAt": "2026-05-26",
+  "status": "fixture",
+  "primarySource": {
+    "title": "Careful Scientific Claim Demo",
+    "url": "examples/careful_document.md",
+    "sourceKind": "text",
+    "renderedFrom": "local_proxy_or_fixture",
+    "documentSource": "examples/careful_document.md",
+    "sourceNote": "Internal deterministic fixture for demos."
+  },
+  "auditRuntime": {
+    "mode": "deterministic_fallback",
+    "runtime": "local",
+    "model": null,
+    "contrastEnabled": false
+  },
+  "references": {
+    "policy": "explicit_reference_urls",
+    "count": 0,
+    "urls": []
+  },
+  "artifacts": {
+    "html": "careful_report.html",
+    "json": "careful_report.json",
+    "markdown": "careful_report.md"
+  },
+  "metrics": {
+    "claimsAudited": 3,
+    "rewrittenClaims": 0,
+    "averageStretch": 12,
+    "verdictCounts": {
+      "supported": 3,
+      "overstated": 0,
+      "missing_context": 0,
+      "contradicted": 0,
+      "not_checkable": 0
+    },
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "blocksPreserved": 7,
+    "explicitReferenceCount": 0,
+    "evidenceItemCount": 3
+  }
+}

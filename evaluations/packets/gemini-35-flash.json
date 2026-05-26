@@ -1,0 +1,64 @@
+{
+  "version": "qa-v1",
+  "slug": "gemini-35-flash",
+  "launch": {
+    "lab": "Google",
+    "title": "Google Gemini 3.5 Flash",
+    "model": "Gemini 3.5 Flash",
+    "originalUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+    "originalLabel": "Original Google launch post",
+    "sourceNote": "Contrasted against the official DeepMind model card."
+  },
+  "archiveArtifacts": {
+    "html": "gemini_35_flash_report.html",
+    "json": "gemini_35_flash_report.json",
+    "markdown": "gemini_35_flash_report.md",
+    "evidencePacket": "evidence_packets/gemini-35-flash.json"
+  },
+  "references": [
+    "https://deepmind.google/models/model-cards/gemini-3-5-flash",
+    "https://deepmind.google/models/evals-methodology/gemini-3-5-flash",
+    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+    "https://ai.google.dev/gemini-api/docs/models",
+    "https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5",
+    "https://ai.google.dev/gemini-api/docs/pricing",
+    "https://openai.com/api/pricing/",
+    "https://platform.claude.com/docs/en/about-claude/pricing",
+    "https://labs.scale.com/leaderboard/mcp_atlas",
+    "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "https://charxiv.github.io/",
+    "https://artificialanalysis.ai/articles/gemini-3-5-flash-everything-you-need-to-know"
+  ],
+  "discovery": {
+    "providers": [
+      {
+        "provider": "anthropic_deep_research",
+        "status": "pending",
+        "suspectClaims": [],
+        "notes": ""
+      },
+      {
+        "provider": "openai_deep_research",
+        "status": "pending",
+        "suspectClaims": [],
+        "notes": ""
+      }
+    ],
+    "mergedReview": {
+      "status": "pending",
+      "mustCatchClaims": [],
+      "niceToCatchClaims": [],
+      "nonIssues": [],
+      "reviewerNotes": ""
+    }
+  },
+  "adjudication": {
+    "claims": []
+  },
+  "humanDecision": {
+    "publishStatus": "pending",
+    "decisionNotes": "",
+    "reviewer": "",
+    "reviewedAt": ""
+  }
+}

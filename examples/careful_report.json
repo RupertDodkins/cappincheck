@@ -2,7 +2,63 @@
   "document": {
     "title": "Careful Scientific Claim Demo",
     "source": "examples/careful_document.md",
-    "text": "# Careful Scientific Claim Demo\n\n## Abstract\n\nWe evaluate CappinCheck on a curated benchmark of technical-document claims. CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.\n\n## Results\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Limitations\n\nThe result is limited to the curated Benchmark X dataset. The evaluation does not establish real-world deployment performance, legal-document performance, clinical-document performance, or user preference.\n\n"
+    "text": "# Careful Scientific Claim Demo\n\n## Abstract\n\nWe evaluate CappinCheck on a curated benchmark of technical-document claims. CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.\n\n## Results\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Limitations\n\nThe result is limited to the curated Benchmark X dataset. The evaluation does not establish real-world deployment performance, legal-document performance, clinical-document performance, or user preference.\n\n",
+    "snapshot": {
+      "title": "Careful Scientific Claim Demo",
+      "source_url": "examples/careful_document.md",
+      "source_kind": "text",
+      "blocks": [
+        {
+          "block_id": "block-0",
+          "kind": "h1",
+          "text": "Careful Scientific Claim Demo",
+          "section_heading": "Careful Scientific Claim Demo",
+          "source_order": 0
+        },
+        {
+          "block_id": "block-1",
+          "kind": "h2",
+          "text": "Abstract",
+          "section_heading": "Abstract",
+          "source_order": 1
+        },
+        {
+          "block_id": "block-2",
+          "kind": "paragraph",
+          "text": "We evaluate CappinCheck on a curated benchmark of technical-document claims. CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.",
+          "section_heading": "Abstract",
+          "source_order": 2
+        },
+        {
+          "block_id": "block-3",
+          "kind": "h2",
+          "text": "Results",
+          "section_heading": "Results",
+          "source_order": 3
+        },
+        {
+          "block_id": "block-4",
+          "kind": "table",
+          "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+          "section_heading": "Results",
+          "source_order": 4
+        },
+        {
+          "block_id": "block-5",
+          "kind": "h2",
+          "text": "Limitations",
+          "section_heading": "Limitations",
+          "source_order": 5
+        },
+        {
+          "block_id": "block-6",
+          "kind": "paragraph",
+          "text": "The result is limited to the curated Benchmark X dataset. The evaluation does not establish real-world deployment performance, legal-document performance, clinical-document performance, or user preference.",
+          "section_heading": "Limitations",
+          "source_order": 6
+        }
+      ]
+    }
   },
   "claims": [
     {
@@ -129,7 +185,8 @@
         "numeric_calibrator_ms": 0,
         "aggregator_ms": 0,
         "contrast_ms": 0
-      }
+      },
+      "tooltip_citations": []
     },
     {
       "claim": {
@@ -217,7 +274,8 @@
         "numeric_calibrator_ms": 0,
         "aggregator_ms": 0,
         "contrast_ms": 0
-      }
+      },
+      "tooltip_citations": []
     },
     {
       "claim": {
@@ -305,7 +363,8 @@
         "numeric_calibrator_ms": 0,
         "aggregator_ms": 0,
         "contrast_ms": 0
-      }
+      },
+      "tooltip_citations": []
     }
   ],
   "runtime": "local",
@@ -352,5 +411,75 @@
         "contrast_ms": 0
       }
     ]
+  },
+  "launch_page": {
+    "source_title": "Careful Scientific Claim Demo",
+    "source_url": "examples/careful_document.md",
+    "blocks": [
+      {
+        "block_id": "block-0",
+        "kind": "h1",
+        "text": "Careful Scientific Claim Demo",
+        "section_heading": "Careful Scientific Claim Demo",
+        "source_order": 0
+      },
+      {
+        "block_id": "block-1",
+        "kind": "h2",
+        "text": "Abstract",
+        "section_heading": "Abstract",
+        "source_order": 1
+      },
+      {
+        "block_id": "block-2",
+        "kind": "paragraph",
+        "text": "We evaluate CappinCheck on a curated benchmark of technical-document claims. CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.",
+        "section_heading": "Abstract",
+        "source_order": 2
+      },
+      {
+        "block_id": "block-3",
+        "kind": "h2",
+        "text": "Results",
+        "section_heading": "Results",
+        "source_order": 3
+      },
+      {
+        "block_id": "block-4",
+        "kind": "table",
+        "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+        "section_heading": "Results",
+        "source_order": 4
+      },
+      {
+        "block_id": "block-5",
+        "kind": "h2",
+        "text": "Limitations",
+        "section_heading": "Limitations",
+        "source_order": 5
+      },
+      {
+        "block_id": "block-6",
+        "kind": "paragraph",
+        "text": "The result is limited to the curated Benchmark X dataset. The evaluation does not establish real-world deployment performance, legal-document performance, clinical-document performance, or user preference.",
+        "section_heading": "Limitations",
+        "source_order": 6
+      }
+    ],
+    "decorations": [],
+    "rewritten_claim_count": 0,
+    "explicit_reference_count": 0,
+    "primary_view": "audited_launch_page"
+  },
+  "publication": {
+    "slug": "careful-control",
+    "lab": "Control",
+    "launch_name": "Careful Scientific Claim",
+    "source_note": "Internal deterministic fixture for demos.",
+    "status": "fixture",
+    "published_at": "2026-05-23",
+    "evidence_packet_url": "evidence_packets/careful-control.json",
+    "gate_status": "needs_review",
+    "disclaimer": "Audited modified version of the original source. This page is provided for analysis and commentary and is not the original publisher's page."
   }
 }

@@ -1,0 +1,90 @@
+{
+  "version": "seed-v1",
+  "notes": "Starter reviewed seed set for archive-quality evaluation. This is intentionally small and should be expanded before benchmark-grade publication.",
+  "claims": [
+    {
+      "slug": "gemini-35-flash",
+      "claimId": "3",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "overstated",
+      "rewriteMustContain": [
+        "cost-efficient alternative"
+      ],
+      "notes": "Broad time and cost compression language is directionally plausible but too sweeping."
+    },
+    {
+      "slug": "gemini-35-flash",
+      "claimId": "4",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "overstated",
+      "rewriteMustContain": [
+        "under human supervision"
+      ],
+      "notes": "Reliable multi-step frontier-performance wording is stronger than the evidence packet supports."
+    },
+    {
+      "slug": "anthropic-sonnet-45",
+      "claimId": "claim_best_coding_model",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "overstated",
+      "rewriteMustContain": [
+        "state-of-the-art",
+        "SWE-bench Verified"
+      ],
+      "notes": "Best-in-the-world language should collapse to benchmark-specific leadership."
+    },
+    {
+      "slug": "anthropic-sonnet-45",
+      "claimId": "claim_30_hour_focus",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "missing_context",
+      "rewriteMustContain": [
+        "internal and early partner tests",
+        "5-hour rolling session limit"
+      ],
+      "notes": "Claim needs deployment and replicability qualifiers."
+    },
+    {
+      "slug": "xai-grok-3",
+      "claimId": "claim_1",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "overstated",
+      "rewriteMustContain": [
+        "its predecessor, Grok 2"
+      ],
+      "notes": "Compute comparison should be narrowed from prior SOTA models to the predecessor."
+    },
+    {
+      "slug": "xai-grok-3",
+      "claimId": "claim_2",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "missing_context",
+      "rewriteMustContain": [
+        "briefly led the Chatbot Arena leaderboard",
+        "codename 'chocolate'"
+      ],
+      "notes": "Leaderboard framing needs date and evaluation-context qualifiers."
+    },
+    {
+      "slug": "xai-grok-3",
+      "claimId": "claim_3",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "supported",
+      "rewriteMustContain": [
+        "1 million token context window"
+      ],
+      "notes": "This is the control-like supported claim inside the xAI artifact."
+    },
+    {
+      "slug": "openai-gpt-4o-system-card",
+      "claimId": "claim_01",
+      "reviewState": "seed_reviewed",
+      "expectedVerdict": "missing_context",
+      "rewriteMustContain": [
+        "false positive rate",
+        "clean internal evaluations"
+      ],
+      "notes": "A 100% catch-rate claim needs the false-positive and evaluation-context caveat."
+    }
+  ]
+}

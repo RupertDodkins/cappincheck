@@ -3,185 +3,449 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CappinCheck Demo Gallery</title>
+  <title>Honest Launches</title>
   <style>
     :root {
-      --ink: #1f2328;
-      --muted: #667085;
-      --line: #d0d7de;
-      --bg: #f6f8fa;
-      --panel: #ffffff;
-      --overstated: #b42318;
-      --context: #b54708;
-      --supported: #067647;
-      --receipts: #344054;
+      --ink: #1f1a17;
+      --muted: #6e6258;
+      --line: rgba(79, 61, 47, 0.18);
+      --bg: #f7f1ea;
+      --panel: rgba(255, 251, 246, 0.94);
+      --accent: #9f4a21;
+      --accent-soft: #f2d7c6;
+      --deep: #33251d;
+      --green: #25684b;
+      --gold: #9a6b16;
+      --shadow: 0 18px 50px rgba(51, 37, 29, 0.12);
     }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--bg);
       color: var(--ink);
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(159, 74, 33, 0.16), transparent 26%),
+        radial-gradient(circle at top right, rgba(37, 104, 75, 0.14), transparent 22%),
+        linear-gradient(180deg, #fbf7f2 0%, var(--bg) 56%, #f2eae1 100%);
+      font-family: "Avenir Next", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
     }
-    header {
-      padding: 18px 22px;
-      border-bottom: 1px solid var(--line);
+    a {
+      color: var(--deep);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .page {
+      width: min(1320px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 40px;
+    }
+    .hero {
+      display: block;
+    }
+    .hero-card,
+    .viewer-shell,
+    .collection-shell {
       background: var(--panel);
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .hero-card {
+      padding: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(159, 74, 33, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(51, 37, 29, 0.06);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 {
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      letter-spacing: -0.02em;
     }
     h1 {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: 0;
+      margin: 16px 0 10px;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 0.96;
+      max-width: 10ch;
     }
-    p {
-      margin: 6px 0 0;
+    .hero-copy {
+      max-width: 62ch;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--deep);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      color: var(--deep);
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .action.primary {
+      background: var(--deep);
+      border-color: var(--deep);
+      color: #fffdf9;
+    }
+    .collection-shell {
+      margin-top: 20px;
+      padding: 20px;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .section-head p {
+      margin: 4px 0 0;
       color: var(--muted);
     }
-    .tabs {
-      display: flex;
-      gap: 8px;
-      padding: 12px 22px;
-      border-bottom: 1px solid var(--line);
-      background: var(--panel);
-      overflow-x: auto;
-    }
-    button {
+    .hint-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      margin-left: 8px;
+      border-radius: 999px;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      color: var(--ink);
-      padding: 9px 12px;
-      font-weight: 700;
-      white-space: nowrap;
-      cursor: pointer;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      vertical-align: middle;
+      cursor: help;
     }
-    button.active {
-      border-color: var(--ink);
-      box-shadow: 0 0 0 2px rgba(31,35,40,.08);
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .entry-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+    }
+    .entry-card:hover,
+    .entry-card.active {
+      transform: translateY(-2px);
+      border-color: rgba(51, 37, 29, 0.34);
+      box-shadow: 0 10px 24px rgba(51, 37, 29, 0.1);
+    }
+    .entry-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+    .lab {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
     .badge {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 2px 7px;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
       border-radius: 999px;
-      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #fffdf9;
+      background: var(--gold);
+    }
+    .badge.overstated { background: #a5361e; }
+    .badge.missing_context { background: #a16417; }
+    .badge.supported { background: var(--green); }
+    .badge.mixed { background: #6c4ae3; }
+    .entry-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      line-height: 1.05;
+    }
+    .entry-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .entry-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-top: 12px;
+      color: var(--deep);
       font-size: 12px;
-      background: var(--receipts);
+      font-weight: 800;
     }
-    .overstated { background: var(--overstated); }
-    .context { background: var(--context); }
-    .supported { background: var(--supported); }
-    .layout {
-      display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
-      min-height: calc(100vh - 122px);
+    .fixture-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
     }
-    .summary {
-      padding: 14px 22px;
-      background: var(--bg);
+    .fixture-chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--deep);
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .viewer-shell {
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .viewer-head {
+      display: block;
       border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 252, 248, 0.94), rgba(248, 242, 235, 0.9));
+    }
+    .summary-pane {
+      padding: 22px;
+    }
+    .summary-pane h2 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      line-height: 0.98;
+    }
+    .summary-pane p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .summary-meta {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .meta-row {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .summary-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
     }
     iframe {
       width: 100%;
-      min-height: 900px;
+      min-height: 920px;
       border: 0;
-      background: var(--panel);
+      background: #fffdf9;
     }
-    code {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 2px 5px;
+    .loading,
+    .error {
+      padding: 18px 22px;
+      color: var(--muted);
     }
-    @media (max-width: 760px) {
-      header {
-        display: block;
-      }
+    .error {
+      color: #8e2b17;
+    }
+    @media (max-width: 980px) {
       iframe {
-        min-height: 1100px;
+        min-height: 1200px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>CappinCheck Demo Gallery</h1>
-      <p>Pre-generated static reports: real AI model launch docs plus one careful supported control.</p>
-    </div>
-    <p><code>Document -> Claims -> Audit Report</code></p>
-  </header>
-  <nav class="tabs" id="tabs"></nav>
-  <main class="layout">
-    <section class="summary" id="summary"></section>
-    <iframe id="frame" title="Selected CappinCheck report"></iframe>
-  </main>
+  <div class="page">
+    <section class="hero">
+      <article class="hero-card">
+        <div class="eyebrow">Reviewed archive first</div>
+        <h1>Audited AI launch pages.</h1>
+        <p class="hero-copy">
+          This archive republishes important frontier-model launches as audited modified pages. The primary view preserves the original structure and substitutes overstated or under-qualified claims inline. The secondary view is the audit ledger with receipts, verdicts, and evidence contrast.
+        </p>
+        <div class="hero-actions">
+          <a class="action primary" href="methodology.html">Read Methodology</a>
+          <a class="action" href="https://github.com/RupertDodkins/cappincheck" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="collection-shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Canonical launches</div>
+          <h2>Featured audits <span class="hint-badge" tabindex="0" title="Audit profile labels are shorthand: mixed means the page contains a mix of supported, overstated, and missing-context claims; overstated means the wording is stronger than the evidence; missing context means the claim may be directionally right but needs scope, methodology, or baseline caveats.">?</span></h2>
+          <p>Major lab launches first. The benchmark comes after these pages are solid.</p>
+        </div>
+      </div>
+      <div class="card-grid" id="featured-grid">
+        <div class="loading">Loading archive entries...</div>
+      </div>
+    </section>
+
+    <section class="viewer-shell">
+      <div class="viewer-head">
+        <aside class="summary-pane" id="summary-pane">
+          <div class="loading">Select an archive entry...</div>
+        </aside>
+      </div>
+      <iframe id="report-frame" title="Selected archive report"></iframe>
+    </section>
+  </div>
+
   <script>
-    const examples = [
-      {
-        label: 'Google Gemini 3.5 Flash',
-        badge: 'mixed',
-        href: 'gemini_35_flash_report.html',
-        summary: 'Live Gemini run on Google’s Gemini 3.5 announcement, contrasted against the official DeepMind model card. Best headline artifact for showing real public input.',
-        command: 'cappincheck audit https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/ --contrast --reference https://deepmind.google/models/model-cards/gemini-3-5-flash --contrast-top 2 --limit 4 --out examples/gemini_35_flash_report.md --json examples/gemini_35_flash_report.json --html examples/gemini_35_flash_report.html'
-      },
-      {
-        label: 'Anthropic Sonnet 4.5',
-        badge: 'overstated',
-        href: 'anthropic_sonnet_45_report.html',
-        summary: 'Live Gemini run on Anthropic’s Claude Sonnet 4.5 launch page with three audited claims. Shows broad capability, endurance, and safety/alignment claims being checked against Anthropic references and Gemini-discovered evidence.',
-        command: 'cappincheck audit https://www.anthropic.com/news/claude-sonnet-4-5 --contrast --reference https://www.anthropic.com/claude-sonnet-4-5-system-card --reference https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy --contrast-top 1 --limit 3 --out examples/anthropic_sonnet_45_report.md --json examples/anthropic_sonnet_45_report.json --html examples/anthropic_sonnet_45_report.html'
-      },
-      {
-        label: 'xAI Grok 3 Proxy',
-        badge: 'missing_context',
-        href: 'xai_grok3_report.html',
-        summary: 'Live Gemini run on a local source proxy for the xAI Grok 3 launch page, because the official xAI page is Cloudflare-blocked to the CLI fetcher. Official xAI, leaderboard, LiveCodeBench, and Stanford transparency URLs are preserved as references.',
-        command: 'cappincheck audit examples/xai_grok3_launch_input.md --contrast --reference https://x.ai/news/grok-3 --reference https://lmarena.ai/?leaderboard= --reference https://livecodebench.github.io/ --reference https://crfm.stanford.edu/fmti/December-2025/company-reports/xAI_FinalReport_FMTI2025.html --contrast-top 1 --limit 1 --out examples/xai_grok3_report.md --json examples/xai_grok3_report.json --html examples/xai_grok3_report.html'
-      },
-      {
-        label: 'OpenAI GPT-4o System Card',
-        badge: 'missing_context',
-        href: 'openai_gpt4o_report.html',
-        summary: 'Live Gemini run on the official OpenAI GPT-4o system card PDF. The HTML page itself returned 403 to the CLI fetcher, so the gallery uses the canonical PDF asset instead.',
-        command: 'cappincheck audit https://cdn.openai.com/gpt-4o-system-card.pdf --limit 1 --profile --out examples/openai_gpt4o_report.md --json examples/openai_gpt4o_report.json --html examples/openai_gpt4o_report.html'
-      },
-      {
-        label: 'Careful Scientific Claim',
-        badge: 'supported',
-        href: 'careful_report.html',
-        summary: 'Shows the non-cynical state: a scoped document with correct percentage-point wording and explicit limitations remains supported.',
-        command: 'cappincheck audit examples/careful_document.md --mock --profile --out examples/careful_report.md --json examples/careful_report.json --html examples/careful_report.html'
-      }
-    ];
-    let selected = 0;
-    const tabs = document.getElementById('tabs');
-    const frame = document.getElementById('frame');
-    const summary = document.getElementById('summary');
-    function cls(value) {
-      if (value === 'supported') return 'supported';
-      if (value === 'overstated') return 'overstated';
-      if (value === 'context' || value === 'mixed' || value === 'missing_context') return 'context';
+    const featuredGrid = document.getElementById('featured-grid');
+    const summaryPane = document.getElementById('summary-pane');
+    const reportFrame = document.getElementById('report-frame');
+    let manifest = null;
+    let selectedSlug = null;
+
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[char]);
+    }
+
+    function badgeClass(value) {
+      const token = String(value || '').toLowerCase().replaceAll(' ', '_');
+      if (token === 'overstated' || token === 'supported' || token === 'missing_context' || token === 'mixed') return token;
       return '';
     }
-    function render() {
-      tabs.innerHTML = examples.map((item, index) => `
-        <button class="${index === selected ? 'active' : ''}" onclick="selected=${index}; render();">
-          ${item.label}<span class="badge ${cls(item.badge)}">${item.badge}</span>
+
+    function currentEntry() {
+      return manifest?.entries?.find(entry => entry.slug === selectedSlug) || null;
+    }
+
+    function featuredEntries() {
+      return (manifest?.entries || []).filter(entry => entry.category === 'featured');
+    }
+
+    function profileLabel(entry) {
+      const badge = String(entry.badge || '').toLowerCase();
+      return badge ? badge.replaceAll('_', ' ') : 'mixed';
+    }
+
+    function profileDescription(entry) {
+      const badge = String(entry.badge || '').toLowerCase();
+      if (badge === 'overstated') return 'The launch language is directionally supported, but stronger or broader than the evidence warrants.';
+      if (badge === 'missing_context') return 'The core claims may be directionally right, but key scope, benchmark, or methodology context is missing.';
+      if (badge === 'supported') return 'The strongest claims are mostly well-supported as written.';
+      return 'The page contains a mix of supported, overstated, and missing-context claims.';
+    }
+
+    function renderCollections() {
+      const featured = featuredEntries();
+      featuredGrid.innerHTML = featured.map(entry => `
+        <button class="entry-card ${entry.slug === selectedSlug ? 'active' : ''}" onclick="selectEntry('${esc(entry.slug)}')">
+          <div class="entry-top">
+            <div class="lab">${esc(entry.lab)}</div>
+            <span class="badge ${badgeClass(entry.badge)}">${esc(entry.badge)}</span>
+          </div>
+          <h3>${esc(entry.title)}</h3>
+          <p>${esc(entry.summary)}</p>
+          <div class="entry-stats">
+            <span>${esc(entry.metrics?.claimsAudited || 0)} claims</span>
+            <span>${esc(entry.metrics?.averageStretch || 0)}/100 avg stretch</span>
+            <span>${entry.publicationGate?.overallPass ? 'gate pass' : 'needs review'}</span>
+          </div>
         </button>
       `).join('');
-      const item = examples[selected];
-      summary.innerHTML = `
-        <strong>${item.label}</strong>
-        <p>${item.summary}</p>
-        ${item.command ? `<p>Command: <code>${item.command}</code></p>` : ''}
-      `;
-      frame.src = item.href;
     }
-    render();
+
+    function renderSummary() {
+      const entry = currentEntry();
+      if (!entry) {
+        summaryPane.innerHTML = '<div class="loading">No archive entry selected.</div>';
+        return;
+      }
+      const originalLink = entry.originalUrl
+        ? `<a class="action primary" href="${esc(entry.originalUrl)}" target="_blank" rel="noopener noreferrer">${esc(entry.originalLabel || 'Open original')}</a>`
+        : '';
+      summaryPane.innerHTML = `
+        <div class="eyebrow">${esc(entry.lab)} · ${esc(entry.status)}</div>
+        <h2>${esc(entry.title)}</h2>
+        <p>${esc(entry.summary)}</p>
+        <div class="summary-meta">
+          <div class="meta-row"><strong>Model:</strong> ${esc(entry.model)}</div>
+          <div class="meta-row"><strong>Audit profile:</strong> <span class="badge ${badgeClass(entry.badge)}">${esc(profileLabel(entry))}</span><br>${esc(profileDescription(entry))}</div>
+          <div class="meta-row"><strong>Coverage:</strong> ${esc(entry.metrics?.claimsAudited || 0)} claims audited · ${esc(entry.metrics?.rewrittenClaims || 0)} inline rewrites</div>
+          <div class="meta-row"><strong>Source note:</strong> ${esc(entry.sourceNote || 'None recorded.')}</div>
+        </div>
+        <div class="summary-links">
+          ${originalLink}
+        </div>
+      `;
+      reportFrame.src = `${entry.artifactHtml}#launch`;
+    }
+
+    function selectEntry(slug) {
+      selectedSlug = slug;
+      renderCollections();
+      renderSummary();
+    }
+
+    async function boot() {
+      try {
+        const response = await fetch('archive_manifest.json');
+        if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
+        manifest = await response.json();
+        selectedSlug = featuredEntries()[0]?.slug || manifest.entries?.[0]?.slug || null;
+        renderCollections();
+        renderSummary();
+      } catch (error) {
+        featuredGrid.innerHTML = `<div class="error">Failed to load archive manifest: ${esc(error.message)}</div>`;
+        summaryPane.innerHTML = `<div class="error">Archive viewer is unavailable until the manifest loads.</div>`;
+      }
+    }
+
+    window.selectEntry = selectEntry;
+    boot();
   </script>
 </body>
 </html>

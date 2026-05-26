@@ -1,0 +1,51 @@
+{
+  "slug": "anthropic-sonnet-45",
+  "lab": "Anthropic",
+  "title": "Anthropic Claude Sonnet 4.5",
+  "publishedAt": "2026-05-26",
+  "status": "reviewed",
+  "primarySource": {
+    "title": "Introducing Claude Sonnet 4.5 \\ Anthropic",
+    "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+    "sourceKind": "html",
+    "renderedFrom": "original_source",
+    "documentSource": "https://www.anthropic.com/news/claude-sonnet-4-5",
+    "sourceNote": "Contrasted against Anthropic system-card and Responsible Scaling Policy references."
+  },
+  "auditRuntime": {
+    "mode": "live_gemini",
+    "runtime": "local",
+    "model": "gemini-3.5-flash",
+    "contrastEnabled": true
+  },
+  "references": {
+    "policy": "explicit_reference_urls",
+    "count": 2,
+    "urls": [
+      "https://www.anthropic.com/claude-sonnet-4-5-system-card",
+      "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy"
+    ]
+  },
+  "artifacts": {
+    "html": "anthropic_sonnet_45_report.html",
+    "json": "anthropic_sonnet_45_report.json",
+    "markdown": "anthropic_sonnet_45_report.md"
+  },
+  "metrics": {
+    "claimsAudited": 3,
+    "rewrittenClaims": 3,
+    "averageStretch": 65,
+    "verdictCounts": {
+      "supported": 0,
+      "overstated": 2,
+      "missing_context": 1,
+      "contradicted": 0,
+      "not_checkable": 0
+    },
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "blocksPreserved": 43,
+    "explicitReferenceCount": 2,
+    "evidenceItemCount": 11
+  }
+}

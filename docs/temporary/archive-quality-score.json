@@ -1,0 +1,228 @@
+{
+  "overallScore": 84,
+  "categories": {
+    "firstGlanceLegibility": 100,
+    "trustInspectability": 100,
+    "judgmentQuality": 38,
+    "pageFidelityPolish": 100,
+    "archiveUsefulnessCoherence": 100
+  },
+  "proxies": {
+    "originalLinkCoveragePct": 100,
+    "modifiedNoticeCoveragePct": 100,
+    "reportSurfaceCoveragePct": 100,
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "evidencePacketCoveragePct": 100,
+    "gatePassRatePct": 100,
+    "sourceNoteCoveragePct": 100,
+    "blocksPreservedCoveragePct": 100,
+    "featuredCount": 4,
+    "featuredAverageStretch": 52,
+    "goldSetCoverageFactorPct": 40
+  },
+  "goldSet": {
+    "reviewedCount": 8,
+    "verdictAgreementPct": 100,
+    "rewriteCoveragePct": 88,
+    "entries": [
+      {
+        "slug": "gemini-35-flash",
+        "claimId": "3",
+        "expectedVerdict": "overstated",
+        "actualVerdict": "overstated",
+        "verdictMatch": true,
+        "rewriteMatch": false
+      },
+      {
+        "slug": "gemini-35-flash",
+        "claimId": "4",
+        "expectedVerdict": "overstated",
+        "actualVerdict": "overstated",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      },
+      {
+        "slug": "anthropic-sonnet-45",
+        "claimId": "claim_best_coding_model",
+        "expectedVerdict": "overstated",
+        "actualVerdict": "overstated",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      },
+      {
+        "slug": "anthropic-sonnet-45",
+        "claimId": "claim_30_hour_focus",
+        "expectedVerdict": "missing_context",
+        "actualVerdict": "missing_context",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      },
+      {
+        "slug": "xai-grok-3",
+        "claimId": "claim_1",
+        "expectedVerdict": "overstated",
+        "actualVerdict": "overstated",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      },
+      {
+        "slug": "xai-grok-3",
+        "claimId": "claim_2",
+        "expectedVerdict": "missing_context",
+        "actualVerdict": "missing_context",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      },
+      {
+        "slug": "xai-grok-3",
+        "claimId": "claim_3",
+        "expectedVerdict": "supported",
+        "actualVerdict": "supported",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      },
+      {
+        "slug": "openai-gpt-4o-system-card",
+        "claimId": "claim_01",
+        "expectedVerdict": "missing_context",
+        "actualVerdict": "missing_context",
+        "verdictMatch": true,
+        "rewriteMatch": true
+      }
+    ]
+  },
+  "entries": [
+    {
+      "slug": "gemini-35-flash",
+      "title": "Google Gemini 3.5 Flash",
+      "metrics": {
+        "claimsAudited": 7,
+        "rewrittenClaims": 6,
+        "averageStretch": 55,
+        "verdictCounts": {
+          "supported": 1,
+          "overstated": 2,
+          "missing_context": 3,
+          "contradicted": 0,
+          "not_checkable": 1
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 42,
+        "explicitReferenceCount": 12,
+        "evidenceItemCount": 22
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      }
+    },
+    {
+      "slug": "anthropic-sonnet-45",
+      "title": "Anthropic Claude Sonnet 4.5",
+      "metrics": {
+        "claimsAudited": 3,
+        "rewrittenClaims": 3,
+        "averageStretch": 65,
+        "verdictCounts": {
+          "supported": 0,
+          "overstated": 2,
+          "missing_context": 1,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 43,
+        "explicitReferenceCount": 2,
+        "evidenceItemCount": 11
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      }
+    },
+    {
+      "slug": "xai-grok-3",
+      "title": "xAI Grok 3",
+      "metrics": {
+        "claimsAudited": 3,
+        "rewrittenClaims": 2,
+        "averageStretch": 48,
+        "verdictCounts": {
+          "supported": 1,
+          "overstated": 1,
+          "missing_context": 1,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 9,
+        "explicitReferenceCount": 4,
+        "evidenceItemCount": 11
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      }
+    },
+    {
+      "slug": "openai-gpt-4o-system-card",
+      "title": "OpenAI GPT-4o System Card",
+      "metrics": {
+        "claimsAudited": 1,
+        "rewrittenClaims": 1,
+        "averageStretch": 40,
+        "verdictCounts": {
+          "supported": 0,
+          "overstated": 0,
+          "missing_context": 1,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 33,
+        "explicitReferenceCount": 1,
+        "evidenceItemCount": 4
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      }
+    }
+  ],
+  "recommendations": [
+    "Expand the reviewed gold set beyond the current seed claims so judgment quality stops resting on a tiny sample."
+  ]
+}

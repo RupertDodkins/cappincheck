@@ -2,9 +2,43 @@
 
 Grounded adversarial claim audit for dense expert documents.
 
-CappinCheck reads an AI model report, paper, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce a structured evidence ledger.
+CappinCheck reads an AI model report, paper, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce an audited launch page plus a structured evidence ledger.
 
-It is not a paper summarizer. The output is a claim ledger: original wording, formal verdict, evidence contrast against references, collapsible agent steps, supporting evidence found, contradictions or narrowing evidence, missing context, computed checks when relevant, and the strongest defensible rewrite.
+It is not a paper summarizer. The primary output is an audited page view that preserves the source structure, substitutes overstated copy inline, and shows the original wording plus citations on hover or tap. The secondary surface is the claim ledger: original wording, formal verdict, evidence contrast against references, collapsible agent steps, supporting evidence found, contradictions or narrowing evidence, missing context, computed checks when relevant, and the strongest defensible rewrite.
+
+## Current Archive Shape
+
+The current public-facing direction is a reviewed static archive of audited launch pages, not an open live-generation product.
+
+Browse the archive locally:
+
+```bash
+cd /Users/rupert/engineering/cappincheck
+python3 -m http.server 8765
+```
+
+Then open:
+
+- `http://127.0.0.1:8765/`
+- `http://127.0.0.1:8765/examples/index.html`
+- `http://127.0.0.1:8765/examples/methodology.html`
+
+The first canonical archive set is:
+
+- Google
+- Anthropic
+- OpenAI
+- xAI
+
+Archive maintenance commands:
+
+```bash
+source .venv/bin/activate
+python scripts/rebuild_archive.py
+python scripts/evaluate_archive.py
+```
+
+This rebuilds the featured HTML reports, refreshes archive metadata and evidence-packet sidecars, and writes the current archive-quality score under `docs/temporary/`.
 
 ## Hackathon Submission
 
@@ -40,6 +74,8 @@ Run the no-key demo:
 cappincheck audit examples/demo_document.md --mock --profile --out examples/demo_report.md --json examples/demo_report.json --html examples/demo_report.html
 open examples/demo_report.html
 ```
+
+For the archive shell, open `examples/index.html` after generating or refreshing artifacts.
 
 The deterministic fixture is `examples/demo_document.md`; use `--mock` for public demos when API access is unavailable or live grounding is flaky.
 
@@ -78,14 +114,17 @@ For a real/public source placeholder that avoids copying copyrighted text into t
 
 1. Run the deterministic mock command above.
 2. Open `examples/demo_report.html`.
-3. Point out the claim ledger: formal verdict, Evidence Contrast, Evidence Sources, Agent Steps, missing context, and rewrite.
-4. Highlight the numeric contrast row: the source says `84.1%` to `87.3%`, so the defensible improvement is `3.2` points / `3.8%` relative, not `30%`.
-5. If `GEMINI_API_KEY` is available, rerun with `--contrast --reference ...` and compare the live grounded report to the deterministic fallback.
+3. Start on the audited launch page: underline styling, hover/tap tooltip, original wording, and explicit-reference citations.
+4. Switch to the claim ledger to show formal verdict, Evidence Contrast, Evidence Sources, Agent Steps, missing context, and rewrite.
+5. Highlight the numeric contrast row: the source says `84.1%` to `87.3%`, so the defensible improvement is `3.2` points / `3.8%` relative, not `30%`.
+6. If `GEMINI_API_KEY` is available, rerun with `--contrast --reference ...` and compare the live grounded report to the deterministic fallback.
 
 ## Output
 
 Each audited claim includes:
 
+- Primary audited-page rendering with inline substitutions
+- Hover/tap tooltip showing original wording, verdict, and explicit-reference citations
 - Original claim
 - Claim type
 - Formal verdict: `supported`, `overstated`, `missing_context`, `contradicted`, or `not_checkable`
@@ -121,7 +160,9 @@ This is documented in `DEMO_EXTENSION_PLAN.md`. Evidence Contrast Mode is the in
 
 Report layout:
 
+- `Audited Launch Page`: the primary surface, preserving source block structure while substituting audited claims inline with hover/tap receipts.
 - `Evidence Contrast`: the demo-facing side-by-side card: claim wording, reference wording, delta, final verdict, and defensible rewrite.
+- `Audit Ledger`: the secondary inspection/debug surface showing verdicts, contrast, sources, and agent steps.
 - `Evidence Sources`: separates explicit user-provided references from Gemini-discovered supporting and caveat/counter sources, with snippets and mismatch notes underneath for inspection.
 
 Reference discovery with Google Search grounding is a v2 extension. The first version prioritizes explicit `--reference` URLs for demo reliability.

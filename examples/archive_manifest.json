@@ -1,0 +1,349 @@
+{
+  "site": {
+    "title": "Audited AI Launch Archive",
+    "tagline": "Modified launch pages with inline corrections, source links, and audit receipts.",
+    "methodologyFile": "methodology.html",
+    "metrics": {
+      "featuredCount": 4,
+      "labsCovered": 4,
+      "averageStretch": 52,
+      "gatePassRatePct": 100,
+      "tooltipCitationCoveragePct": 100
+    }
+  },
+  "entries": [
+    {
+      "slug": "gemini-35-flash",
+      "category": "featured",
+      "status": "reviewed",
+      "lab": "Google",
+      "model": "Gemini 3.5 Flash",
+      "title": "Google Gemini 3.5 Flash",
+      "badge": "mixed",
+      "artifactHtml": "gemini_35_flash_report.html",
+      "artifactJson": "gemini_35_flash_report.json",
+      "artifactMd": "gemini_35_flash_report.md",
+      "originalUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+      "originalLabel": "Original Google launch post",
+      "summary": "Live Gemini run on Google's Gemini 3.5 announcement, contrasted against the official DeepMind model card. Best headline artifact for the audited launch-page surface.",
+      "sourceNote": "Contrasted against the official DeepMind model card.",
+      "referenceUrls": [
+        "https://deepmind.google/models/model-cards/gemini-3-5-flash",
+        "https://deepmind.google/models/evals-methodology/gemini-3-5-flash",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+        "https://ai.google.dev/gemini-api/docs/models",
+        "https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://openai.com/api/pricing/",
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://labs.scale.com/leaderboard/mcp_atlas",
+        "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "https://charxiv.github.io/",
+        "https://artificialanalysis.ai/articles/gemini-3-5-flash-everything-you-need-to-know"
+      ],
+      "match": {
+        "sourceContains": [
+          "blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+          "gemini-3-5",
+          "gemini_35_flash_report"
+        ],
+        "titleContains": [
+          "gemini 3.5 flash"
+        ]
+      },
+      "publishedAt": "2026-05-26",
+      "evidencePacketFile": "evidence_packets/gemini-35-flash.json",
+      "metrics": {
+        "claimsAudited": 7,
+        "rewrittenClaims": 6,
+        "averageStretch": 55,
+        "verdictCounts": {
+          "supported": 1,
+          "overstated": 2,
+          "missing_context": 3,
+          "contradicted": 0,
+          "not_checkable": 1
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 42,
+        "explicitReferenceCount": 12,
+        "evidenceItemCount": 22
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      },
+      "evidencePacket": {
+        "primarySourceKind": "html",
+        "renderedFrom": "original_source",
+        "referenceCount": 12
+      }
+    },
+    {
+      "slug": "anthropic-sonnet-45",
+      "category": "featured",
+      "status": "reviewed",
+      "lab": "Anthropic",
+      "model": "Claude Sonnet 4.5",
+      "title": "Anthropic Claude Sonnet 4.5",
+      "badge": "overstated",
+      "artifactHtml": "anthropic_sonnet_45_report.html",
+      "artifactJson": "anthropic_sonnet_45_report.json",
+      "artifactMd": "anthropic_sonnet_45_report.md",
+      "originalUrl": "https://www.anthropic.com/news/claude-sonnet-4-5",
+      "originalLabel": "Original Anthropic launch post",
+      "summary": "Live Gemini run on Anthropic's Claude Sonnet 4.5 launch page with audited capability, endurance, and safety claims.",
+      "sourceNote": "Contrasted against Anthropic system-card and Responsible Scaling Policy references.",
+      "referenceUrls": [
+        "https://www.anthropic.com/claude-sonnet-4-5-system-card",
+        "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy"
+      ],
+      "match": {
+        "sourceContains": [
+          "anthropic.com/news/claude-sonnet-4-5",
+          "anthropic_sonnet_45_report"
+        ],
+        "titleContains": [
+          "claude sonnet 4.5",
+          "anthropic"
+        ]
+      },
+      "publishedAt": "2026-05-26",
+      "evidencePacketFile": "evidence_packets/anthropic-sonnet-45.json",
+      "metrics": {
+        "claimsAudited": 3,
+        "rewrittenClaims": 3,
+        "averageStretch": 65,
+        "verdictCounts": {
+          "supported": 0,
+          "overstated": 2,
+          "missing_context": 1,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 43,
+        "explicitReferenceCount": 2,
+        "evidenceItemCount": 11
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      },
+      "evidencePacket": {
+        "primarySourceKind": "html",
+        "renderedFrom": "original_source",
+        "referenceCount": 2
+      }
+    },
+    {
+      "slug": "xai-grok-3",
+      "category": "featured",
+      "status": "reviewed",
+      "lab": "xAI",
+      "model": "Grok 3",
+      "title": "xAI Grok 3",
+      "badge": "missing_context",
+      "artifactHtml": "xai_grok3_report.html",
+      "artifactJson": "xai_grok3_report.json",
+      "artifactMd": "xai_grok3_report.md",
+      "originalUrl": "https://x.ai/news/grok-3",
+      "originalLabel": "Original xAI launch post",
+      "summary": "Launch-page audit built from a local source proxy because the official xAI page is Cloudflare-blocked to the CLI fetcher.",
+      "sourceNote": "Rendered from a local content proxy while preserving the official xAI launch URL as the canonical source.",
+      "referenceUrls": [
+        "https://x.ai/news/grok-3",
+        "https://lmarena.ai/?leaderboard=",
+        "https://livecodebench.github.io/",
+        "https://crfm.stanford.edu/fmti/December-2025/company-reports/xAI_FinalReport_FMTI2025.html"
+      ],
+      "match": {
+        "sourceContains": [
+          "xai_grok3_launch_input.md",
+          "x.ai/news/grok-3",
+          "xai_grok3_report"
+        ],
+        "titleContains": [
+          "grok 3",
+          "xai"
+        ]
+      },
+      "publishedAt": "2026-05-26",
+      "evidencePacketFile": "evidence_packets/xai-grok-3.json",
+      "metrics": {
+        "claimsAudited": 3,
+        "rewrittenClaims": 2,
+        "averageStretch": 48,
+        "verdictCounts": {
+          "supported": 1,
+          "overstated": 1,
+          "missing_context": 1,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 9,
+        "explicitReferenceCount": 4,
+        "evidenceItemCount": 11
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      },
+      "evidencePacket": {
+        "primarySourceKind": "text",
+        "renderedFrom": "local_proxy_or_fixture",
+        "referenceCount": 4
+      }
+    },
+    {
+      "slug": "openai-gpt-4o-system-card",
+      "category": "featured",
+      "status": "reviewed",
+      "lab": "OpenAI",
+      "model": "GPT-4o",
+      "title": "OpenAI GPT-4o System Card",
+      "badge": "missing_context",
+      "artifactHtml": "openai_gpt4o_report.html",
+      "artifactJson": "openai_gpt4o_report.json",
+      "artifactMd": "openai_gpt4o_report.md",
+      "originalUrl": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "originalLabel": "Original OpenAI system card PDF",
+      "summary": "Audit of the official GPT-4o system card PDF, used because the HTML page returned a 403 to the CLI fetcher.",
+      "sourceNote": "Uses the canonical OpenAI PDF asset as the source document.",
+      "referenceUrls": [
+        "https://cdn.openai.com/gpt-4o-system-card.pdf"
+      ],
+      "match": {
+        "sourceContains": [
+          "cdn.openai.com/gpt-4o-system-card.pdf",
+          "openai_gpt4o_report"
+        ],
+        "titleContains": [
+          "gpt-4o system card",
+          "openai"
+        ]
+      },
+      "publishedAt": "2026-05-26",
+      "evidencePacketFile": "evidence_packets/openai-gpt-4o-system-card.json",
+      "metrics": {
+        "claimsAudited": 1,
+        "rewrittenClaims": 1,
+        "averageStretch": 40,
+        "verdictCounts": {
+          "supported": 0,
+          "overstated": 0,
+          "missing_context": 1,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 33,
+        "explicitReferenceCount": 1,
+        "evidenceItemCount": 4
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      },
+      "evidencePacket": {
+        "primarySourceKind": "text",
+        "renderedFrom": "original_source",
+        "referenceCount": 1
+      }
+    },
+    {
+      "slug": "careful-control",
+      "category": "fixture",
+      "status": "fixture",
+      "lab": "Control",
+      "model": "Careful Scientific Claim",
+      "title": "Careful Scientific Claim",
+      "badge": "supported",
+      "artifactHtml": "careful_report.html",
+      "artifactJson": "careful_report.json",
+      "artifactMd": "careful_report.md",
+      "originalUrl": "",
+      "originalLabel": "",
+      "summary": "Control fixture showing that scoped, careful wording can remain supported.",
+      "sourceNote": "Internal deterministic fixture for demos.",
+      "referenceUrls": [],
+      "match": {
+        "sourceContains": [
+          "careful_document.md",
+          "careful_report"
+        ],
+        "titleContains": [
+          "careful scientific claim"
+        ]
+      },
+      "publishedAt": "2026-05-26",
+      "evidencePacketFile": "evidence_packets/careful-control.json",
+      "metrics": {
+        "claimsAudited": 3,
+        "rewrittenClaims": 0,
+        "averageStretch": 12,
+        "verdictCounts": {
+          "supported": 3,
+          "overstated": 0,
+          "missing_context": 0,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 7,
+        "explicitReferenceCount": 0,
+        "evidenceItemCount": 3
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      },
+      "evidencePacket": {
+        "primarySourceKind": "text",
+        "renderedFrom": "local_proxy_or_fixture",
+        "referenceCount": 0
+      }
+    }
+  ]
+}

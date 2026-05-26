@@ -1,0 +1,50 @@
+{
+  "slug": "openai-gpt-4o-system-card",
+  "lab": "OpenAI",
+  "title": "OpenAI GPT-4o System Card",
+  "publishedAt": "2026-05-26",
+  "status": "reviewed",
+  "primarySource": {
+    "title": "GPT-4o System Card",
+    "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+    "sourceKind": "text",
+    "renderedFrom": "original_source",
+    "documentSource": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+    "sourceNote": "Uses the canonical OpenAI PDF asset as the source document."
+  },
+  "auditRuntime": {
+    "mode": "live_gemini",
+    "runtime": "local",
+    "model": "gemini-3.5-flash",
+    "contrastEnabled": false
+  },
+  "references": {
+    "policy": "explicit_reference_urls",
+    "count": 1,
+    "urls": [
+      "https://cdn.openai.com/gpt-4o-system-card.pdf"
+    ]
+  },
+  "artifacts": {
+    "html": "openai_gpt4o_report.html",
+    "json": "openai_gpt4o_report.json",
+    "markdown": "openai_gpt4o_report.md"
+  },
+  "metrics": {
+    "claimsAudited": 1,
+    "rewrittenClaims": 1,
+    "averageStretch": 40,
+    "verdictCounts": {
+      "supported": 0,
+      "overstated": 0,
+      "missing_context": 1,
+      "contradicted": 0,
+      "not_checkable": 0
+    },
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "blocksPreserved": 33,
+    "explicitReferenceCount": 1,
+    "evidenceItemCount": 4
+  }
+}

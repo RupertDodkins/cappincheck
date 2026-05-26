@@ -8,6 +8,7 @@ import httpx
 from pypdf import PdfReader
 
 from .schemas import Document
+from .source_snapshot import build_snapshot_from_html, build_snapshot_from_text, snapshot_to_text
 
 
 def load_document(source: str) -> Document:
@@ -18,18 +19,22 @@ def load_document(source: str) -> Document:
         if "pdf" in content_type or source.lower().endswith(".pdf"):
             text = _read_pdf_bytes(response.content)
             title = _infer_title(text, source)
+            snapshot = build_snapshot_from_text(text, source_url=source, title=title)
         else:
             title = _html_title(response.text) or source
-            text = _strip_html(response.text)
+            snapshot = build_snapshot_from_html(response.text, source_url=source, title=title)
+            text = snapshot_to_text(snapshot)
             title = title if title != source else _infer_title(text, source)
-        return Document(title=title, source=source, text=text)
+        return Document(title=title, source=source, text=text, snapshot=snapshot)
 
     path = Path(source)
     if path.suffix.lower() == ".pdf":
         text = _read_pdf_path(path)
+        snapshot = build_snapshot_from_text(text, source_url=str(path), title=_infer_title(text, path.name))
     else:
         text = path.read_text(encoding="utf-8")
-    return Document(title=_infer_title(text, path.name), source=str(path), text=text)
+        snapshot = build_snapshot_from_text(text, source_url=str(path), title=_infer_title(text, path.name))
+    return Document(title=_infer_title(text, path.name), source=str(path), text=text, snapshot=snapshot)
 
 
 def _read_pdf_path(path: Path) -> str:
@@ -45,8 +50,26 @@ def _read_pdf_bytes(content: bytes) -> str:
 
 def _strip_html(html: str) -> str:
     html = re.sub(r"(?is)<script.*?</script>|<style.*?</style>", " ", html)
+    html = re.sub(r"(?is)<br\s*/?>", "\n", html)
+    block_tags = (
+        "article|aside|blockquote|div|figcaption|figure|footer|form|h1|h2|h3|h4|h5|h6|"
+        "header|hr|li|main|nav|ol|p|pre|section|table|tbody|td|th|thead|tr|ul"
+    )
+    html = re.sub(rf"(?is)</?(?:{block_tags})\b[^>]*>", "\n\n", html)
     text = re.sub(r"(?s)<[^>]+>", " ", html)
-    return re.sub(r"\s+", " ", text).strip()
+    text = html_lib.unescape(text)
+    lines = [re.sub(r"[ \t]+", " ", line).strip() for line in text.splitlines()]
+    cleaned: list[str] = []
+    previous_blank = False
+    for line in lines:
+        if not line:
+            if not previous_blank and cleaned:
+                cleaned.append("")
+            previous_blank = True
+            continue
+        cleaned.append(line)
+        previous_blank = False
+    return "\n".join(cleaned).strip()
 
 
 def _html_title(html: str) -> str | None:

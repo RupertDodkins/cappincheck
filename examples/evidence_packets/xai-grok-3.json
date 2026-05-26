@@ -1,0 +1,53 @@
+{
+  "slug": "xai-grok-3",
+  "lab": "xAI",
+  "title": "xAI Grok 3",
+  "publishedAt": "2026-05-26",
+  "status": "reviewed",
+  "primarySource": {
+    "title": "xAI Grok 3 Launch Claim Proxy",
+    "url": "https://x.ai/news/grok-3",
+    "sourceKind": "text",
+    "renderedFrom": "local_proxy_or_fixture",
+    "documentSource": "examples/xai_grok3_launch_input.md",
+    "sourceNote": "Rendered from a local content proxy while preserving the official xAI launch URL as the canonical source."
+  },
+  "auditRuntime": {
+    "mode": "live_gemini",
+    "runtime": "local",
+    "model": "gemini-3.5-flash",
+    "contrastEnabled": true
+  },
+  "references": {
+    "policy": "explicit_reference_urls",
+    "count": 4,
+    "urls": [
+      "https://x.ai/news/grok-3",
+      "https://lmarena.ai/?leaderboard=",
+      "https://livecodebench.github.io/",
+      "https://crfm.stanford.edu/fmti/December-2025/company-reports/xAI_FinalReport_FMTI2025.html"
+    ]
+  },
+  "artifacts": {
+    "html": "xai_grok3_report.html",
+    "json": "xai_grok3_report.json",
+    "markdown": "xai_grok3_report.md"
+  },
+  "metrics": {
+    "claimsAudited": 3,
+    "rewrittenClaims": 2,
+    "averageStretch": 48,
+    "verdictCounts": {
+      "supported": 1,
+      "overstated": 1,
+      "missing_context": 1,
+      "contradicted": 0,
+      "not_checkable": 0
+    },
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "blocksPreserved": 9,
+    "explicitReferenceCount": 4,
+    "evidenceItemCount": 11
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CappinCheck Report</title>
+  <title>Demo Paper: CappinCheck for Agentic Claim Audits · CappinCheck</title>
   <style>
     :root {
       --ink: #1f2328;
@@ -31,9 +31,192 @@
       gap: 16px;
       align-items: baseline;
     }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
     h1 { margin: 0; font-size: 24px; letter-spacing: 0; }
     main {
       min-height: calc(100vh - 74px);
+    }
+    [hidden] { display: none !important; }
+    .notice-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+    }
+    .notice-copy {
+      max-width: 920px;
+    }
+    .notice-copy p {
+      margin: 6px 0 0;
+      color: var(--ink);
+    }
+    .notice-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .notice-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .notice-link.primary {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #ffffff;
+    }
+    .view-switcher {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 14px 18px 0;
+      background: var(--bg);
+    }
+    .view-toggle {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .view-toggle.active {
+      background: var(--ink);
+      color: #ffffff;
+      border-color: var(--ink);
+    }
+    .launch-shell {
+      padding: 18px;
+      background: var(--bg);
+    }
+    .launch-article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      line-height: 1.7;
+      box-shadow: 0 8px 24px rgba(31,35,40,.06);
+    }
+    .launch-block {
+      margin: 0 0 18px;
+      overflow-wrap: anywhere;
+    }
+    .launch-block:last-child {
+      margin-bottom: 0;
+    }
+    .launch-block.list-item {
+      padding-left: 18px;
+      position: relative;
+    }
+    .launch-block.list-item::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+    .launch-block.preformatted {
+      white-space: pre-wrap;
+      background: #0d1117;
+      color: #f0f6fc;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .launch-kicker {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .launch-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+    .launch-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .launch-meta p {
+      margin: 0;
+    }
+    .audit-mark {
+      appearance: none;
+      border: 0;
+      border-bottom: 2px dotted rgba(181, 71, 8, 0.9);
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      line-height: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+    .audit-mark:hover,
+    .audit-mark:focus-visible {
+      background: rgba(181, 71, 8, 0.08);
+      outline: none;
+      border-bottom-style: solid;
+    }
+    .audit-tooltip {
+      position: fixed;
+      z-index: 1000;
+      max-width: min(360px, calc(100vw - 32px));
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--ink);
+      padding: 12px 14px;
+      box-shadow: 0 18px 42px rgba(31,35,40,.18);
+    }
+    .audit-tooltip p {
+      margin: 0 0 10px;
+      color: inherit;
+    }
+    .audit-tooltip p:last-child {
+      margin-bottom: 0;
+    }
+    .audit-tooltip .tooltip-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .audit-tooltip .tooltip-citations {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .audit-tooltip .tooltip-citation {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
     }
     .claim-strip {
       padding: 16px 18px;
@@ -284,18 +467,29 @@
       .report-grid { grid-template-columns: 1fr; }
       section { border-right: 0; border-bottom: 1px solid var(--line); }
       .strength-grid { grid-template-columns: 1fr; }
+      .notice-strip {
+        display: block;
+      }
+      .notice-links {
+        margin-top: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div>
-      <h1>CappinCheck</h1>
+      <div class="eyebrow">CappinCheck audit artifact</div>
+      <h1>Demo Paper: CappinCheck for Agentic Claim Audits</h1>
       <div class="muted">Demo Paper: CappinCheck for Agentic Claim Audits</div>
     </div>
     <div class="muted">3 audited claims · 1ms pipeline · deterministic_fallback</div>
   </header>
   <main>
+    <div class="notice-strip">
+      <div class="notice-copy" id="publication-notice"></div>
+      <div class="notice-links" id="publication-links"></div>
+    </div>
     <div class="headline-strip">
       <div class="title-row">
         <h2>Run Summary</h2>
@@ -304,43 +498,125 @@
       <div class="summary-grid" id="scorecard-grid"></div>
       <div class="telemetry-grid" id="telemetry-grid"></div>
     </div>
-    <div class="claim-strip">
-      <div class="title-row">
-        <h2>Claim Ledger</h2>
-        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
-      </div>
-      <div class="filters single">
-        <label>Verdict
-          <span class="hint" tabindex="0" data-tip="Formal verdict definitions: supported = evidence supports the claim as written; overstated = directionally supported but too broad/strong/certain; missing_context = may be true but key scope/baseline/method/source context is absent; contradicted = evidence conflicts with the claim; not_checkable = insufficient evidence to verify or falsify.">?</span>
-          <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
-        </label>
-      </div>
-      <p class="muted" id="filter-summary"></p>
-      <div id="claim-list"></div>
+    <div class="view-switcher">
+      <button class="view-toggle active" id="launch-toggle" onclick="setView('launch')">Audited Launch Page</button>
+      <button class="view-toggle" id="ledger-toggle" onclick="setView('ledger')">Audit Ledger</button>
     </div>
-    <div class="report-grid">
-      <section>
+    <div id="launch-view" class="launch-shell">
+      <div class="panel">
         <div class="title-row">
-          <h2>Selected Claim</h2>
-          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+          <h2>Audited Launch Page</h2>
+          <span class="hint" tabindex="0" data-tip="Primary surface: the source launch page reconstructed from preserved content blocks, with audited substitutions rendered inline. Hover or tap the underlined copy to inspect the original wording and explicit-reference citations. This page is an audited modified version, not the original publisher page.">?</span>
         </div>
-        <div id="claim-detail"></div>
-      </section>
-      <section>
+        <div id="launch-summary"></div>
+      </div>
+      <article class="launch-article">
+        <div id="launch-article"></div>
+      </article>
+    </div>
+    <div id="ledger-view" hidden>
+      <div class="claim-strip">
         <div class="title-row">
-          <h2>Source Provenance</h2>
-          <span class="hint" tabindex="0" data-tip="Separates explicit references you provided from claim-level contrast references and Gemini-discovered supporting or caveat/counter sources.">?</span>
+          <h2>Audit Ledger</h2>
+          <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
         </div>
-        <div id="evidence"></div>
-      </section>
+        <div class="filters single">
+          <label>Verdict
+            <span class="hint" tabindex="0" data-tip="Formal verdict definitions: supported = evidence supports the claim as written; overstated = directionally supported but too broad/strong/certain; missing_context = may be true but key scope/baseline/method/source context is absent; contradicted = evidence conflicts with the claim; not_checkable = insufficient evidence to verify or falsify.">?</span>
+            <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
+          </label>
+        </div>
+        <p class="muted" id="filter-summary"></p>
+        <div id="claim-list"></div>
+      </div>
+      <div class="report-grid">
+        <section>
+          <div class="title-row">
+            <h2>Selected Claim</h2>
+            <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+          </div>
+          <div id="claim-detail"></div>
+        </section>
+        <section>
+          <div class="title-row">
+            <h2>Source Provenance</h2>
+            <span class="hint" tabindex="0" data-tip="Separates explicit references you provided from claim-level contrast references and Gemini-discovered supporting or caveat/counter sources.">?</span>
+          </div>
+          <div id="evidence"></div>
+        </section>
+      </div>
     </div>
   </main>
+  <div id="audit-tooltip" class="audit-tooltip" hidden></div>
   <script>
     const report = {
   "document": {
     "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
     "source": "examples/demo_document.md",
-    "text": "# Demo Paper: CappinCheck for Agentic Claim Audits\n\n## Abstract\n\nWe introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n"
+    "text": "# Demo Paper: CappinCheck for Agentic Claim Audits\n\n## Abstract\n\nWe introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n",
+    "snapshot": {
+      "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+      "source_url": "examples/demo_document.md",
+      "source_kind": "text",
+      "blocks": [
+        {
+          "block_id": "block-0",
+          "kind": "h1",
+          "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
+          "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+          "source_order": 0
+        },
+        {
+          "block_id": "block-1",
+          "kind": "h2",
+          "text": "Abstract",
+          "section_heading": "Abstract",
+          "source_order": 1
+        },
+        {
+          "block_id": "block-2",
+          "kind": "paragraph",
+          "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+          "section_heading": "Abstract",
+          "source_order": 2
+        },
+        {
+          "block_id": "block-3",
+          "kind": "h2",
+          "text": "Results",
+          "section_heading": "Results",
+          "source_order": 3
+        },
+        {
+          "block_id": "block-4",
+          "kind": "paragraph",
+          "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+          "section_heading": "Results",
+          "source_order": 4
+        },
+        {
+          "block_id": "block-5",
+          "kind": "table",
+          "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+          "section_heading": "Results",
+          "source_order": 5
+        },
+        {
+          "block_id": "block-6",
+          "kind": "h2",
+          "text": "Discussion",
+          "section_heading": "Discussion",
+          "source_order": 6
+        },
+        {
+          "block_id": "block-7",
+          "kind": "paragraph",
+          "text": "The benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.",
+          "section_heading": "Discussion",
+          "source_order": 7
+        }
+      ]
+    }
   },
   "claims": [
     {
@@ -470,7 +746,17 @@
         "numeric_calibrator_ms": 0,
         "aggregator_ms": 0,
         "contrast_ms": 0
-      }
+      },
+      "anchor": {
+        "claim_id": "c1",
+        "block_id": "block-2",
+        "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
+        "start_char": 26,
+        "end_char": 115,
+        "match_type": "clause_fuzzy",
+        "match_confidence": 0.8415
+      },
+      "tooltip_citations": []
     },
     {
       "claim": {
@@ -546,7 +832,17 @@
         "numeric_calibrator_ms": 0,
         "aggregator_ms": 0,
         "contrast_ms": 0
-      }
+      },
+      "anchor": {
+        "claim_id": "c2",
+        "block_id": "block-2",
+        "matched_text": "The system robustly generalizes across domains",
+        "start_char": 116,
+        "end_char": 162,
+        "match_type": "clause_fuzzy",
+        "match_confidence": 0.9892
+      },
+      "tooltip_citations": []
     },
     {
       "claim": {
@@ -622,7 +918,17 @@
         "numeric_calibrator_ms": 0,
         "aggregator_ms": 0,
         "contrast_ms": 0
-      }
+      },
+      "anchor": {
+        "claim_id": "c3",
+        "block_id": "block-2",
+        "matched_text": "is the first agentic workflow for scientific claim auditing.",
+        "start_char": 167,
+        "end_char": 227,
+        "match_type": "clause_fuzzy",
+        "match_confidence": 0.96
+      },
+      "tooltip_citations": []
     }
   ],
   "runtime": "local",
@@ -669,9 +975,248 @@
         "contrast_ms": 0
       }
     ]
+  },
+  "launch_page": {
+    "source_title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+    "source_url": "examples/demo_document.md",
+    "blocks": [
+      {
+        "block_id": "block-0",
+        "kind": "h1",
+        "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
+        "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+        "source_order": 0
+      },
+      {
+        "block_id": "block-1",
+        "kind": "h2",
+        "text": "Abstract",
+        "section_heading": "Abstract",
+        "source_order": 1
+      },
+      {
+        "block_id": "block-2",
+        "kind": "paragraph",
+        "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+        "section_heading": "Abstract",
+        "source_order": 2
+      },
+      {
+        "block_id": "block-3",
+        "kind": "h2",
+        "text": "Results",
+        "section_heading": "Results",
+        "source_order": 3
+      },
+      {
+        "block_id": "block-4",
+        "kind": "paragraph",
+        "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+        "section_heading": "Results",
+        "source_order": 4
+      },
+      {
+        "block_id": "block-5",
+        "kind": "table",
+        "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+        "section_heading": "Results",
+        "source_order": 5
+      },
+      {
+        "block_id": "block-6",
+        "kind": "h2",
+        "text": "Discussion",
+        "section_heading": "Discussion",
+        "source_order": 6
+      },
+      {
+        "block_id": "block-7",
+        "kind": "paragraph",
+        "text": "The benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.",
+        "section_heading": "Discussion",
+        "source_order": 7
+      }
+    ],
+    "decorations": [
+      {
+        "claim_id": "c1",
+        "verdict": "overstated",
+        "original_text": "Our method improves performance by 30% over prior work on real-world tasks.",
+        "rewritten_text": "Our method improves performance from 84.1% to 87.3% on Benchmark X, a 3.2-point absolute gain and 3.8% relative improvement.",
+        "reason": "The reported benchmark numbers show improvement, but the stated 30% improvement does not match the arithmetic and the evidence is a curated benchmark, not real-world tasks.",
+        "citations": [],
+        "anchor": {
+          "claim_id": "c1",
+          "block_id": "block-2",
+          "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
+          "start_char": 26,
+          "end_char": 115,
+          "match_type": "clause_fuzzy",
+          "match_confidence": 0.8415
+        }
+      },
+      {
+        "claim_id": "c2",
+        "verdict": "missing_context",
+        "original_text": "The system robustly generalizes across domains.",
+        "rewritten_text": "The document provides preliminary evidence for a narrower version of this claim.",
+        "reason": "The claim may be plausible, but the demo document does not provide enough scope or external evidence.",
+        "citations": [],
+        "anchor": {
+          "claim_id": "c2",
+          "block_id": "block-2",
+          "matched_text": "The system robustly generalizes across domains",
+          "start_char": 116,
+          "end_char": 162,
+          "match_type": "clause_fuzzy",
+          "match_confidence": 0.9892
+        }
+      },
+      {
+        "claim_id": "c3",
+        "verdict": "missing_context",
+        "original_text": "This is the first agentic workflow for scientific claim auditing.",
+        "rewritten_text": "The document provides preliminary evidence for a narrower version of this claim.",
+        "reason": "The claim may be plausible, but the demo document does not provide enough scope or external evidence.",
+        "citations": [],
+        "anchor": {
+          "claim_id": "c3",
+          "block_id": "block-2",
+          "matched_text": "is the first agentic workflow for scientific claim auditing.",
+          "start_char": 167,
+          "end_char": 227,
+          "match_type": "clause_fuzzy",
+          "match_confidence": 0.96
+        }
+      }
+    ],
+    "rewritten_claim_count": 3,
+    "explicit_reference_count": 0,
+    "primary_view": "audited_launch_page"
   }
 };
+    const launchPage = {
+  "source_title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+  "source_url": "examples/demo_document.md",
+  "blocks": [
+    {
+      "block_id": "block-0",
+      "kind": "h1",
+      "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
+      "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+      "source_order": 0
+    },
+    {
+      "block_id": "block-1",
+      "kind": "h2",
+      "text": "Abstract",
+      "section_heading": "Abstract",
+      "source_order": 1
+    },
+    {
+      "block_id": "block-2",
+      "kind": "paragraph",
+      "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+      "section_heading": "Abstract",
+      "source_order": 2
+    },
+    {
+      "block_id": "block-3",
+      "kind": "h2",
+      "text": "Results",
+      "section_heading": "Results",
+      "source_order": 3
+    },
+    {
+      "block_id": "block-4",
+      "kind": "paragraph",
+      "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+      "section_heading": "Results",
+      "source_order": 4
+    },
+    {
+      "block_id": "block-5",
+      "kind": "table",
+      "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+      "section_heading": "Results",
+      "source_order": 5
+    },
+    {
+      "block_id": "block-6",
+      "kind": "h2",
+      "text": "Discussion",
+      "section_heading": "Discussion",
+      "source_order": 6
+    },
+    {
+      "block_id": "block-7",
+      "kind": "paragraph",
+      "text": "The benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.",
+      "section_heading": "Discussion",
+      "source_order": 7
+    }
+  ],
+  "decorations": [
+    {
+      "claim_id": "c1",
+      "verdict": "overstated",
+      "original_text": "Our method improves performance by 30% over prior work on real-world tasks.",
+      "rewritten_text": "Our method improves performance from 84.1% to 87.3% on Benchmark X, a 3.2-point absolute gain and 3.8% relative improvement.",
+      "reason": "The reported benchmark numbers show improvement, but the stated 30% improvement does not match the arithmetic and the evidence is a curated benchmark, not real-world tasks.",
+      "citations": [],
+      "anchor": {
+        "claim_id": "c1",
+        "block_id": "block-2",
+        "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
+        "start_char": 26,
+        "end_char": 115,
+        "match_type": "clause_fuzzy",
+        "match_confidence": 0.8415
+      }
+    },
+    {
+      "claim_id": "c2",
+      "verdict": "missing_context",
+      "original_text": "The system robustly generalizes across domains.",
+      "rewritten_text": "The document provides preliminary evidence for a narrower version of this claim.",
+      "reason": "The claim may be plausible, but the demo document does not provide enough scope or external evidence.",
+      "citations": [],
+      "anchor": {
+        "claim_id": "c2",
+        "block_id": "block-2",
+        "matched_text": "The system robustly generalizes across domains",
+        "start_char": 116,
+        "end_char": 162,
+        "match_type": "clause_fuzzy",
+        "match_confidence": 0.9892
+      }
+    },
+    {
+      "claim_id": "c3",
+      "verdict": "missing_context",
+      "original_text": "This is the first agentic workflow for scientific claim auditing.",
+      "rewritten_text": "The document provides preliminary evidence for a narrower version of this claim.",
+      "reason": "The claim may be plausible, but the demo document does not provide enough scope or external evidence.",
+      "citations": [],
+      "anchor": {
+        "claim_id": "c3",
+        "block_id": "block-2",
+        "matched_text": "is the first agentic workflow for scientific claim auditing.",
+        "start_char": 167,
+        "end_char": 227,
+        "match_type": "clause_fuzzy",
+        "match_confidence": 0.96
+      }
+    }
+  ],
+  "rewritten_claim_count": 3,
+  "explicit_reference_count": 0,
+  "primary_view": "audited_launch_page"
+};
+    const publication = {};
     let selected = 0;
+    let activeView = 'launch';
+    let launchTooltipGlobalsBound = false;
     const filters = { verdict: 'all' };
     const cls = (value) => String(value).replaceAll('_', '-').replaceAll(' ', '-');
     const confidenceScore = { low: 34, medium: 67, high: 100 };
@@ -713,6 +1258,27 @@
         contradicted: 'Available evidence conflicts with the claim as written.',
         not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
       })[verdict] || 'Formal CappinCheck verdict for this claim.';
+    }
+    function verdictLabel(verdict) {
+      return verdictLabels[verdict] || String(verdict || '').replaceAll('_', ' ');
+    }
+    function renderPublicationHeader() {
+      const defaultSource = safeHref(launchPage.source_url || report.document?.source || '');
+      const originalHref = safeHref(publication.original_url || defaultSource);
+      const originalLabel = publication.original_label || (defaultSource ? 'Original source' : 'Source');
+      const note = publication.source_note || '';
+      const disclaimer = publication.disclaimer || 'Audited modified version of the original source.';
+      const status = publication.status || 'reviewed';
+      document.getElementById('publication-notice').innerHTML = `
+        <strong>Audited modified version</strong>
+        <p class="wrap">${esc(disclaimer)}</p>
+        <p class="wrap"><strong>Status:</strong> ${esc(status)}${note ? ` · ${esc(note)}` : ''}</p>
+      `;
+      document.getElementById('publication-links').innerHTML = [
+        originalHref ? `<a class="notice-link primary" href="${esc(originalHref)}" target="_blank" rel="noopener noreferrer">${esc(originalLabel)}</a>` : '',
+        `<a class="notice-link" href="index.html">Archive</a>`,
+        `<a class="notice-link" href="methodology.html">Methodology</a>`
+      ].filter(Boolean).join('');
     }
     function verdictCounts(audits) {
       const counts = {
@@ -758,6 +1324,168 @@
         statCard('Unique Sources', String(run.unique_source_count || 0), 'support + caveat + contrast urls'),
         statCard('Provided References', String((report.reference_urls || []).length), 'explicit --reference inputs'),
       ].join('');
+    }
+    function setView(view) {
+      activeView = view === 'ledger' ? 'ledger' : 'launch';
+      document.getElementById('launch-view').hidden = activeView !== 'launch';
+      document.getElementById('ledger-view').hidden = activeView !== 'ledger';
+      document.getElementById('launch-toggle').classList.toggle('active', activeView === 'launch');
+      document.getElementById('ledger-toggle').classList.toggle('active', activeView === 'ledger');
+      if (activeView === 'launch') renderLaunchPage();
+    }
+    function renderLaunchPage() {
+      const decorations = launchPage.decorations || [];
+      const byBlock = new Map();
+      for (const decoration of decorations) {
+        const blockId = decoration.anchor?.block_id;
+        if (!blockId) continue;
+        if (!byBlock.has(blockId)) byBlock.set(blockId, []);
+        byBlock.get(blockId).push(decoration);
+      }
+      for (const values of byBlock.values()) {
+        values.sort((left, right) => (left.anchor.start_char || 0) - (right.anchor.start_char || 0));
+      }
+      const defaultSource = safeHref(launchPage.source_url || report.document?.source || '');
+      const originalHref = safeHref(publication.original_url || defaultSource);
+      const originalLabel = publication.original_label || 'Original source';
+      const sourceNote = publication.source_note || '';
+      document.getElementById('launch-summary').innerHTML = `
+        <div class="launch-kicker">Primary Surface</div>
+        <p class="launch-note wrap">
+          This view preserves the source page structure while substituting audited claims inline. Hover or tap the underlined copy to inspect the original wording, verdict, and explicit-reference citations.
+        </p>
+        <div class="launch-meta">
+          <p class="wrap">
+            <strong>Rewritten claims:</strong> ${launchPage.rewritten_claim_count || 0}
+            · <strong>Tooltip citations:</strong> ${launchPage.explicit_reference_count || 0}
+            · <strong>Blocks preserved:</strong> ${(launchPage.blocks || []).length}
+          </p>
+          <p class="wrap">
+            <strong>Source title:</strong> ${esc(launchPage.source_title || report.document?.title || 'Untitled source')}
+            ${originalHref ? `· <a href="${esc(originalHref)}" target="_blank" rel="noopener noreferrer">${esc(originalLabel)}</a>` : ''}
+          </p>
+          ${sourceNote ? `<p class="muted wrap">${esc(sourceNote)}</p>` : ''}
+        </div>
+      `;
+      document.getElementById('launch-article').innerHTML = (launchPage.blocks || [])
+        .map(block => renderLaunchBlock(block, byBlock.get(block.block_id) || []))
+        .join('');
+      bindAuditMarks();
+    }
+    function renderLaunchBlock(block, decorations) {
+      const text = String(block.text || '');
+      const markup = decorateBlockText(text, decorations);
+      const kind = String(block.kind || 'paragraph').toLowerCase();
+      if (/^h[1-6]$/.test(kind)) {
+        return `<${kind} class="launch-block">${markup}</${kind}>`;
+      }
+      if (kind === 'blockquote') {
+        return `<blockquote class="launch-block">${markup}</blockquote>`;
+      }
+      if (kind === 'pre' || kind === 'table') {
+        return `<pre class="launch-block preformatted">${markup}</pre>`;
+      }
+      if (kind === 'li') {
+        return `<p class="launch-block list-item">${markup}</p>`;
+      }
+      return `<p class="launch-block">${markup}</p>`;
+    }
+    function decorateBlockText(text, decorations) {
+      if (!decorations.length) return esc(text);
+      let cursor = 0;
+      let output = '';
+      for (const decoration of decorations) {
+        const anchor = decoration.anchor || {};
+        const start = Number(anchor.start_char || 0);
+        const end = Number(anchor.end_char || 0);
+        if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start || start < cursor) continue;
+        output += esc(text.slice(cursor, start));
+        output += `<button type="button" class="audit-mark" data-claim-id="${esc(decoration.claim_id)}">${esc(decoration.rewritten_text)}</button>`;
+        cursor = end;
+      }
+      output += esc(text.slice(cursor));
+      return output;
+    }
+    function bindAuditMarks() {
+      const tooltip = document.getElementById('audit-tooltip');
+      const decorations = new Map((launchPage.decorations || []).map(item => [item.claim_id, item]));
+      document.querySelectorAll('.audit-mark').forEach(node => {
+        if (node.dataset.tooltipBound === '1') return;
+        node.dataset.tooltipBound = '1';
+        const claimId = node.getAttribute('data-claim-id');
+        if (!claimId) return;
+        const decoration = decorations.get(claimId);
+        if (!decoration) return;
+        const show = (event) => {
+          tooltip.innerHTML = tooltipMarkup(decoration);
+          tooltip.hidden = false;
+          positionTooltip(node, tooltip);
+          event?.stopPropagation?.();
+        };
+        const hide = () => {
+          tooltip.hidden = true;
+        };
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('focus', show);
+        node.addEventListener('mouseleave', hide);
+        node.addEventListener('blur', hide);
+        node.addEventListener('click', show);
+      });
+      if (!launchTooltipGlobalsBound) {
+        launchTooltipGlobalsBound = true;
+        document.addEventListener('click', (event) => {
+          if (!event.target.closest('.audit-mark') && !event.target.closest('#audit-tooltip')) {
+            tooltip.hidden = true;
+          }
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            tooltip.hidden = true;
+          }
+        });
+        window.addEventListener('scroll', () => {
+          tooltip.hidden = true;
+        }, { passive: true });
+      }
+    }
+    function tooltipMarkup(decoration) {
+      const citations = decoration.citations || [];
+      return `
+        <div class="tooltip-label">Original wording</div>
+        <p class="wrap">${esc(decoration.original_text)}</p>
+        <div class="tooltip-label">Why it changed</div>
+        <p class="wrap"><strong>${esc(verdictLabel(decoration.verdict))}</strong> - ${esc(decoration.reason)}</p>
+        <div class="tooltip-label">Citations</div>
+        <div class="tooltip-citations">
+          ${citations.length ? citations.map(citation => tooltipCitationMarkup(citation)).join('') : '<p class="muted">No explicit reference citations were attached to this claim.</p>'}
+        </div>
+      `;
+    }
+    function tooltipCitationMarkup(citation) {
+      const href = safeHref(citation.url);
+      const titleMarkup = href
+        ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(citation.title)}</a>`
+        : `<strong>${esc(citation.title)}</strong>`;
+      return `
+        <div class="tooltip-citation">
+          <p class="wrap">${titleMarkup}</p>
+          ${citation.snippet ? `<p class="muted wrap">${esc(citation.snippet)}</p>` : ''}
+          ${citation.why_relevant ? `<p class="muted wrap">${esc(citation.why_relevant)}</p>` : ''}
+        </div>
+      `;
+    }
+    function positionTooltip(target, tooltip) {
+      const rect = target.getBoundingClientRect();
+      const margin = 12;
+      const desiredTop = rect.bottom + margin;
+      const maxLeft = window.innerWidth - tooltip.offsetWidth - margin;
+      const left = Math.max(margin, Math.min(rect.left, maxLeft));
+      let top = desiredTop;
+      if (top + tooltip.offsetHeight > window.innerHeight - margin) {
+        top = Math.max(margin, rect.top - tooltip.offsetHeight - margin);
+      }
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
     }
     const filteredAudits = () => report.audits
       .map((audit, index) => ({ ...audit, __index: index }))
@@ -1001,8 +1729,10 @@
       }).join('');
     }
     setupFilters();
+    renderPublicationHeader();
     renderHeadline();
     render();
+    setView('launch');
   </script>
 </body>
 </html>

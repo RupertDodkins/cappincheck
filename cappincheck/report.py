@@ -4,7 +4,8 @@ import html
 import json
 from pathlib import Path
 
-from .schemas import AuditReport, ClaimAudit
+from .archive_registry import publication_info_for_report
+from .schemas import AuditReport, ClaimAudit, PublicationInfo
 
 
 def write_json(report: AuditReport, path: Path) -> None:
@@ -75,17 +76,24 @@ def write_markdown(report: AuditReport, path: Path) -> None:
 
 
 def write_html(report: AuditReport, path: Path) -> None:
+    publication = publication_info_for_report(report)
     data = json.dumps(report.model_dump(exclude_none=True), indent=2).replace("</", "<\\/")
+    launch_page = json.dumps(_build_launch_page_data(report), indent=2).replace("</", "<\\/")
+    publication_data = json.dumps(
+        publication.model_dump(exclude_none=True) if publication else {},
+        indent=2,
+    ).replace("</", "<\\/")
     header_summary = f"{len(report.audits)} audited claims"
     if report.run_profile:
         header_summary += f" · {_format_duration_ms(report.run_profile.total_duration_ms)} pipeline"
     header_summary += f" · {html.escape(report.mode)}"
+    page_title = publication.launch_name if publication and publication.launch_name else report.document.title
     markup = f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CappinCheck Report</title>
+  <title>{html.escape(page_title)} · Honest Launches</title>
   <style>
     :root {{
       --ink: #1f2328;
@@ -113,9 +121,198 @@ def write_html(report: AuditReport, path: Path) -> None:
       gap: 16px;
       align-items: baseline;
     }}
+    .eyebrow {{
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }}
     h1 {{ margin: 0; font-size: 24px; letter-spacing: 0; }}
     main {{
       min-height: calc(100vh - 74px);
+    }}
+    [hidden] {{ display: none !important; }}
+    .notice-strip {{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+    }}
+    .notice-copy {{
+      max-width: 920px;
+    }}
+    .notice-copy p {{
+      margin: 6px 0 0;
+      color: var(--ink);
+    }}
+    .notice-links {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }}
+    .notice-link {{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--ink);
+    }}
+    .notice-link.primary {{
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #ffffff;
+    }}
+    .view-switcher {{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 14px 18px 0;
+      background: var(--bg);
+    }}
+    .view-toggle {{
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }}
+    .view-toggle.active {{
+      background: var(--ink);
+      color: #ffffff;
+      border-color: var(--ink);
+    }}
+    .launch-shell {{
+      padding: 18px;
+      background: var(--bg);
+    }}
+    .launch-article {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      line-height: 1.7;
+      box-shadow: 0 8px 24px rgba(31,35,40,.06);
+    }}
+    .launch-block {{
+      margin: 0 0 18px;
+      overflow-wrap: anywhere;
+    }}
+    .launch-block:last-child {{
+      margin-bottom: 0;
+    }}
+    .launch-block.list-item {{
+      padding-left: 18px;
+      position: relative;
+    }}
+    .launch-block.list-item::before {{
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }}
+    .launch-block.preformatted {{
+      white-space: pre-wrap;
+      background: #0d1117;
+      color: #f0f6fc;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }}
+    .launch-kicker {{
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }}
+    .launch-note {{
+      margin: 0 0 14px;
+      color: var(--muted);
+    }}
+    .launch-meta {{
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }}
+    .launch-actions {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }}
+    .launch-meta p {{
+      margin: 0;
+    }}
+    .audit-mark {{
+      appearance: none;
+      border: 0;
+      border-bottom: 2px dotted rgba(181, 71, 8, 0.9);
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      line-height: inherit;
+      cursor: pointer;
+      text-align: left;
+    }}
+    .audit-mark:hover,
+    .audit-mark:focus-visible {{
+      background: rgba(181, 71, 8, 0.08);
+      outline: none;
+      border-bottom-style: solid;
+    }}
+    .audit-tooltip {{
+      position: fixed;
+      z-index: 1000;
+      max-width: min(360px, calc(100vw - 32px));
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--ink);
+      padding: 12px 14px;
+      box-shadow: 0 18px 42px rgba(31,35,40,.18);
+    }}
+    .audit-tooltip p {{
+      margin: 0 0 10px;
+      color: inherit;
+    }}
+    .audit-tooltip p:last-child {{
+      margin-bottom: 0;
+    }}
+    .audit-tooltip .tooltip-label {{
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }}
+    .audit-tooltip .tooltip-citations {{
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }}
+    .audit-tooltip .tooltip-citation {{
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
     }}
     .claim-strip {{
       padding: 16px 18px;
@@ -366,60 +563,88 @@ def write_html(report: AuditReport, path: Path) -> None:
       .report-grid {{ grid-template-columns: 1fr; }}
       section {{ border-right: 0; border-bottom: 1px solid var(--line); }}
       .strength-grid {{ grid-template-columns: 1fr; }}
+      .notice-strip {{
+        display: block;
+      }}
+      .notice-links {{
+        margin-top: 12px;
+      }}
     }}
   </style>
 </head>
 <body>
-  <header>
+  <header id="artifact-header">
     <div>
-      <h1>CappinCheck</h1>
+      <div class="eyebrow">Honest Launches audit artifact</div>
+      <h1>{html.escape(page_title)}</h1>
       <div class="muted">{html.escape(report.document.title)}</div>
     </div>
     <div class="muted">{header_summary}</div>
   </header>
   <main>
-    <div class="headline-strip">
-      <div class="title-row">
-        <h2>Run Summary</h2>
-        <span class="hint" tabindex="0" data-tip="This top strip summarizes the audit punchline: how many claims were audited, how severe they were, and what runtime/profile telemetry was recorded for the run.">?</span>
-      </div>
-      <div class="summary-grid" id="scorecard-grid"></div>
-      <div class="telemetry-grid" id="telemetry-grid"></div>
+    <div class="view-switcher">
+      <button class="view-toggle active" id="launch-toggle" onclick="setView('launch')">Audited Launch Page</button>
+      <button class="view-toggle" id="ledger-toggle" onclick="setView('ledger')">Audit Ledger</button>
     </div>
-    <div class="claim-strip">
-      <div class="title-row">
-        <h2>Claim Ledger</h2>
-        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
-      </div>
-      <div class="filters single">
-        <label>Verdict
-          <span class="hint" tabindex="0" data-tip="Formal verdict definitions: supported = evidence supports the claim as written; overstated = directionally supported but too broad/strong/certain; missing_context = may be true but key scope/baseline/method/source context is absent; contradicted = evidence conflicts with the claim; not_checkable = insufficient evidence to verify or falsify.">?</span>
-          <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
-        </label>
-      </div>
-      <p class="muted" id="filter-summary"></p>
-      <div id="claim-list"></div>
+    <div id="launch-view" class="launch-shell">
+      <div id="launch-summary"></div>
+      <article class="launch-article">
+        <div id="launch-article"></div>
+      </article>
     </div>
-    <div class="report-grid">
-      <section>
+    <div id="ledger-view" hidden>
+      <div class="notice-strip">
+        <div class="notice-copy" id="publication-notice"></div>
+        <div class="notice-links" id="publication-links"></div>
+      </div>
+      <div class="headline-strip">
         <div class="title-row">
-          <h2>Selected Claim</h2>
-          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+          <h2>Run Summary</h2>
+          <span class="hint" tabindex="0" data-tip="This strip summarizes the audit punchline: how many claims were audited, how severe they were, and what runtime/profile telemetry was recorded for the run.">?</span>
         </div>
-        <div id="claim-detail"></div>
-      </section>
-      <section>
+        <div class="summary-grid" id="scorecard-grid"></div>
+        <div class="telemetry-grid" id="telemetry-grid"></div>
+      </div>
+      <div class="claim-strip">
         <div class="title-row">
-          <h2>Source Provenance</h2>
-          <span class="hint" tabindex="0" data-tip="Separates explicit references you provided from claim-level contrast references and Gemini-discovered supporting or caveat/counter sources.">?</span>
+          <h2>Audit Ledger</h2>
+          <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then Honest Launches audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
         </div>
-        <div id="evidence"></div>
-      </section>
+        <div class="filters single">
+          <label>Verdict
+            <span class="hint" tabindex="0" data-tip="Formal verdict definitions: supported = evidence supports the claim as written; overstated = directionally supported but too broad/strong/certain; missing_context = may be true but key scope/baseline/method/source context is absent; contradicted = evidence conflicts with the claim; not_checkable = insufficient evidence to verify or falsify.">?</span>
+            <select id="verdict-filter" onchange="filters.verdict=this.value; syncSelection(); render();"></select>
+          </label>
+        </div>
+        <p class="muted" id="filter-summary"></p>
+        <div id="claim-list"></div>
+      </div>
+      <div class="report-grid">
+        <section>
+          <div class="title-row">
+            <h2>Selected Claim</h2>
+            <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, the Honest Launches verdict, and the strongest defensible rewrite.">?</span>
+          </div>
+          <div id="claim-detail"></div>
+        </section>
+        <section>
+          <div class="title-row">
+            <h2>Source Provenance</h2>
+            <span class="hint" tabindex="0" data-tip="Separates explicit references you provided from claim-level contrast references and Gemini-discovered supporting or caveat/counter sources.">?</span>
+          </div>
+          <div id="evidence"></div>
+        </section>
+      </div>
     </div>
   </main>
+  <div id="audit-tooltip" class="audit-tooltip" hidden></div>
   <script>
     const report = {data};
+    const launchPage = {launch_page};
+    const publication = {publication_data};
     let selected = 0;
+    let activeView = window.location.hash === '#ledger' ? 'ledger' : 'launch';
+    let launchTooltipGlobalsBound = false;
     const filters = {{ verdict: 'all' }};
     const cls = (value) => String(value).replaceAll('_', '-').replaceAll(' ', '-');
     const confidenceScore = {{ low: 34, medium: 67, high: 100 }};
@@ -460,7 +685,29 @@ def write_html(report: AuditReport, path: Path) -> None:
         missing_context: 'The claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.',
         contradicted: 'Available evidence conflicts with the claim as written.',
         not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
-      }})[verdict] || 'Formal CappinCheck verdict for this claim.';
+      }})[verdict] || 'Formal Honest Launches verdict for this claim.';
+    }}
+    function verdictLabel(verdict) {{
+      return verdictLabels[verdict] || String(verdict || '').replaceAll('_', ' ');
+    }}
+    function renderPublicationHeader() {{
+      const defaultSource = safeHref(launchPage.source_url || report.document?.source || '');
+      const originalHref = safeHref(publication.original_url || defaultSource);
+      const originalLabel = publication.original_label || (defaultSource ? 'Original source' : 'Source');
+      const note = publication.source_note || '';
+      const disclaimer = publication.disclaimer || 'Audited modified version of the original source.';
+      const status = publication.status || 'reviewed';
+      const publishedAt = publication.published_at || 'unknown';
+      const gateStatus = publication.gate_status || 'unknown';
+      const evidenceHref = safeHref(publication.evidence_packet_url || '');
+      document.getElementById('publication-notice').innerHTML = `
+        <strong>Audited modified version</strong>
+        <p class="wrap">${{esc(disclaimer)}}</p>
+        <p class="wrap"><strong>Status:</strong> ${{esc(status)}} · <strong>Published:</strong> ${{esc(publishedAt)}} · <strong>Gate:</strong> ${{esc(gateStatus)}}${{note ? ` · ${{esc(note)}}` : ''}}</p>
+      `;
+      document.getElementById('publication-links').innerHTML = [
+        evidenceHref ? `<a class="notice-link" href="${{esc(evidenceHref)}}" target="_blank" rel="noopener noreferrer">Evidence Packet</a>` : '',
+      ].filter(Boolean).join('');
     }}
     function verdictCounts(audits) {{
       const counts = {{
@@ -506,6 +753,151 @@ def write_html(report: AuditReport, path: Path) -> None:
         statCard('Unique Sources', String(run.unique_source_count || 0), 'support + caveat + contrast urls'),
         statCard('Provided References', String((report.reference_urls || []).length), 'explicit --reference inputs'),
       ].join('');
+    }}
+    function setView(view) {{
+      activeView = view === 'ledger' ? 'ledger' : 'launch';
+      document.getElementById('launch-view').hidden = activeView !== 'launch';
+      document.getElementById('ledger-view').hidden = activeView !== 'ledger';
+      document.getElementById('launch-toggle').classList.toggle('active', activeView === 'launch');
+      document.getElementById('ledger-toggle').classList.toggle('active', activeView === 'ledger');
+      const targetHash = activeView === 'ledger' ? '#ledger' : '#launch';
+      if (window.location.hash !== targetHash) {{
+        history.replaceState(null, '', targetHash);
+      }}
+      if (activeView === 'launch') renderLaunchPage();
+    }}
+    function renderLaunchPage() {{
+      document.getElementById('launch-summary').innerHTML = '';
+      const decorations = launchPage.decorations || [];
+      const byBlock = new Map();
+      for (const decoration of decorations) {{
+        const blockId = decoration.anchor?.block_id;
+        if (!blockId) continue;
+        if (!byBlock.has(blockId)) byBlock.set(blockId, []);
+        byBlock.get(blockId).push(decoration);
+      }}
+      for (const values of byBlock.values()) {{
+        values.sort((left, right) => (left.anchor.start_char || 0) - (right.anchor.start_char || 0));
+      }}
+      document.getElementById('launch-article').innerHTML = (launchPage.blocks || [])
+        .map(block => renderLaunchBlock(block, byBlock.get(block.block_id) || []))
+        .join('');
+      bindAuditMarks();
+    }}
+    function renderLaunchBlock(block, decorations) {{
+      const text = String(block.text || '');
+      const markup = decorateBlockText(text, decorations);
+      const kind = String(block.kind || 'paragraph').toLowerCase();
+      if (/^h[1-6]$/.test(kind)) {{
+        return `<${{kind}} class="launch-block">${{markup}}</${{kind}}>`;
+      }}
+      if (kind === 'blockquote') {{
+        return `<blockquote class="launch-block">${{markup}}</blockquote>`;
+      }}
+      if (kind === 'pre' || kind === 'table') {{
+        return `<pre class="launch-block preformatted">${{markup}}</pre>`;
+      }}
+      if (kind === 'li') {{
+        return `<p class="launch-block list-item">${{markup}}</p>`;
+      }}
+      return `<p class="launch-block">${{markup}}</p>`;
+    }}
+    function decorateBlockText(text, decorations) {{
+      if (!decorations.length) return esc(text);
+      let cursor = 0;
+      let output = '';
+      for (const decoration of decorations) {{
+        const anchor = decoration.anchor || {{}};
+        const start = Number(anchor.start_char || 0);
+        const end = Number(anchor.end_char || 0);
+        if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start || start < cursor) continue;
+        output += esc(text.slice(cursor, start));
+        output += `<button type="button" class="audit-mark" data-claim-id="${{esc(decoration.claim_id)}}">${{esc(decoration.rewritten_text)}}</button>`;
+        cursor = end;
+      }}
+      output += esc(text.slice(cursor));
+      return output;
+    }}
+    function bindAuditMarks() {{
+      const tooltip = document.getElementById('audit-tooltip');
+      const decorations = new Map((launchPage.decorations || []).map(item => [item.claim_id, item]));
+      document.querySelectorAll('.audit-mark').forEach(node => {{
+        if (node.dataset.tooltipBound === '1') return;
+        node.dataset.tooltipBound = '1';
+        const claimId = node.getAttribute('data-claim-id');
+        if (!claimId) return;
+        const decoration = decorations.get(claimId);
+        if (!decoration) return;
+        const show = (event) => {{
+          tooltip.innerHTML = tooltipMarkup(decoration);
+          tooltip.hidden = false;
+          positionTooltip(node, tooltip);
+          event?.stopPropagation?.();
+        }};
+        const hide = () => {{
+          tooltip.hidden = true;
+        }};
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('focus', show);
+        node.addEventListener('mouseleave', hide);
+        node.addEventListener('blur', hide);
+        node.addEventListener('click', show);
+      }});
+      if (!launchTooltipGlobalsBound) {{
+        launchTooltipGlobalsBound = true;
+        document.addEventListener('click', (event) => {{
+          if (!event.target.closest('.audit-mark') && !event.target.closest('#audit-tooltip')) {{
+            tooltip.hidden = true;
+          }}
+        }});
+        document.addEventListener('keydown', (event) => {{
+          if (event.key === 'Escape') {{
+            tooltip.hidden = true;
+          }}
+        }});
+        window.addEventListener('scroll', () => {{
+          tooltip.hidden = true;
+        }}, {{ passive: true }});
+      }}
+    }}
+    function tooltipMarkup(decoration) {{
+      const citations = decoration.citations || [];
+      return `
+        <div class="tooltip-label">Original wording</div>
+        <p class="wrap">${{esc(decoration.original_text)}}</p>
+        <div class="tooltip-label">Why it changed</div>
+        <p class="wrap"><strong>${{esc(verdictLabel(decoration.verdict))}}</strong> - ${{esc(decoration.reason)}}</p>
+        <div class="tooltip-label">Citations</div>
+        <div class="tooltip-citations">
+          ${{citations.length ? citations.map(citation => tooltipCitationMarkup(citation)).join('') : '<p class="muted">No explicit reference citations were attached to this claim.</p>'}}
+        </div>
+      `;
+    }}
+    function tooltipCitationMarkup(citation) {{
+      const href = safeHref(citation.url);
+      const titleMarkup = href
+        ? `<a href="${{esc(href)}}" target="_blank" rel="noopener noreferrer">${{esc(citation.title)}}</a>`
+        : `<strong>${{esc(citation.title)}}</strong>`;
+      return `
+        <div class="tooltip-citation">
+          <p class="wrap">${{titleMarkup}}</p>
+          ${{citation.snippet ? `<p class="muted wrap">${{esc(citation.snippet)}}</p>` : ''}}
+          ${{citation.why_relevant ? `<p class="muted wrap">${{esc(citation.why_relevant)}}</p>` : ''}}
+        </div>
+      `;
+    }}
+    function positionTooltip(target, tooltip) {{
+      const rect = target.getBoundingClientRect();
+      const margin = 12;
+      const desiredTop = rect.bottom + margin;
+      const maxLeft = window.innerWidth - tooltip.offsetWidth - margin;
+      const left = Math.max(margin, Math.min(rect.left, maxLeft));
+      let top = desiredTop;
+      if (top + tooltip.offsetHeight > window.innerHeight - margin) {{
+        top = Math.max(margin, rect.top - tooltip.offsetHeight - margin);
+      }}
+      tooltip.style.left = `${{left}}px`;
+      tooltip.style.top = `${{top}}px`;
     }}
     const filteredAudits = () => report.audits
       .map((audit, index) => ({{ ...audit, __index: index }}))
@@ -572,7 +964,7 @@ def write_html(report: AuditReport, path: Path) -> None:
           </p>
           <div class="strength-grid">
             ${{strengthCard('Stretch pressure', audit.stretch_score, audit.verdict, `${{audit.stretch_score}}/100`, 'How much the wording outruns the evidence.')}}
-            ${{strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident CappinCheck is in this verdict from available evidence.')}}
+            ${{strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident Honest Launches is in this verdict from available evidence.')}}
             ${{strengthCard('Evidence depth', evidenceScore, audit.verdict, `${{evidenceCount}} item${{evidenceCount === 1 ? '' : 's'}}`, 'How much direct evidence is attached to this claim audit.')}}
           </div>
         </div>
@@ -749,8 +1141,16 @@ def write_html(report: AuditReport, path: Path) -> None:
       }}).join('');
     }}
     setupFilters();
+    renderPublicationHeader();
     renderHeadline();
     render();
+    setView(activeView);
+    window.addEventListener('hashchange', () => {{
+      const nextView = window.location.hash === '#ledger' ? 'ledger' : 'launch';
+      if (nextView !== activeView) {{
+        setView(nextView);
+      }}
+    }});
   </script>
 </body>
 </html>
@@ -906,6 +1306,21 @@ def _evidence_markdown_item(item) -> str:
         source = f"[{item.source_title}]({item.url})"
     suffix = f" Relevance: {item.relevance}" if item.relevance else ""
     return f"- {item.snippet} ({source}).{suffix}"
+
+
+def _build_launch_page_data(report: AuditReport) -> dict[str, object]:
+    if report.launch_page is not None:
+        return report.launch_page.model_dump(exclude_none=True)
+    snapshot = report.document.snapshot
+    return {
+        "source_title": report.document.title,
+        "source_url": report.document.source,
+        "blocks": snapshot.model_dump(exclude_none=True).get("blocks", []) if snapshot else [],
+        "decorations": [],
+        "rewritten_claim_count": 0,
+        "explicit_reference_count": len(report.reference_urls),
+        "primary_view": "audited_launch_page",
+    }
 
 
 def _verdict_counts(report: AuditReport) -> dict[str, int]:

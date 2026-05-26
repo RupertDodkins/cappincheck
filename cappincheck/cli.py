@@ -7,7 +7,10 @@ from time import perf_counter
 
 import typer
 
+from .anchor_map import enrich_report_for_launch_page
+from .archive_registry import publication_info_for_report
 from .audit import audit_claims
+from .canonical_hardening import harden_report
 from .claims import extract_claims
 from .ingest import load_document
 from .report import write_html, write_json, write_markdown
@@ -101,6 +104,10 @@ def audit(
         reference_urls=reference_urls,
         run_profile=run_profile,
     )
+    report = harden_report(report)
+    report = enrich_report_for_launch_page(report)
+    report.publication = publication_info_for_report(report)
+    audits = report.audits
 
     markdown_started_at = perf_counter()
     write_markdown(report, out)

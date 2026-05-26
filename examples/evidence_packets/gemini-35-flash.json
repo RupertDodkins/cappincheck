@@ -1,0 +1,61 @@
+{
+  "slug": "gemini-35-flash",
+  "lab": "Google",
+  "title": "Google Gemini 3.5 Flash",
+  "publishedAt": "2026-05-26",
+  "status": "reviewed",
+  "primarySource": {
+    "title": "Gemini 3.5: frontier intelligence with action",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+    "sourceKind": "html",
+    "renderedFrom": "original_source",
+    "documentSource": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+    "sourceNote": "Contrasted against the official DeepMind model card."
+  },
+  "auditRuntime": {
+    "mode": "live_gemini",
+    "runtime": "local",
+    "model": "gemini-3.5-flash",
+    "contrastEnabled": true
+  },
+  "references": {
+    "policy": "explicit_reference_urls",
+    "count": 12,
+    "urls": [
+      "https://deepmind.google/models/model-cards/gemini-3-5-flash",
+      "https://deepmind.google/models/evals-methodology/gemini-3-5-flash",
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+      "https://ai.google.dev/gemini-api/docs/models",
+      "https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5",
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://openai.com/api/pricing/",
+      "https://platform.claude.com/docs/en/about-claude/pricing",
+      "https://labs.scale.com/leaderboard/mcp_atlas",
+      "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "https://charxiv.github.io/",
+      "https://artificialanalysis.ai/articles/gemini-3-5-flash-everything-you-need-to-know"
+    ]
+  },
+  "artifacts": {
+    "html": "gemini_35_flash_report.html",
+    "json": "gemini_35_flash_report.json",
+    "markdown": "gemini_35_flash_report.md"
+  },
+  "metrics": {
+    "claimsAudited": 7,
+    "rewrittenClaims": 6,
+    "averageStretch": 55,
+    "verdictCounts": {
+      "supported": 1,
+      "overstated": 2,
+      "missing_context": 3,
+      "contradicted": 0,
+      "not_checkable": 1
+    },
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "blocksPreserved": 42,
+    "explicitReferenceCount": 12,
+    "evidenceItemCount": 22
+  }
+}

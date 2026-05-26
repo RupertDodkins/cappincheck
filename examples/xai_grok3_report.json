@@ -2,7 +2,77 @@
   "document": {
     "title": "xAI Grok 3 Launch Claim Proxy",
     "source": "examples/xai_grok3_launch_input.md",
-    "text": "# xAI Grok 3 Launch Claim Proxy\n\nOfficial source URL: https://x.ai/news/grok-3\n\nNote: the official xAI launch page is Cloudflare-blocked for the local CLI fetcher in this environment. This proxy preserves the public launch-page claims to audit while keeping the official URL in the document and contrast references.\n\n## Claims to audit\n\nGrok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.\n\nGrok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.\n\nGrok 3 reasoning models show strong benchmark results on AIME, GPQA, LiveCodeBench, MMMU, and long-context retrieval tasks.\n\nDeepSearch is a lightning-fast AI agent designed to seek the truth across the entire corpus of human knowledge.\n\nGrok 3 has a 1 million token context window, described as 8 times larger than xAI's previous models.\n"
+    "text": "# xAI Grok 3 Launch Claim Proxy\n\nOfficial source URL: https://x.ai/news/grok-3\n\nNote: the official xAI launch page is Cloudflare-blocked for the local CLI fetcher in this environment. This proxy preserves the public launch-page claims to audit while keeping the official URL in the document and contrast references.\n\n## Claims to audit\n\nGrok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.\n\nGrok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.\n\nGrok 3 reasoning models show strong benchmark results on AIME, GPQA, LiveCodeBench, MMMU, and long-context retrieval tasks.\n\nDeepSearch is a lightning-fast AI agent designed to seek the truth across the entire corpus of human knowledge.\n\nGrok 3 has a 1 million token context window, described as 8 times larger than xAI's previous models.\n",
+    "snapshot": {
+      "title": "xAI Grok 3 Launch Claim Proxy",
+      "source_url": "examples/xai_grok3_launch_input.md",
+      "source_kind": "text",
+      "blocks": [
+        {
+          "block_id": "block-0",
+          "kind": "h1",
+          "text": "xAI Grok 3 Launch Claim Proxy",
+          "section_heading": "xAI Grok 3 Launch Claim Proxy",
+          "source_order": 0
+        },
+        {
+          "block_id": "block-1",
+          "kind": "paragraph",
+          "text": "Official source URL: https://x.ai/news/grok-3",
+          "section_heading": "xAI Grok 3 Launch Claim Proxy",
+          "source_order": 1
+        },
+        {
+          "block_id": "block-2",
+          "kind": "paragraph",
+          "text": "Note: the official xAI launch page is Cloudflare-blocked for the local CLI fetcher in this environment. This proxy preserves the public launch-page claims to audit while keeping the official URL in the document and contrast references.",
+          "section_heading": "xAI Grok 3 Launch Claim Proxy",
+          "source_order": 2
+        },
+        {
+          "block_id": "block-3",
+          "kind": "h2",
+          "text": "Claims to audit",
+          "section_heading": "Claims to audit",
+          "source_order": 3
+        },
+        {
+          "block_id": "block-4",
+          "kind": "paragraph",
+          "text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.",
+          "section_heading": "Claims to audit",
+          "source_order": 4
+        },
+        {
+          "block_id": "block-5",
+          "kind": "paragraph",
+          "text": "Grok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.",
+          "section_heading": "Claims to audit",
+          "source_order": 5
+        },
+        {
+          "block_id": "block-6",
+          "kind": "paragraph",
+          "text": "Grok 3 reasoning models show strong benchmark results on AIME, GPQA, LiveCodeBench, MMMU, and long-context retrieval tasks.",
+          "section_heading": "Claims to audit",
+          "source_order": 6
+        },
+        {
+          "block_id": "block-7",
+          "kind": "paragraph",
+          "text": "DeepSearch is a lightning-fast AI agent designed to seek the truth across the entire corpus of human knowledge.",
+          "section_heading": "Claims to audit",
+          "source_order": 7
+        },
+        {
+          "block_id": "block-8",
+          "kind": "paragraph",
+          "text": "Grok 3 has a 1 million token context window, described as 8 times larger than xAI's previous models.",
+          "section_heading": "Claims to audit",
+          "source_order": 8
+        }
+      ]
+    }
   },
   "claims": [
     {
@@ -302,7 +372,30 @@
         "numeric_calibrator_ms": 24040,
         "aggregator_ms": 33032,
         "contrast_ms": 25534
-      }
+      },
+      "anchor": {
+        "claim_id": "claim_1",
+        "block_id": "block-4",
+        "matched_text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.",
+        "start_char": 0,
+        "end_char": 135,
+        "match_type": "exact_claim",
+        "match_confidence": 1.0
+      },
+      "tooltip_citations": [
+        {
+          "title": "Grok 3 - x.ai",
+          "url": "https://x.ai/news/grok-3",
+          "snippet": "The official blog states: 'Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements...'",
+          "why_relevant": "As a marketing announcement from the vendor, it asserts the 10x scale-up without providing verifiable compute specifications or FLOP metrics."
+        },
+        {
+          "title": "lmarena.ai",
+          "url": "https://lmarena.ai/?leaderboard=",
+          "snippet": "",
+          "why_relevant": "As a marketing announcement from the vendor, it asserts the 10x scale-up without providing verifiable compute specifications or FLOP metrics."
+        }
+      ]
     },
     {
       "claim": {
@@ -559,7 +652,30 @@
         "numeric_calibrator_ms": 36870,
         "aggregator_ms": 35540,
         "contrast_ms": 0
-      }
+      },
+      "anchor": {
+        "claim_id": "claim_2",
+        "block_id": "block-5",
+        "matched_text": "Grok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.",
+        "start_char": 0,
+        "end_char": 149,
+        "match_type": "exact_claim",
+        "match_confidence": 1.0
+      },
+      "tooltip_citations": [
+        {
+          "title": "Grok 3 - x.ai",
+          "url": "https://x.ai/news/grok-3",
+          "snippet": "",
+          "why_relevant": "Represents a historical snapshot from early 2025."
+        },
+        {
+          "title": "lmarena.ai",
+          "url": "https://lmarena.ai/?leaderboard=",
+          "snippet": "",
+          "why_relevant": "Represents a historical snapshot from early 2025."
+        }
+      ]
     },
     {
       "claim": {
@@ -875,7 +991,8 @@
         "numeric_calibrator_ms": 32148,
         "aggregator_ms": 41995,
         "contrast_ms": 27687
-      }
+      },
+      "tooltip_citations": []
     }
   ],
   "runtime": "local",
@@ -928,5 +1045,152 @@
         "contrast_ms": 27687
       }
     ]
+  },
+  "launch_page": {
+    "source_title": "xAI Grok 3 Launch Claim Proxy",
+    "source_url": "examples/xai_grok3_launch_input.md",
+    "blocks": [
+      {
+        "block_id": "block-0",
+        "kind": "h1",
+        "text": "xAI Grok 3 Launch Claim Proxy",
+        "section_heading": "xAI Grok 3 Launch Claim Proxy",
+        "source_order": 0
+      },
+      {
+        "block_id": "block-1",
+        "kind": "paragraph",
+        "text": "Official source URL: https://x.ai/news/grok-3",
+        "section_heading": "xAI Grok 3 Launch Claim Proxy",
+        "source_order": 1
+      },
+      {
+        "block_id": "block-2",
+        "kind": "paragraph",
+        "text": "Note: the official xAI launch page is Cloudflare-blocked for the local CLI fetcher in this environment. This proxy preserves the public launch-page claims to audit while keeping the official URL in the document and contrast references.",
+        "section_heading": "xAI Grok 3 Launch Claim Proxy",
+        "source_order": 2
+      },
+      {
+        "block_id": "block-3",
+        "kind": "h2",
+        "text": "Claims to audit",
+        "section_heading": "Claims to audit",
+        "source_order": 3
+      },
+      {
+        "block_id": "block-4",
+        "kind": "paragraph",
+        "text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.",
+        "section_heading": "Claims to audit",
+        "source_order": 4
+      },
+      {
+        "block_id": "block-5",
+        "kind": "paragraph",
+        "text": "Grok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.",
+        "section_heading": "Claims to audit",
+        "source_order": 5
+      },
+      {
+        "block_id": "block-6",
+        "kind": "paragraph",
+        "text": "Grok 3 reasoning models show strong benchmark results on AIME, GPQA, LiveCodeBench, MMMU, and long-context retrieval tasks.",
+        "section_heading": "Claims to audit",
+        "source_order": 6
+      },
+      {
+        "block_id": "block-7",
+        "kind": "paragraph",
+        "text": "DeepSearch is a lightning-fast AI agent designed to seek the truth across the entire corpus of human knowledge.",
+        "section_heading": "Claims to audit",
+        "source_order": 7
+      },
+      {
+        "block_id": "block-8",
+        "kind": "paragraph",
+        "text": "Grok 3 has a 1 million token context window, described as 8 times larger than xAI's previous models.",
+        "section_heading": "Claims to audit",
+        "source_order": 8
+      }
+    ],
+    "decorations": [
+      {
+        "claim_id": "claim_1",
+        "verdict": "overstated",
+        "original_text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.",
+        "rewritten_text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster using approximately 10x the training compute of its predecessor, Grok 2.",
+        "reason": "The claim uses xAI's official phrasing that Grok 3 was trained with '10x the compute of previous state-of-the-art models,' which is misleading and overstates the baseline. Public clarifications by Elon Musk indicate that the 10x compute multiplier is actually relative to xAI's own predecessor, Grok 2, rather than competitors' state-of-the-art models. Additionally, the Stanford CRFM FMTI 2025 report reveals that xAI is completely opaque about training compute, awarding it a score of 0 for training compute disclosures, which means the 10x claim lacks any verifiable public metrics (such as FLOPs) or methodology to support a scientific comparison against other industry SOTA models.",
+        "citations": [
+          {
+            "title": "Grok 3 - x.ai",
+            "url": "https://x.ai/news/grok-3",
+            "snippet": "The official blog states: 'Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements...'",
+            "why_relevant": "As a marketing announcement from the vendor, it asserts the 10x scale-up without providing verifiable compute specifications or FLOP metrics."
+          },
+          {
+            "title": "lmarena.ai",
+            "url": "https://lmarena.ai/?leaderboard=",
+            "snippet": "",
+            "why_relevant": "As a marketing announcement from the vendor, it asserts the 10x scale-up without providing verifiable compute specifications or FLOP metrics."
+          }
+        ],
+        "anchor": {
+          "claim_id": "claim_1",
+          "block_id": "block-4",
+          "matched_text": "Grok 3 is xAI's most advanced model yet, trained on the Colossus supercluster with 10x the compute of previous state-of-the-art models.",
+          "start_char": 0,
+          "end_char": 135,
+          "match_type": "exact_claim",
+          "match_confidence": 1.0
+        }
+      },
+      {
+        "claim_id": "claim_2",
+        "verdict": "missing_context",
+        "original_text": "Grok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.",
+        "rewritten_text": "At its launch in February 2025, Grok 3 (tested under the codename 'chocolate') briefly led the Chatbot Arena leaderboard with a statistically significant 1402 Elo rating, though it has since been surpassed by newer models.",
+        "reason": "The claim asserts that Grok 3 'has leading performance' and references a 1402 Elo rating. While this rating is historically accurate and represented a statistically significant #1 spot at its launch on February 18, 2025, the present-tense framing is misleading. In 2026, subsequent models such as GPT-5.5-high, Claude 4.7, and Gemini 3.1 have achieved Elo ratings exceeding 1500, meaning Grok 3 is no longer the performance leader in Chatbot Arena. Additionally, the claim lacks context regarding known style biases and academic critiques of the LMSYS platform.",
+        "citations": [
+          {
+            "title": "Grok 3 - x.ai",
+            "url": "https://x.ai/news/grok-3",
+            "snippet": "",
+            "why_relevant": "Represents a historical snapshot from early 2025."
+          },
+          {
+            "title": "lmarena.ai",
+            "url": "https://lmarena.ai/?leaderboard=",
+            "snippet": "",
+            "why_relevant": "Represents a historical snapshot from early 2025."
+          }
+        ],
+        "anchor": {
+          "claim_id": "claim_2",
+          "block_id": "block-5",
+          "matched_text": "Grok 3 has leading performance across both academic benchmarks and real-world user preferences, including a reported 1402 Elo score in Chatbot Arena.",
+          "start_char": 0,
+          "end_char": 149,
+          "match_type": "exact_claim",
+          "match_confidence": 1.0
+        }
+      }
+    ],
+    "rewritten_claim_count": 2,
+    "explicit_reference_count": 2,
+    "primary_view": "audited_launch_page"
+  },
+  "publication": {
+    "slug": "xai-grok-3",
+    "lab": "xAI",
+    "launch_name": "xAI Grok 3",
+    "original_url": "https://x.ai/news/grok-3",
+    "original_label": "Original xAI launch post",
+    "source_note": "Rendered from a local content proxy while preserving the official xAI launch URL as the canonical source.",
+    "status": "reviewed",
+    "published_at": "2026-05-23",
+    "evidence_packet_url": "evidence_packets/xai-grok-3.json",
+    "gate_status": "needs_review",
+    "disclaimer": "Audited modified version of the original source. This page is provided for analysis and commentary and is not the original publisher's page."
   }
 }
