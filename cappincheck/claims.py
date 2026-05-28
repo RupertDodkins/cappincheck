@@ -16,7 +16,7 @@ def extract_claims(document: Document, *, mock: bool, limit: int = 8) -> list[Ri
 
     client = GeminiClient()
     prompt = f"""
-You are CappinCheck, an adversarial claim extractor for dense expert documents.
+You are HonestLaunch, an adversarial claim extractor for dense expert documents.
 
 Extract the {limit} riskiest factual claims from the document below. Do not summarize.
 Prefer claims with numeric improvements, novelty language, broad generalization,
@@ -73,7 +73,7 @@ def _careful_claims() -> list[RiskyClaim]:
         RiskyClaim(
             id="careful_1",
             claim=(
-                "CappinCheck improved from 84.1% to 87.3% on Benchmark X, "
+                "HonestLaunch improved from 84.1% to 87.3% on Benchmark X, "
                 "a 3.2 percentage-point gain under the benchmark conditions."
             ),
             claim_type=ClaimType.NUMERIC,
@@ -104,7 +104,7 @@ def _needs_receipts_claims() -> list[RiskyClaim]:
     return [
         RiskyClaim(
             id="receipts_1",
-            claim="Users strongly prefer CappinCheck over existing review tools.",
+            claim="Users strongly prefer HonestLaunch over existing review tools.",
             claim_type=ClaimType.OTHER,
             source_location="Abstract",
             why_risky="Preference claims need user study data or survey evidence.",
@@ -112,7 +112,7 @@ def _needs_receipts_claims() -> list[RiskyClaim]:
         ),
         RiskyClaim(
             id="receipts_2",
-            claim="CappinCheck is safe for production use in regulated environments.",
+            claim="HonestLaunch is safe for production use in regulated environments.",
             claim_type=ClaimType.SAFETY,
             source_location="Deployment",
             why_risky="Safety and regulated-production claims require concrete validation and scope.",
@@ -120,7 +120,7 @@ def _needs_receipts_claims() -> list[RiskyClaim]:
         ),
         RiskyClaim(
             id="receipts_3",
-            claim="CappinCheck is the first tool to audit scientific claims with agents.",
+            claim="HonestLaunch is the first tool to audit scientific claims with agents.",
             claim_type=ClaimType.NOVELTY,
             source_location="Introduction",
             why_risky="First/novelty claims require prior-work search.",

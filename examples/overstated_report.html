@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CappinCheck Report</title>
+  <title>HonestLaunch Report</title>
   <style>
     :root {
       --ink: #1f2328;
@@ -290,8 +290,8 @@
 <body>
   <header>
     <div>
-      <h1>CappinCheck</h1>
-      <div class="muted">Demo Paper: CappinCheck for Agentic Claim Audits</div>
+      <h1>HonestLaunch</h1>
+      <div class="muted">Demo Paper: HonestLaunch for Agentic Claim Audits</div>
     </div>
     <div class="muted">3 audited claims · 1ms pipeline · deterministic_fallback</div>
   </header>
@@ -307,7 +307,7 @@
     <div class="claim-strip">
       <div class="title-row">
         <h2>Claim Ledger</h2>
-        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
+        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then HonestLaunch audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
       </div>
       <div class="filters single">
         <label>Verdict
@@ -322,7 +322,7 @@
       <section>
         <div class="title-row">
           <h2>Selected Claim</h2>
-          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, HonestLaunch verdict, and strongest defensible rewrite.">?</span>
         </div>
         <div id="claim-detail"></div>
       </section>
@@ -338,9 +338,9 @@
   <script>
     const report = {
   "document": {
-    "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+    "title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
     "source": "examples/demo_document.md",
-    "text": "# Demo Paper: CappinCheck for Agentic Claim Audits\n\n## Abstract\n\nWe introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n"
+    "text": "# Demo Paper: HonestLaunch for Agentic Claim Audits\n\n## Abstract\n\nWe introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n"
   },
   "claims": [
     {
@@ -386,7 +386,7 @@
       "supporting_evidence": [
         {
           "source_title": "Demo document benchmark table",
-          "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+          "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
           "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
         }
       ],
@@ -407,7 +407,7 @@
           "supporting_evidence": [
             {
               "source_title": "Demo document benchmark table",
-              "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+              "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
               "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
             }
           ],
@@ -448,7 +448,7 @@
           "supporting_evidence": [
             {
               "source_title": "Demo document benchmark table",
-              "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+              "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
               "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
             }
           ],
@@ -712,7 +712,7 @@
         missing_context: 'The claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.',
         contradicted: 'Available evidence conflicts with the claim as written.',
         not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
-      })[verdict] || 'Formal CappinCheck verdict for this claim.';
+      })[verdict] || 'Formal HonestLaunch verdict for this claim.';
     }
     function verdictCounts(audits) {
       const counts = {
@@ -824,7 +824,7 @@
           </p>
           <div class="strength-grid">
             ${strengthCard('Stretch pressure', audit.stretch_score, audit.verdict, `${audit.stretch_score}/100`, 'How much the wording outruns the evidence.')}
-            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident CappinCheck is in this verdict from available evidence.')}
+            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident HonestLaunch is in this verdict from available evidence.')}
             ${strengthCard('Evidence depth', evidenceScore, audit.verdict, `${evidenceCount} item${evidenceCount === 1 ? '' : 's'}`, 'How much direct evidence is attached to this claim audit.')}
           </div>
         </div>

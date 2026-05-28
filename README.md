@@ -1,8 +1,8 @@
-# CappinCheck
+# HonestLaunch
 
 Grounded adversarial claim audit for dense expert documents.
 
-CappinCheck reads an AI model report, paper, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce an audited launch page plus a structured evidence ledger.
+HonestLaunch reads an AI model report, paper, technical blog post, or other dense expert document, extracts the riskiest factual claims, then dispatches specialist verifier agents to produce an audited launch page plus a structured evidence ledger.
 
 It is not a paper summarizer. The primary output is an audited page view that preserves the source structure, substitutes overstated copy inline, and shows the original wording plus citations on hover or tap. The secondary surface is the claim ledger: original wording, formal verdict, evidence contrast against references, collapsible agent steps, supporting evidence found, contradictions or narrowing evidence, missing context, computed checks when relevant, and the strongest defensible rewrite.
 
@@ -42,9 +42,9 @@ This rebuilds the featured HTML reports, refreshes archive metadata and evidence
 
 ## Hackathon Submission
 
-CappinCheck was built as a submission to the [Google I/O Hackathon](https://cerebralvalley.ai/e/google-io-hackathon), hosted by Cerebral Valley with the Google DeepMind team.
+HonestLaunch was built as a submission to the [Google I/O Hackathon](https://cerebralvalley.ai/e/google-io-hackathon), hosted by Cerebral Valley with the Google DeepMind team.
 
-The project was shaped around the event prompt for Gemini 3.5 Flash: build something new for the agentic era that benefits from fast, low-cost multi-step reasoning. Rather than shipping another chat interface or RAG wrapper, CappinCheck uses parallel Gemini specialist agents to audit dense public AI model reports and launch posts, compare claims against references, and rewrite overstated claims into wording that is still strong but actually defensible.
+The project was shaped around the event prompt for Gemini 3.5 Flash: build something new for the agentic era that benefits from fast, low-cost multi-step reasoning. Rather than shipping another chat interface or RAG wrapper, HonestLaunch uses parallel Gemini specialist agents to audit dense public AI model reports and launch posts, compare claims against references, and rewrite overstated claims into wording that is still strong but actually defensible.
 
 ## Why Low-Latency Gemini
 
@@ -169,6 +169,6 @@ Reference discovery with Google Search grounding is a v2 extension. The first ve
 
 ## Limitations
 
-CappinCheck does not prove that a paper is true or false. It identifies claims whose wording may outrun the available evidence. It should be used as a triage and review aid, not as an authority.
+HonestLaunch does not prove that a paper is true or false. It identifies claims whose wording may outrun the available evidence. It should be used as a triage and review aid, not as an authority.
 
 The default runtime is local async Gemini execution over repo-local skill files. The experimental managed runtime is implemented but not demo-safe in this environment; see `RUNTIME.md`. Live output depends on model availability, tool support, and grounding quality. The `--mock` path is intentionally deterministic so public demos can run without secrets or network access.

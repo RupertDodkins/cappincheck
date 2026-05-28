@@ -1,4 +1,4 @@
-# CappinCheck Report: Demo Paper: CappinCheck for Agentic Claim Audits
+# HonestLaunch Report: Demo Paper: HonestLaunch for Agentic Claim Audits
 
 Source: `examples/demo_document.md`
 
@@ -49,7 +49,7 @@ Source: `examples/demo_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+- Baseline: 84.1%. HonestLaunch: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 </details>
 
@@ -77,7 +77,7 @@ Source: `examples/demo_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+- Baseline: 84.1%. HonestLaunch: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 **Missing context:**
 - No real-world deployment task is reported in the demo document.
@@ -93,7 +93,7 @@ Source: `examples/demo_document.md`
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 
 **Gemini-discovered supporting sources:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+- Baseline: 84.1%. HonestLaunch: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 **Missing context:**
 - No real-world deployment task is reported in the demo document.

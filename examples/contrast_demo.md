@@ -1,4 +1,4 @@
-# CappinCheck Report: Demo Paper: CappinCheck for Agentic Claim Audits
+# HonestLaunch Report: Demo Paper: HonestLaunch for Agentic Claim Audits
 
 Source: `examples/demo_document.md`
 
@@ -6,8 +6,8 @@ Source: `examples/demo_document.md`
 
 - Mode: `deterministic_fallback`
 - Model: `none`
-- Pipeline wall: `1ms`
-- Load / Extract / Audit / Contrast: `1ms` / `1ms` / `1ms` / `1ms`
+- Pipeline wall: `2ms`
+- Load / Extract / Audit / Contrast: `2ms` / `1ms` / `1ms` / `1ms`
 - Claims extracted / audited: `3` / `3`
 - Specialist passes / unique sources: `9` / `0`
 
@@ -37,7 +37,7 @@ Source: `examples/demo_document.md`
 
 **Why:** The reference supports a narrower benchmark improvement, but not a 30% improvement on real-world tasks.
 
-**Defensible rewrite:** CappinCheck improves from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain and 3.8% relative improvement under the benchmark conditions.
+**Defensible rewrite:** HonestLaunch improves from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain and 3.8% relative improvement under the benchmark conditions.
 
 **Claim timing:**
 - Total / Verifier / Contradiction / Numeric / Aggregator / Contrast: 1ms / 0ms / 0ms / 0ms / 0ms / 1ms
@@ -49,7 +49,7 @@ Source: `examples/demo_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+- Baseline: 84.1%. HonestLaunch: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 </details>
 
@@ -77,7 +77,7 @@ Source: `examples/demo_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+- Baseline: 84.1%. HonestLaunch: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 **Missing context:**
 - No real-world deployment task is reported in the demo document.
@@ -92,7 +92,7 @@ Source: `examples/demo_document.md`
 
 **Claim says:** Our method improves performance by 30% over prior work on real-world tasks.
 
-**Best reference says:** The reference reports 84.1% for the baseline and 87.3% for CappinCheck on Benchmark X.
+**Best reference says:** The reference reports 84.1% for the baseline and 87.3% for HonestLaunch on Benchmark X.
 
 **Key qualification:** The evidence is one curated benchmark, not real-world tasks; the computed gain is 3.2 percentage points and 3.8% relative.
 
@@ -100,21 +100,21 @@ Source: `examples/demo_document.md`
 
 **Final verdict:** overstated
 
-**Defensible rewrite:** CappinCheck improves from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain and 3.8% relative improvement under the benchmark conditions.
+**Defensible rewrite:** HonestLaunch improves from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain and 3.8% relative improvement under the benchmark conditions.
 
 ### Claim-Level Contrast References
 
-- Internal Benchmark X fixture (benchmark, authority 85/100): internal fixture source. Deterministic offline fixture containing the baseline and CappinCheck benchmark scores.
+- Internal Benchmark X fixture (benchmark, authority 85/100): internal fixture source. Deterministic offline fixture containing the baseline and HonestLaunch benchmark scores.
 
 **Reference snippets / mismatches:**
-- The reference reports 84.1% for the baseline and 87.3% for CappinCheck on Benchmark X. (Internal Benchmark X fixture, narrows, internal fixture source). The evidence is one curated benchmark, not real-world tasks; the computed gain is 3.2 percentage points and 3.8% relative.
+- The reference reports 84.1% for the baseline and 87.3% for HonestLaunch on Benchmark X. (Internal Benchmark X fixture, narrows, internal fixture source). The evidence is one curated benchmark, not real-world tasks; the computed gain is 3.2 percentage points and 3.8% relative.
 
 **Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 points.
 - Relative gain: (3.2 / 84.1) * 100 = 3.8%.
 
 **Gemini-discovered supporting sources:**
-- Baseline: 84.1%. CappinCheck: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
+- Baseline: 84.1%. HonestLaunch: 87.3%. (Demo document benchmark table). Relevance: The table supports a 3.2-point absolute gain, not a 30% relative improvement.
 
 **Missing context:**
 - No real-world deployment task is reported in the demo document.
@@ -130,7 +130,7 @@ Source: `examples/demo_document.md`
 
 **Why:** The claim generalizes beyond the reference, which only supports performance on curated Benchmark X.
 
-**Defensible rewrite:** CappinCheck generalizes across the curated domains represented in Benchmark X; real-world deployment performance was not evaluated.
+**Defensible rewrite:** HonestLaunch generalizes across the curated domains represented in Benchmark X; real-world deployment performance was not evaluated.
 
 **Claim timing:**
 - Total / Verifier / Contradiction / Numeric / Aggregator / Contrast: 1ms / 0ms / 0ms / 0ms / 0ms / 1ms
@@ -179,7 +179,7 @@ Source: `examples/demo_document.md`
 
 **Final verdict:** missing_context
 
-**Defensible rewrite:** CappinCheck generalizes across the curated domains represented in Benchmark X; real-world deployment performance was not evaluated.
+**Defensible rewrite:** HonestLaunch generalizes across the curated domains represented in Benchmark X; real-world deployment performance was not evaluated.
 
 ### Claim-Level Contrast References
 

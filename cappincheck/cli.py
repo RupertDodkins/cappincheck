@@ -22,13 +22,13 @@ app = typer.Typer(help="Grounded claim audit for dense expert documents.")
 
 @app.callback()
 def main() -> None:
-    """CappinCheck command line interface."""
+    """HonestLaunch command line interface."""
 
 
 @app.command()
 def audit(
     source: str = typer.Argument(..., help="PDF path, markdown/text path, or URL."),
-    out: Path = typer.Option(Path("cappincheck_report.md"), "--out", help="Markdown report path."),
+    out: Path = typer.Option(Path("honestlaunch_report.md"), "--out", help="Markdown report path."),
     json_out: Path | None = typer.Option(None, "--json", help="Optional JSON report path."),
     html_out: Path | None = typer.Option(None, "--html", help="Optional static HTML dashboard path."),
     limit: int = typer.Option(5, "--limit", min=1, max=12, help="Number of claims to audit."),

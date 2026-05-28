@@ -1,18 +1,18 @@
 {
   "document": {
-    "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+    "title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
     "source": "examples/demo_document.md",
-    "text": "# Demo Paper: CappinCheck for Agentic Claim Audits\n\n## Abstract\n\nWe introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n",
+    "text": "# Demo Paper: HonestLaunch for Agentic Claim Audits\n\n## Abstract\n\nWe introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n",
     "snapshot": {
-      "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+      "title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
       "source_url": "examples/demo_document.md",
       "source_kind": "text",
       "blocks": [
         {
           "block_id": "block-0",
           "kind": "h1",
-          "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
-          "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+          "text": "Demo Paper: HonestLaunch for Agentic Claim Audits",
+          "section_heading": "Demo Paper: HonestLaunch for Agentic Claim Audits",
           "source_order": 0
         },
         {
@@ -25,7 +25,7 @@
         {
           "block_id": "block-2",
           "kind": "paragraph",
-          "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+          "text": "We introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
           "section_heading": "Abstract",
           "source_order": 2
         },
@@ -39,14 +39,14 @@
         {
           "block_id": "block-4",
           "kind": "paragraph",
-          "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+          "text": "We compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.",
           "section_heading": "Results",
           "source_order": 4
         },
         {
           "block_id": "block-5",
           "kind": "table",
-          "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+          "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |",
           "section_heading": "Results",
           "source_order": 5
         },
@@ -111,7 +111,7 @@
       "supporting_evidence": [
         {
           "source_title": "Demo document benchmark table",
-          "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+          "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
           "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
         }
       ],
@@ -132,7 +132,7 @@
           "supporting_evidence": [
             {
               "source_title": "Demo document benchmark table",
-              "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+              "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
               "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
             }
           ],
@@ -173,7 +173,7 @@
           "supporting_evidence": [
             {
               "source_title": "Demo document benchmark table",
-              "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+              "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
               "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
             }
           ],
@@ -200,8 +200,8 @@
         "claim_id": "c1",
         "block_id": "block-2",
         "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
-        "start_char": 26,
-        "end_char": 115,
+        "start_char": 27,
+        "end_char": 116,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.8415
       },
@@ -286,8 +286,8 @@
         "claim_id": "c2",
         "block_id": "block-2",
         "matched_text": "The system robustly generalizes across domains",
-        "start_char": 116,
-        "end_char": 162,
+        "start_char": 117,
+        "end_char": 163,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.9892
       },
@@ -372,8 +372,8 @@
         "claim_id": "c3",
         "block_id": "block-2",
         "matched_text": "is the first agentic workflow for scientific claim auditing.",
-        "start_char": 167,
-        "end_char": 227,
+        "start_char": 168,
+        "end_char": 228,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.96
       },
@@ -426,14 +426,14 @@
     ]
   },
   "launch_page": {
-    "source_title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+    "source_title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
     "source_url": "examples/demo_document.md",
     "blocks": [
       {
         "block_id": "block-0",
         "kind": "h1",
-        "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
-        "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+        "text": "Demo Paper: HonestLaunch for Agentic Claim Audits",
+        "section_heading": "Demo Paper: HonestLaunch for Agentic Claim Audits",
         "source_order": 0
       },
       {
@@ -446,7 +446,7 @@
       {
         "block_id": "block-2",
         "kind": "paragraph",
-        "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+        "text": "We introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
         "section_heading": "Abstract",
         "source_order": 2
       },
@@ -460,14 +460,14 @@
       {
         "block_id": "block-4",
         "kind": "paragraph",
-        "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+        "text": "We compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.",
         "section_heading": "Results",
         "source_order": 4
       },
       {
         "block_id": "block-5",
         "kind": "table",
-        "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+        "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |",
         "section_heading": "Results",
         "source_order": 5
       },
@@ -498,8 +498,8 @@
           "claim_id": "c1",
           "block_id": "block-2",
           "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
-          "start_char": 26,
-          "end_char": 115,
+          "start_char": 27,
+          "end_char": 116,
           "match_type": "clause_fuzzy",
           "match_confidence": 0.8415
         }
@@ -515,8 +515,8 @@
           "claim_id": "c2",
           "block_id": "block-2",
           "matched_text": "The system robustly generalizes across domains",
-          "start_char": 116,
-          "end_char": 162,
+          "start_char": 117,
+          "end_char": 163,
           "match_type": "clause_fuzzy",
           "match_confidence": 0.9892
         }
@@ -532,8 +532,8 @@
           "claim_id": "c3",
           "block_id": "block-2",
           "matched_text": "is the first agentic workflow for scientific claim auditing.",
-          "start_char": 167,
-          "end_char": 227,
+          "start_char": 168,
+          "end_char": 228,
           "match_type": "clause_fuzzy",
           "match_confidence": 0.96
         }

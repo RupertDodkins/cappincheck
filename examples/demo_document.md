@@ -1,17 +1,17 @@
-# Demo Paper: CappinCheck for Agentic Claim Audits
+# Demo Paper: HonestLaunch for Agentic Claim Audits
 
 ## Abstract
 
-We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.
+We introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.
 
 ## Results
 
-We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.
+We compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.
 
 | System | Benchmark X accuracy |
 | --- | ---: |
 | Baseline | 84.1% |
-| CappinCheck | 87.3% |
+| HonestLaunch | 87.3% |
 
 ## Discussion
 

@@ -6,10 +6,10 @@ Status: recommended lighter-weight QA layer for the archive. This is not the ful
 
 Use deep-research models as **independent editorial readers** before publication.
 
-The point is not to replace CappinCheck.
+The point is not to replace HonestLaunch.
 The point is to sanity-check that:
 
-- CappinCheck surfaced the right suspicious claims
+- HonestLaunch surfaced the right suspicious claims
 - the verdicts are directionally fair
 - the archive did not miss the most important stretch or caveat
 
@@ -19,8 +19,8 @@ This is a `QA layer`, not a new source of truth.
 
 Production still works like this:
 
-1. CappinCheck ingests the launch and picks the risky claims.
-2. CappinCheck audits those claims and renders the artifact.
+1. HonestLaunch ingests the launch and picks the risky claims.
+2. HonestLaunch audits those claims and renders the artifact.
 3. Deep-research runs act as second readers.
 4. You decide whether to publish.
 
@@ -30,7 +30,7 @@ Citations alone are enough for a publishable inspectable artifact.
 
 They are **not** enough to tell you:
 
-- whether CappinCheck picked the most important claims
+- whether HonestLaunch picked the most important claims
 - whether it missed a better caveat
 - whether another strong reader would have reached a very different conclusion
 
@@ -98,7 +98,7 @@ Output to capture in the packet:
 
 You review:
 
-- CappinCheck's selected claims
+- HonestLaunch's selected claims
 - Anthropic-discovered suspect claims
 - OpenAI-discovered suspect claims
 
@@ -132,18 +132,18 @@ Capture:
 - rewrite must-avoid
 - approved primary sources
 
-### Step 5: Compare QA outputs to CappinCheck
+### Step 5: Compare QA outputs to HonestLaunch
 
 For each merged claim, compare:
 
-- Did CappinCheck catch it?
+- Did HonestLaunch catch it?
 - Did it choose a similar verdict?
 - Did it cite similar primary sources?
 - Did its rewrite preserve the right meaning?
 
 This is the lightweight QA question:
 
-> If two strong independent readers and CappinCheck all look at this launch, do they roughly agree on what the risky claims are and how they should be narrowed?
+> If two strong independent readers and HonestLaunch all look at this launch, do they roughly agree on what the risky claims are and how they should be narrowed?
 
 ### Step 6: Human publication decision
 
@@ -179,7 +179,7 @@ It is a launch-specific QA record.
 
 This workflow helps answer:
 
-- did CappinCheck pick the right suspicious claims?
+- did HonestLaunch pick the right suspicious claims?
 - did it miss a major stretch?
 - do independent readers agree with the archive directionally?
 
@@ -203,7 +203,7 @@ Use this on the 4 canonical archive pages:
 Do not block publishing on perfect agreement.
 Use it as editorial QA:
 
-- if CappinCheck and both research readers roughly converge, publish with confidence
+- if HonestLaunch and both research readers roughly converge, publish with confidence
 - if they diverge sharply, inspect the claim selection or evidence before publish
 
 ## Practical Rule

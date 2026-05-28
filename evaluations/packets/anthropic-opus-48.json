@@ -13,11 +13,10 @@
     "html": "anthropic_opus_48_report.html",
     "json": "anthropic_opus_48_report.json",
     "markdown": "anthropic_opus_48_report.md",
-    "evidencePacket": ""
+    "evidencePacket": "evidence_packets/anthropic-opus-48.json"
   },
   "references": [
     "https://www.anthropic.com/claude-opus-4-8-system-card",
-    "https://www.anthropic.com/news/claude-opus-4-8",
     "https://platform.claude.com/docs/en/about-claude/models/overview",
     "https://claude.com/pricing#api",
     "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy"

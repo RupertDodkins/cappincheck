@@ -5,25 +5,24 @@
   "publishedAt": "2026-05-28",
   "status": "reviewed",
   "primarySource": {
-    "title": "Anthropic Claude Opus 4.8",
-    "url": "https://www.anthropic.com/news/claude-opus-4-8",
+    "title": "Introducing Claude Opus 4.8 \\ Anthropic",
+    "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
     "sourceKind": "html",
     "renderedFrom": "original_source",
     "documentSource": "https://www.anthropic.com/news/claude-opus-4-8",
-    "sourceNote": "Curated against Anthropic's Opus 4.8 system card, model docs, pricing, and Responsible Scaling Policy references."
+    "sourceNote": "Contrasted against Anthropic's Opus 4.8 system card, model docs, pricing, and Responsible Scaling Policy references."
   },
   "auditRuntime": {
-    "mode": "curated_manual",
-    "runtime": "manual",
-    "model": null,
-    "contrastEnabled": true
+    "mode": "live_gemini",
+    "runtime": "local",
+    "model": "gemini-3.5-flash",
+    "contrastEnabled": false
   },
   "references": {
     "policy": "explicit_reference_urls",
-    "count": 5,
+    "count": 4,
     "urls": [
       "https://www.anthropic.com/claude-opus-4-8-system-card",
-      "https://www.anthropic.com/news/claude-opus-4-8",
       "https://platform.claude.com/docs/en/about-claude/models/overview",
       "https://claude.com/pricing#api",
       "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy"
@@ -35,20 +34,20 @@
     "markdown": "anthropic_opus_48_report.md"
   },
   "metrics": {
-    "claimsAudited": 6,
+    "claimsAudited": 5,
     "rewrittenClaims": 4,
-    "averageStretch": 46,
+    "averageStretch": 33,
     "verdictCounts": {
-      "supported": 2,
-      "overstated": 0,
+      "supported": 1,
+      "overstated": 1,
       "missing_context": 3,
       "contradicted": 0,
-      "not_checkable": 1
+      "not_checkable": 0
     },
     "tooltipCitationCoveragePct": 100,
     "anchorCoveragePct": 100,
     "blocksPreserved": 32,
-    "explicitReferenceCount": 5,
-    "evidenceItemCount": 16
+    "explicitReferenceCount": 4,
+    "evidenceItemCount": 15
   }
 }

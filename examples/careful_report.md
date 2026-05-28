@@ -1,4 +1,4 @@
-# CappinCheck Report: Careful Scientific Claim Demo
+# HonestLaunch Report: Careful Scientific Claim Demo
 
 Source: `examples/careful_document.md`
 
@@ -23,7 +23,7 @@ Source: `examples/careful_document.md`
 
 | Claim | Formal Verdict | Confidence | Stretch Score |
 | --- | --- | --- | ---: |
-| CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions. | supported | high | 8 |
+| HonestLaunch improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions. | supported | high | 8 |
 | The evaluation does not establish real-world deployment performance. | supported | high | 14 |
 | The result is limited to the curated Benchmark X dataset. | supported | high | 14 |
 
@@ -31,13 +31,13 @@ Source: `examples/careful_document.md`
 
 **Confidence:** high
 
-**Original:** CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.
+**Original:** HonestLaunch improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.
 
 **Stretch Score:** 8/100
 
 **Why:** The claim is narrow, scoped, and supported by the document's own evidence and caveats.
 
-**Defensible rewrite:** CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.
+**Defensible rewrite:** HonestLaunch improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.
 
 **Claim timing:**
 - Total / Verifier / Contradiction / Numeric / Aggregator / Contrast: 0ms / 0ms / 0ms / 0ms / 0ms / 0ms
@@ -49,7 +49,7 @@ Source: `examples/careful_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 </details>
 
@@ -75,7 +75,7 @@ Source: `examples/careful_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 **Computed checks:**
 - Absolute gain: 87.3 - 84.1 = 3.2 percentage points.
@@ -90,7 +90,7 @@ Source: `examples/careful_document.md`
 - The document uses percentage-point wording, so the numeric claim is properly scoped.
 
 **Gemini-discovered supporting sources:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 
 ## careful_2: supported
@@ -115,7 +115,7 @@ Source: `examples/careful_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 </details>
 
@@ -136,12 +136,12 @@ Source: `examples/careful_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 </details>
 
 **Gemini-discovered supporting sources:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 
 ## careful_3: supported
@@ -166,7 +166,7 @@ Source: `examples/careful_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 </details>
 
@@ -187,10 +187,10 @@ Source: `examples/careful_document.md`
 **Duration:** 0ms
 
 **Supporting evidence:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 
 </details>
 
 **Gemini-discovered supporting sources:**
-- Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
+- Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain. (Careful document benchmark table). Relevance: The source wording matches the table and keeps the scope limited to Benchmark X.
 

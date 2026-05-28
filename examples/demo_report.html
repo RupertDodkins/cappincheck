@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Demo Paper: CappinCheck for Agentic Claim Audits · CappinCheck</title>
+  <title>Demo Paper: HonestLaunch for Agentic Claim Audits · Honest Launches</title>
   <style>
     :root {
       --ink: #1f2328;
@@ -159,6 +159,12 @@
     .launch-meta {
       display: grid;
       gap: 8px;
+      margin-top: 14px;
+    }
+    .launch-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 14px;
     }
     .launch-meta p {
@@ -477,48 +483,42 @@
   </style>
 </head>
 <body>
-  <header>
+  <header id="artifact-header">
     <div>
-      <div class="eyebrow">CappinCheck audit artifact</div>
-      <h1>Demo Paper: CappinCheck for Agentic Claim Audits</h1>
-      <div class="muted">Demo Paper: CappinCheck for Agentic Claim Audits</div>
+      <div class="eyebrow">Honest Launches audit artifact</div>
+      <h1>Demo Paper: HonestLaunch for Agentic Claim Audits</h1>
+      <div class="muted">Demo Paper: HonestLaunch for Agentic Claim Audits</div>
     </div>
     <div class="muted">3 audited claims · 1ms pipeline · deterministic_fallback</div>
   </header>
   <main>
-    <div class="notice-strip">
-      <div class="notice-copy" id="publication-notice"></div>
-      <div class="notice-links" id="publication-links"></div>
-    </div>
-    <div class="headline-strip">
-      <div class="title-row">
-        <h2>Run Summary</h2>
-        <span class="hint" tabindex="0" data-tip="This top strip summarizes the audit punchline: how many claims were audited, how severe they were, and what runtime/profile telemetry was recorded for the run.">?</span>
-      </div>
-      <div class="summary-grid" id="scorecard-grid"></div>
-      <div class="telemetry-grid" id="telemetry-grid"></div>
-    </div>
     <div class="view-switcher">
       <button class="view-toggle active" id="launch-toggle" onclick="setView('launch')">Audited Launch Page</button>
       <button class="view-toggle" id="ledger-toggle" onclick="setView('ledger')">Audit Ledger</button>
     </div>
     <div id="launch-view" class="launch-shell">
-      <div class="panel">
-        <div class="title-row">
-          <h2>Audited Launch Page</h2>
-          <span class="hint" tabindex="0" data-tip="Primary surface: the source launch page reconstructed from preserved content blocks, with audited substitutions rendered inline. Hover or tap the underlined copy to inspect the original wording and explicit-reference citations. This page is an audited modified version, not the original publisher page.">?</span>
-        </div>
-        <div id="launch-summary"></div>
-      </div>
+      <div id="launch-summary"></div>
       <article class="launch-article">
         <div id="launch-article"></div>
       </article>
     </div>
     <div id="ledger-view" hidden>
+      <div class="notice-strip">
+        <div class="notice-copy" id="publication-notice"></div>
+        <div class="notice-links" id="publication-links"></div>
+      </div>
+      <div class="headline-strip">
+        <div class="title-row">
+          <h2>Run Summary</h2>
+          <span class="hint" tabindex="0" data-tip="This strip summarizes the audit punchline: how many claims were audited, how severe they were, and what runtime/profile telemetry was recorded for the run.">?</span>
+        </div>
+        <div class="summary-grid" id="scorecard-grid"></div>
+        <div class="telemetry-grid" id="telemetry-grid"></div>
+      </div>
       <div class="claim-strip">
         <div class="title-row">
           <h2>Audit Ledger</h2>
-          <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
+          <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then Honest Launches audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
         </div>
         <div class="filters single">
           <label>Verdict
@@ -533,7 +533,7 @@
         <section>
           <div class="title-row">
             <h2>Selected Claim</h2>
-            <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+            <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, the Honest Launches verdict, and the strongest defensible rewrite.">?</span>
           </div>
           <div id="claim-detail"></div>
         </section>
@@ -551,19 +551,19 @@
   <script>
     const report = {
   "document": {
-    "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+    "title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
     "source": "examples/demo_document.md",
-    "text": "# Demo Paper: CappinCheck for Agentic Claim Audits\n\n## Abstract\n\nWe introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n",
+    "text": "# Demo Paper: HonestLaunch for Agentic Claim Audits\n\n## Abstract\n\nWe introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.\n\n## Results\n\nWe compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.\n\n| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |\n\n## Discussion\n\nThe benchmark contains curated technical claims from public documents. We did not evaluate prospective real-world deployment, clinical documents, legal documents, or private enterprise workflows. We did not run an external literature search for prior scientific fact-checking or claim-audit systems.\n",
     "snapshot": {
-      "title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+      "title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
       "source_url": "examples/demo_document.md",
       "source_kind": "text",
       "blocks": [
         {
           "block_id": "block-0",
           "kind": "h1",
-          "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
-          "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+          "text": "Demo Paper: HonestLaunch for Agentic Claim Audits",
+          "section_heading": "Demo Paper: HonestLaunch for Agentic Claim Audits",
           "source_order": 0
         },
         {
@@ -576,7 +576,7 @@
         {
           "block_id": "block-2",
           "kind": "paragraph",
-          "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+          "text": "We introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
           "section_heading": "Abstract",
           "source_order": 2
         },
@@ -590,14 +590,14 @@
         {
           "block_id": "block-4",
           "kind": "paragraph",
-          "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+          "text": "We compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.",
           "section_heading": "Results",
           "source_order": 4
         },
         {
           "block_id": "block-5",
           "kind": "table",
-          "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+          "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |",
           "section_heading": "Results",
           "source_order": 5
         },
@@ -662,7 +662,7 @@
       "supporting_evidence": [
         {
           "source_title": "Demo document benchmark table",
-          "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+          "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
           "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
         }
       ],
@@ -683,7 +683,7 @@
           "supporting_evidence": [
             {
               "source_title": "Demo document benchmark table",
-              "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+              "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
               "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
             }
           ],
@@ -724,7 +724,7 @@
           "supporting_evidence": [
             {
               "source_title": "Demo document benchmark table",
-              "snippet": "Baseline: 84.1%. CappinCheck: 87.3%.",
+              "snippet": "Baseline: 84.1%. HonestLaunch: 87.3%.",
               "relevance": "The table supports a 3.2-point absolute gain, not a 30% relative improvement."
             }
           ],
@@ -751,8 +751,8 @@
         "claim_id": "c1",
         "block_id": "block-2",
         "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
-        "start_char": 26,
-        "end_char": 115,
+        "start_char": 27,
+        "end_char": 116,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.8415
       },
@@ -837,8 +837,8 @@
         "claim_id": "c2",
         "block_id": "block-2",
         "matched_text": "The system robustly generalizes across domains",
-        "start_char": 116,
-        "end_char": 162,
+        "start_char": 117,
+        "end_char": 163,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.9892
       },
@@ -923,8 +923,8 @@
         "claim_id": "c3",
         "block_id": "block-2",
         "matched_text": "is the first agentic workflow for scientific claim auditing.",
-        "start_char": 167,
-        "end_char": 227,
+        "start_char": 168,
+        "end_char": 228,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.96
       },
@@ -977,14 +977,14 @@
     ]
   },
   "launch_page": {
-    "source_title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+    "source_title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
     "source_url": "examples/demo_document.md",
     "blocks": [
       {
         "block_id": "block-0",
         "kind": "h1",
-        "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
-        "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+        "text": "Demo Paper: HonestLaunch for Agentic Claim Audits",
+        "section_heading": "Demo Paper: HonestLaunch for Agentic Claim Audits",
         "source_order": 0
       },
       {
@@ -997,7 +997,7 @@
       {
         "block_id": "block-2",
         "kind": "paragraph",
-        "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+        "text": "We introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
         "section_heading": "Abstract",
         "source_order": 2
       },
@@ -1011,14 +1011,14 @@
       {
         "block_id": "block-4",
         "kind": "paragraph",
-        "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+        "text": "We compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.",
         "section_heading": "Results",
         "source_order": 4
       },
       {
         "block_id": "block-5",
         "kind": "table",
-        "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+        "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |",
         "section_heading": "Results",
         "source_order": 5
       },
@@ -1049,8 +1049,8 @@
           "claim_id": "c1",
           "block_id": "block-2",
           "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
-          "start_char": 26,
-          "end_char": 115,
+          "start_char": 27,
+          "end_char": 116,
           "match_type": "clause_fuzzy",
           "match_confidence": 0.8415
         }
@@ -1066,8 +1066,8 @@
           "claim_id": "c2",
           "block_id": "block-2",
           "matched_text": "The system robustly generalizes across domains",
-          "start_char": 116,
-          "end_char": 162,
+          "start_char": 117,
+          "end_char": 163,
           "match_type": "clause_fuzzy",
           "match_confidence": 0.9892
         }
@@ -1083,8 +1083,8 @@
           "claim_id": "c3",
           "block_id": "block-2",
           "matched_text": "is the first agentic workflow for scientific claim auditing.",
-          "start_char": 167,
-          "end_char": 227,
+          "start_char": 168,
+          "end_char": 228,
           "match_type": "clause_fuzzy",
           "match_confidence": 0.96
         }
@@ -1096,14 +1096,14 @@
   }
 };
     const launchPage = {
-  "source_title": "Demo Paper: CappinCheck for Agentic Claim Audits",
+  "source_title": "Demo Paper: HonestLaunch for Agentic Claim Audits",
   "source_url": "examples/demo_document.md",
   "blocks": [
     {
       "block_id": "block-0",
       "kind": "h1",
-      "text": "Demo Paper: CappinCheck for Agentic Claim Audits",
-      "section_heading": "Demo Paper: CappinCheck for Agentic Claim Audits",
+      "text": "Demo Paper: HonestLaunch for Agentic Claim Audits",
+      "section_heading": "Demo Paper: HonestLaunch for Agentic Claim Audits",
       "source_order": 0
     },
     {
@@ -1116,7 +1116,7 @@
     {
       "block_id": "block-2",
       "kind": "paragraph",
-      "text": "We introduce CappinCheck, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
+      "text": "We introduce HonestLaunch, an agentic workflow that improves performance by 30% over prior work on real-world tasks. The system robustly generalizes across domains and is the first agentic workflow for scientific claim auditing.",
       "section_heading": "Abstract",
       "source_order": 2
     },
@@ -1130,14 +1130,14 @@
     {
       "block_id": "block-4",
       "kind": "paragraph",
-      "text": "We compare CappinCheck against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. CappinCheck achieves 87.3% on the same benchmark.",
+      "text": "We compare HonestLaunch against a baseline claim-review pipeline on Benchmark X. The baseline system achieves 84.1% on the benchmark. HonestLaunch achieves 87.3% on the same benchmark.",
       "section_heading": "Results",
       "source_order": 4
     },
     {
       "block_id": "block-5",
       "kind": "table",
-      "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| CappinCheck | 87.3% |",
+      "text": "| System | Benchmark X accuracy |\n| --- | ---: |\n| Baseline | 84.1% |\n| HonestLaunch | 87.3% |",
       "section_heading": "Results",
       "source_order": 5
     },
@@ -1168,8 +1168,8 @@
         "claim_id": "c1",
         "block_id": "block-2",
         "matched_text": "an agentic workflow that improves performance by 30% over prior work on real-world tasks.",
-        "start_char": 26,
-        "end_char": 115,
+        "start_char": 27,
+        "end_char": 116,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.8415
       }
@@ -1185,8 +1185,8 @@
         "claim_id": "c2",
         "block_id": "block-2",
         "matched_text": "The system robustly generalizes across domains",
-        "start_char": 116,
-        "end_char": 162,
+        "start_char": 117,
+        "end_char": 163,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.9892
       }
@@ -1202,8 +1202,8 @@
         "claim_id": "c3",
         "block_id": "block-2",
         "matched_text": "is the first agentic workflow for scientific claim auditing.",
-        "start_char": 167,
-        "end_char": 227,
+        "start_char": 168,
+        "end_char": 228,
         "match_type": "clause_fuzzy",
         "match_confidence": 0.96
       }
@@ -1215,7 +1215,7 @@
 };
     const publication = {};
     let selected = 0;
-    let activeView = 'launch';
+    let activeView = window.location.hash === '#ledger' ? 'ledger' : 'launch';
     let launchTooltipGlobalsBound = false;
     const filters = { verdict: 'all' };
     const cls = (value) => String(value).replaceAll('_', '-').replaceAll(' ', '-');
@@ -1257,7 +1257,7 @@
         missing_context: 'The claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.',
         contradicted: 'Available evidence conflicts with the claim as written.',
         not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
-      })[verdict] || 'Formal CappinCheck verdict for this claim.';
+      })[verdict] || 'Formal Honest Launches verdict for this claim.';
     }
     function verdictLabel(verdict) {
       return verdictLabels[verdict] || String(verdict || '').replaceAll('_', ' ');
@@ -1269,15 +1269,16 @@
       const note = publication.source_note || '';
       const disclaimer = publication.disclaimer || 'Audited modified version of the original source.';
       const status = publication.status || 'reviewed';
+      const publishedAt = publication.published_at || 'unknown';
+      const gateStatus = publication.gate_status || 'unknown';
+      const evidenceHref = safeHref(publication.evidence_packet_url || '');
       document.getElementById('publication-notice').innerHTML = `
         <strong>Audited modified version</strong>
         <p class="wrap">${esc(disclaimer)}</p>
-        <p class="wrap"><strong>Status:</strong> ${esc(status)}${note ? ` · ${esc(note)}` : ''}</p>
+        <p class="wrap"><strong>Status:</strong> ${esc(status)} · <strong>Published:</strong> ${esc(publishedAt)} · <strong>Gate:</strong> ${esc(gateStatus)}${note ? ` · ${esc(note)}` : ''}</p>
       `;
       document.getElementById('publication-links').innerHTML = [
-        originalHref ? `<a class="notice-link primary" href="${esc(originalHref)}" target="_blank" rel="noopener noreferrer">${esc(originalLabel)}</a>` : '',
-        `<a class="notice-link" href="index.html">Archive</a>`,
-        `<a class="notice-link" href="methodology.html">Methodology</a>`
+        evidenceHref ? `<a class="notice-link" href="${esc(evidenceHref)}" target="_blank" rel="noopener noreferrer">Evidence Packet</a>` : '',
       ].filter(Boolean).join('');
     }
     function verdictCounts(audits) {
@@ -1331,9 +1332,14 @@
       document.getElementById('ledger-view').hidden = activeView !== 'ledger';
       document.getElementById('launch-toggle').classList.toggle('active', activeView === 'launch');
       document.getElementById('ledger-toggle').classList.toggle('active', activeView === 'ledger');
+      const targetHash = activeView === 'ledger' ? '#ledger' : '#launch';
+      if (window.location.hash !== targetHash) {
+        history.replaceState(null, '', targetHash);
+      }
       if (activeView === 'launch') renderLaunchPage();
     }
     function renderLaunchPage() {
+      document.getElementById('launch-summary').innerHTML = '';
       const decorations = launchPage.decorations || [];
       const byBlock = new Map();
       for (const decoration of decorations) {
@@ -1345,28 +1351,6 @@
       for (const values of byBlock.values()) {
         values.sort((left, right) => (left.anchor.start_char || 0) - (right.anchor.start_char || 0));
       }
-      const defaultSource = safeHref(launchPage.source_url || report.document?.source || '');
-      const originalHref = safeHref(publication.original_url || defaultSource);
-      const originalLabel = publication.original_label || 'Original source';
-      const sourceNote = publication.source_note || '';
-      document.getElementById('launch-summary').innerHTML = `
-        <div class="launch-kicker">Primary Surface</div>
-        <p class="launch-note wrap">
-          This view preserves the source page structure while substituting audited claims inline. Hover or tap the underlined copy to inspect the original wording, verdict, and explicit-reference citations.
-        </p>
-        <div class="launch-meta">
-          <p class="wrap">
-            <strong>Rewritten claims:</strong> ${launchPage.rewritten_claim_count || 0}
-            · <strong>Tooltip citations:</strong> ${launchPage.explicit_reference_count || 0}
-            · <strong>Blocks preserved:</strong> ${(launchPage.blocks || []).length}
-          </p>
-          <p class="wrap">
-            <strong>Source title:</strong> ${esc(launchPage.source_title || report.document?.title || 'Untitled source')}
-            ${originalHref ? `· <a href="${esc(originalHref)}" target="_blank" rel="noopener noreferrer">${esc(originalLabel)}</a>` : ''}
-          </p>
-          ${sourceNote ? `<p class="muted wrap">${esc(sourceNote)}</p>` : ''}
-        </div>
-      `;
       document.getElementById('launch-article').innerHTML = (launchPage.blocks || [])
         .map(block => renderLaunchBlock(block, byBlock.get(block.block_id) || []))
         .join('');
@@ -1552,7 +1536,7 @@
           </p>
           <div class="strength-grid">
             ${strengthCard('Stretch pressure', audit.stretch_score, audit.verdict, `${audit.stretch_score}/100`, 'How much the wording outruns the evidence.')}
-            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident CappinCheck is in this verdict from available evidence.')}
+            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident Honest Launches is in this verdict from available evidence.')}
             ${strengthCard('Evidence depth', evidenceScore, audit.verdict, `${evidenceCount} item${evidenceCount === 1 ? '' : 's'}`, 'How much direct evidence is attached to this claim audit.')}
           </div>
         </div>
@@ -1732,7 +1716,13 @@
     renderPublicationHeader();
     renderHeadline();
     render();
-    setView('launch');
+    setView(activeView);
+    window.addEventListener('hashchange', () => {
+      const nextView = window.location.hash === '#ledger' ? 'ledger' : 'launch';
+      if (nextView !== activeView) {
+        setView(nextView);
+      }
+    });
   </script>
 </body>
 </html>

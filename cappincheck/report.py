@@ -16,7 +16,7 @@ def write_markdown(report: AuditReport, path: Path) -> None:
     verdict_counts = _verdict_counts(report)
     average_stretch = _average_stretch(report.audits)
     lines = [
-        f"# CappinCheck Report: {report.document.title}",
+        f"# HonestLaunch Report: {report.document.title}",
         "",
         f"Source: `{report.document.source}`",
         "",

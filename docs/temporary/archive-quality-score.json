@@ -1,24 +1,24 @@
 {
-  "overallScore": 79,
+  "overallScore": 85,
   "categories": {
     "firstGlanceLegibility": 100,
-    "trustInspectability": 84,
+    "trustInspectability": 100,
     "judgmentQuality": 38,
-    "pageFidelityPolish": 86,
-    "archiveUsefulnessCoherence": 102
+    "pageFidelityPolish": 100,
+    "archiveUsefulnessCoherence": 106
   },
   "proxies": {
     "originalLinkCoveragePct": 100,
     "modifiedNoticeCoveragePct": 100,
     "reportSurfaceCoveragePct": 100,
-    "tooltipCitationCoveragePct": 80,
-    "anchorCoveragePct": 80,
-    "evidencePacketCoveragePct": 80,
+    "tooltipCitationCoveragePct": 100,
+    "anchorCoveragePct": 100,
+    "evidencePacketCoveragePct": 100,
     "gatePassRatePct": 100,
     "sourceNoteCoveragePct": 100,
-    "blocksPreservedCoveragePct": 80,
+    "blocksPreservedCoveragePct": 100,
     "featuredCount": 5,
-    "featuredAverageStretch": 52,
+    "featuredAverageStretch": 48,
     "goldSetCoverageFactorPct": 40
   },
   "goldSet": {
@@ -160,8 +160,34 @@
     {
       "slug": "anthropic-opus-48",
       "title": "Anthropic Claude Opus 4.8",
-      "metrics": {},
-      "publicationGate": {}
+      "metrics": {
+        "claimsAudited": 5,
+        "rewrittenClaims": 4,
+        "averageStretch": 33,
+        "verdictCounts": {
+          "supported": 1,
+          "overstated": 1,
+          "missing_context": 3,
+          "contradicted": 0,
+          "not_checkable": 0
+        },
+        "tooltipCitationCoveragePct": 100,
+        "anchorCoveragePct": 100,
+        "blocksPreserved": 32,
+        "explicitReferenceCount": 4,
+        "evidenceItemCount": 15
+      },
+      "publicationGate": {
+        "overallPass": true,
+        "checks": {
+          "hasModifiedNotice": true,
+          "hasOriginalLink": true,
+          "hasEvidencePacketLink": true,
+          "allEditedClaimsAnchored": true,
+          "allEditedClaimsCited": true,
+          "hasPreservedBlocks": true
+        }
+      }
     },
     {
       "slug": "xai-grok-3",
@@ -229,8 +255,6 @@
     }
   ],
   "recommendations": [
-    "Expand the reviewed gold set beyond the current seed claims so judgment quality stops resting on a tiny sample.",
-    "Bring tooltip-citation coverage on rewritten claims to 100% before treating the archive as a durable reference.",
-    "Fix any remaining unanchored rewritten claims so every visible change maps to a concrete source span."
+    "Expand the reviewed gold set beyond the current seed claims so judgment quality stops resting on a tiny sample."
   ]
 }

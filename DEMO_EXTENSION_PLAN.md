@@ -1,10 +1,10 @@
-# CappinCheck Demo Extension Plan
+# HonestLaunch Demo Extension Plan
 
 This plan supersedes the broad outstanding-work list for the next hackathon phase. The goal is to make the current project land in a live Google I/O / DeepMind demo: credible on real input, Gemini-native, and reliable under time pressure.
 
 ## Current Baseline
 
-CappinCheck is a CLI-first open-source tool that audits AI model reports, dense technical/scientific documents, and technical blog posts for claims that may outrun the evidence. It extracts risky claims, runs specialist verifier/skeptic/numeric-calibrator passes, and emits Markdown, JSON, and static HTML reports.
+HonestLaunch is a CLI-first open-source tool that audits AI model reports, dense technical/scientific documents, and technical blog posts for claims that may outrun the evidence. It extracts risky claims, runs specialist verifier/skeptic/numeric-calibrator passes, and emits Markdown, JSON, and static HTML reports.
 
 Already present or in progress:
 
@@ -44,7 +44,7 @@ Risk: playful labels can make the tool feel unserious in front of research-heavy
 
 Decision:
 
-- Keep the project name `CappinCheck`.
+- Keep the project name `HonestLaunch`.
 - Lead reports with formal labels: `Formal Verdict`, `Confidence`, `Evidence`, `Delta`, and `Defensible Rewrite`.
 - Remove playful labels from the demo report and JSON schema.
 - Use `stretch_score` for the numeric severity measure.
@@ -349,7 +349,7 @@ Do not spend this phase on:
 
 Use this claim:
 
-> CappinCheck does not prove papers true or false. It turns overclaim detection into an inspectable, grounded source-comparison workflow.
+> HonestLaunch does not prove papers true or false. It turns overclaim detection into an inspectable, grounded source-comparison workflow.
 
 Core demo sentence:
 

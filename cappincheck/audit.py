@@ -225,7 +225,7 @@ def _mock_audit(document: Document, claim: RiskyClaim) -> ClaimAudit:
             EvidenceItem(
                 source_title="Demo document benchmark table",
                 url=None,
-                snippet="Baseline: 84.1%. CappinCheck: 87.3%.",
+                snippet="Baseline: 84.1%. HonestLaunch: 87.3%.",
                 relevance="The table supports a 3.2-point absolute gain, not a 30% relative improvement.",
             )
         ]
@@ -275,7 +275,7 @@ def _mock_careful_audit(claim: RiskyClaim) -> ClaimAudit:
         EvidenceItem(
             source_title="Careful document benchmark table",
             url=None,
-            snippet="Baseline: 84.1%. CappinCheck: 87.3%. The document calls this a 3.2 percentage-point gain.",
+            snippet="Baseline: 84.1%. HonestLaunch: 87.3%. The document calls this a 3.2 percentage-point gain.",
             relevance="The source wording matches the table and keeps the scope limited to Benchmark X.",
         )
     ]

@@ -81,7 +81,7 @@ async def _live_contrast(
     client = GeminiClient()
     references = "\n".join(f"- {url}" for url in reference_urls)
     prompt = f"""
-You are CappinCheck Evidence Contrast Mode.
+You are HonestLaunch Evidence Contrast Mode.
 
 Compare the exact claim wording against the provided reference URLs. Your task is reference fidelity, not universal truth.
 Use URL Context and Google Search only to inspect the provided references and resolve the referenced pages when needed.
@@ -141,7 +141,7 @@ def _mock_contrast(audit: ClaimAudit) -> EvidenceContrast:
                 ReferenceSource(
                     title="Internal Benchmark X fixture",
                     source_type="benchmark",
-                    why_relevant="Deterministic offline fixture containing the baseline and CappinCheck benchmark scores.",
+                    why_relevant="Deterministic offline fixture containing the baseline and HonestLaunch benchmark scores.",
                     authority_score=85,
                 )
             ],
@@ -149,7 +149,7 @@ def _mock_contrast(audit: ClaimAudit) -> EvidenceContrast:
                 ContrastSource(
                     title="Internal Benchmark X fixture",
                     stance="narrows",
-                    evidence_summary="The reference reports 84.1% for the baseline and 87.3% for CappinCheck on Benchmark X.",
+                    evidence_summary="The reference reports 84.1% for the baseline and 87.3% for HonestLaunch on Benchmark X.",
                     key_qualification="The evidence is one curated benchmark, not real-world tasks; the computed gain is 3.2 percentage points and 3.8% relative.",
                 )
             ],
@@ -158,7 +158,7 @@ def _mock_contrast(audit: ClaimAudit) -> EvidenceContrast:
                 "The reference supports a narrower benchmark improvement, but not a 30% improvement on real-world tasks."
             ),
             suggested_rewrite=(
-                "CappinCheck improves from 84.1% to 87.3% on Benchmark X, "
+                "HonestLaunch improves from 84.1% to 87.3% on Benchmark X, "
                 "a 3.2 percentage-point gain and 3.8% relative improvement under the benchmark conditions."
             ),
             recommended_verdict=Verdict.OVERSTATED,
@@ -189,7 +189,7 @@ def _mock_contrast(audit: ClaimAudit) -> EvidenceContrast:
                 "The claim generalizes beyond the reference, which only supports performance on curated Benchmark X."
             ),
             suggested_rewrite=(
-                "CappinCheck generalizes across the curated domains represented in Benchmark X; "
+                "HonestLaunch generalizes across the curated domains represented in Benchmark X; "
                 "real-world deployment performance was not evaluated."
             ),
             recommended_verdict=Verdict.MISSING_CONTEXT,

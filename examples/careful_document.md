@@ -2,14 +2,14 @@
 
 ## Abstract
 
-We evaluate CappinCheck on a curated benchmark of technical-document claims. CappinCheck improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.
+We evaluate HonestLaunch on a curated benchmark of technical-document claims. HonestLaunch improved from 84.1% to 87.3% on Benchmark X, a 3.2 percentage-point gain under the benchmark conditions.
 
 ## Results
 
 | System | Benchmark X accuracy |
 | --- | ---: |
 | Baseline | 84.1% |
-| CappinCheck | 87.3% |
+| HonestLaunch | 87.3% |
 
 ## Limitations
 

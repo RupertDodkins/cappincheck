@@ -2,12 +2,12 @@
   "document": {
     "title": "Unauditable Fixture Demo",
     "source": "examples/needs_receipts_document.md",
-    "text": "# Unauditable Fixture Demo\n\n## Abstract\n\nUsers strongly prefer CappinCheck over existing review tools. CappinCheck is the first tool to audit scientific claims with agents.\n\n## Deployment\n\nCappinCheck is safe for production use in regulated environments.\n\n## Evidence\n\nThis short document intentionally does not include a user study, benchmark, safety evaluation, production deployment study, prior-work comparison, or external validation.\n"
+    "text": "# Unauditable Fixture Demo\n\n## Abstract\n\nUsers strongly prefer HonestLaunch over existing review tools. HonestLaunch is the first tool to audit scientific claims with agents.\n\n## Deployment\n\nHonestLaunch is safe for production use in regulated environments.\n\n## Evidence\n\nThis short document intentionally does not include a user study, benchmark, safety evaluation, production deployment study, prior-work comparison, or external validation.\n"
   },
   "claims": [
     {
       "id": "receipts_1",
-      "claim": "Users strongly prefer CappinCheck over existing review tools.",
+      "claim": "Users strongly prefer HonestLaunch over existing review tools.",
       "claim_type": "other",
       "source_location": "Abstract",
       "why_risky": "Preference claims need user study data or survey evidence.",
@@ -15,7 +15,7 @@
     },
     {
       "id": "receipts_2",
-      "claim": "CappinCheck is safe for production use in regulated environments.",
+      "claim": "HonestLaunch is safe for production use in regulated environments.",
       "claim_type": "safety",
       "source_location": "Deployment",
       "why_risky": "Safety and regulated-production claims require concrete validation and scope.",
@@ -23,7 +23,7 @@
     },
     {
       "id": "receipts_3",
-      "claim": "CappinCheck is the first tool to audit scientific claims with agents.",
+      "claim": "HonestLaunch is the first tool to audit scientific claims with agents.",
       "claim_type": "novelty",
       "source_location": "Introduction",
       "why_risky": "First/novelty claims require prior-work search.",
@@ -34,7 +34,7 @@
     {
       "claim": {
         "id": "receipts_1",
-        "claim": "Users strongly prefer CappinCheck over existing review tools.",
+        "claim": "Users strongly prefer HonestLaunch over existing review tools.",
         "claim_type": "other",
         "source_location": "Abstract",
         "why_risky": "Preference claims need user study data or survey evidence.",
@@ -113,7 +113,7 @@
     {
       "claim": {
         "id": "receipts_2",
-        "claim": "CappinCheck is safe for production use in regulated environments.",
+        "claim": "HonestLaunch is safe for production use in regulated environments.",
         "claim_type": "safety",
         "source_location": "Deployment",
         "why_risky": "Safety and regulated-production claims require concrete validation and scope.",
@@ -192,7 +192,7 @@
     {
       "claim": {
         "id": "receipts_3",
-        "claim": "CappinCheck is the first tool to audit scientific claims with agents.",
+        "claim": "HonestLaunch is the first tool to audit scientific claims with agents.",
         "claim_type": "novelty",
         "source_location": "Introduction",
         "why_risky": "First/novelty claims require prior-work search.",

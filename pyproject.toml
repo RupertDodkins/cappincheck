@@ -5,7 +5,7 @@ description = "Grounded adversarial claim audit for dense expert documents."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "CappinCheck contributors" }]
+authors = [{ name = "HonestLaunch contributors" }]
 dependencies = [
   "google-genai>=1.0.0",
   "httpx>=0.27.0",
@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 cappincheck = "cappincheck.cli:app"
+honestlaunch = "cappincheck.cli:app"
 
 [build-system]
 requires = ["hatchling"]

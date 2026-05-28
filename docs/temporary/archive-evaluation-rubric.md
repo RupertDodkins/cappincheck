@@ -4,7 +4,7 @@ Status: active working rubric for judging whether the audited launch archive is 
 
 ## Goal
 
-Judge CappinCheck the way a skeptical technical visitor would judge it:
+Judge HonestLaunch the way a skeptical technical visitor would judge it:
 
 - Is the product legible immediately?
 - Does the judgment feel fair?

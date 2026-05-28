@@ -1,4 +1,4 @@
-# CappinCheck Report: GPT-4o System Card
+# HonestLaunch Report: GPT-4o System Card
 
 Source: `https://cdn.openai.com/gpt-4o-system-card.pdf`
 

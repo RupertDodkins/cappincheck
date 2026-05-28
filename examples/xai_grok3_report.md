@@ -1,4 +1,4 @@
-# CappinCheck Report: xAI Grok 3 Launch Claim Proxy
+# HonestLaunch Report: xAI Grok 3 Launch Claim Proxy
 
 Source: `examples/xai_grok3_launch_input.md`
 

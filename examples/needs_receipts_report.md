@@ -1,4 +1,4 @@
-# CappinCheck Report: Unauditable Fixture Demo
+# HonestLaunch Report: Unauditable Fixture Demo
 
 Source: `examples/needs_receipts_document.md`
 
@@ -23,15 +23,15 @@ Source: `examples/needs_receipts_document.md`
 
 | Claim | Formal Verdict | Confidence | Stretch Score |
 | --- | --- | --- | ---: |
-| Users strongly prefer CappinCheck over existing review tools. | not_checkable | medium | 58 |
-| CappinCheck is safe for production use in regulated environments. | not_checkable | medium | 72 |
-| CappinCheck is the first tool to audit scientific claims with agents. | not_checkable | medium | 58 |
+| Users strongly prefer HonestLaunch over existing review tools. | not_checkable | medium | 58 |
+| HonestLaunch is safe for production use in regulated environments. | not_checkable | medium | 72 |
+| HonestLaunch is the first tool to audit scientific claims with agents. | not_checkable | medium | 58 |
 
 ## receipts_1: not_checkable
 
 **Confidence:** medium
 
-**Original:** Users strongly prefer CappinCheck over existing review tools.
+**Original:** Users strongly prefer HonestLaunch over existing review tools.
 
 **Stretch Score:** 58/100
 
@@ -85,7 +85,7 @@ Source: `examples/needs_receipts_document.md`
 
 **Confidence:** medium
 
-**Original:** CappinCheck is safe for production use in regulated environments.
+**Original:** HonestLaunch is safe for production use in regulated environments.
 
 **Stretch Score:** 72/100
 
@@ -139,7 +139,7 @@ Source: `examples/needs_receipts_document.md`
 
 **Confidence:** medium
 
-**Original:** CappinCheck is the first tool to audit scientific claims with agents.
+**Original:** HonestLaunch is the first tool to audit scientific claims with agents.
 
 **Stretch Score:** 58/100
 

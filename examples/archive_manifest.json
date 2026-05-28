@@ -6,7 +6,7 @@
     "metrics": {
       "featuredCount": 5,
       "labsCovered": 4,
-      "averageStretch": 51,
+      "averageStretch": 48,
       "gatePassRatePct": 100,
       "tooltipCitationCoveragePct": 100
     }
@@ -51,7 +51,7 @@
           "gemini 3.5 flash"
         ]
       },
-      "publishedAt": "2026-05-26",
+      "publishedAt": "2026-05-28",
       "evidencePacketFile": "evidence_packets/gemini-35-flash.json",
       "metrics": {
         "claimsAudited": 7,
@@ -85,7 +85,8 @@
         "primarySourceKind": "html",
         "renderedFrom": "original_source",
         "referenceCount": 12
-      }
+      },
+      "launchDate": "2026-05-19"
     },
     {
       "slug": "anthropic-sonnet-45",
@@ -116,7 +117,7 @@
           "anthropic"
         ]
       },
-      "publishedAt": "2026-05-26",
+      "publishedAt": "2026-05-28",
       "evidencePacketFile": "evidence_packets/anthropic-sonnet-45.json",
       "metrics": {
         "claimsAudited": 3,
@@ -150,7 +151,8 @@
         "primarySourceKind": "html",
         "renderedFrom": "original_source",
         "referenceCount": 2
-      }
+      },
+      "launchDate": "2025-09-29"
     },
     {
       "slug": "anthropic-opus-48",
@@ -165,11 +167,10 @@
       "artifactMd": "anthropic_opus_48_report.md",
       "originalUrl": "https://www.anthropic.com/news/claude-opus-4-8",
       "originalLabel": "Original Anthropic launch post",
-      "summary": "Curated archive pass on Anthropic's Claude Opus 4.8 launch page with audited benchmark, honesty, alignment, and pricing claims.",
-      "sourceNote": "Curated against Anthropic's Opus 4.8 system card, model docs, pricing, and Responsible Scaling Policy references.",
+      "summary": "Live Gemini run on Anthropic's Claude Opus 4.8 launch page with audited benchmark, coding, browser-agent, and pricing claims.",
+      "sourceNote": "Contrasted against Anthropic's Opus 4.8 system card, model docs, pricing, and Responsible Scaling Policy references.",
       "referenceUrls": [
         "https://www.anthropic.com/claude-opus-4-8-system-card",
-        "https://www.anthropic.com/news/claude-opus-4-8",
         "https://platform.claude.com/docs/en/about-claude/models/overview",
         "https://claude.com/pricing#api",
         "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy"
@@ -187,21 +188,21 @@
       "publishedAt": "2026-05-28",
       "evidencePacketFile": "evidence_packets/anthropic-opus-48.json",
       "metrics": {
-        "claimsAudited": 6,
+        "claimsAudited": 5,
         "rewrittenClaims": 4,
-        "averageStretch": 46,
+        "averageStretch": 33,
         "verdictCounts": {
-          "supported": 2,
-          "overstated": 0,
+          "supported": 1,
+          "overstated": 1,
           "missing_context": 3,
           "contradicted": 0,
-          "not_checkable": 1
+          "not_checkable": 0
         },
         "tooltipCitationCoveragePct": 100,
         "anchorCoveragePct": 100,
         "blocksPreserved": 32,
-        "explicitReferenceCount": 5,
-        "evidenceItemCount": 16
+        "explicitReferenceCount": 4,
+        "evidenceItemCount": 15
       },
       "publicationGate": {
         "overallPass": true,
@@ -217,8 +218,9 @@
       "evidencePacket": {
         "primarySourceKind": "html",
         "renderedFrom": "original_source",
-        "referenceCount": 5
-      }
+        "referenceCount": 4
+      },
+      "launchDate": "2026-05-28"
     },
     {
       "slug": "xai-grok-3",
@@ -252,7 +254,7 @@
           "xai"
         ]
       },
-      "publishedAt": "2026-05-26",
+      "publishedAt": "2026-05-28",
       "evidencePacketFile": "evidence_packets/xai-grok-3.json",
       "metrics": {
         "claimsAudited": 3,
@@ -286,7 +288,8 @@
         "primarySourceKind": "text",
         "renderedFrom": "local_proxy_or_fixture",
         "referenceCount": 4
-      }
+      },
+      "launchDate": "2025-02-19"
     },
     {
       "slug": "openai-gpt-4o-system-card",
@@ -316,7 +319,7 @@
           "openai"
         ]
       },
-      "publishedAt": "2026-05-26",
+      "publishedAt": "2026-05-28",
       "evidencePacketFile": "evidence_packets/openai-gpt-4o-system-card.json",
       "metrics": {
         "claimsAudited": 1,
@@ -350,7 +353,8 @@
         "primarySourceKind": "text",
         "renderedFrom": "original_source",
         "referenceCount": 1
-      }
+      },
+      "launchDate": "2024-05-13"
     },
     {
       "slug": "careful-control",
@@ -377,7 +381,7 @@
           "careful scientific claim"
         ]
       },
-      "publishedAt": "2026-05-26",
+      "publishedAt": "2026-05-28",
       "evidencePacketFile": "evidence_packets/careful-control.json",
       "metrics": {
         "claimsAudited": 3,

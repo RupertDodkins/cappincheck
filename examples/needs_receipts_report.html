@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CappinCheck Report</title>
+  <title>HonestLaunch Report</title>
   <style>
     :root {
       --ink: #1f2328;
@@ -290,7 +290,7 @@
 <body>
   <header>
     <div>
-      <h1>CappinCheck</h1>
+      <h1>HonestLaunch</h1>
       <div class="muted">Unauditable Fixture Demo</div>
     </div>
     <div class="muted">3 audited claims · 2ms pipeline · deterministic_fallback</div>
@@ -307,7 +307,7 @@
     <div class="claim-strip">
       <div class="title-row">
         <h2>Claim Ledger</h2>
-        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then CappinCheck audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
+        <span class="hint" tabindex="0" data-tip="Gemini extracts risky factual claims, then HonestLaunch audits the selected claims. Click a card to inspect verdict, evidence, contrast, and agent steps.">?</span>
       </div>
       <div class="filters single">
         <label>Verdict
@@ -322,7 +322,7 @@
       <section>
         <div class="title-row">
           <h2>Selected Claim</h2>
-          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, CappinCheck verdict, and strongest defensible rewrite.">?</span>
+          <span class="hint" tabindex="0" data-tip="This panel shows the selected claim, HonestLaunch verdict, and strongest defensible rewrite.">?</span>
         </div>
         <div id="claim-detail"></div>
       </section>
@@ -340,12 +340,12 @@
   "document": {
     "title": "Unauditable Fixture Demo",
     "source": "examples/needs_receipts_document.md",
-    "text": "# Unauditable Fixture Demo\n\n## Abstract\n\nUsers strongly prefer CappinCheck over existing review tools. CappinCheck is the first tool to audit scientific claims with agents.\n\n## Deployment\n\nCappinCheck is safe for production use in regulated environments.\n\n## Evidence\n\nThis short document intentionally does not include a user study, benchmark, safety evaluation, production deployment study, prior-work comparison, or external validation.\n"
+    "text": "# Unauditable Fixture Demo\n\n## Abstract\n\nUsers strongly prefer HonestLaunch over existing review tools. HonestLaunch is the first tool to audit scientific claims with agents.\n\n## Deployment\n\nHonestLaunch is safe for production use in regulated environments.\n\n## Evidence\n\nThis short document intentionally does not include a user study, benchmark, safety evaluation, production deployment study, prior-work comparison, or external validation.\n"
   },
   "claims": [
     {
       "id": "receipts_1",
-      "claim": "Users strongly prefer CappinCheck over existing review tools.",
+      "claim": "Users strongly prefer HonestLaunch over existing review tools.",
       "claim_type": "other",
       "source_location": "Abstract",
       "why_risky": "Preference claims need user study data or survey evidence.",
@@ -353,7 +353,7 @@
     },
     {
       "id": "receipts_2",
-      "claim": "CappinCheck is safe for production use in regulated environments.",
+      "claim": "HonestLaunch is safe for production use in regulated environments.",
       "claim_type": "safety",
       "source_location": "Deployment",
       "why_risky": "Safety and regulated-production claims require concrete validation and scope.",
@@ -361,7 +361,7 @@
     },
     {
       "id": "receipts_3",
-      "claim": "CappinCheck is the first tool to audit scientific claims with agents.",
+      "claim": "HonestLaunch is the first tool to audit scientific claims with agents.",
       "claim_type": "novelty",
       "source_location": "Introduction",
       "why_risky": "First/novelty claims require prior-work search.",
@@ -372,7 +372,7 @@
     {
       "claim": {
         "id": "receipts_1",
-        "claim": "Users strongly prefer CappinCheck over existing review tools.",
+        "claim": "Users strongly prefer HonestLaunch over existing review tools.",
         "claim_type": "other",
         "source_location": "Abstract",
         "why_risky": "Preference claims need user study data or survey evidence.",
@@ -451,7 +451,7 @@
     {
       "claim": {
         "id": "receipts_2",
-        "claim": "CappinCheck is safe for production use in regulated environments.",
+        "claim": "HonestLaunch is safe for production use in regulated environments.",
         "claim_type": "safety",
         "source_location": "Deployment",
         "why_risky": "Safety and regulated-production claims require concrete validation and scope.",
@@ -530,7 +530,7 @@
     {
       "claim": {
         "id": "receipts_3",
-        "claim": "CappinCheck is the first tool to audit scientific claims with agents.",
+        "claim": "HonestLaunch is the first tool to audit scientific claims with agents.",
         "claim_type": "novelty",
         "source_location": "Introduction",
         "why_risky": "First/novelty claims require prior-work search.",
@@ -694,7 +694,7 @@
         missing_context: 'The claim may be true, but key scope, baseline, methodology, source, or denominator context is missing.',
         contradicted: 'Available evidence conflicts with the claim as written.',
         not_checkable: 'The available sources do not provide enough evidence to verify or falsify the claim.'
-      })[verdict] || 'Formal CappinCheck verdict for this claim.';
+      })[verdict] || 'Formal HonestLaunch verdict for this claim.';
     }
     function verdictCounts(audits) {
       const counts = {
@@ -806,7 +806,7 @@
           </p>
           <div class="strength-grid">
             ${strengthCard('Stretch pressure', audit.stretch_score, audit.verdict, `${audit.stretch_score}/100`, 'How much the wording outruns the evidence.')}
-            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident CappinCheck is in this verdict from available evidence.')}
+            ${strengthCard('Confidence', confidence, audit.verdict, esc(audit.confidence), 'How confident HonestLaunch is in this verdict from available evidence.')}
             ${strengthCard('Evidence depth', evidenceScore, audit.verdict, `${evidenceCount} item${evidenceCount === 1 ? '' : 's'}`, 'How much direct evidence is attached to this claim audit.')}
           </div>
         </div>

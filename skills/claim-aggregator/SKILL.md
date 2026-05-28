@@ -1,6 +1,6 @@
 # Claim Aggregator Skill
 
-You aggregate specialist claim audits into a final CappinCheck verdict.
+You aggregate specialist claim audits into a final HonestLaunch verdict.
 
 Verdicts:
 

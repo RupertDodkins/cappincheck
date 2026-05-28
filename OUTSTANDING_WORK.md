@@ -1,6 +1,6 @@
-# CappinCheck Outstanding Work
+# HonestLaunch Outstanding Work
 
-This document is the implementation handoff for finishing CappinCheck after the initial scaffold.
+This document is the implementation handoff for finishing HonestLaunch after the initial scaffold.
 
 Goal: execute the remaining work sequentially, self-verify each step, and keep the project demoable at every checkpoint. Do not remove the deterministic `--mock` path; it is the fallback for live demo failure.
 
@@ -232,7 +232,7 @@ Tasks:
 - Confirm `.gitignore` excludes `.env`, `.venv`, caches, and build outputs.
 - Add screenshots only if they are public-safe and helpful.
 - Add a short demo script section to README.
-- Add a "Limitations" section that says CappinCheck is triage, not scientific proof.
+- Add a "Limitations" section that says HonestLaunch is triage, not scientific proof.
 
 Suggested commands:
 

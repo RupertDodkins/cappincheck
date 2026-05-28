@@ -463,7 +463,7 @@ Success criteria:
 - The demo can be explained as:
 
 ```text
-CappinCheck compares a risky claim against explicit reference sources. The reference supports a narrower statement, so the final verdict is overstated and the report gives a defensible rewrite.
+HonestLaunch compares a risky claim against explicit reference sources. The reference supports a narrower statement, so the final verdict is overstated and the report gives a defensible rewrite.
 ```
 
 ## Suggested Concurrent Execution

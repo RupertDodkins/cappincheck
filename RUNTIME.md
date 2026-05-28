@@ -1,6 +1,6 @@
-# CappinCheck Runtime Boundary
+# HonestLaunch Runtime Boundary
 
-CappinCheck currently runs locally. The CLI loads the role definitions in `skills/*/SKILL.md`, dispatches local async Gemini calls for each specialist pass, then aggregates results into Markdown, JSON, and static HTML reports.
+HonestLaunch currently runs locally. The CLI loads the role definitions in `skills/*/SKILL.md`, dispatches local async Gemini calls for each specialist pass, then aggregates results into Markdown, JSON, and static HTML reports.
 
 The supported default runtime is local. An experimental `--runtime managed` path uses the Google GenAI Interactions API to run the same specialist skill prompts through managed interactions. Google marks this API as experimental, so the local runtime remains the demo-safe default.
 

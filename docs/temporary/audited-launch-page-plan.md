@@ -1,10 +1,10 @@
 # Audited Launch Page Plan
 
-Status: temporary implementation plan for the next CappinCheck phase.
+Status: temporary implementation plan for the next HonestLaunch phase.
 
 ## Goal
 
-Turn the primary CappinCheck surface into a high-fidelity modified version of the source launch page, with audited claim substitutions rendered inline.
+Turn the primary HonestLaunch surface into a high-fidelity modified version of the source launch page, with audited claim substitutions rendered inline.
 
 Product contract for v1:
 
@@ -30,7 +30,7 @@ Product contract for v1:
 - Source fidelity: preserve original layout and feel as much as practical, including exact-clone fidelity where technically feasible
 - Evidence placement: inline hover/tap tooltip
 - Tooltip nuance for `missing_context`: keep the visible replacement clean; put the caveat/context in the tooltip
-- Branding: subtle CappinCheck wrapper for now; rename can happen later
+- Branding: subtle HonestLaunch wrapper for now; rename can happen later
 - Mobile interaction: tap popover
 - Publishing posture: show that the page is a modified audited version, not the original source
 

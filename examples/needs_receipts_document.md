@@ -2,11 +2,11 @@
 
 ## Abstract
 
-Users strongly prefer CappinCheck over existing review tools. CappinCheck is the first tool to audit scientific claims with agents.
+Users strongly prefer HonestLaunch over existing review tools. HonestLaunch is the first tool to audit scientific claims with agents.
 
 ## Deployment
 
-CappinCheck is safe for production use in regulated environments.
+HonestLaunch is safe for production use in regulated environments.
 
 ## Evidence
 

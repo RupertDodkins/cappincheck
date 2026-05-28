@@ -1,4 +1,4 @@
-# CappinCheck Report: Introducing Claude Sonnet 4.5 \ Anthropic
+# HonestLaunch Report: Introducing Claude Sonnet 4.5 \ Anthropic
 
 Source: `https://www.anthropic.com/news/claude-sonnet-4-5`
 

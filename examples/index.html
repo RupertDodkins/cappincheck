@@ -184,6 +184,13 @@
       text-transform: uppercase;
       color: var(--muted);
     }
+    .entry-date {
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
     .badge {
       display: inline-flex;
       align-items: center;
@@ -363,7 +370,36 @@
     }
 
     function featuredEntries() {
-      return (manifest?.entries || []).filter(entry => entry.category === 'featured');
+      return (manifest?.entries || [])
+        .filter(entry => entry.category === 'featured')
+        .sort((left, right) => compareEntryDates(left, right));
+    }
+
+    function entryTimestamp(entry) {
+      const token = entry?.launchDate || entry?.publishedAt || '';
+      const time = Date.parse(token);
+      return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time;
+    }
+
+    function compareEntryDates(left, right) {
+      const leftTime = entryTimestamp(left);
+      const rightTime = entryTimestamp(right);
+      if (Number.isNaN(leftTime) && Number.isNaN(rightTime)) return 0;
+      if (Number.isNaN(leftTime)) return -1;
+      if (Number.isNaN(rightTime)) return 1;
+      return rightTime - leftTime;
+    }
+
+    function formatLaunchDate(entry) {
+      const token = entry?.launchDate || entry?.publishedAt;
+      if (!token) return '';
+      const date = new Date(`${token}T00:00:00`);
+      if (Number.isNaN(date.getTime())) return token;
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(date);
     }
 
     function profileLabel(entry) {
@@ -384,7 +420,10 @@
       featuredGrid.innerHTML = featured.map(entry => `
         <button class="entry-card ${entry.slug === selectedSlug ? 'active' : ''}" onclick="selectEntry('${esc(entry.slug)}')">
           <div class="entry-top">
-            <div class="lab">${esc(entry.lab)}</div>
+            <div>
+              <div class="lab">${esc(entry.lab)}</div>
+              <div class="entry-date">${esc(formatLaunchDate(entry))}</div>
+            </div>
             <span class="badge ${badgeClass(entry.badge)}">${esc(entry.badge)}</span>
           </div>
           <h3>${esc(entry.title)}</h3>
